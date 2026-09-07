@@ -1,0 +1,13 @@
+{
+  "@@locale": "ar",
+  "hello": "مرحبا",
+  "welcome": "أهلا وسهلا",
+  "goodbye": "مع السلامة",
+  "thank_you": "شكرا",
+  "yes": "نعم",
+  "signIn": "تسجيل الدخول",
+  "signInContent": "محتوى تسجيل الدخول",
+  "language": "اللغة",
+  "languageEnglish": "الإنجليزية",
+  "languageArabic": "العربية"
+}

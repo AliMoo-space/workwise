@@ -1,0 +1,13 @@
+{
+  "@@locale": "en",
+  "hello": "Hello",
+  "welcome": "Welcome",
+  "goodbye": "Goodbye",
+  "thank_you": "Thank you",
+  "yes": "Yes",
+  "signIn": "Sign In",
+  "signInContent": "Sign In Content",
+  "language": "Language",
+  "languageEnglish": "English",
+  "languageArabic": "Arabic"
+}
