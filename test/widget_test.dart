@@ -7,10 +7,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:workwise/core/localization/locale_cubit.dart';
+import 'package:workwise/core/localization/locale_provider.dart';
 import 'package:workwise/main.dart';
 
 void main() {
@@ -22,8 +22,8 @@ void main() {
     final preferences = await SharedPreferences.getInstance();
 
     await tester.pumpWidget(
-      BlocProvider(
-        create: (_) => LocaleCubit(preferences),
+      ChangeNotifierProvider(
+        create: (_) => LocaleProvider(preferences),
         child: const MyApp(),
       ),
     );

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import '../colors/app_colors.dart';
@@ -224,8 +222,6 @@ final class AppTextStyles {
     fontWeight: FontWeight.w400,
     height: 20 / 14,
     color: AppColors.textPrimary,
-    fontFeatures: [
-      FontFeature.tabularFigures(),
-    ],
+    fontFeatures: [FontFeature.tabularFigures()],
   );
 }
