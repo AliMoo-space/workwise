@@ -1,3 +1,7 @@
 {
-    "cmake.sourceDirectory": "/Users/alimohamed/Desktop/projects/workwise/linux"
+    "cmake.sourceDirectory": "/Users/alimohamed/Desktop/projects/workwise/linux",
+    "cSpell.words": [
+        "Leavescreen",
+        "workwise"
+    ]
 }

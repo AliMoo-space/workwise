@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:workwise/core/design_system/theme/app_theme.dart';
 import 'package:workwise/core/localization/locale_cubit.dart';
 import 'package:workwise/core/routing/router_generation_config.dart';
