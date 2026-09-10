@@ -73,7 +73,7 @@ class AppDrawer extends StatelessWidget {
                 // TODO: Implement logout logic
                 // context.read<AuthCubit>().logout();
 
-                context.go(AppRoutes.signInScreen);
+                // context.go(AppRoutes.signInScreen);
               },
               child: const AppText('Logout', color: AppColors.error),
             ),
