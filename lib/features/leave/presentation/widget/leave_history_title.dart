@@ -1,34 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:workwise/core/design_system/colors/app_colors.dart';
+import 'package:workwise/generated/app_localizations.dart';
 
 class LeaveHistoryTitle extends StatelessWidget {
   const LeaveHistoryTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Row(
       children: [
         Text(
-          "Leave history",
-          style: TextStyle(
-            color: AppColors.black,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.w500,
-          ),
+          localization.leaveHistory,
+          style: Theme.of(context).textTheme.titleMedium,
         ),
 
-        Spacer(),
+        const Spacer(),
 
         TextButton(
           onPressed: () {},
           child: Text(
-            "view",
-            style: TextStyle(
-              color: AppColors.black,
-              fontSize: 16.sp,
-              fontWeight: FontWeight.w500,
-            ),
+            localization.view,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
       ],

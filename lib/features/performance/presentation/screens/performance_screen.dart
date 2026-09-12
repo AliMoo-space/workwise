@@ -1,8 +1,6 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:workwise/features/performance/presentation/widget/at_a_glance_header.dart';
 import 'package:workwise/features/performance/presentation/widget/home_greeting.dart';
 import 'package:workwise/features/performance/presentation/widget/monthly_performance.dart';

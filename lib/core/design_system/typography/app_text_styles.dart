@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 
 import '../colors/app_colors.dart';
 
@@ -34,11 +35,11 @@ final class AppTextStyles {
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle displayMedium = TextStyle(
+  static TextStyle displayMedium = TextStyle(
     fontFamily: headingFontFamily,
-    fontSize: 32,
+    fontSize: 25.sp,
     fontWeight: FontWeight.w700,
-    height: 40 / 32,
+    height: 40 / 32.h,
     color: AppColors.textPrimary,
   );
 
@@ -62,11 +63,11 @@ final class AppTextStyles {
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle headlineMedium = TextStyle(
+  static TextStyle headlineMedium = TextStyle(
     fontFamily: headingFontFamily,
-    fontSize: 24,
+    fontSize: 24.sp,
     fontWeight: FontWeight.w600,
-    height: 32 / 24,
+    height: 32 / 24.h,
     color: AppColors.textPrimary,
   );
 
@@ -82,9 +83,9 @@ final class AppTextStyles {
   // Titles
   // ===========================================================================
 
-  static const TextStyle titleLarge = TextStyle(
+  static TextStyle titleLarge = TextStyle(
     fontFamily: headingFontFamily,
-    fontSize: 20,
+    fontSize: 20.sp,
     fontWeight: FontWeight.w600,
     height: 28 / 20,
     color: AppColors.textPrimary,
@@ -118,19 +119,19 @@ final class AppTextStyles {
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle bodyMedium = TextStyle(
+  static TextStyle bodyMedium = TextStyle(
     fontFamily: bodyFontFamily,
-    fontSize: 14,
+    fontSize: 14.sp,
     fontWeight: FontWeight.w400,
-    height: 20 / 14,
+    height: 20 / 14.h,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle bodySmall = TextStyle(
+  static TextStyle bodySmall = TextStyle(
     fontFamily: bodyFontFamily,
-    fontSize: 14,
+    fontSize: 14.sp,
     fontWeight: FontWeight.w400,
-    height: 20 / 14,
+    height: 20 / 14.h,
     color: AppColors.textSecondary,
   );
 
@@ -138,11 +139,11 @@ final class AppTextStyles {
   // Labels
   // ===========================================================================
 
-  static const TextStyle labelLarge = TextStyle(
+  static TextStyle labelLarge = TextStyle(
     fontFamily: bodyFontFamily,
-    fontSize: 14,
+    fontSize: 14.sp,
     fontWeight: FontWeight.w500,
-    height: 20 / 14,
+    height: 20 / 14.h,
     color: AppColors.textPrimary,
   );
 
@@ -224,8 +225,6 @@ final class AppTextStyles {
     fontWeight: FontWeight.w400,
     height: 20 / 14,
     color: AppColors.textPrimary,
-    fontFeatures: [
-      FontFeature.tabularFigures(),
-    ],
+    fontFeatures: [FontFeature.tabularFigures()],
   );
 }

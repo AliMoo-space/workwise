@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:workwise/core/design_system/colors/app_colors.dart';
+import 'package:workwise/generated/app_localizations.dart';
 
 class LeaveSubtitle extends StatelessWidget {
   const LeaveSubtitle({super.key});
@@ -9,8 +9,8 @@ class LeaveSubtitle extends StatelessWidget {
     return Align(
       alignment: Alignment.topLeft,
       child: Text(
-        "Balances, requests, and personal goals",
-        style: TextStyle(color: AppColors.black),
+        AppLocalizations.of(context).balancesRequestsGoals,
+        style: Theme.of(context).textTheme.bodySmall,
       ),
     );
   }

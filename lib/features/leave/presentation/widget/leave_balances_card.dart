@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
-import 'package:workwise/core/design_system/colors/app_colors.dart';
 
 class LeaveBalancesCard extends StatelessWidget {
   const LeaveBalancesCard({super.key});
@@ -15,10 +14,15 @@ class LeaveBalancesCard extends StatelessWidget {
           height: 150.h,
           width: 110.w,
           child: Card(
-            color: AppColors.white,
+            // color: AppColors.white,
+            color: Theme.of(context).colorScheme.onError,
+
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.r),
-              side: BorderSide(color: AppColors.border, width: 1.w),
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.outline,
+                width: 1.w,
+              ),
             ),
             child: Padding(
               padding: EdgeInsets.all(12.r),
@@ -28,7 +32,7 @@ class LeaveBalancesCard extends StatelessWidget {
                     alignment: AlignmentGeometry.topLeft,
                     child: Text(
                       "Annual",
-                      style: TextStyle(color: AppColors.black, fontSize: 15.sp),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                   Gap(10.h),
@@ -36,30 +40,28 @@ class LeaveBalancesCard extends StatelessWidget {
                     children: [
                       Text(
                         "13",
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontSize: 25.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         "/21",
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ],
                   ),
                   Align(
                     alignment: AlignmentGeometry.topLeft,
-                    child: Text("days left"),
+                    child: Text(
+                      "days left",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
                   Gap(10.h),
                   LinearProgressIndicator(
                     value: 13 / 21,
-                    backgroundColor: Colors.grey.shade300,
-                    color: AppColors.success,
+                    backgroundColor: Theme.of(context).colorScheme.outline,
+
+                    color: Theme.of(context).colorScheme.tertiary,
+
                     minHeight: 8.0.h,
                     borderRadius: BorderRadius.circular(10.r),
                   ),
@@ -72,10 +74,15 @@ class LeaveBalancesCard extends StatelessWidget {
           height: 150.h,
           width: 110.w,
           child: Card(
-            color: AppColors.white,
+            // color: AppColors.white,
+            color: Theme.of(context).colorScheme.onError,
+
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.r),
-              side: BorderSide(color: AppColors.border, width: 1.w),
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.outline,
+                width: 1.w,
+              ),
             ),
             child: Padding(
               padding: EdgeInsets.all(12.r),
@@ -85,7 +92,7 @@ class LeaveBalancesCard extends StatelessWidget {
                     alignment: AlignmentGeometry.topLeft,
                     child: Text(
                       "Casual",
-                      style: TextStyle(color: AppColors.black, fontSize: 15.sp),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                   Gap(10.h),
@@ -93,30 +100,25 @@ class LeaveBalancesCard extends StatelessWidget {
                     children: [
                       Text(
                         "4",
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontSize: 25.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
-                      Text(
-                        "/7",
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                      Text("/7", style: Theme.of(context).textTheme.labelLarge),
                     ],
                   ),
                   Align(
                     alignment: AlignmentGeometry.topLeft,
-                    child: Text("days left"),
+                    child: Text(
+                      "days left",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
                   Gap(10.h),
                   LinearProgressIndicator(
                     value: 13 / 25,
-                    backgroundColor: Colors.grey.shade300,
-                    color: AppColors.success,
+                    // backgroundColor: Colors.grey.shade300,
+                    backgroundColor: Theme.of(context).colorScheme.outline,
+
+                    color: Theme.of(context).colorScheme.tertiary,
                     minHeight: 8.0.h,
                     borderRadius: BorderRadius.circular(10.r),
                   ),
@@ -129,10 +131,15 @@ class LeaveBalancesCard extends StatelessWidget {
           height: 150.h,
           width: 110.w,
           child: Card(
-            color: AppColors.white,
+            // color: AppColors.white,
+            color: Theme.of(context).colorScheme.onError,
+
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30.r),
-              side: BorderSide(color: AppColors.border, width: 1.w),
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.outline,
+                width: 1.w,
+              ),
             ),
             child: Padding(
               padding: EdgeInsets.all(12.r),
@@ -142,7 +149,7 @@ class LeaveBalancesCard extends StatelessWidget {
                     alignment: AlignmentGeometry.topLeft,
                     child: Text(
                       "Sick",
-                      style: TextStyle(color: AppColors.black, fontSize: 15.sp),
+                      style: Theme.of(context).textTheme.titleSmall,
                     ),
                   ),
                   Gap(10.h),
@@ -150,30 +157,28 @@ class LeaveBalancesCard extends StatelessWidget {
                     children: [
                       Text(
                         "8",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                       Text(
                         "/10",
-                        style: TextStyle(
-                          color: AppColors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.labelLarge,
                       ),
                     ],
                   ),
                   Align(
                     alignment: AlignmentGeometry.topLeft,
-                    child: Text("days left"),
+                    child: Text(
+                      "days left",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
                   Gap(10.h),
                   LinearProgressIndicator(
                     value: 13 / 17,
-                    backgroundColor: Colors.grey.shade300,
-                    color: AppColors.success,
+
+                    backgroundColor: Theme.of(context).colorScheme.outline,
+                    color: Theme.of(context).colorScheme.tertiary,
+
                     minHeight: 8.0.h,
                     borderRadius: BorderRadius.circular(10.r),
                   ),

@@ -3,8 +3,12 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
+import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
+import 'package:workwise/core/design_system/widgets/inputs/app_dropdown.dart';
+import 'package:workwise/core/design_system/widgets/inputs/app_text_field.dart';
+import 'package:workwise/core/utils/app_helpers.dart';
+import 'package:workwise/generated/app_localizations.dart';
 
 // ignore: must_be_immutable
 class LeaveRequestForm extends StatefulWidget {
@@ -16,120 +20,66 @@ class LeaveRequestForm extends StatefulWidget {
 
 class _LeaveRequestFormState extends State<LeaveRequestForm> {
   File? selectedImage;
+
   final TextEditingController startDateController = TextEditingController();
+
   final TextEditingController endDateController = TextEditingController();
-
-  Future<void> pickImage() async {
-    final ImagePicker picker = ImagePicker();
-
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-
-    if (image != null) {
-      setState(() {
-        selectedImage = File(image.path);
-      });
-    }
-  }
-
-  Future<void> selectDate(TextEditingController controller) async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2020),
-      lastDate: DateTime(2100),
-    );
-
-    if (pickedDate != null) {
-      controller.text =
-          "${pickedDate.day.toString().padLeft(2, '0')} / "
-          "${pickedDate.month.toString().padLeft(2, '0')} / "
-          "${pickedDate.year}";
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context);
+
     return SizedBox(
       height: 520.h,
       width: double.infinity,
       child: Card(
-        color: AppColors.white,
+        color: Theme.of(context).colorScheme.onError,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.r),
-          side: BorderSide(color: Colors.grey.shade400, width: 1.w),
+          side: BorderSide(
+            color: Theme.of(context).colorScheme.outline,
+            width: 1.w,
+          ),
         ),
         child: Padding(
           padding: EdgeInsets.all(15.r),
           child: Column(
             children: [
               Align(
-                alignment: AlignmentGeometry.topLeft,
+                alignment: Alignment.topLeft,
                 child: Text(
-                  "Leave type",
-                  style: TextStyle(
-                    fontSize: 17,
-                    color: AppColors.black,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  localization.leaveType,
+                  style: Theme.of(context).textTheme.labelLarge,
                 ),
               ),
+
               Gap(10.h),
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  hintText: "Select type...",
-                  filled: true,
-                  fillColor: AppColors.background,
 
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.r),
-                    borderSide: BorderSide(
-                      color: AppColors.border,
-                      width: .5.w,
-                    ),
-                  ),
-
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.r),
-                    borderSide: BorderSide(
-                      color: AppColors.border,
-                      width: .5.w,
-                    ),
-                  ),
-
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30),
-                    borderSide: BorderSide(
-                      color: Colors.grey.shade600,
-                      width: 1.w,
-                    ),
-                  ),
-                ),
-
-                borderRadius: BorderRadius.circular(15.r),
-                dropdownColor: AppColors.white,
-                menuMaxHeight: 200.h,
-
-                items: const [
+              AppDropdown<String>(
+                hint: localization.selectLeaveType,
+                fillColor: Theme.of(context).colorScheme.surface,
+                borderRadius: 30,
+                items: [
                   DropdownMenuItem(
-                    value: "Annual Leave",
-                    child: Text("Annual Leave"),
+                    value: 'Annual Leave',
+                    child: Text(localization.annualLeave),
                   ),
                   DropdownMenuItem(
-                    value: "Casual Leave",
-                    child: Text("Casual Leave"),
+                    value: 'Casual Leave',
+                    child: Text(localization.casualLeave),
                   ),
                   DropdownMenuItem(
-                    value: "sick Leave",
-                    child: Text("Sick Leave"),
+                    value: 'Sick Leave',
+                    child: Text(localization.sickLeave),
                   ),
                 ],
-
                 onChanged: (value) {
                   print(value);
                 },
               ),
 
               Gap(15.h),
+
               Row(
                 children: [
                   Expanded(
@@ -137,56 +87,23 @@ class _LeaveRequestFormState extends State<LeaveRequestForm> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Start date",
-                          style: TextStyle(
-                            color: AppColors.black,
-                            fontSize: 17.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          localization.startDate,
+                          style: Theme.of(context).textTheme.labelLarge,
                         ),
+
                         Gap(10.h),
-                        TextField(
+
+                        AppTextField(
                           controller: startDateController,
+                          hintText: 'DD / MM / YYYY',
                           readOnly: true,
-                          onTap: () => selectDate(startDateController),
-                          decoration: InputDecoration(
-                            hintText: "DD / MM / YYYY",
-                            hintStyle: TextStyle(
-                              fontSize: 12.sp,
-                              color: Colors.black,
-                            ),
-                            filled: true,
-                            fillColor: AppColors.background,
-
-                            suffixIcon: Icon(
-                              Icons.calendar_today_outlined,
-                              size: 20.r,
-                            ),
-
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.r),
-                              borderSide: BorderSide(
-                                color: AppColors.border,
-                                width: .5.w,
-                              ),
-                            ),
-
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.r),
-                              borderSide: BorderSide(
-                                color: AppColors.border,
-                                width: .5.w,
-                              ),
-                            ),
-
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.r),
-                              borderSide: BorderSide(
-                                color: Colors.grey.shade600,
-                                width: 1.w,
-                              ),
-                            ),
+                          onTap: () => AppHelpers.selectDate(
+                            context,
+                            startDateController,
                           ),
+                          suffixIcon: const Icon(Icons.calendar_today_outlined),
+                          fillColor: Theme.of(context).colorScheme.surface,
+                          borderRadius: 30,
                         ),
                       ],
                     ),
@@ -199,113 +116,69 @@ class _LeaveRequestFormState extends State<LeaveRequestForm> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "End date",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 17.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
+                          localization.endDate,
+                          style: Theme.of(context).textTheme.labelLarge,
                         ),
+
                         Gap(10.h),
-                        TextField(
+
+                        AppTextField(
                           controller: endDateController,
+                          hintText: 'DD / MM / YYYY',
                           readOnly: true,
-                          onTap: () => selectDate(endDateController),
-                          decoration: InputDecoration(
-                            hintText: "DD / MM / YYYY",
-                            hintStyle: TextStyle(
-                              fontSize: 12.sp,
-                              color: AppColors.black,
-                            ),
-                            filled: true,
-                            fillColor: AppColors.background,
-
-                            suffixIcon: Icon(
-                              Icons.calendar_today_outlined,
-                              size: 20.r,
-                            ),
-
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.r),
-                              borderSide: BorderSide(
-                                color: AppColors.border,
-                                width: .5.w,
-                              ),
-                            ),
-
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.r),
-                              borderSide: BorderSide(
-                                color: AppColors.border,
-                                width: .5.w,
-                              ),
-                            ),
-
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.r),
-                              borderSide: BorderSide(
-                                color: Colors.grey.shade600,
-                                width: 1.w,
-                              ),
-                            ),
-                          ),
+                          onTap: () =>
+                              AppHelpers.selectDate(context, endDateController),
+                          suffixIcon: const Icon(Icons.calendar_today_outlined),
+                          fillColor: Theme.of(context).colorScheme.surface,
+                          borderRadius: 30,
                         ),
                       ],
                     ),
                   ),
                 ],
               ),
+
               Gap(15.h),
 
               Align(
-                alignment: AlignmentGeometry.topLeft,
+                alignment: Alignment.topLeft,
                 child: Text(
-                  "Reason",
-                  style: TextStyle(
-                    color: AppColors.black,
-                    fontSize: 17.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  localization.reason,
+                  style: Theme.of(context).textTheme.labelLarge,
                 ),
               ),
 
               Gap(10.h),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: "Briefly describe your reason...",
-                  filled: true,
 
-                  fillColor: AppColors.background,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.r),
-                    borderSide: BorderSide(
-                      color: AppColors.border,
-                      width: .5.w,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.r),
-                    borderSide: BorderSide(
-                      color: AppColors.border,
-                      width: .5.w,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.r),
-                    borderSide: BorderSide(color: AppColors.border, width: 1.w),
-                  ),
-                ),
+              AppTextField(
+                hintText: localization.reasonHint,
+                type: AppTextFieldType.multiline,
+                fillColor: Theme.of(context).colorScheme.surface,
+                borderRadius: 30,
+                maxLines: 1,
               ),
 
               Gap(20.h),
+
               GestureDetector(
-                onTap: pickImage,
+                onTap: () async {
+                  final File? image = await AppHelpers.pickImage();
+
+                  if (image != null) {
+                    setState(() {
+                      selectedImage = image;
+                    });
+                  }
+                },
                 child: Container(
                   height: 130.h,
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: AppColors.background,
-                    border: Border.all(width: .5.w, color: AppColors.border),
+                    color: Theme.of(context).colorScheme.surface,
+                    border: Border.all(
+                      width: .5.w,
+                      color: Theme.of(context).colorScheme.outline,
+                    ),
                     borderRadius: BorderRadius.circular(15.r),
                   ),
                   child: selectedImage != null
@@ -321,43 +194,28 @@ class _LeaveRequestFormState extends State<LeaveRequestForm> {
                       : Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Icon(Icons.cloud_upload),
+                            const Icon(Icons.cloud_upload),
+
                             Text(
-                              "Attach supporting document",
-                              style: TextStyle(
-                                color: AppColors.black,
-                                fontSize: 15.sp,
-                                fontWeight: FontWeight.w500,
-                              ),
+                              localization.attachSupportingDocument,
+                              style: Theme.of(context).textTheme.titleSmall,
                             ),
+
                             Gap(5.h),
-                            Text("Upload image"),
+
+                            Text(localization.uploadImage),
                           ],
                         ),
                 ),
               ),
 
               Gap(10.h),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xff243B53),
-                  foregroundColor: Colors.white,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 100.w,
-                    vertical: 13.h,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.r),
-                  ),
-                ),
+
+              AppButton(
+                text: localization.submitRequest,
                 onPressed: () {},
-                child: Text(
-                  "Submit request",
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
+                height: 48.h,
+                width: double.infinity.w,
               ),
             ],
           ),

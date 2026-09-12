@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:workwise/core/design_system/colors/app_colors.dart';
+import 'package:workwise/generated/app_localizations.dart';
 
 class LeaveTitle extends StatelessWidget {
   const LeaveTitle({super.key});
@@ -10,12 +9,8 @@ class LeaveTitle extends StatelessWidget {
     return Align(
       alignment: Alignment.topLeft,
       child: Text(
-        "Leave",
-        style: TextStyle(
-          color: AppColors.black,
-          fontSize: 25.sp,
-          fontWeight: FontWeight.bold,
-        ),
+        AppLocalizations.of(context).leave,
+        style: Theme.of(context).textTheme.headlineMedium,
       ),
     );
   }

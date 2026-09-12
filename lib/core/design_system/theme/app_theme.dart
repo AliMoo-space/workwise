@@ -22,14 +22,18 @@ final class AppTheme {
         onPrimary: AppColors.onPrimary,
         secondary: AppColors.secondary,
         onSecondary: AppColors.onSecondary,
-        surface: AppColors.surface,
+
+        surface: AppColors.background,
         onSurface: AppColors.onSurface,
+
         error: AppColors.error,
         onError: AppColors.onError,
-        outline: AppColors.outline,
+
+        outline: AppColors.border,
+        tertiary: AppColors.success,
       ),
 
-      textTheme: const TextTheme(
+      textTheme: TextTheme(
         displayLarge: AppTextStyles.displayLarge,
         displayMedium: AppTextStyles.displayMedium,
         displaySmall: AppTextStyles.displaySmall,
@@ -68,9 +72,7 @@ final class AppTheme {
             vertical: AppSpacing.space12,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              AppRadius.radius12,
-            ),
+            borderRadius: BorderRadius.circular(AppRadius.radius12),
           ),
         ),
       ),
@@ -79,13 +81,9 @@ final class AppTheme {
         style: OutlinedButton.styleFrom(
           minimumSize: const Size.fromHeight(48),
           foregroundColor: AppColors.primary,
-          side: const BorderSide(
-            color: AppColors.border,
-          ),
+          side: const BorderSide(color: AppColors.border),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-              AppRadius.radius12,
-            ),
+            borderRadius: BorderRadius.circular(AppRadius.radius12),
           ),
         ),
       ),
@@ -102,40 +100,23 @@ final class AppTheme {
         hintStyle: AppTextStyles.hint,
 
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(
-            AppRadius.radius12,
-          ),
-          borderSide: const BorderSide(
-            color: AppColors.border,
-          ),
+          borderRadius: BorderRadius.circular(AppRadius.radius12),
+          borderSide: const BorderSide(color: AppColors.border),
         ),
 
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(
-            AppRadius.radius12,
-          ),
-          borderSide: const BorderSide(
-            color: AppColors.border,
-          ),
+          borderRadius: BorderRadius.circular(AppRadius.radius12),
+          borderSide: const BorderSide(color: AppColors.border),
         ),
 
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(
-            AppRadius.radius12,
-          ),
-          borderSide: const BorderSide(
-            color: AppColors.primary,
-            width: 2,
-          ),
+          borderRadius: BorderRadius.circular(AppRadius.radius12),
+          borderSide: const BorderSide(color: AppColors.primary, width: 2),
         ),
 
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(
-            AppRadius.radius12,
-          ),
-          borderSide: const BorderSide(
-            color: AppColors.error,
-          ),
+          borderRadius: BorderRadius.circular(AppRadius.radius12),
+          borderSide: const BorderSide(color: AppColors.error),
         ),
       ),
 
@@ -143,12 +124,8 @@ final class AppTheme {
         elevation: 0,
         color: AppColors.surface,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            AppRadius.radius12,
-          ),
-          side: const BorderSide(
-            color: AppColors.border,
-          ),
+          borderRadius: BorderRadius.circular(AppRadius.radius12),
+          side: const BorderSide(color: AppColors.border),
         ),
       ),
 
@@ -156,9 +133,7 @@ final class AppTheme {
         color: AppColors.primary,
       ),
 
-      iconTheme: const IconThemeData(
-        color: AppColors.textSecondary,
-      ),
+      iconTheme: const IconThemeData(color: AppColors.textSecondary),
     );
   }
 }

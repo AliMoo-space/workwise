@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:workwise/core/design_system/colors/app_colors.dart';
+import 'package:workwise/generated/app_localizations.dart';
 
 class MonthlyPerformance extends StatelessWidget {
   const MonthlyPerformance({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context)!;
+
     return Container(
-      height: 200.h,
+      height: 180.h,
       width: double.infinity.w,
       padding: EdgeInsets.symmetric(horizontal: 25.w),
       decoration: BoxDecoration(
-        color: AppColors.border,
+        color: Theme.of(context).colorScheme.outline,
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Row(
@@ -25,14 +27,24 @@ class MonthlyPerformance extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("THIS MONTH", style: TextStyle(fontSize: 14.sp)),
-              Gap(5.h),
               Text(
-                "Your performance",
-                style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+                localization.thisMonth,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
+
               Gap(5.h),
-              Text("5% from last month", style: TextStyle(fontSize: 14.sp)),
+
+              Text(
+                localization.yourPerformance,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+
+              Gap(5.h),
+
+              Text(
+                "5% ${localization.fromLastMonth}",
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
             ],
           ),
 
@@ -40,7 +52,7 @@ class MonthlyPerformance extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               CircularPercentIndicator(
-                radius: 70.0.r,
+                radius: 50.0.r,
                 lineWidth: 10.0.w,
                 percent: 0.87,
                 animation: true,
@@ -50,23 +62,18 @@ class MonthlyPerformance extends StatelessWidget {
                   children: [
                     Text(
                       "87%",
-                      style: TextStyle(
-                        fontSize: 32.sp,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.primary,
-                      ),
+                      style: Theme.of(context).textTheme.displayMedium,
                     ),
+
                     Gap(4.h),
+
                     Text(
-                      "overall",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      localization.overall,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 ),
-                progressColor: AppColors.secondary,
+                progressColor: Theme.of(context).colorScheme.secondary,
               ),
             ],
           ),
