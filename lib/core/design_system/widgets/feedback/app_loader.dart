@@ -47,7 +47,10 @@ class AppFullScreenLoader extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const AppLoader.large(),
-            if (message != null) ...[const Gap(16), AppText(message!)],
+            if (message != null) ...[
+              const Gap(16),
+              AppText(message!),
+            ],
           ],
         ),
       ),
