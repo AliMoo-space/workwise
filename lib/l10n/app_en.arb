@@ -46,5 +46,11 @@
 "performanceTrend": "Performance trend",
 "personalGoals": "Personal goals",
 "target": "Target:",
-"onTrack": "On Track"
+"onTrack": "On Track",
+"aiAssistant": "AI Assistant",
+  "careerCoachingHrPolicySupport": "Career coaching & HR policy support",
+  "careerCoach": "Career Coach",
+  "policyAssistant": "Policy Assistant",
+   "actionPlan": "Action plan",
+   "developmentAreas": "Development areas"
 }

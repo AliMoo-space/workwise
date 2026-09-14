@@ -46,5 +46,11 @@
 "performanceTrend": "اتجاه الأداء",
 "personalGoals": "الأهداف الشخصية",
 "target": "الهدف:",
-"onTrack": "في المسار"
+"onTrack": "في المسار",
+"aiAssistant": "المساعد الذكي",
+  "careerCoachingHrPolicySupport": "التوجيه المهني ودعم سياسات الموارد البشرية",
+  "careerCoach": "التوجيه المهني",
+  "policyAssistant": "مساعد السياسات",
+  "actionPlan": "خطة العمل",
+  "developmentAreas": "مجالات التطوير"
 }

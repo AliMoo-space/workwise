@@ -148,4 +148,23 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get onTrack => 'في المسار';
+
+  @override
+  String get aiAssistant => 'المساعد الذكي';
+
+  @override
+  String get careerCoachingHrPolicySupport =>
+      'التوجيه المهني ودعم سياسات الموارد البشرية';
+
+  @override
+  String get careerCoach => 'التوجيه المهني';
+
+  @override
+  String get policyAssistant => 'مساعد السياسات';
+
+  @override
+  String get actionPlan => 'خطة العمل';
+
+  @override
+  String get developmentAreas => 'مجالات التطوير';
 }

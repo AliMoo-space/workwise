@@ -148,4 +148,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onTrack => 'On Track';
+
+  @override
+  String get aiAssistant => 'AI Assistant';
+
+  @override
+  String get careerCoachingHrPolicySupport =>
+      'Career coaching & HR policy support';
+
+  @override
+  String get careerCoach => 'Career Coach';
+
+  @override
+  String get policyAssistant => 'Policy Assistant';
+
+  @override
+  String get actionPlan => 'Action plan';
+
+  @override
+  String get developmentAreas => 'Development areas';
 }

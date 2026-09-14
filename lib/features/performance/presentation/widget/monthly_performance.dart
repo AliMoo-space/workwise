@@ -9,7 +9,7 @@ class MonthlyPerformance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context);
 
     return Container(
       height: 180.h,

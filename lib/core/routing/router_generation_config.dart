@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/core/routing/page_transition.dart';
-import 'package:workwise/features/performance/presentation/screens/performance_screen.dart';
+import 'package:workwise/features/AIAssistant/presentation/screens/AI_assistant.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
@@ -11,7 +11,7 @@ class RouterGenerationConfig {
         name: AppRoutes.signInScreen,
         path: AppRoutes.signInScreen,
         pageBuilder: (context, state) =>
-            slideTransitionPage(state: state, child: const PerformanceScreen()),
+            slideTransitionPage(state: state, child: const AiAssistant()),
       ),
     ],
   );

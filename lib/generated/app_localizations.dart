@@ -379,6 +379,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'On Track'**
   String get onTrack;
+
+  /// No description provided for @aiAssistant.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Assistant'**
+  String get aiAssistant;
+
+  /// No description provided for @careerCoachingHrPolicySupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Career coaching & HR policy support'**
+  String get careerCoachingHrPolicySupport;
+
+  /// No description provided for @careerCoach.
+  ///
+  /// In en, this message translates to:
+  /// **'Career Coach'**
+  String get careerCoach;
+
+  /// No description provided for @policyAssistant.
+  ///
+  /// In en, this message translates to:
+  /// **'Policy Assistant'**
+  String get policyAssistant;
+
+  /// No description provided for @actionPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Action plan'**
+  String get actionPlan;
+
+  /// No description provided for @developmentAreas.
+  ///
+  /// In en, this message translates to:
+  /// **'Development areas'**
+  String get developmentAreas;
 }
 
 class _AppLocalizationsDelegate
