@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:workwise/core/design_system/colors/app_colors.dart';
+import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 
 class ProgressSlider extends StatelessWidget {
   const ProgressSlider({
@@ -19,17 +21,17 @@ class ProgressSlider extends StatelessWidget {
     children: [
       Row(
         children: [
-          Text(
+          AppText(
             'Progress',
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15.sp),
           ),
-          const Spacer(),
-          Text(
+          Spacer(),
+          AppText(
             '$value%',
             style: TextStyle(
               fontWeight: FontWeight.w700,
-              fontSize: 16.sp,
-              color: const Color(0xFF1F365C),
+              fontSize: 15.sp,
+              color: AppColors.black,
             ),
           ),
         ],
@@ -47,7 +49,7 @@ class ProgressSlider extends StatelessWidget {
           value: value.clamp(0, 100).toDouble(),
           min: 0,
           max: 100,
-          divisions: 20,
+          // divisions: 20,
           label: '$value%',
           onChanged: enabled ? onChanged : null,
         ),

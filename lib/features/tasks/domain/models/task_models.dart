@@ -4,7 +4,7 @@ enum TaskFilter { all, inProgress, underReview, completed }
 
 enum TaskStatus { inProgress, underReview, completed }
 
-enum TaskPriority { low, medium, high, urgent }
+enum TaskPriority { low, medium, high }
 
 @immutable
 class Task {
@@ -30,22 +30,17 @@ class Task {
   final String? description;
   final String? feedback;
 
-  Task copyWith({
-    int? progress,
-    TaskStatus? status,
-    String? feedback,
-  }) =>
-      Task(
-        id: id,
-        title: title,
-        managerName: managerName,
-        priority: priority,
-        deadline: deadline,
-        progress: progress ?? this.progress,
-        status: status ?? this.status,
-        description: description,
-        feedback: feedback ?? this.feedback,
-      );
+  Task copyWith({int? progress, TaskStatus? status, String? feedback}) => Task(
+    id: id,
+    title: title,
+    managerName: managerName,
+    priority: priority,
+    deadline: deadline,
+    progress: progress ?? this.progress,
+    status: status ?? this.status,
+    description: description,
+    feedback: feedback ?? this.feedback,
+  );
 }
 
 @immutable

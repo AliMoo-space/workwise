@@ -26,6 +26,8 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   shimmer_animation: ^2.2.2+1
+  gap: ^3.0.1
+  file_picker: ^10.3.10
 
 dev_dependencies:
   flutter_lints: ^6.0.0

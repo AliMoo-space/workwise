@@ -4,23 +4,23 @@ import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/generated/app_localizations.dart';
+import '../../../domain/models/task_models.dart';
 
-import '../../domain/models/task_models.dart';
+class PriorityBadge extends StatelessWidget {
+  const PriorityBadge({super.key, required this.priority});
 
-class TaskStatusBadge extends StatelessWidget {
-  const TaskStatusBadge({super.key, required this.status});
-
-  final TaskStatus status;
+  final TaskPriority priority;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
-    final (label, color) = switch (status) {
-      TaskStatus.inProgress => (l10n.inProgress, AppColors.secondary),
-      TaskStatus.underReview => (l10n.underReview, AppColors.warning),
-      TaskStatus.completed => (l10n.completed, AppColors.success),
+    final (label, color) = switch (priority) {
+      TaskPriority.low => (l10n.low, AppColors.success),
+      TaskPriority.medium => (l10n.medium, AppColors.warning),
+      TaskPriority.high => (l10n.high, AppColors.focus),
     };
+
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
       decoration: BoxDecoration(
@@ -32,19 +32,16 @@ class TaskStatusBadge extends StatelessWidget {
         children: [
           Container(
             width: 6.w,
-            height: 6.h,
+            height: 6.w,
             decoration: BoxDecoration(color: color, shape: BoxShape.circle),
           ),
           Gap(5.w),
-          Flexible(
-            child: AppText(
-              label,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.w500,
-                fontSize: 13.sp,
-              ),
+          AppText(
+            label,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w500,
+              fontSize: 13.sp,
             ),
           ),
         ],

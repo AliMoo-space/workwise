@@ -157,6 +157,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Arabic'**
   String get languageArabic;
+
+  /// No description provided for @tasks.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks'**
+  String get tasks;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submit;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @trackAssignments.
+  ///
+  /// In en, this message translates to:
+  /// **'Track assignments and submit for review'**
+  String get trackAssignments;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @inProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In Progress'**
+  String get inProgress;
+
+  /// No description provided for @underReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Under Review'**
+  String get underReview;
+
+  /// No description provided for @completed.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completed;
+
+  /// No description provided for @noTasksHere.
+  ///
+  /// In en, this message translates to:
+  /// **'No tasks here'**
+  String get noTasksHere;
+
+  /// No description provided for @noTasksMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no tasks in this filter right now.'**
+  String get noTasksMessage;
+
+  /// No description provided for @submitForReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit for Review'**
+  String get submitForReview;
+
+  /// No description provided for @notes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get notes;
+
+  /// No description provided for @notesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a note for your manager...'**
+  String get notesHint;
+
+  /// No description provided for @attachments.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachments'**
+  String get attachments;
+
+  /// No description provided for @tapToUpload.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to upload a file'**
+  String get tapToUpload;
+
+  /// No description provided for @fileFormatsSupported.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF, DOCX, PNG up to 10MB'**
+  String get fileFormatsSupported;
+
+  /// No description provided for @removeAttachment.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove attachment'**
+  String get removeAttachment;
+
+  /// No description provided for @taskSubmittedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Task submitted for review.'**
+  String get taskSubmittedSuccess;
+
+  /// No description provided for @due.
+  ///
+  /// In en, this message translates to:
+  /// **'Due'**
+  String get due;
+
+  /// No description provided for @managerFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Manager feedback: {feedback}'**
+  String managerFeedback(String feedback);
+
+  /// No description provided for @low.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get low;
+
+  /// No description provided for @medium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get medium;
+
+  /// No description provided for @high.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get high;
+
+  /// No description provided for @urgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent'**
+  String get urgent;
 }
 
 class _AppLocalizationsDelegate

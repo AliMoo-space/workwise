@@ -19,7 +19,7 @@ class StaticTasksData {
       id: '2',
       title: 'Fix login bug on iOS',
       managerName: 'Mohamed Ali',
-      priority: TaskPriority.urgent,
+      priority: TaskPriority.high,
       deadline: DateTime.now().add(const Duration(days: 1)),
       progress: 80,
       status: TaskStatus.inProgress,
@@ -64,10 +64,7 @@ class StaticTasksData {
   static void updateTask(String taskId, int progress, TaskStatus status) {
     final index = tasks.indexWhere((t) => t.id == taskId);
     if (index != -1) {
-      tasks[index] = tasks[index].copyWith(
-        progress: progress,
-        status: status,
-      );
+      tasks[index] = tasks[index].copyWith(progress: progress, status: status);
     }
   }
 }
