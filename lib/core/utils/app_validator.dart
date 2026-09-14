@@ -47,9 +47,9 @@ final class AppValidators {
   }
 
   static FormFieldValidator<String> email({
-    String emptyMessage = 'البريد الإلكتروني مطلوب.',
+    String emptyMessage = 'email is required',
     // 'Email is required.',
-    String invalidMessage = 'أدخل عنوان بريد إلكتروني صالح.',
+    String invalidMessage = ' valid email is required',
     // 'Enter a valid email address.',
   }) {
     return (value) {
@@ -70,10 +70,10 @@ final class AppValidators {
 static FormFieldValidator<String> password({
     int minLength = 8,
     bool requireStrongPassword = false,
-    String emptyMessage = 'كلمة المرور مطلوبة.',
+    String emptyMessage = 'password is required',
     String? minLengthMessage,
     String weakPasswordMessage =
-        'كلمة المرور يجب أن تحتوي على حرف كبير، حرف صغير، ورقم.',
+        'password must contain an uppercase letter, a lowercase letter, and a number.',
   }) 
   {
     return (value) {
@@ -83,7 +83,7 @@ static FormFieldValidator<String> password({
 
       if (value.length < minLength) {
         return minLengthMessage ??
-            'كلمة المرور يجب أن تكون على الأقل $minLength أحرف.';
+            'password must be at least $minLength characters.';
       }
 
       if (requireStrongPassword && !_passwordRegex.hasMatch(value)) {
@@ -207,8 +207,8 @@ static FormFieldValidator<String> password({
    FormFieldValidator<String> minLength(int length, {String? message}) {
     return (value) {
       if (value == null || value.length < length) {
-        return message ?? 'وجب أن يكون الحد الأدنى لطول $length حرفًا.';
-        // message ?? 'Minimum $length characters required.';
+        return message ?? 'Minimum $length characters required.';
+        //  لازم 8 حروف  علي الاقل
       }
 
       return null;
@@ -218,8 +218,7 @@ static FormFieldValidator<String> password({
    FormFieldValidator<String> maxLength(int length, {String? message}) {
     return (value) {
       if (value != null && value.length > length) {
-        return message ?? 'يجب ألا يزيد الحد الأقصى للطول عن $length حرفًا.';
-        // message ?? 'Maximum $length characters allowed.';
+        return message ?? 'aximum $length characters allowed.';
       }
 
       return null;
@@ -228,8 +227,7 @@ static FormFieldValidator<String> password({
 
    FormFieldValidator<String> confirmPassword(
     TextEditingController passwordController, {
-    String message = 'كلمة المرور غير متطابقة.',
-    // 'Passwords do not match.',
+    String message = 'Passwords do not match',
   }) {
     return (value) {
       if (value != passwordController.text) {

@@ -1,12 +1,13 @@
-// ignore_for_file: dead_code, deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart'; // 1. إضافة الـ Import
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-import 'package:workwise/core/design_system/colors/app_colors.dart';
+import 'package:workwise/core/design_system/widgets/feedback/app_loader.dart';
 import 'package:workwise/core/routing/app_routes.dart';
-import 'package:workwise/features/auth/splash/logic/splash_cubit.dart';
-import 'package:workwise/features/auth/splash/logic/splash_state.dart';
+import 'package:workwise/features/splash/presentation/logic/splash_cubit.dart';
+import 'package:workwise/features/splash/presentation/logic/splash_state.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -14,61 +15,52 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => SplashCubit()..checkAuthSession(),
+      create: (_) {
+        FlutterNativeSplash.remove();
+        return SplashCubit()..checkAuthSession();
+      },
+
       child: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
           if (state is UnauthenticatedState) {
-            // context.go(AppRoutes.loginScreen);
             context.go(AppRoutes.loginScreen);
           } else if (state is AuthenticatedState) {
             context.go(AppRoutes.homeScreen);
           }
         },
         child: Scaffold(
-          backgroundColor: AppColors.primary,
+          backgroundColor: Theme.of(context).colorScheme.primary,
           body: SafeArea(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Spacer(),
                 Image.asset(
-                  'assets/images/logo.jpeg', 
-                  width: 100,
-                  height: 100,
+                  'assets/images/logo2.jpeg',
+                  width: 100.w,
+                  height: 100.h,
                   fit: BoxFit.contain,
                 ),
-                
-                const SizedBox(height: 1),
-                Image.asset(
-                  'assets/images/logo1.jpeg', 
-                  width: 180,
-                  fit: BoxFit.contain,
-                ),
-                
-                const SizedBox(height: 32),
-
+                Gap(32.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(AppColors.textSecondary),
-                      ),
+                    AppLoader(
+                      size: 16.w,
+                      strokeWidth: 2.w,
+                      // color: AppColors.textSecondary,
+                      color: Theme.of(context).colorScheme.onSecondary,
                     ),
-                    const SizedBox(width: 10),
+                    Gap(10.w),
+
                     Text(
                       'loading...',
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
-                        fontSize: 13,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                     ),
                   ],
                 ),
-                
                 const Spacer(),
               ],
             ),

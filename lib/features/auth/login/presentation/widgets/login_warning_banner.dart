@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:gap/gap.dart';
+// import 'package:workwise/core/design_system/colors/app_colors.dart';
 
 class LoginWarningBanner extends StatelessWidget {
   final String message;
@@ -13,35 +16,35 @@ class LoginWarningBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final backgroundColor = isSessionExpired
-        ? const Color(0xFF3A301D) // بني/أصفر داكن لانتهاء الجلسة
-        : const Color(0xFF3B2023); // أحمر داكن للخطأ
+        ? Theme.of(context).colorScheme.onError // بني/أصفر داكن لانتهاء الجلسة
+        : Theme.of(context).colorScheme.error; // أحمر داكن للخطأ
 
     final borderColor = isSessionExpired
-        ? Colors.amber.shade700
-        : Colors.red.shade700;
+        ? Theme.of(context).colorScheme.onError
+        : Theme.of(context).colorScheme.error;
 
-    final iconColor = isSessionExpired ? Colors.amber : Colors.redAccent;
+    final iconColor = isSessionExpired ? Theme.of(context).colorScheme.onError : Theme.of(context).colorScheme.error;
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      padding:  EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
       decoration: BoxDecoration(
         color: backgroundColor,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: borderColor, width: 1),
+        borderRadius: BorderRadius.circular(10.r),
+        border: Border.all(color: borderColor, width: 1.w),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(Icons.warning_amber_rounded, color: iconColor, size: 20),
-          const SizedBox(width: 10),
+          Icon(Icons.warning_amber_rounded, color: iconColor, size: 20.sp),
+          Gap( 10.w),
           Expanded(
             child: Text(
               message,
               style: TextStyle(
                 color: iconColor,
-                fontSize: 13,
-                height: 1.3,
+                fontSize: 13.sp,
+                height: 1.3.h,
               ),
             ),
           ),

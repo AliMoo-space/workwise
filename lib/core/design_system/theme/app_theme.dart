@@ -19,7 +19,7 @@ final class AppTheme {
 
       colorScheme: const ColorScheme.light(
         primary: AppColors.primary,
-        onPrimary: AppColors.onPrimary,
+        onPrimary: AppColors.textPrimary,
         secondary: AppColors.secondary,
         onSecondary: AppColors.onSecondary,
 

@@ -30,9 +30,9 @@ class LoginCubit extends Cubit<LoginState> {
       
       // بعدين ان شاء الله 
       // لو تسجيل الدخول تمام
-      // emit(LoginSuccessState());
+      emit(LoginSuccessState());
       // لو مش تمام
-      // emit(LoginErrorState('Incorrect email or password. Please try again.'));
+      emit(LoginErrorState('Incorrect email or password. Please try again.'));
     }
   }
 
