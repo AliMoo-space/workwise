@@ -9,18 +9,15 @@ import 'package:workwise/generated/app_localizations.dart';
 
 class AiAssistant extends StatefulWidget {
   const AiAssistant({super.key});
-
   @override
   State<AiAssistant> createState() => _AiAssistantState();
 }
 
 class _AiAssistantState extends State<AiAssistant> {
   int currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     final localization = AppLocalizations.of(context);
-
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -41,9 +38,7 @@ class _AiAssistantState extends State<AiAssistant> {
                       color: Theme.of(context).colorScheme.onError,
                     ),
                   ),
-
                   Gap(10.w),
-
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,9 +56,7 @@ class _AiAssistantState extends State<AiAssistant> {
                   ),
                 ],
               ),
-
               Gap(15.h),
-
               Container(
                 width: double.infinity,
                 height: 50.h,
@@ -96,7 +89,6 @@ class _AiAssistantState extends State<AiAssistant> {
                         ),
                       ),
                     ),
-
                     Expanded(
                       child: GestureDetector(
                         onTap: () {
@@ -122,9 +114,7 @@ class _AiAssistantState extends State<AiAssistant> {
                   ],
                 ),
               ),
-
               Gap(20.h),
-
               Expanded(
                 child: currentIndex == 0
                     ? const CareerCoach()
