@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/features/auth/login/logic/login_cubit.dart';
 import 'package:workwise/features/auth/login/logic/login_state.dart';
@@ -8,23 +11,21 @@ import 'package:workwise/features/auth/login/presentation/widgets/login_form.dar
 import 'package:workwise/features/auth/login/presentation/widgets/login_header_widget.dart';
 import 'package:workwise/features/auth/login/presentation/widgets/login_warning_banner.dart';
 import 'package:workwise/features/auth/login/presentation/widgets/quick_sign_in_button.dart';
-
-
+import 'package:workwise/generated/app_localizations.dart';
 
 class LoginScreen extends StatelessWidget {
   final bool isSessionExpired;
 
-  const LoginScreen({
-    super.key,
-    this.isSessionExpired = false,
-  });
+  const LoginScreen({super.key, this.isSessionExpired = false});
 
   @override
   Widget build(BuildContext context) {
+    final localization = AppLocalizations.of(context);
+
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: Scaffold(
-        backgroundColor: const Color(0xFFF5F7F8), 
+        backgroundColor: Theme.of(context).colorScheme.onSurface,
         body: SafeArea(
           child: BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) {
@@ -34,50 +35,54 @@ class LoginScreen extends StatelessWidget {
             },
             builder: (context, state) {
               return SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 0.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(height: 12),
-                    const LoginHeaderWidget(),
-                    const SizedBox(height: 20),
+                    Gap(12.h),
+                    LoginHeaderWidget(),
+                    Gap(20.h),
                     if (isSessionExpired) ...[
-                      const LoginWarningBanner(
-                        message: 'Your session has expired. Please log in again to continue.',
+                      LoginWarningBanner(
+                        message: localization.sessionExpiredWarning,
                         isSessionExpired: true,
                       ),
-                      const SizedBox(height: 16),
+                      Gap(16.h),
                     ] else if (state is LoginErrorState) ...[
-                      const LoginWarningBanner(
-                        message: 'Invalid credentials. Please try again.',
+                      LoginWarningBanner(
+                        message: localization.signInWithCorporateCredentials,
                         isSessionExpired: false,
                       ),
-                      const SizedBox(height: 16),
                     ],
 
-                    const LoginForm(),
-                    const SizedBox(height: 24),
-
-                    const Row(
+                    LoginForm(),
+                    Row(
                       children: [
-                        Expanded(child: Divider(color: Colors.white12)),
+                        Expanded(child: Divider(color: AppColors.secondary)),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
                           child: Text(
-                            'OR',
-                            style: TextStyle(
-                              color: Colors.white38,
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            localization.or,
+                            style: Theme.of(context).textTheme.titleSmall
+                                ?.copyWith(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.secondary,
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
                         ),
-                        Expanded(child: Divider(color: Colors.white12)),
+                        Expanded(
+                          child: Divider(
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                        ),
                       ],
                     ),
-
+                    Gap(24.h),
                     QuickSignInButton(
                       onTap: () {
+                        context.go(AppRoutes.fingerprintScreen);
                       },
                     ),
                   ],

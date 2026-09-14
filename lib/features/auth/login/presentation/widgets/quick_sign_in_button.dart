@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:gap/gap.dart';
+import 'package:workwise/generated/app_localizations.dart';
 
 class QuickSignInButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -7,51 +10,52 @@ class QuickSignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+            final localization = AppLocalizations.of(context);
+
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(12.r),
       child: Container(
-        margin: const EdgeInsets.symmetric( horizontal: 15),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        margin: EdgeInsets.symmetric(horizontal: 15.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
         decoration: BoxDecoration(
-          color: const Color(0xFFFFFFFF),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Color(0xFF243B53)),
+          color: Theme.of(context).colorScheme.surface,
+          // color: AppColors.surface,
+          borderRadius: BorderRadius.circular(20.r),
+          border: Border.all(color: Theme.of(context).colorScheme.primary),
         ),
         child: Row(
           children: [
-            const Icon(
+            Icon(
               Icons.fingerprint,
-              color: Color(0xFF243B53),
-              size: 28,
+              color: Theme.of(context).colorScheme.primary,
+              size: 28.sp,
             ),
-            const SizedBox(width: 14),
-            const Expanded(
+            Gap(14.w),
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Quick Sign-In',
-                    style: TextStyle(
-                      color: Color(0xFF243B53),
-                      fontSize: 14,
+                    localization.quickSignIn,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 2),
+                  Gap(2.h),
                   Text(
-                    'Use Fingerprint or Face ID',
-                    style: TextStyle(
-                      color: Color(0xFF243B53),
-                      fontSize: 12,
+                    localization.useFingerprintOrFaceId,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                 ],
               ),
             ),
-            const Icon(
+            Icon(
               Icons.chevron_right,
-              color:Color(0xFF243B53),
+              color: Theme.of(context).colorScheme.primary,
             ),
           ],
         ),
