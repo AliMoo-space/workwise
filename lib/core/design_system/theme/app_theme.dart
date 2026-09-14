@@ -15,7 +15,7 @@ final class AppTheme {
 
       fontFamily: AppTextStyles.bodyFontFamily,
 
-      scaffoldBackgroundColor: AppColors.background,
+      scaffoldBackgroundColor: AppColors.white,
 
       colorScheme: const ColorScheme.light(
         primary: AppColors.primary,

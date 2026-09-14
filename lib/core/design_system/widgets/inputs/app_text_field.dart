@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:flutter/services.dart';
+import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_radius.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
@@ -261,7 +263,7 @@ class _AppTextFieldState extends State<AppTextField> {
               color: AppColors.textPrimary,
             ),
           ),
-          SizedBox(height: AppSpacing.space8),
+          Gap(AppSpacing.space8),
         ],
         TextFormField(
           controller: widget.controller,

@@ -41,3 +41,38 @@
   "invalidEmailFormatMessage": "Invalid work email format",
   "enterPasswordMessage": "Please enter your password"
 }
+  "tasks": "Tasks",
+  "profile": "Profile",
+  "settings": "Settings",
+  "logout": "Logout",
+  "submit": "Submit",
+  "cancel": "Cancel",
+  "trackAssignments": "Track assignments and submit for review",
+  "all": "All",
+  "inProgress": "In Progress",
+  "underReview": "Under Review",
+  "completed": "Completed",
+  "noTasksHere": "No tasks here",
+  "noTasksMessage": "There are no tasks in this filter right now.",
+  "submitForReview": "Submit for Review",
+  "notes": "Notes",
+  "notesHint": "Add a note for your manager...",
+  "attachments": "Attachments",
+  "tapToUpload": "Tap to upload a file",
+  "fileFormatsSupported": "PDF, DOCX, PNG up to 10MB",
+  "removeAttachment": "Remove attachment",
+  "taskSubmittedSuccess": "Task submitted for review.",
+  "due": "Due",
+  "managerFeedback": "Manager feedback: {feedback}",
+  "@managerFeedback": {
+    "placeholders": {
+      "feedback": {
+        "type": "String"
+      }
+    }
+  },
+  "low": "Low",
+  "medium": "Medium",
+  "high": "High",
+  "urgent": "Urgent"
+}

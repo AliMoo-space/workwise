@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
@@ -26,7 +27,7 @@ class AppErrorState extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(Icons.error_outline_rounded, size: 56, color: AppColors.error),
-            const SizedBox(height: AppSpacing.space16),
+            const Gap(AppSpacing.space16),
             AppText(
               message,
               style: AppTextStyles.bodyMedium,
@@ -34,7 +35,7 @@ class AppErrorState extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             if (onRetry != null) ...[
-              const SizedBox(height: AppSpacing.space24),
+              const Gap(AppSpacing.space24),
               AppButton(text: buttonText, onPressed: onRetry),
             ],
           ],

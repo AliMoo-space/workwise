@@ -119,4 +119,88 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enterPasswordMessage => 'يرجى إدخال كلمة المرور';
+  String get languageArabic => 'العربية';
+
+  @override
+  String get tasks => 'المهام';
+
+  @override
+  String get profile => 'الملف الشخصي';
+
+  @override
+  String get settings => 'الإعدادات';
+
+  @override
+  String get logout => 'تسجيل الخروج';
+
+  @override
+  String get submit => 'إرسال';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get trackAssignments => 'تتبع المهام وإرسالها للمراجعة';
+
+  @override
+  String get all => 'الكل';
+
+  @override
+  String get inProgress => 'قيد التنفيذ';
+
+  @override
+  String get underReview => 'قيد المراجعة';
+
+  @override
+  String get completed => 'مكتملة';
+
+  @override
+  String get noTasksHere => 'لا توجد مهام هنا';
+
+  @override
+  String get noTasksMessage => 'لا توجد مهام في هذا الفلتر حالياً.';
+
+  @override
+  String get submitForReview => 'إرسال للمراجعة';
+
+  @override
+  String get notes => 'ملاحظات';
+
+  @override
+  String get notesHint => 'أضف ملاحظة لمديرك...';
+
+  @override
+  String get attachments => 'المرفقات';
+
+  @override
+  String get tapToUpload => 'اضغط لرفع ملف';
+
+  @override
+  String get fileFormatsSupported => 'PDF, DOCX, PNG حتى 10 ميجا';
+
+  @override
+  String get removeAttachment => 'حذف المرفق';
+
+  @override
+  String get taskSubmittedSuccess => 'تم إرسال المهمة للمراجعة.';
+
+  @override
+  String get due => 'الموعد النهائي';
+
+  @override
+  String managerFeedback(String feedback) {
+    return 'ملاحظات المدير: $feedback';
+  }
+
+  @override
+  String get low => 'منخفضة';
+
+  @override
+  String get medium => 'متوسطة';
+
+  @override
+  String get high => 'عالية';
+
+  @override
+  String get urgent => 'عاجلة';
 }
