@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 class AppDrawerWidget extends StatelessWidget {
   const AppDrawerWidget({super.key});
@@ -8,14 +9,14 @@ class AppDrawerWidget extends StatelessWidget {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
-        children: const [
+        children: [
           DrawerHeader(
             decoration: BoxDecoration(color: Colors.blue),
-            child: Text('Drawer Header'),
+            child: Text(context.l10n.drawerHeader),
           ),
-          ListTile(title: Text('Item 1')),
-          ListTile(title: Text('Item 2')),
-          ListTile(title: Text('Item 3')),
+          ListTile(title: Text(context.l10n.drawerItem1)),
+          ListTile(title: Text(context.l10n.drawerItem2)),
+          ListTile(title: Text(context.l10n.drawerItem3)),
         ],
       ),
     );

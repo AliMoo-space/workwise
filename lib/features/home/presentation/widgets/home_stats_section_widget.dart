@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_section.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 class HomeStatsSectionWidget extends StatelessWidget {
   const HomeStatsSectionWidget({super.key});
@@ -21,10 +23,10 @@ class HomeStatsSectionWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Icon(Icons.task_alt_sharp),
-                  SizedBox(height: AppSpacing.space12.h),
+                  Gap(AppSpacing.space12.h),
                   AppText('3', style: AppTextStyles.headlineSmall),
                   AppText(
-                    'Pending Tasks',
+                    context.l10n.pendingTasks,
                     style: AppTextStyles.headlineSmall.copyWith(fontSize: 16),
                   ),
                 ],
@@ -33,7 +35,7 @@ class HomeStatsSectionWidget extends StatelessWidget {
           ),
         ),
 
-        SizedBox(width: AppSpacing.space16.w),
+        Gap(AppSpacing.space16.w),
 
         Expanded(
           child: AppSection(
@@ -43,16 +45,19 @@ class HomeStatsSectionWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Icon(Icons.calendar_month),
-                  SizedBox(height: AppSpacing.space12.h),
+                  Gap(AppSpacing.space12.h),
                   AppText('June 12', style: AppTextStyles.headlineSmall),
-                  AppText('Next Meeting', style: AppTextStyles.bodySmall),
+                  AppText(
+                    context.l10n.nextMeeting,
+                    style: AppTextStyles.bodySmall,
+                  ),
                 ],
               ),
             ),
           ),
         ),
 
-        SizedBox(width: AppSpacing.space16.w),
+        Gap(AppSpacing.space16.w),
 
         Expanded(
           child: AppSection(
@@ -62,10 +67,10 @@ class HomeStatsSectionWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Icon(Icons.wallet_travel_outlined),
-                  SizedBox(height: AppSpacing.space12.h),
+                  Gap(AppSpacing.space12.h),
                   AppText('13d', style: AppTextStyles.headlineSmall),
                   AppText(
-                    'Leave Balance',
+                    context.l10n.leaveBalance,
                     style: AppTextStyles.headlineSmall.copyWith(fontSize: 16),
                   ),
                 ],

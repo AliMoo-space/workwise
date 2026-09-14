@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 class AttendanceCardWidget extends StatelessWidget {
   const AttendanceCardWidget({super.key});
@@ -24,7 +26,7 @@ class AttendanceCardWidget extends StatelessWidget {
             children: [
               Expanded(
                 child: AppText(
-                  "Today's attendance",
+                  context.l10n.todayAttendance,
                   style: AppTextStyles.titleSmall.copyWith(
                     color: AppColors.disabled,
                   ),
@@ -36,7 +38,7 @@ class AttendanceCardWidget extends StatelessWidget {
                 backgroundColor: AppColors.outlineVariant.withValues(alpha: .2),
                 child: Center(
                   child: AppText(
-                    'On Shift',
+                    context.l10n.onShift,
                     style: AppTextStyles.bodyLarge.copyWith(
                       color: AppColors.onPrimary,
                     ),
@@ -45,19 +47,19 @@ class AttendanceCardWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: AppSpacing.space4.h),
+          Gap(AppSpacing.space4.h),
           AppText(
-            'Checked in at 9:00 AM',
+            context.l10n.checkedInAt,
             style: AppTextStyles.bodyLarge.copyWith(
               color: AppColors.onPrimary,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: AppSpacing.space12.h),
+          Gap(AppSpacing.space12.h),
           Row(
             children: [
               Icon(Icons.access_time, color: AppColors.onPrimary),
-              SizedBox(width: AppSpacing.space8.w),
+              Gap(AppSpacing.space8.w),
               AppText(
                 '03:20:51 ',
                 style: AppTextStyles.headlineMedium.copyWith(
@@ -66,29 +68,29 @@ class AttendanceCardWidget extends StatelessWidget {
                 ),
               ),
               AppText(
-                'hours worked',
+                context.l10n.hoursWorked,
                 style: AppTextStyles.bodyLarge.copyWith(
                   color: AppColors.onPrimary,
                 ),
               ),
             ],
           ),
-          SizedBox(height: AppSpacing.space12.h),
+          Gap(AppSpacing.space12.h),
           Row(
             children: [
               Icon(Icons.location_on_outlined, color: AppColors.onPrimary),
-              SizedBox(width: AppSpacing.space8.w),
+              Gap(AppSpacing.space8.w),
               AppText(
-                'Inside the office',
+                context.l10n.insideOffice,
                 style: AppTextStyles.bodyLarge.copyWith(
                   color: AppColors.onPrimary,
                 ),
               ),
             ],
           ),
-          SizedBox(height: AppSpacing.space12.h),
+          Gap(AppSpacing.space12.h),
           AppButton(
-            text: 'Check Out',
+            text: context.l10n.checkOut,
             backgroundColor: AppColors.outlineVariant.withValues(alpha: .4),
             onPressed: () {},
           ),

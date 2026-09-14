@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
+import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_icon_button.dart';
+import 'package:workwise/core/design_system/widgets/inputs/language_selector.dart';
 
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/features/home/presentation/widgets/app_drawer_widget.dart';
 import 'package:workwise/features/home/presentation/widgets/attendance_card_widget.dart';
 import 'package:workwise/features/home/presentation/widgets/home_stats_grid_widget.dart';
@@ -18,15 +21,16 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       drawer: AppDrawerWidget(),
       appBar: AppBar(
-        title: const Text('Home Screen'),
+        title: Text(context.l10n.homeScreen),
         actions: [
+          LanguageSelector(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: AppSpacing.space12.w),
             child: AppIconButton(
               icon: Icons.notifications,
               variant: AppIconButtonVariant.outlined,
               onPressed: () {},
-              tooltip: 'Notifications',
+              tooltip: context.l10n.notifications,
               iconSize: AppSpacing.space24.sp,
             ),
           ),
@@ -37,25 +41,25 @@ class HomeScreen extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: AppSpacing.space16.w),
           child: Column(
             children: [
-              SizedBox(height: AppSpacing.space24.h),
+              Gap(AppSpacing.space24.h),
 
               AttendanceCardWidget(),
 
-              SizedBox(height: AppSpacing.space24.h),
+              Gap(AppSpacing.space24.h),
               HomeStatsSectionWidget(),
 
-              SizedBox(height: AppSpacing.space24.h),
+              Gap(AppSpacing.space24.h),
               Align(
-                alignment: Alignment.centerLeft,
+                alignment: AlignmentDirectional.centerStart,
                 child: AppText(
-                  'Quick Actions',
+                  context.l10n.quickActions,
                   style: AppTextStyles.headlineMedium,
                 ),
               ),
-              SizedBox(height: AppSpacing.space16.h),
+              Gap(AppSpacing.space16.h),
 
               HomeStatsGrid(),
-              SizedBox(height: AppSpacing.space16.h),
+              Gap(AppSpacing.space16.h),
             ],
           ),
         ),
