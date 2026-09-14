@@ -1,11 +1,9 @@
-// ignore_for_file: unnecessary_import
-
+// ignore: unnecessary_import
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
 import '../colors/app_colors.dart';
-
 @immutable
 final class AppTextStyles {
   const AppTextStyles._();
