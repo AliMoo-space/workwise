@@ -1,9 +1,9 @@
+// ignore: unnecessary_import
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
 import '../colors/app_colors.dart';
-
 @immutable
 final class AppTextStyles {
   const AppTextStyles._();
@@ -224,8 +224,6 @@ final class AppTextStyles {
     fontWeight: FontWeight.w400,
     height: 20 / 14,
     color: AppColors.textPrimary,
-    fontFeatures: [
-      FontFeature.tabularFigures(),
-    ],
+    fontFeatures: [FontFeature.tabularFigures()],
   );
 }

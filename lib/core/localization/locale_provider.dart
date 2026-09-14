@@ -1,21 +1,24 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocaleCubit extends Cubit<Locale> {
-  LocaleCubit(SharedPreferences preferences)
-    : _preferences = preferences,
-      super(_localeFromCode(preferences.getString(_localeKey)));
+class LocaleProvider extends ChangeNotifier {
+  LocaleProvider(SharedPreferences preferences)
+      : _preferences = preferences,
+        _locale = _localeFromCode(preferences.getString(_localeKey));
 
   static const _localeKey = 'locale';
   final SharedPreferences _preferences;
+  Locale _locale;
+
+  Locale get locale => _locale;
 
   Future<void> setLocale(Locale locale) async {
-    if (!_isSupported(locale) || locale == state) {
+    if (!_isSupported(locale) || locale == _locale) {
       return;
     }
 
-    emit(locale);
+    _locale = locale;
+    notifyListeners();
     await _preferences.setString(_localeKey, locale.languageCode);
   }
 

@@ -8,37 +8,42 @@ environment:
   sdk: ^3.12.2
 
 dependencies:
-  bloc: ^9.2.1
   cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   equatable: ^2.0.8
   flutter:
     sdk: flutter
-  flutter_bloc: ^9.1.1
   flutter_screenutil_plus: ^1.5.0
   flutter_svg: ^2.3.0
   get_it: ^9.2.1
   go_router: ^17.3.0
   intl: ^0.20.2
   lottie: ^3.5.1
+  provider: ^6.1.2
   shared_preferences: ^2.5.3
   supabase_flutter: ^2.15.0
   flutter_localizations:
     sdk: flutter
   shimmer_animation: ^2.2.2+1
+  local_auth: ^3.0.2
+  gap: ^3.0.1
+  flutter_native_splash: ^2.4.8
+  gap: ^3.0.1
+  file_picker: ^10.3.10
 
 dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
+  # flutter_native_splash: ^2.4.8
 
 flutter:
   generate: true
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
   # example:
   # fonts:
@@ -55,3 +60,20 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+# flutter_native_splash:
+#   color: "#ffffff"
+#   image: assets/images/logo2.jpeg
+#   android_12:
+#     color: "#ffffff"
+#     image: assets/images/logo2.jpeg
+
+flutter_native_splash:
+  color: "#243B53" # اللون اللي اخترته (شيلنا 0xFF وحطينا #)
+  image: assets/images/e.png # مسار الصورة
+
+  # إعدادات أندرويد 12 والأحدث (Android 12+)
+  android_12:
+    image: assets/images/e.png
+    color: "#243B53"
+
+  web: false

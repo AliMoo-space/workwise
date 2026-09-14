@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 
@@ -47,7 +48,7 @@ class AppFullScreenLoader extends StatelessWidget {
           children: [
             const AppLoader.large(),
             if (message != null) ...[
-              const SizedBox(height: 16),
+              const Gap(16),
               AppText(message!),
             ],
           ],

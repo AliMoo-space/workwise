@@ -9,5 +9,70 @@
   "signInContent": "Sign In Content",
   "language": "Language",
   "languageEnglish": "English",
-  "languageArabic": "Arabic"
+  "languageArabic": "Arabic",
+  "loading": "loading...",
+
+  "welcomeBack": "Welcome Back",
+  "signInWithCorporateCredentials": "Sign in with your corporate credentials",
+  "workEmail": "Work Email",
+  "workEmailHint": "name@company.com",
+  "password": "Password",
+  "passwordHint": "Enter your password",
+  "keepMeSignedIn": "Keep me signed in",
+  "forgotPassword": "Forgot Password?",
+
+  "quickSignIn": "Quick Sign-In",
+  "useFingerprintOrFaceId": "Use Fingerprint or Face ID",
+  "or": "OR",
+
+  "sessionExpiredWarning": "Your session has expired. Please try again to continue.",
+  "invalidCredentialsWarning": "Invalid credentials. Please try again.",
+
+  "verifyYourIdentityToAccessYourAccount": "Verify your identity to access your account",
+  "tapToScanFingerprintFaceID": "Tap to scan Fingerprint / Face ID",
+  "useEmailAndPasswordInstead": "Use email and password instead",
+  "biometricsNotAvailable": "Biometric authentication is not available on this device.",
+  "authCanceledOrFailed": "Authentication canceled or failed.",
+
+  "resetPasswordTitle": "Reset Password",
+  "resetPasswordDescription": "Enter your work email and we'll send you a reset link.",
+  "sendResetLink": "Send Reset Link",
+  "enterWorkEmailMessage": "Please enter your work email",
+  "invalidEmailFormatMessage": "Invalid work email format",
+  "enterPasswordMessage": "Please enter your password"
+}
+  "tasks": "Tasks",
+  "profile": "Profile",
+  "settings": "Settings",
+  "logout": "Logout",
+  "submit": "Submit",
+  "cancel": "Cancel",
+  "trackAssignments": "Track assignments and submit for review",
+  "all": "All",
+  "inProgress": "In Progress",
+  "underReview": "Under Review",
+  "completed": "Completed",
+  "noTasksHere": "No tasks here",
+  "noTasksMessage": "There are no tasks in this filter right now.",
+  "submitForReview": "Submit for Review",
+  "notes": "Notes",
+  "notesHint": "Add a note for your manager...",
+  "attachments": "Attachments",
+  "tapToUpload": "Tap to upload a file",
+  "fileFormatsSupported": "PDF, DOCX, PNG up to 10MB",
+  "removeAttachment": "Remove attachment",
+  "taskSubmittedSuccess": "Task submitted for review.",
+  "due": "Due",
+  "managerFeedback": "Manager feedback: {feedback}",
+  "@managerFeedback": {
+    "placeholders": {
+      "feedback": {
+        "type": "String"
+      }
+    }
+  },
+  "low": "Low",
+  "medium": "Medium",
+  "high": "High",
+  "urgent": "Urgent"
 }
