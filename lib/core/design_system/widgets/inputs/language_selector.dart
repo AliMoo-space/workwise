@@ -12,18 +12,18 @@ class LanguageSelector extends StatelessWidget {
     final selectedLocale = context.watch<LocaleProvider>().locale;
 
     return PopupMenuButton<Locale>(
-      tooltip: localizations.language,
+      tooltip: context.l10n.language,
       initialValue: selectedLocale,
       onSelected: context.read<LocaleProvider>().setLocale,
       icon: const Icon(Icons.language),
       itemBuilder: (context) => [
         PopupMenuItem(
           value: const Locale('en'),
-          child: Text(localizations.languageEnglish),
+          child: Text(context.l10n.languageEnglish),
         ),
         PopupMenuItem(
           value: const Locale('ar'),
-          child: Text(localizations.languageArabic),
+          child: Text(context.l10n.languageArabic),
         ),
       ],
     );
