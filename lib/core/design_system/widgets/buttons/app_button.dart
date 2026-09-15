@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_radius.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
@@ -67,6 +68,10 @@ class AppButton extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   if (leading != null) ...[leading!, Gap(AppSpacing.space8)],
+                  if (leading != null) ...[
+                    leading!,
+                    const Gap(AppSpacing.space8),
+                  ],
 
                   AppText(
                     text,
@@ -77,6 +82,10 @@ class AppButton extends StatelessWidget {
                   ),
 
                   if (trailing != null) ...[Gap(AppSpacing.space8), trailing!],
+                  if (trailing != null) ...[
+                    const Gap(AppSpacing.space8),
+                    trailing!,
+                  ],
                 ],
               ),
       ),

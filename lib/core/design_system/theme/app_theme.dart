@@ -19,17 +19,21 @@ final class AppTheme {
 
       colorScheme: const ColorScheme.light(
         primary: AppColors.primary,
-        onPrimary: AppColors.onPrimary,
+        onPrimary: AppColors.textPrimary,
         secondary: AppColors.secondary,
         onSecondary: AppColors.onSecondary,
-        surface: AppColors.surface,
+
+        surface: AppColors.background,
         onSurface: AppColors.onSurface,
+
         error: AppColors.error,
         onError: AppColors.onError,
-        outline: AppColors.outline,
+
+        outline: AppColors.border,
+        tertiary: AppColors.success,
       ),
 
-      textTheme: const TextTheme(
+      textTheme: TextTheme(
         displayLarge: AppTextStyles.displayLarge,
         displayMedium: AppTextStyles.displayMedium,
         displaySmall: AppTextStyles.displaySmall,

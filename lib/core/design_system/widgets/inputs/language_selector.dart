@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workwise/core/localization/local_cubit.dart';
+
 import 'package:workwise/core/localization/localization_extension.dart';
 
 class LanguageSelector extends StatelessWidget {
@@ -6,9 +9,12 @@ class LanguageSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectedLocale = context.watch<LocaleCubit>().state;
+
     return PopupMenuButton<Locale>(
       tooltip: context.l10n.language,
-      onSelected: (locale) {},
+      initialValue: selectedLocale,
+      onSelected: context.read<LocaleCubit>().setLocale,
       icon: const Icon(Icons.language),
       itemBuilder: (context) => [
         PopupMenuItem(
