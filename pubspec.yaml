@@ -1,7 +1,9 @@
 name: workwise
+
 description: "A new Flutter project."
 
 publish_to: 'none'
+
 version: 1.0.0+1
 
 environment:
@@ -27,50 +29,30 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   shimmer_animation: ^2.2.2+1
+
   local_auth: ^3.0.2
   gap: ^3.0.1
   flutter_native_splash: ^2.4.8
+  flutter_map: ^8.3.2
+  latlong2: ^0.10.1
+  pinput: ^6.0.2
 
 dev_dependencies:
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  # flutter_native_splash: ^2.4.8
 
 flutter:
   generate: true
   uses-material-design: true
-  # To add assets to your application, add an assets section, like this:
+
   assets:
     - assets/images/
-  #   - images/a_dot_ham.jpeg
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/to/font-from-package
-# flutter_native_splash:
-#   color: "#ffffff"
-#   image: assets/images/logo2.jpeg
-#   android_12:
-#     color: "#ffffff"
-#     image: assets/images/logo2.jpeg
 
 flutter_native_splash:
-  color: "#243B53" # اللون اللي اخترته (شيلنا 0xFF وحطينا #)
-  image: assets/images/e.png # مسار الصورة
+  color: "#243B53"
+  image: assets/images/e.png
 
-  # إعدادات أندرويد 12 والأحدث (Android 12+)
   android_12:
     image: assets/images/e.png
     color: "#243B53"
