@@ -21,9 +21,11 @@ class AppButton extends StatelessWidget {
     this.width,
     this.height = 56,
     this.backgroundColor,
+    this.fontSize,
   });
   final Color? backgroundColor;
   final String text;
+  final double? fontSize;
 
   final VoidCallback? onPressed;
 
@@ -52,7 +54,7 @@ class AppButton extends StatelessWidget {
         style: style,
         onPressed: enabled && !isLoading ? onPressed : null,
         child: isLoading
-            ? const SizedBox(
+            ? SizedBox(
                 width: 22,
                 height: 22,
                 child: CircularProgressIndicator(
@@ -64,22 +66,17 @@ class AppButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (leading != null) ...[
-                    leading!,
-                    const Gap(AppSpacing.space8),
-                  ],
+                  if (leading != null) ...[leading!, Gap(AppSpacing.space8)],
 
                   AppText(
                     text,
                     style: AppTextStyles.titleLarge.copyWith(
                       color: style.foregroundColor?.resolve({}),
+                      fontSize: fontSize,
                     ),
                   ),
 
-                  if (trailing != null) ...[
-                    const Gap(AppSpacing.space8),
-                    trailing!,
-                  ],
+                  if (trailing != null) ...[Gap(AppSpacing.space8), trailing!],
                 ],
               ),
       ),

@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
@@ -11,11 +12,17 @@ class AppLoader extends StatelessWidget {
     this.color,
   });
 
-  const AppLoader.small({super.key, this.strokeWidth = 2.5, this.color})
-    : size = 18;
+  const AppLoader.small({
+    super.key,
+    this.strokeWidth = 2.5,
+    this.color,
+  }) : size = 18;
 
-  const AppLoader.large({super.key, this.strokeWidth = 4, this.color})
-    : size = 40;
+  const AppLoader.large({
+    super.key,
+    this.strokeWidth = 4,
+    this.color,
+  }) : size = 40;
 
   final double size;
   final double strokeWidth;
@@ -60,129 +67,4 @@ class AppFullScreenLoader extends StatelessWidget {
 
 
 
-// import 'package:flutter/material.dart';
-// import 'package:workwise/core/design_system/colors/app_colors.dart';
 
-
-// enum AppLoaderSize {
-//   small,
-//   medium,
-//   large,
-// }
-
-// class AppLoader extends StatelessWidget {
-//   const AppLoader({
-//     super.key,
-//     this.size = AppLoaderSize.medium,
-//     this.color,
-//     this.strokeWidth = 3,
-//   });
-
-//   final AppLoaderSize size;
-
-//   final Color? color;
-
-//   final double strokeWidth;
-
-//   double get _dimension {
-//     switch (size) {
-//       case AppLoaderSize.small:
-//         return 20;
-
-//       case AppLoaderSize.medium:
-//         return 32;
-
-//       case AppLoaderSize.large:
-//         return 48;
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       width: _dimension,
-//       height: _dimension,
-//       child: CircularProgressIndicator(
-//         strokeWidth: strokeWidth,
-//         color: color ?? AppColors.primary,
-//       ),
-//     );
-//   }
-// }
-
-// ///
-// /// Full screen loading
-// ///
-// class AppFullScreenLoader extends StatelessWidget {
-//   const AppFullScreenLoader({
-//     super.key,
-//     this.message,
-//   });
-
-//   final String? message;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ColoredBox(
-//       color: AppColors.background,
-//       child: Center(
-//         child: Column(
-//           mainAxisSize: MainAxisSize.min,
-//           children: [
-
-//             const AppLoader(
-//               size: AppLoaderSize.large,
-//             ),
-
-//             if (message != null) ...[
-
-//               const SizedBox(height: 16),
-
-//               Text(
-//                 message!,
-//                 style: Theme.of(context).textTheme.bodyMedium,
-//               ),
-//             ]
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// ///
-// /// Overlay loading
-// ///
-// class AppLoadingOverlay extends StatelessWidget {
-//   const AppLoadingOverlay({
-//     super.key,
-//     required this.child,
-//     required this.isLoading,
-//   });
-
-//   final Widget child;
-
-//   final bool isLoading;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Stack(
-//       children: [
-
-//         child,
-
-//         if (isLoading)
-//           Positioned.fill(
-//             child: ColoredBox(
-//               color: Colors.black26,
-//               child: const Center(
-//                 child: AppLoader(
-//                   size: AppLoaderSize.large,
-//                 ),
-//               ),
-//             ),
-//           ),
-//       ],
-//     );
-//   }
-// }
