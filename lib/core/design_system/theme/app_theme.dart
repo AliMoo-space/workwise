@@ -21,17 +21,20 @@ final class AppTheme {
         primary: AppColors.primary,
         onPrimary: AppColors.textPrimary,
         secondary: AppColors.secondary,
-        onSecondary: AppColors.textSecondary,
-        surface: AppColors.surface,
-        onSurface: AppColors.background,
+        onSecondary: AppColors.onSecondary,
+
+        surface: AppColors.background,
+        onSurface: AppColors.onSurface,
+
+       
         error: AppColors.error,
-        onError: AppColors.warning,
+        onError: AppColors.onError,
+
         outline: AppColors.border,
-      tertiary: AppColors.success,  
-        
+        tertiary: AppColors.success,
       ),
 
-      textTheme: const TextTheme(
+      textTheme: TextTheme(
         displayLarge: AppTextStyles.displayLarge,
         displayMedium: AppTextStyles.displayMedium,
         displaySmall: AppTextStyles.displaySmall,
@@ -100,21 +103,25 @@ final class AppTheme {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.radius12),
           borderSide: const BorderSide(color: AppColors.border),
+     
         ),
 
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.radius12),
           borderSide: const BorderSide(color: AppColors.border),
+
         ),
 
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.radius12),
           borderSide: const BorderSide(color: AppColors.primary, width: 2),
+
         ),
 
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.radius12),
           borderSide: const BorderSide(color: AppColors.error),
+
         ),
       ),
 
@@ -124,6 +131,7 @@ final class AppTheme {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.radius12),
           side: const BorderSide(color: AppColors.border),
+
         ),
       ),
 
@@ -132,6 +140,8 @@ final class AppTheme {
       ),
 
       iconTheme: const IconThemeData(color: AppColors.textSecondary),
+
     );
   }
 }
+

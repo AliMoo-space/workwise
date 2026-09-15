@@ -8,4 +8,5 @@ class AppRoutes {
   static const String notesScreen = '/notesScreen';
   static const String otpVerificationScreen = '/otp-verification';
   static const String createNewPasswordScreen = '/create_new_password';
+  static const String tasksScreen = '/tasksScreen';
 }

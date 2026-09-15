@@ -30,7 +30,7 @@ class LoginScreen extends StatelessWidget {
           child: BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) {
               if (state is LoginSuccessState) {
-                context.go(AppRoutes.homeScreen);
+                context.go(AppRoutes.mainScreen);
               }
             },
             builder: (context, state) {

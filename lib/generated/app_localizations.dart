@@ -158,156 +158,6 @@ abstract class AppLocalizations {
   /// **'Arabic'**
   String get languageArabic;
 
-  /// No description provided for @loading.
-  ///
-  /// In en, this message translates to:
-  /// **'loading...'**
-  String get loading;
-
-  /// No description provided for @welcomeBack.
-  ///
-  /// In en, this message translates to:
-  /// **'Welcome Back'**
-  String get welcomeBack;
-
-  /// No description provided for @signInWithCorporateCredentials.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in with your corporate credentials'**
-  String get signInWithCorporateCredentials;
-
-  /// No description provided for @workEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Work Email'**
-  String get workEmail;
-
-  /// No description provided for @workEmailHint.
-  ///
-  /// In en, this message translates to:
-  /// **'name@company.com'**
-  String get workEmailHint;
-
-  /// No description provided for @password.
-  ///
-  /// In en, this message translates to:
-  /// **'Password'**
-  String get password;
-
-  /// No description provided for @passwordHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your password'**
-  String get passwordHint;
-
-  /// No description provided for @keepMeSignedIn.
-  ///
-  /// In en, this message translates to:
-  /// **'Keep me signed in'**
-  String get keepMeSignedIn;
-
-  /// No description provided for @forgotPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Forgot Password?'**
-  String get forgotPassword;
-
-  /// No description provided for @quickSignIn.
-  ///
-  /// In en, this message translates to:
-  /// **'Quick Sign-In'**
-  String get quickSignIn;
-
-  /// No description provided for @useFingerprintOrFaceId.
-  ///
-  /// In en, this message translates to:
-  /// **'Use Fingerprint or Face ID'**
-  String get useFingerprintOrFaceId;
-
-  /// No description provided for @or.
-  ///
-  /// In en, this message translates to:
-  /// **'OR'**
-  String get or;
-
-  /// No description provided for @sessionExpiredWarning.
-  ///
-  /// In en, this message translates to:
-  /// **'Your session has expired. Please try again to continue.'**
-  String get sessionExpiredWarning;
-
-  /// No description provided for @invalidCredentialsWarning.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid credentials. Please try again.'**
-  String get invalidCredentialsWarning;
-
-  /// No description provided for @verifyYourIdentityToAccessYourAccount.
-  ///
-  /// In en, this message translates to:
-  /// **'Verify your identity to access your account'**
-  String get verifyYourIdentityToAccessYourAccount;
-
-  /// No description provided for @tapToScanFingerprintFaceID.
-  ///
-  /// In en, this message translates to:
-  /// **'Tap to scan Fingerprint / Face ID'**
-  String get tapToScanFingerprintFaceID;
-
-  /// No description provided for @useEmailAndPasswordInstead.
-  ///
-  /// In en, this message translates to:
-  /// **'Use email and password instead'**
-  String get useEmailAndPasswordInstead;
-
-  /// No description provided for @biometricsNotAvailable.
-  ///
-  /// In en, this message translates to:
-  /// **'Biometric authentication is not available on this device.'**
-  String get biometricsNotAvailable;
-
-  /// No description provided for @authCanceledOrFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'Authentication canceled or failed.'**
-  String get authCanceledOrFailed;
-
-  /// No description provided for @resetPasswordTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset Password'**
-  String get resetPasswordTitle;
-
-  /// No description provided for @resetPasswordDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your work email and we\'ll send you a reset link.'**
-  String get resetPasswordDescription;
-
-  /// No description provided for @sendResetLink.
-  ///
-  /// In en, this message translates to:
-  /// **'Send Reset Link'**
-  String get sendResetLink;
-
-  /// No description provided for @enterWorkEmailMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter your work email'**
-  String get enterWorkEmailMessage;
-
-  /// No description provided for @invalidEmailFormatMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid work email format'**
-  String get invalidEmailFormatMessage;
-
-  /// No description provided for @enterPasswordMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter your password'**
-  String get enterPasswordMessage;
-
   /// No description provided for @homeScreen.
   ///
   /// In en, this message translates to:
@@ -524,11 +374,557 @@ abstract class AppLocalizations {
   /// **'Orders'**
   String get orders;
 
+  /// No description provided for @tasks.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks'**
+  String get tasks;
+
   /// No description provided for @profile.
   ///
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit'**
+  String get submit;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @trackAssignments.
+  ///
+  /// In en, this message translates to:
+  /// **'Track assignments and submit for review'**
+  String get trackAssignments;
+
+  /// No description provided for @all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get all;
+
+  /// No description provided for @inProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In Progress'**
+  String get inProgress;
+
+  /// No description provided for @underReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Under Review'**
+  String get underReview;
+
+  /// No description provided for @completed.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get completed;
+
+  /// No description provided for @noTasksHere.
+  ///
+  /// In en, this message translates to:
+  /// **'No tasks here'**
+  String get noTasksHere;
+
+  /// No description provided for @noTasksMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no tasks in this filter right now.'**
+  String get noTasksMessage;
+
+  /// No description provided for @submitForReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit for Review'**
+  String get submitForReview;
+
+  /// No description provided for @notes.
+  ///
+  /// In en, this message translates to:
+  /// **'Notes'**
+  String get notes;
+
+  /// No description provided for @notesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a note for your manager...'**
+  String get notesHint;
+
+  /// No description provided for @attachments.
+  ///
+  /// In en, this message translates to:
+  /// **'Attachments'**
+  String get attachments;
+
+  /// No description provided for @tapToUpload.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to upload a file'**
+  String get tapToUpload;
+
+  /// No description provided for @fileFormatsSupported.
+  ///
+  /// In en, this message translates to:
+  /// **'PDF, DOCX, PNG up to 10MB'**
+  String get fileFormatsSupported;
+
+  /// No description provided for @removeAttachment.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove attachment'**
+  String get removeAttachment;
+
+  /// No description provided for @taskSubmittedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Task submitted for review.'**
+  String get taskSubmittedSuccess;
+
+  /// No description provided for @due.
+  ///
+  /// In en, this message translates to:
+  /// **'Due'**
+  String get due;
+
+  /// No description provided for @managerFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Manager feedback: {feedback}'**
+  String managerFeedback(String feedback);
+
+  /// No description provided for @low.
+  ///
+  /// In en, this message translates to:
+  /// **'Low'**
+  String get low;
+
+  /// No description provided for @medium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium'**
+  String get medium;
+
+  /// No description provided for @high.
+  ///
+  /// In en, this message translates to:
+  /// **'High'**
+  String get high;
+
+  /// No description provided for @urgent.
+  ///
+  /// In en, this message translates to:
+  /// **'Urgent'**
+  String get urgent;
+
+  /// No description provided for @leave.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave'**
+  String get leave;
+
+  /// No description provided for @balancesRequestsGoals.
+  ///
+  /// In en, this message translates to:
+  /// **'Balances, requests, and personal goals'**
+  String get balancesRequestsGoals;
+
+  /// No description provided for @leaveType.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave type'**
+  String get leaveType;
+
+  /// No description provided for @selectLeaveType.
+  ///
+  /// In en, this message translates to:
+  /// **'Select type...'**
+  String get selectLeaveType;
+
+  /// No description provided for @annualLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Annual Leave'**
+  String get annualLeave;
+
+  /// No description provided for @casualLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Casual Leave'**
+  String get casualLeave;
+
+  /// No description provided for @sickLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Sick Leave'**
+  String get sickLeave;
+
+  /// No description provided for @startDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Start date'**
+  String get startDate;
+
+  /// No description provided for @endDate.
+  ///
+  /// In en, this message translates to:
+  /// **'End date'**
+  String get endDate;
+
+  /// No description provided for @reason.
+  ///
+  /// In en, this message translates to:
+  /// **'Reason'**
+  String get reason;
+
+  /// No description provided for @reasonHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Briefly describe your reason...'**
+  String get reasonHint;
+
+  /// No description provided for @attachSupportingDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach supporting document'**
+  String get attachSupportingDocument;
+
+  /// No description provided for @uploadImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload image'**
+  String get uploadImage;
+
+  /// No description provided for @submitRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit request'**
+  String get submitRequest;
+
+  /// No description provided for @leaveHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave history'**
+  String get leaveHistory;
+
+  /// No description provided for @view.
+  ///
+  /// In en, this message translates to:
+  /// **'View'**
+  String get view;
+
+  /// No description provided for @approved.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved'**
+  String get approved;
+
+  /// No description provided for @atAGlance.
+  ///
+  /// In en, this message translates to:
+  /// **'At a glance'**
+  String get atAGlance;
+
+  /// No description provided for @goodMorning.
+  ///
+  /// In en, this message translates to:
+  /// **'Good morning'**
+  String get goodMorning;
+
+  /// No description provided for @thisMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'THIS MONTH'**
+  String get thisMonth;
+
+  /// No description provided for @yourPerformance.
+  ///
+  /// In en, this message translates to:
+  /// **'Your performance'**
+  String get yourPerformance;
+
+  /// No description provided for @fromLastMonth.
+  ///
+  /// In en, this message translates to:
+  /// **'from last month'**
+  String get fromLastMonth;
+
+  /// No description provided for @overall.
+  ///
+  /// In en, this message translates to:
+  /// **'overall'**
+  String get overall;
+
+  /// No description provided for @quality.
+  ///
+  /// In en, this message translates to:
+  /// **'Quality'**
+  String get quality;
+
+  /// No description provided for @april.
+  ///
+  /// In en, this message translates to:
+  /// **'Apr'**
+  String get april;
+
+  /// No description provided for @may.
+  ///
+  /// In en, this message translates to:
+  /// **'May'**
+  String get may;
+
+  /// No description provided for @june.
+  ///
+  /// In en, this message translates to:
+  /// **'Jun'**
+  String get june;
+
+  /// No description provided for @july.
+  ///
+  /// In en, this message translates to:
+  /// **'Jul'**
+  String get july;
+
+  /// No description provided for @august.
+  ///
+  /// In en, this message translates to:
+  /// **'Aug'**
+  String get august;
+
+  /// No description provided for @september.
+  ///
+  /// In en, this message translates to:
+  /// **'Sep'**
+  String get september;
+
+  /// No description provided for @performanceTrend.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance trend'**
+  String get performanceTrend;
+
+  /// No description provided for @personalGoals.
+  ///
+  /// In en, this message translates to:
+  /// **'Personal goals'**
+  String get personalGoals;
+
+  /// No description provided for @target.
+  ///
+  /// In en, this message translates to:
+  /// **'Target:'**
+  String get target;
+
+  /// No description provided for @onTrack.
+  ///
+  /// In en, this message translates to:
+  /// **'On Track'**
+  String get onTrack;
+
+  /// No description provided for @aiAssistant.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Assistant'**
+  String get aiAssistant;
+
+  /// No description provided for @careerCoachingHrPolicySupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Career coaching & HR policy support'**
+  String get careerCoachingHrPolicySupport;
+
+  /// No description provided for @careerCoach.
+  ///
+  /// In en, this message translates to:
+  /// **'Career Coach'**
+  String get careerCoach;
+
+  /// No description provided for @policyAssistant.
+  ///
+  /// In en, this message translates to:
+  /// **'Policy Assistant'**
+  String get policyAssistant;
+
+  /// No description provided for @actionPlan.
+  ///
+  /// In en, this message translates to:
+  /// **'Action plan'**
+  String get actionPlan;
+
+  /// No description provided for @developmentAreas.
+  ///
+  /// In en, this message translates to:
+  /// **'Development areas'**
+  String get developmentAreas;
+
+  /// No description provided for @loading.
+  ///
+  /// In en, this message translates to:
+  /// **'loading...'**
+  String get loading;
+
+  /// No description provided for @welcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back'**
+  String get welcomeBack;
+
+  /// No description provided for @signInWithCorporateCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with your corporate credentials'**
+  String get signInWithCorporateCredentials;
+
+  /// No description provided for @workEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Work Email'**
+  String get workEmail;
+
+  /// No description provided for @workEmailHint.
+  ///
+  /// In en, this message translates to:
+  /// **'name@company.com'**
+  String get workEmailHint;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @passwordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get passwordHint;
+
+  /// No description provided for @keepMeSignedIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep me signed in'**
+  String get keepMeSignedIn;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password?'**
+  String get forgotPassword;
+
+  /// No description provided for @quickSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Sign-In'**
+  String get quickSignIn;
+
+  /// No description provided for @useFingerprintOrFaceId.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Fingerprint or Face ID'**
+  String get useFingerprintOrFaceId;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'OR'**
+  String get or;
+
+  /// No description provided for @sessionExpiredWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Your session has expired. Please try again to continue.'**
+  String get sessionExpiredWarning;
+
+  /// No description provided for @invalidCredentialsWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid credentials. Please try again.'**
+  String get invalidCredentialsWarning;
+
+  /// No description provided for @verifyYourIdentityToAccessYourAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your identity to access your account'**
+  String get verifyYourIdentityToAccessYourAccount;
+
+  /// No description provided for @tapToScanFingerprintFaceID.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to scan Fingerprint / Face ID'**
+  String get tapToScanFingerprintFaceID;
+
+  /// No description provided for @useEmailAndPasswordInstead.
+  ///
+  /// In en, this message translates to:
+  /// **'Use email and password instead'**
+  String get useEmailAndPasswordInstead;
+
+  /// No description provided for @biometricsNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Biometric authentication is not available on this device.'**
+  String get biometricsNotAvailable;
+
+  /// No description provided for @authCanceledOrFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication canceled or failed.'**
+  String get authCanceledOrFailed;
+
+  /// No description provided for @resetPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPasswordTitle;
+
+  /// No description provided for @resetPasswordDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your work email and we\'ll send you a reset link.'**
+  String get resetPasswordDescription;
+
+  /// No description provided for @sendResetLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Reset Link'**
+  String get sendResetLink;
+
+  /// No description provided for @enterWorkEmailMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your work email'**
+  String get enterWorkEmailMessage;
+
+  /// No description provided for @invalidEmailFormatMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid work email format'**
+  String get invalidEmailFormatMessage;
+
+  /// No description provided for @enterPasswordMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your password'**
+  String get enterPasswordMessage;
 }
 
 class _AppLocalizationsDelegate

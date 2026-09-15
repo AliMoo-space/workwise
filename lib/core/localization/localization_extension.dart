@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+import 'package:workwise/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:workwise/generated/app_localizations.dart';
 
