@@ -11,6 +11,7 @@ import 'package:workwise/features/drawer/widgets/app_drawer/app_drawer.dart';
 import 'package:workwise/features/home/presentation/widgets/attendance_card_widget.dart';
 import 'package:workwise/features/home/presentation/widgets/home_stats_grid_widget.dart';
 import 'package:workwise/features/home/presentation/widgets/home_stats_section_widget.dart';
+import 'package:workwise/features/home/presentation/widgets/app_drawer_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -65,3 +66,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
+
