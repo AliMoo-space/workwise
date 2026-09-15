@@ -49,27 +49,33 @@ class AppIconButton extends StatelessWidget {
       ),
     };
 
-    return Tooltip(
-      message: tooltip,
-      child: Material(
-        color: backgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.radius16),
-          side: BorderSide(
-            color: borderColor,
-            width: borderColor == Colors.transparent ? 0 : 1,
-          ),
-        ),
-        child: InkWell(
-          onTap: onPressed,
-          borderRadius: BorderRadius.circular(AppRadius.radius16),
-          child: SizedBox(
-            width: resolvedSize,
-            height: resolvedSize,
-            child: Icon(icon, size: resolvedIconSize, color: foregroundColor),
-          ),
+    final button = Material(
+      color: backgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppRadius.radius16),
+        side: BorderSide(
+          color: borderColor,
+          width: borderColor == Colors.transparent ? 0 : 1,
         ),
       ),
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(AppRadius.radius16),
+        child: SizedBox(
+          width: resolvedSize,
+          height: resolvedSize,
+          child: Icon(icon, size: resolvedIconSize, color: foregroundColor),
+        ),
+      ),
+    );
+
+    if (tooltip == null) {
+      return button;
+    }
+
+    return Tooltip(
+      message: tooltip!,
+      child: button,
     );
   }
 }

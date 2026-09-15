@@ -7,6 +7,7 @@
 // )
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
@@ -50,7 +51,7 @@ class AppSection extends StatelessWidget {
                         AppText(title!, style: AppTextStyles.titleLarge),
 
                       if (subtitle != null) ...[
-                        const SizedBox(height: AppSpacing.space4),
+                        const Gap(AppSpacing.space4),
                         AppText(
                           subtitle!,
                           style: AppTextStyles.bodySmall,
@@ -65,7 +66,7 @@ class AppSection extends StatelessWidget {
               ],
             ),
 
-          if (title != null || trailing != null) SizedBox(height: spacing),
+          if (title != null || trailing != null) Gap(spacing),
 
           child,
         ],

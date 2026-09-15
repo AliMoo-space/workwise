@@ -1,15 +1,105 @@
 {
   "@@locale": "ar",
+
   "hello": "مرحبا",
   "welcome": "أهلا وسهلا",
   "goodbye": "مع السلامة",
   "thank_you": "شكرا",
   "yes": "نعم",
+
   "signIn": "تسجيل الدخول",
   "signInContent": "محتوى تسجيل الدخول",
+
   "language": "اللغة",
   "languageEnglish": "الإنجليزية",
   "languageArabic": "العربية",
+
+  "homeScreen": "الرئيسية",
+  "notifications": "الإشعارات",
+  "quickActions": "إجراءات سريعة",
+
+  "todayAttendance": "حضور اليوم",
+  "onShift": "في الدوام",
+  "checkedInAt": "تم تسجيل الحضور الساعة 9:00 صباحًا",
+  "hoursWorked": "ساعات العمل",
+  "insideOffice": "داخل المكتب",
+  "checkOut": "تسجيل الانصراف",
+
+  "pendingTasks": "المهام المعلقة",
+  "nextMeeting": "الاجتماع القادم",
+  "leaveBalance": "رصيد الإجازات",
+
+  "requestLeave": "طلب إجازة",
+  "submitTask": "إرسال مهمة",
+  "viewCalendar": "عرض التقويم",
+
+  "aiHrAssistant": "مساعد الموارد البشرية الذكي",
+
+  "drawerHeader": "رأس القائمة",
+  "drawerItem1": "العنصر 1",
+  "drawerItem2": "العنصر 2",
+  "drawerItem3": "العنصر 3",
+
+  "attendance": "الحضور",
+  "attendanceDescription": "تسجيل الحضور والتحقق من الموقع والسجل",
+  "history": "السجل",
+  "june2026": "يونيو 2026",
+
+  "insideWorkplaceRadius": "داخل نطاق موقع العمل",
+  "gpsAccuracy": "دقة GPS +/-8م - 42م إلى المكتب",
+
+  "valid": "صالح",
+  "present": "حاضر",
+  "late": "متأخر",
+
+  "attendanceDate1": "الاثنين، 09 يونيو",
+  "attendanceDetails1": "08:45 ص - 05:32 م  -  8س 47د",
+
+  "attendanceDate2": "الجمعة، 06 يونيو",
+  "attendanceDetails2": "09:18 ص - 05:40 م  -  8س 22د",
+
+  "attendanceDate3": "الخميس، 05 يونيو",
+  "attendanceDetails3": "08:52 ص - 05:28 م  -  8س 36د",
+
+  "orders": "الطلبات",
+
+  "tasks": "المهام",
+  "profile": "الملف الشخصي",
+  "settings": "الإعدادات",
+  "logout": "تسجيل الخروج",
+
+  "submit": "إرسال",
+  "cancel": "إلغاء",
+
+  "trackAssignments": "تتبع المهام وإرسالها للمراجعة",
+
+  "all": "الكل",
+  "inProgress": "قيد التنفيذ",
+  "underReview": "قيد المراجعة",
+  "completed": "مكتملة",
+
+  "noTasksHere": "لا توجد مهام هنا",
+  "noTasksMessage": "لا توجد مهام في هذا الفلتر حالياً.",
+
+  "submitForReview": "إرسال للمراجعة",
+
+  "notes": "ملاحظات",
+  "notesHint": "أضف ملاحظة لمديرك...",
+
+  "attachments": "المرفقات",
+  "tapToUpload": "اضغط لرفع ملف",
+  "fileFormatsSupported": "PDF, DOCX, PNG حتى 10 ميجا",
+  "removeAttachment": "حذف المرفق",
+
+  "taskSubmittedSuccess": "تم إرسال المهمة للمراجعة.",
+
+  "due": "الموعد النهائي",
+  "managerFeedback": "ملاحظات المدير: {feedback}",
+
+  "low": "منخفضة",
+  "medium": "متوسطة",
+  "high": "عالية",
+  "urgent": "عاجلة",
   "requestLeave": "طلب إجازة",
   "leave": "الإجازات",
   "balancesRequestsGoals": "الأرصدة والطلبات والأهداف الشخصية",

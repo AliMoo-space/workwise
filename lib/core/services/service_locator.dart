@@ -1,37 +1,10 @@
-
 import 'package:get_it/get_it.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  // =============================================
-  // External Dependencies
-  // =============================================
+  final preferences = await SharedPreferences.getInstance();
 
-  /// Register Supabase client as a Lazy Singleton.
-  /// One instance will be created when it's first requested.
-
-  // =============================================
-  // Data Layer
-  // =============================================
-
-
-
-  // =============================================
-  // Domain Layer
-  // =============================================
-
-  
-
-
-  // =============================================
-  // Use Cases
-  // =============================================
-
-  
-  
-  // =============================================
-  // Presentation Layer
-  // =============================================
-
-  }
+  sl.registerSingleton<SharedPreferences>(preferences);
+}
