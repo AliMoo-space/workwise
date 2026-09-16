@@ -1,20 +1,26 @@
 import 'package:go_router/go_router.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/core/routing/page_transition.dart';
+import 'package:workwise/features/auth/fingerprint/presentation/screens/finger_print_screen.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/screens/create_new_passwors_screen.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/screens/otp_verification_screen.dart';
+import 'package:workwise/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:workwise/features/home/presentation/screens/home_screen.dart';
 import 'package:workwise/features/main/presentation/screens/main_screen.dart';
 import 'package:workwise/features/setting/presentation/screens/settings_screen.dart';
-import 'package:workwise/features/tasks/presentation/screens/tasks_screen.dart';
-import 'package:workwise/features/auth/fingerprint/presentation/screens/finger_print_screen.dart';
-import 'package:workwise/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:workwise/features/splash/presentation/screens/splash_screen.dart';
+import 'package:workwise/features/tasks/presentation/screens/tasks_screen.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
     initialLocation: AppRoutes.splashScreen,
     routes: [
+      GoRoute(
+        name: AppRoutes.mainScreen,
+        path: AppRoutes.mainScreen,
+        pageBuilder: (context, state) =>
+            slideTransitionPage(state: state, child: const MainScreen()),
+      ),
       GoRoute(
         name: AppRoutes.splashScreen,
         path: AppRoutes.splashScreen,
@@ -56,12 +62,6 @@ class RouterGenerationConfig {
             slideTransitionPage(state: state, child: const FingerPrintScreen()),
       ),
       GoRoute(
-        name: AppRoutes.mainScreen,
-        path: AppRoutes.mainScreen,
-        pageBuilder: (context, state) =>
-            slideTransitionPage(state: state, child: const MainScreen()),
-      ),
-      GoRoute(
         name: AppRoutes.homeScreen,
         path: AppRoutes.homeScreen,
         pageBuilder: (context, state) =>
@@ -73,7 +73,6 @@ class RouterGenerationConfig {
         pageBuilder: (context, state) =>
             slideTransitionPage(state: state, child: const TasksScreen()),
       ),
-
       GoRoute(
         name: AppRoutes.settingsScreen,
         path: AppRoutes.settingsScreen,
