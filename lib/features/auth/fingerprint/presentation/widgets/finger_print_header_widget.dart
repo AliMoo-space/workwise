@@ -18,7 +18,7 @@ class FingerprintHeaderWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 10.h),
           child: Center(
             child: Image.asset(
-              'assets/images/logo2.jpeg',
+              'assets/images/logo2.jpg',
               height: 150.h,
               width: 150.w,
               fit: BoxFit.contain,

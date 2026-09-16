@@ -9,8 +9,10 @@ Future<void> init() async {
   // =============================================
   // External Dependencies
   // =============================================
-final preferences = await SharedPreferences.getInstance();
+
+  final preferences = await SharedPreferences.getInstance();
   sl.registerSingleton<SharedPreferences>(preferences);
+
   // =============================================
   // Data Layer
   // =============================================
