@@ -1,11 +1,15 @@
-// ignore_for_file: use_super_parameters
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 
+import 'package:workwise/core/design_system/spacing/app_radius.dart';
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
+import 'package:workwise/core/design_system/widgets/inputs/app_text_field.dart';
+import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
+import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+
 class PolicyAssistant extends StatelessWidget {
-  const PolicyAssistant({Key? key}) : super(key: key);
+  const PolicyAssistant({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,19 +17,20 @@ class PolicyAssistant extends StatelessWidget {
       backgroundColor: const Color(0xFFF8F9FA),
       body: Column(
         children: [
-          // Chat List
           Expanded(
             child: ListView(
-              padding: EdgeInsets.all(16.r),
+              padding: EdgeInsets.all(AppSpacing.space16.r),
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: EdgeInsets.all(6.r),
+                      padding: EdgeInsets.all(AppSpacing.space4.r),
                       decoration: BoxDecoration(
                         color: Theme.of(context).colorScheme.outline,
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(
+                          AppRadius.radius8.r,
+                        ),
                       ),
                       child: Icon(
                         Icons.smart_toy_outlined,
@@ -34,19 +39,18 @@ class PolicyAssistant extends StatelessWidget {
                       ),
                     ),
 
-                    Gap(8.w),
+                    Gap(AppSpacing.space8.w),
 
                     Expanded(
-                      child: Container(
-                        padding: EdgeInsets.all(14.r),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.onError,
-                          borderRadius: BorderRadius.circular(16.r),
-                          border: Border.all(
-                            color: Theme.of(context).colorScheme.outline,
-                          ),
+                      child: AppCard(
+                        padding: EdgeInsets.all(AppSpacing.space16.r),
+                        backgroundColor: Theme.of(context).colorScheme.onError,
+                        borderRadius: AppRadius.radius16.r,
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.outline,
                         ),
-                        child: const Text(
+                        boxShadow: const [],
+                        child: const AppText(
                           "Hi Omar, I'm your HR Policy Assistant. Ask me about leave policies, benefits, or your current balances.",
                         ),
                       ),
@@ -54,82 +58,73 @@ class PolicyAssistant extends StatelessWidget {
                   ],
                 ),
 
-                Gap(12.h),
+                Gap(AppSpacing.space12.h),
 
                 Align(
                   alignment: Alignment.centerRight,
-                  child: Container(
-                    padding: EdgeInsets.all(14.r),
-                    constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width * 0.73.w,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.primary,
-                      borderRadius: BorderRadius.circular(16.r),
-                    ),
-                    child: Text(
+                  child: AppCard(
+                    padding: EdgeInsets.all(AppSpacing.space16.r),
+                    margin: EdgeInsets.zero,
+                    width: MediaQuery.of(context).size.width * 0.73,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    borderRadius: AppRadius.radius16.r,
+                    border: Border.all(color: Colors.transparent, width: 0),
+                    boxShadow: const [],
+                    child: AppText(
                       "How many annual leave days can I carry over to next year?",
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.onError,
-                      ),
+                      color: Theme.of(context).colorScheme.onError,
                     ),
                   ),
                 ),
 
-                Gap(12.h),
+                Gap(AppSpacing.space12.h),
               ],
             ),
           ),
 
-          Container(
+          SizedBox(
             height: 45.h,
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: ListView(
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.space16.w),
               scrollDirection: Axis.horizontal,
               children: [
                 ActionChip(
                   backgroundColor: Theme.of(context).colorScheme.onError,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.r),
+                    borderRadius: BorderRadius.circular(AppRadius.radius20.r),
                     side: BorderSide(
                       color: Theme.of(context).colorScheme.outline,
                     ),
                   ),
-                  label: const Text("What's my sick leave balance?"),
+                  label: const AppText("What's my sick leave balance?"),
                   onPressed: () {},
                 ),
-
-                Gap(8.w),
               ],
             ),
           ),
 
-          Gap(8.h),
+          Gap(AppSpacing.space8.h),
 
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-            color: Theme.of(context).colorScheme.onError,
+          AppCard(
+            padding: EdgeInsets.symmetric(
+              horizontal: AppSpacing.space16.w,
+              vertical: AppSpacing.space12.h,
+            ),
+            backgroundColor: Theme.of(context).colorScheme.onError,
+            borderRadius: AppRadius.radius0,
+            border: Border.all(color: Colors.transparent, width: 0),
+            boxShadow: const [],
             child: Row(
               children: [
                 Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "Ask about a policy or balance...",
-                      filled: true,
-                      fillColor: Theme.of(context).colorScheme.surface,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 12.h,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(24.r),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
+                  child: AppTextField(
+                    hintText: "Ask about a policy or balance...",
+                    fillColor: Theme.of(context).colorScheme.surface,
+                    borderRadius: AppRadius.radius24.r,
                   ),
                 ),
 
-                Gap(8.w),
+                Gap(AppSpacing.space8.w),
 
                 Container(
                   decoration: BoxDecoration(

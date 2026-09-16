@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
+
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/features/AIAssistant/presentation/widget/action_plan_card.dart';
 import 'package:workwise/features/AIAssistant/presentation/widget/action_plan_title.dart';
 import 'package:workwise/features/AIAssistant/presentation/widget/development_area_card.dart';
@@ -16,33 +17,33 @@ class CareerCoach extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          StrengthsTitle(),
+          const StrengthsTitle(),
 
-          Gap(15.h),
+          Gap(AppSpacing.space16),
 
-          StrengthCard(),
+          const StrengthCard(),
 
-          Gap(10.h),
+          Gap(AppSpacing.space8),
 
-          Gap(10.h),
+          Gap(AppSpacing.space8),
 
-          DevelopmentAreasTitle(),
+          const DevelopmentAreasTitle(),
 
-          Gap(15.h),
+          Gap(AppSpacing.space16),
 
-          DevelopmentAreaCard(),
+          const DevelopmentAreaCard(),
 
-          Gap(15.h),
+          Gap(AppSpacing.space16),
 
-          Gap(15.h),
+          Gap(AppSpacing.space16),
 
-          ActionPlanTitle(),
+          const ActionPlanTitle(),
 
-          Gap(15.h),
+          Gap(AppSpacing.space16),
 
-          ActionPlanCard(),
+          const ActionPlanCard(),
 
-          Gap(15.h),
+          Gap(AppSpacing.space16),
         ],
       ),
     );

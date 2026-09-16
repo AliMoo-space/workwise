@@ -1,22 +1,25 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:workwise/generated/app_localizations.dart';
+
+import 'package:workwise/core/design_system/spacing/app_radius.dart';
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
+import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
+import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 class PerformanceTrendChart extends StatelessWidget {
   const PerformanceTrendChart({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
-
-    return Container(
-      padding: EdgeInsets.all(16.r),
+    return AppCard(
+      padding: EdgeInsets.all(AppSpacing.space16.r),
       height: 180.h,
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onError,
-        borderRadius: BorderRadius.circular(16.r),
-      ),
+      backgroundColor: Theme.of(context).colorScheme.onError,
+      borderRadius: AppRadius.radius16.r,
+      border: Border.all(color: Colors.transparent, width: 0),
+      boxShadow: const [],
       child: LineChart(
         LineChartData(
           gridData: FlGridData(show: false),
@@ -30,19 +33,19 @@ class PerformanceTrendChart extends StatelessWidget {
                 showTitles: true,
                 getTitlesWidget: (value, meta) {
                   final titles = {
-                    0: localization.april,
-                    1: localization.may,
-                    2: localization.june,
-                    3: localization.july,
-                    4: localization.august,
-                    5: localization.september,
+                    0: context.l10n.april,
+                    1: context.l10n.may,
+                    2: context.l10n.june,
+                    3: context.l10n.july,
+                    4: context.l10n.august,
+                    5: context.l10n.september,
                   };
 
                   final text = titles[value.toInt()] ?? '';
 
                   return Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Text(
+                    padding: EdgeInsets.only(top: AppSpacing.space8.h),
+                    child: AppText(
                       text,
                       style: Theme.of(context).textTheme.labelMedium,
                     ),

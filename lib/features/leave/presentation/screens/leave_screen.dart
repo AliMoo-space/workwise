@@ -1,6 +1,7 @@
-// ignore_for_file: avoid_print
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/features/leave/presentation/widget/leave_balances_card.dart';
 import 'package:workwise/features/leave/presentation/widget/leave_history_list.dart';
 import 'package:workwise/features/leave/presentation/widget/leave_history_title.dart';
@@ -17,7 +18,7 @@ class Leavescreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(AppSpacing.space16),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -25,27 +26,27 @@ class Leavescreen extends StatelessWidget {
 
                 const LeaveSubtitle(),
 
-                const Gap(15),
+                const Gap(AppSpacing.space16),
 
                 const LeaveBalancesCard(),
 
-                const Gap(10),
+                const Gap(AppSpacing.space8),
 
                 const RequestLeaveTitle(),
 
-                const Gap(10),
+                const Gap(AppSpacing.space8),
 
                 const LeaveRequestForm(),
 
-                const Gap(15),
+                const Gap(AppSpacing.space16),
 
                 const LeaveHistoryTitle(),
 
-                const Gap(5),
+                const Gap(AppSpacing.space4),
 
                 const LeaveHistoryList(),
 
-                const Gap(10),
+                const Gap(AppSpacing.space8),
               ],
             ),
           ),

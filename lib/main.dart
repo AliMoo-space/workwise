@@ -9,9 +9,7 @@ import 'package:workwise/generated/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   final preferences = await SharedPreferences.getInstance();
-
   runApp(
     ChangeNotifierProvider(
       create: (_) => LocaleProvider(preferences),

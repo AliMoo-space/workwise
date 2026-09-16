@@ -5,7 +5,6 @@ import 'package:workwise/core/routing/page_transition.dart';
 import 'package:workwise/features/home/presentation/screens/home_screen.dart';
 import 'package:workwise/features/main/presentation/screens/main_screen.dart';
 import 'package:workwise/features/tasks/presentation/screens/tasks_screen.dart';
-import 'package:workwise/features/AIAssistant/presentation/screens/AI_assistant.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
