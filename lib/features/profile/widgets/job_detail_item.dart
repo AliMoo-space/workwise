@@ -37,7 +37,7 @@ class JobDetailItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(AppSpacing.space12.w),
+          Gap(AppSpacing.space8.w),
 
           Expanded(child: _buildContent()),
 
@@ -72,7 +72,7 @@ class JobDetailItem extends StatelessWidget {
 
         Gap(AppSpacing.space4.h),
 
-        AppText(title, style: AppTextStyles.titleMedium),
+        AppText(title, style: AppTextStyles.titleMedium, fontSize: 14.sp),
 
         if (subtitle != null) ...[
           Gap(AppSpacing.space2.h),
@@ -90,11 +90,11 @@ class JobDetailItem extends StatelessWidget {
   Widget _buildContactButton() {
     return AppButton(
       text: 'Contact',
-      fontSize: 12.sp,
+      fontSize: 10.sp,
       onPressed: () {},
       variant: AppButtonVariant.secondary,
       height: 40.h,
-      width: 80.w,
+      width: 100.w,
     );
   }
 
