@@ -40,31 +40,44 @@ class AppDropdown<T> extends StatelessWidget {
     final decoration = InputDecoration(
       hintText: hint,
       filled: true,
-      fillColor: fillColor ?? AppColors.surfaceLowest,
-
+      fillColor: enabled
+          ? fillColor ?? AppColors.surfaceLowest
+          : AppColors.disabled,
       contentPadding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.space16,
         vertical: AppSpacing.space16,
       ),
-
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(borderRadius),
-        borderSide: const BorderSide(color: AppColors.outlineVariant),
+        borderSide: const BorderSide(
+          color: AppColors.outlineVariant,
+        ),
       ),
-
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(borderRadius),
-        borderSide: const BorderSide(color: AppColors.primary, width: 2),
+        borderSide: const BorderSide(
+          color: AppColors.primary,
+          width: 2,
+        ),
       ),
-
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(borderRadius),
-        borderSide: const BorderSide(color: AppColors.error),
+        borderSide: const BorderSide(
+          color: AppColors.error,
+        ),
       ),
-
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(borderRadius),
-        borderSide: const BorderSide(color: AppColors.error, width: 2),
+        borderSide: const BorderSide(
+          color: AppColors.error,
+          width: 2,
+        ),
+      ),
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(borderRadius),
+        borderSide: const BorderSide(
+          color: AppColors.outlineVariant,
+        ),
       ),
     );
 
@@ -75,12 +88,13 @@ class AppDropdown<T> extends StatelessWidget {
           AppText(
             label!,
             style: AppTextStyles.labelMedium.copyWith(
-              color: AppColors.textPrimary,
+              color: enabled
+                  ? AppColors.textPrimary
+                  : AppColors.textDisabled,
             ),
           ),
           const Gap(AppSpacing.space8),
         ],
-
         DropdownButtonFormField<T>(
           initialValue: value,
           items: items,
@@ -88,16 +102,12 @@ class AppDropdown<T> extends StatelessWidget {
           validator: validator,
           style: AppTextStyles.bodyMedium,
           decoration: decoration,
-
           icon: const Icon(
             Icons.keyboard_arrow_down_rounded,
             color: AppColors.textSecondary,
           ),
-
           dropdownColor: fillColor ?? AppColors.surfaceLowest,
-
-          borderRadius: BorderRadius.circular(AppRadius.radius16),
-
+          borderRadius: BorderRadius.circular(borderRadius),
           isExpanded: true,
         ),
       ],
