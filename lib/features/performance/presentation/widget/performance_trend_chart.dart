@@ -8,7 +8,7 @@ class PerformanceTrendChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context);
 
     return Container(
       padding: EdgeInsets.all(16.r),

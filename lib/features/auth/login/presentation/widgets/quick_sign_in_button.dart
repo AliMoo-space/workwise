@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
-import 'package:workwise/generated/app_localizations.dart';
+import 'package:workwise/core/design_system/spacing/app_radius.dart';
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
+import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
+import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 class QuickSignInButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -10,52 +14,51 @@ class QuickSignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-            final localization = AppLocalizations.of(context);
+    final primaryColor = Theme.of(context).colorScheme.primary;
 
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(12.r),
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 15.w),
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          // color: AppColors.surface,
-          borderRadius: BorderRadius.circular(20.r),
-          border: Border.all(color: Theme.of(context).colorScheme.primary),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
+      child: AppCard(
+        onTap: onTap,
+        borderRadius: AppRadius.radius20,
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        border: Border.all(color: primaryColor),
+        padding:  EdgeInsets.symmetric(
+          horizontal: AppSpacing.space16,
+          vertical: AppSpacing.space16,
         ),
         child: Row(
           children: [
             Icon(
               Icons.fingerprint,
-              color: Theme.of(context).colorScheme.primary,
+              color: primaryColor,
               size: 28.sp,
             ),
-            Gap(14.w),
+             Gap(AppSpacing.space12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    localization.quickSignIn,
+                  AppText(
+                    context.l10n.quickSignIn,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
+                          color: primaryColor,
+                          fontWeight: FontWeight.bold,
+                        ),
                   ),
-                  Gap(2.h),
-                  Text(
-                    localization.useFingerprintOrFaceId,
+                  const Gap(AppSpacing.space2),
+                  AppText(
+                    context.l10n.useFingerprintOrFaceId,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                          color: primaryColor,
+                        ),
                   ),
                 ],
               ),
             ),
             Icon(
               Icons.chevron_right,
-              color: Theme.of(context).colorScheme.primary,
+              color: primaryColor,
             ),
           ],
         ),

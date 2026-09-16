@@ -1,18 +1,47 @@
-abstract class LoginState {}
+abstract class ForgotPasswordState {}
 
-class LoginInitialState extends LoginState {}
+// 1. الحالة الأولية
+class ForgotPasswordInitialState extends ForgotPasswordState {}
 
-class LoginLoadingState extends LoginState {}
+// --- حالات إرسال كود الـ OTP للبريد الإلكتروني ---
+class SendOtpLoadingState extends ForgotPasswordState {}
 
-class LoginSuccessState extends LoginState {}
-
-class LoginErrorState extends LoginState {
-  final String message;
-  LoginErrorState(this.message);
+class SendOtpSuccessState extends ForgotPasswordState {
+  final String email;
+  SendOtpSuccessState(this.email);
 }
 
-// لو هظهر او اخفي الباسوورد
-class LoginPasswordVisibilityState extends LoginState {}
+class SendOtpErrorState extends ForgotPasswordState {
+  final String message;
+  SendOtpErrorState(this.message);
+}
 
-// الشيك لوكس بتاع ال keep me signed in
-class LoginKeepMeSignedInState extends LoginState {}
+// --- حالات التحقق من كود الـ OTP ---
+class VerifyOtpLoadingState extends ForgotPasswordState {}
+
+class VerifyOtpSuccessState extends ForgotPasswordState {}
+
+class VerifyOtpErrorState extends ForgotPasswordState {
+  final String message;
+  VerifyOtpErrorState(this.message);
+}
+
+// --- حالات إعادة إرسال الكود (Resend Code Timer & Action) ---
+class ResendOtpLoadingState extends ForgotPasswordState {}
+
+class ResendOtpSuccessState extends ForgotPasswordState {}
+
+class ResendOtpErrorState extends ForgotPasswordState {
+  final String message;
+  ResendOtpErrorState(this.message);
+}
+
+// --- حالات تغيير كلمة السر الجديدة ---
+class ResetPasswordLoadingState extends ForgotPasswordState {}
+
+class ResetPasswordSuccessState extends ForgotPasswordState {}
+
+class ResetPasswordErrorState extends ForgotPasswordState {
+  final String message;
+  ResetPasswordErrorState(this.message);
+}

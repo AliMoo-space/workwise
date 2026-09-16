@@ -7,6 +7,7 @@ class AppRoutes {
   static const String mainScreen = '/mainScreen';
   static const String notesScreen = '/notesScreen';
   static const String otpVerificationScreen = '/otp-verification';
-  static const String createNewPasswordScreen = '/create_new_password';
+  static const String createNewPasswordScreen = '/create-new-password';
   static const String tasksScreen = '/tasksScreen';
+  static const String settingsScreen = '/setting';
 }
