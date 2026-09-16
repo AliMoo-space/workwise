@@ -1,47 +1,69 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'login_state.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'forgot_password_state.dart';
 
-// class LoginCubit extends Cubit<LoginState> {
-//   LoginCubit() : super(LoginInitialState());
+class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
+  ForgotPasswordCubit() : super(ForgotPasswordInitialState());
 
-//   final formKey = GlobalKey<FormState>();
-//   final emailController = TextEditingController();
-//   final passwordController = TextEditingController();
+  // Controllers
+  final emailController = TextEditingController();
+  final newPasswordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
+  final otpController = TextEditingController();
 
-//   bool isPasswordHidden = true;
-//   bool keepMeSignedIn = false;
+  // 1. Send OTP to Email
+  Future<void> sendOtp() async {
+    emit(SendOtpLoadingState());
+    
+    await Future.delayed(const Duration(seconds: 2));
+    
+    emit(SendOtpSuccessState(emailController.text.trim()));
+  }
 
-//   void togglePasswordVisibility() {
-//     isPasswordHidden = !isPasswordHidden;
-//     emit(LoginPasswordVisibilityState());
-//   }
+  // 2. Verify OTP Code
+  Future<void> verifyOtp() async {
+    final otp = otpController.text.trim();
+    if (otp.length < 6) {
+      emit(VerifyOtpErrorState('Please enter the complete 6-digit code.'));
+      return;
+    }
 
-//   void toggleKeepMeSignedIn(bool? value) {
-//     keepMeSignedIn = value ?? false;
-//     emit(LoginKeepMeSignedInState());
-//   }
+    emit(VerifyOtpLoadingState());
+    await Future.delayed(const Duration(seconds: 2));
 
-//   Future<void> login() async {
-//     if (formKey.currentState!.validate()) {
-//       emit(LoginLoadingState());
-      
-//       await Future.delayed(const Duration(seconds: 2));
-      
-//       // بعدين ان شاء الله 
-//       // لو تسجيل الدخول تمام
-//       emit(LoginSuccessState());
-//       // لو مش تمام
-//       emit(LoginErrorState('Incorrect email or password. Please try again.'));
-//     }
-//   }
+    // Mock verification check (e.g., correct code is 123456)
+    if (otp == "123456") {
+      emit(VerifyOtpSuccessState());
+    } else {
+      emit(VerifyOtpErrorState('Invalid verification code. Please try again.'));
+    }
+  }
 
-//   @override
-//   Future<void> close() {
-//     emailController.dispose();
-//     passwordController.dispose();
-//     return super.close();
-//   }
-// }
-// // dispose دي لقيتها وانا بسيرش وعرفت انها بتفضي الكاش من الداتا عشان الذاكره 
-// // يعني ممكن منستخدمهاش عادي 
+  // 3. Resend OTP
+  Future<void> resendOtp() async {
+    emit(ResendOtpLoadingState());
+    await Future.delayed(const Duration(seconds: 2));
+    emit(ResendOtpSuccessState());
+  }
+
+  // 4. Reset Password
+  Future<void> resetPassword() async {
+    if (newPasswordController.text != confirmPasswordController.text) {
+      emit(ResetPasswordErrorState('Passwords do not match.'));
+      return;
+    }
+
+    emit(ResetPasswordLoadingState());
+    await Future.delayed(const Duration(seconds: 2));
+    emit(ResetPasswordSuccessState());
+  }
+
+  @override
+  Future<void> close() {
+    emailController.dispose();
+    newPasswordController.dispose();
+    confirmPasswordController.dispose();
+    otpController.dispose();
+    return super.close();
+  }
+}
