@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 import '../colors/app_colors.dart';
@@ -15,22 +16,37 @@ final class AppTheme {
 
       fontFamily: AppTextStyles.bodyFontFamily,
 
-      scaffoldBackgroundColor: AppColors.white,
+      // تم تغييرها من AppColors.white إلى background
+      // لأن background هو لون خلفية التطبيق الأساسي.
+      scaffoldBackgroundColor: AppColors.background,
 
       colorScheme: const ColorScheme.light(
         primary: AppColors.primary,
-        onPrimary: AppColors.textPrimary,
+
+        // تم تصحيحها لاستخدام onPrimary بدل textPrimary
+        // لأنها مخصصة للنصوص والأيقونات فوق primary.
+        onPrimary: AppColors.onPrimary,
+
         secondary: AppColors.secondary,
         onSecondary: AppColors.onSecondary,
 
-        surface: AppColors.background,
+        // تم إضافة accent كـ tertiary للـColorScheme
+        // بحيث يكون لون الـAccent متاحًا من خلال الـTheme.
+        tertiary: AppColors.accent,
+        onTertiary: AppColors.onAccent,
+
+        // تم تغييرها من background إلى surface
+        // لأن surface مخصص للكروت والـMaterial surfaces.
+        surface: AppColors.surface,
+
         onSurface: AppColors.onSurface,
 
         error: AppColors.error,
         onError: AppColors.onError,
 
-        outline: AppColors.border,
-        tertiary: AppColors.success,
+        // استخدام الـoutline المخصص بدل border مباشرة.
+        outline: AppColors.outline,
+        outlineVariant: AppColors.outlineVariant,
       ),
 
       textTheme: TextTheme(
@@ -81,7 +97,9 @@ final class AppTheme {
         style: OutlinedButton.styleFrom(
           minimumSize: const Size.fromHeight(48),
           foregroundColor: AppColors.primary,
-          side: const BorderSide(color: AppColors.border),
+          side: const BorderSide(
+            color: AppColors.border,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.radius12),
           ),
@@ -101,22 +119,41 @@ final class AppTheme {
 
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.radius12),
-          borderSide: const BorderSide(color: AppColors.border),
+          borderSide: const BorderSide(
+            color: AppColors.border,
+          ),
         ),
 
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.radius12),
-          borderSide: const BorderSide(color: AppColors.border),
+          borderSide: const BorderSide(
+            color: AppColors.border,
+          ),
         ),
 
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.radius12),
-          borderSide: const BorderSide(color: AppColors.primary, width: 2),
+          borderSide: const BorderSide(
+            color: AppColors.primary,
+            width: 2,
+          ),
         ),
 
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.radius12),
-          borderSide: const BorderSide(color: AppColors.error),
+          borderSide: const BorderSide(
+            color: AppColors.error,
+          ),
+        ),
+
+        // تم إضافة focusedErrorBorder
+        // عشان شكل الـTextField يفضل واضح لو عليه Error وهو Focused.
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(AppRadius.radius12),
+          borderSide: const BorderSide(
+            color: AppColors.error,
+            width: 2,
+          ),
         ),
       ),
 
@@ -125,7 +162,9 @@ final class AppTheme {
         color: AppColors.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.radius12),
-          side: const BorderSide(color: AppColors.border),
+          side: const BorderSide(
+            color: AppColors.border,
+          ),
         ),
       ),
 
@@ -133,7 +172,66 @@ final class AppTheme {
         color: AppColors.primary,
       ),
 
-      iconTheme: const IconThemeData(color: AppColors.textSecondary),
+      iconTheme: const IconThemeData(
+        color: AppColors.textSecondary,
+      ),
+
+      // تمت إضافة Theme للـCheckbox
+      // عشان ياخد ألوان الـDesign System بدل الألوان الافتراضية.
+      checkboxTheme: CheckboxThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.radius4),
+        ),
+        side: const BorderSide(
+          color: AppColors.outline,
+        ),
+        fillColor: WidgetStateProperty.resolveWith<Color?>(
+          (states) {
+            if (states.contains(WidgetState.selected)) {
+              return AppColors.primary;
+            }
+
+            return null;
+          },
+        ),
+      ),
+
+      // تمت إضافة Theme للـRadio
+      // عشان اللون المختار يعتمد على الـprimary.
+      radioTheme: RadioThemeData(
+        fillColor: WidgetStateProperty.resolveWith<Color?>(
+          (states) {
+            if (states.contains(WidgetState.selected)) {
+              return AppColors.primary;
+            }
+
+            return AppColors.outline;
+          },
+        ),
+      ),
+
+      // تمت إضافة Theme للـSwitch
+      // عشان الـselected والـdisabled states يستخدموا ألوان الـDesign System.
+      switchTheme: SwitchThemeData(
+        thumbColor: WidgetStateProperty.resolveWith<Color?>(
+          (states) {
+            if (states.contains(WidgetState.selected)) {
+              return AppColors.onPrimary;
+            }
+
+            return AppColors.outline;
+          },
+        ),
+        trackColor: WidgetStateProperty.resolveWith<Color?>(
+          (states) {
+            if (states.contains(WidgetState.selected)) {
+              return AppColors.primary;
+            }
+
+            return AppColors.disabled;
+          },
+        ),
+      ),
     );
   }
 }

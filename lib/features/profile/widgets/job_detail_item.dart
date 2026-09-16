@@ -90,7 +90,7 @@ class JobDetailItem extends StatelessWidget {
   Widget _buildContactButton() {
     return AppButton(
       text: 'Contact',
-      fontSize: 12.sp,
+      
       onPressed: () {},
       variant: AppButtonVariant.secondary,
       height: 40.h,

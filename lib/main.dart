@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:workwise/core/design_system/theme/app_theme.dart';
-import 'package:workwise/core/localization/locale_provider.dart';
+import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/routing/router_generation_config.dart';
+import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/generated/app_localizations.dart';
 
 void main() async {
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  final preferences = await SharedPreferences.getInstance();
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => LocaleProvider(preferences),
-      child: const MyApp(),
-    ),
-  );
+  await init();
+
+  runApp(BlocProvider(create: (_) => sl<LocaleCubit>(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -25,7 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locale = context.watch<LocaleProvider>().locale;
+    final locale = context.watch<LocaleCubit>().state;
 
     return ScreenUtilPlusInit(
       designSize: const Size(375, 812),
@@ -43,7 +40,7 @@ class MyApp extends StatelessWidget {
         return GestureDetector(
           behavior: HitTestBehavior.translucent,
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: child!,
+          child: SafeArea(child: child!),
         );
       },
     );
