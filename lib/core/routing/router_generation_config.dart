@@ -12,15 +12,6 @@ class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
     initialLocation: AppRoutes.mainScreen,
     routes: [
-      // GoRoute(
-      //   name: AppRoutes.signInScreen,
-      //   path: AppRoutes.signInScreen,
-      //   pageBuilder: (context, state) =>
-      //       slideTransitionPage(
-      //         state: state,
-      //         child: const SignInScreen(),
-      //       ),
-      // ),
       GoRoute(
         name: AppRoutes.mainScreen,
         path: AppRoutes.mainScreen,
@@ -51,6 +42,12 @@ class RouterGenerationConfig {
           state: state,
           child: const FingerPrintScreen(),
         ),
+      ),
+      GoRoute(
+        name: AppRoutes.aiAssistant,
+        path: AppRoutes.aiAssistant,
+        pageBuilder: (context, state) =>
+            slideTransitionPage(state: state, child: const AiAssistant()),
       ),
     ],
   );

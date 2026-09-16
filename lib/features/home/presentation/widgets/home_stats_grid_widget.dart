@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/core/routing/app_routes.dart';
 
 class HomeStatsGrid extends StatelessWidget {
   const HomeStatsGrid({super.key});
@@ -88,6 +90,7 @@ class HomeStatsGrid extends StatelessWidget {
             Expanded(
               child: AppCard(
                 height: 80.h,
+                onTap: () => context.push(AppRoutes.aiAssistant),
                 child: Row(
                   children: [
                     Icon(Icons.smart_toy_sharp),
