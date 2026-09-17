@@ -1,4 +1,3 @@
-
 // ignore_for_file: unused_import
 
 import 'package:go_router/go_router.dart';
@@ -19,52 +18,39 @@ class RouterGenerationConfig {
       GoRoute(
         name: AppRoutes.splashScreen,
         path: AppRoutes.splashScreen,
-        pageBuilder: (context, state) => slideTransitionPage(
-          state: state,
-          child: const SplashScreen(),
-        ),
+        pageBuilder: (context, state) =>
+            slideTransitionPage(state: state, child: const SplashScreen()),
       ),
       GoRoute(
         name: AppRoutes.loginScreen,
         path: AppRoutes.loginScreen,
-        pageBuilder: (context, state) => slideTransitionPage(
-          state: state,
-          child: const LoginScreen(),
-        ),
+        pageBuilder: (context, state) =>
+            slideTransitionPage(state: state, child: const LoginScreen()),
       ),
       GoRoute(
         name: AppRoutes.fingerprintScreen,
         path: AppRoutes.fingerprintScreen,
-        pageBuilder: (context, state) => slideTransitionPage(
-          state: state,
-          child: const FingerPrintScreen(),
-        ),
+        pageBuilder: (context, state) =>
+            slideTransitionPage(state: state, child: const FingerPrintScreen()),
       ),
       GoRoute(
         name: AppRoutes.mainScreen,
         path: AppRoutes.mainScreen,
-        pageBuilder: (context, state) => slideTransitionPage(
-          state: state,
-          child: const MainScreen(),
-        ),
+        pageBuilder: (context, state) =>
+            slideTransitionPage(state: state, child: const MainScreen()),
       ),
       GoRoute(
         name: AppRoutes.homeScreen,
         path: AppRoutes.homeScreen,
-        pageBuilder: (context, state) => slideTransitionPage(
-          state: state,
-          child: const HomeScreen(),
-        ),
+        pageBuilder: (context, state) =>
+            slideTransitionPage(state: state, child: const HomeScreen()),
       ),
 
       GoRoute(
         name: AppRoutes.tasksScreen,
         path: AppRoutes.tasksScreen,
         pageBuilder: (context, state) {
-          return slideTransitionPage(
-            state: state,
-            child: const TasksScreen(),
-          );
+          return slideTransitionPage(state: state, child: const TasksScreen());
         },
       ),
     ],

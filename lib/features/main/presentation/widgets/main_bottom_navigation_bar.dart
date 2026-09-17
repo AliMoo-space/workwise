@@ -65,7 +65,7 @@ class MainBottomNavigationBar extends StatelessWidget {
             BottomNavigationBarItem(
               icon: Icon(Icons.receipt_long_outlined),
               activeIcon: Icon(Icons.receipt_long_rounded),
-              label: context.l10n.orders,
+              label: context.l10n.tasks,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_outline),
