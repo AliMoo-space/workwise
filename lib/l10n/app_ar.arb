@@ -1,19 +1,47 @@
 {
   "@@locale": "ar",
-
-  "hello": "مرحبا",
-  "welcome": "أهلا وسهلا",
+  "hello": "مرحباً",
+  "welcome": "أهلاً وسهلاً",
   "goodbye": "مع السلامة",
-  "thank_you": "شكرا",
+  "thank_you": "شكراً",
   "yes": "نعم",
 
   "signIn": "تسجيل الدخول",
   "signInContent": "محتوى تسجيل الدخول",
 
   "language": "اللغة",
-  "languageEnglish": "الإنجليزية",
-  "languageArabic": "العربية",
+  "languageEnglish": "الإنجليزيّة",
+  "languageArabic": "العربيّة",
+  "loading": "جاري التحميل...",
 
+  "welcomeBack": "مرحباً بعودتك",
+  "signInWithCorporateCredentials": "سجّل الدخول باستخدام بيانات حساب الشركة",
+  "workEmail": "البريد الإلكتروني للعمل",
+  "workEmailHint": "name@company.com",
+  "password": "كلمة المرور",
+  "passwordHint": "أدخل كلمة المرور",
+  "keepMeSignedIn": "الاحتفاظ بتسجيل الدخول",
+  "forgotPassword": "نسيت كلمة المرور؟",
+
+  "quickSignIn": "تسجيل دخول سريع",
+  "useFingerprintOrFaceId": "استخدم بصمة الإصبع أو الوجه",
+  "or": "أو",
+
+  "sessionExpiredWarning": "انتهت الجلسة الخاصة بك. يرجى إعادة محاولة الدخول للمتابعة.",
+  "invalidCredentialsWarning": "بيانات الدخول غير صحيحة. يرجى المحاولة مرة أخرى.",
+
+  "verifyYourIdentityToAccessYourAccount": "تأكيد الهوية للوصول إلى حسابك",
+  "tapToScanFingerprintFaceID": "انقر للمسح ببصمة الإصبع / الوجه",
+  "useEmailAndPasswordInstead": "استخدم البريد الإلكتروني وكلمة المرور بدلاً من ذلك",
+  "biometricsNotAvailable": "التحقق بالبصمة غير متوفر على هذا الجهاز.",
+  "authCanceledOrFailed": "تم إلغاء عملية التحقق أو فشلت.",
+
+  "resetPasswordTitle": "إعادة ضبط كلمة المرور",
+  "resetPasswordDescription": "أدخل بريد العمل وسنرسل لك رابطاً لإعادة الضبط.",
+  "sendResetLink": "إرسال رابط الضبط",
+  "enterWorkEmailMessage": "يرجى إدخال بريد العمل الإلكتروني",
+  "invalidEmailFormatMessage": "صيغة بريد العمل غير صحيحة",
+  "enterPasswordMessage": "يرجى إدخال كلمة المرور",
   "homeScreen": "الرئيسية",
   "notifications": "الإشعارات",
   "quickActions": "إجراءات سريعة",

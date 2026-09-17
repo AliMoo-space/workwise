@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workwise/core/design_system/theme/app_theme.dart';
 import 'package:workwise/core/localization/locale_provider.dart';
 import 'package:workwise/core/routing/router_generation_config.dart';
+import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/generated/app_localizations.dart';
 
 void main() async {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   WidgetsFlutterBinding.ensureInitialized();
 
-  final preferences = await SharedPreferences.getInstance();
+  await init();
 
   runApp(
     ChangeNotifierProvider(
-      create: (_) => LocaleProvider(preferences),
+      create: (_) => sl<LocaleProvider>(),
       child: const MyApp(),
     ),
   );

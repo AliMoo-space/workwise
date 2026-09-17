@@ -13,7 +13,6 @@
   "language": "Language",
   "languageEnglish": "English",
   "languageArabic": "Arabic",
-
   "homeScreen": "Home Screen",
   "notifications": "Notifications",
   "quickActions": "Quick Actions",
@@ -63,6 +62,36 @@
 
   "orders": "Orders",
 
+  "loading": "loading...",
+
+  "welcomeBack": "Welcome Back",
+  "signInWithCorporateCredentials": "Sign in with your corporate credentials",
+  "workEmail": "Work Email",
+  "workEmailHint": "name@company.com",
+  "password": "Password",
+  "passwordHint": "Enter your password",
+  "keepMeSignedIn": "Keep me signed in",
+  "forgotPassword": "Forgot Password?",
+
+  "quickSignIn": "Quick Sign-In",
+  "useFingerprintOrFaceId": "Use Fingerprint or Face ID",
+  "or": "OR",
+
+  "sessionExpiredWarning": "Your session has expired. Please try again to continue.",
+  "invalidCredentialsWarning": "Invalid credentials. Please try again.",
+
+  "verifyYourIdentityToAccessYourAccount": "Verify your identity to access your account",
+  "tapToScanFingerprintFaceID": "Tap to scan Fingerprint / Face ID",
+  "useEmailAndPasswordInstead": "Use email and password instead",
+  "biometricsNotAvailable": "Biometric authentication is not available on this device.",
+  "authCanceledOrFailed": "Authentication canceled or failed.",
+
+  "resetPasswordTitle": "Reset Password",
+  "resetPasswordDescription": "Enter your work email and we'll send you a reset link.",
+  "sendResetLink": "Send Reset Link",
+  "enterWorkEmailMessage": "Please enter your work email",
+  "invalidEmailFormatMessage": "Invalid work email format",
+  "enterPasswordMessage": "Please enter your password",
   "tasks": "Tasks",
   "profile": "Profile",
   "settings": "Settings",

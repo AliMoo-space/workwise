@@ -31,8 +31,11 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  flutter_bloc: ^9.1.1
   shimmer_animation: ^2.2.2+1
+  local_auth: ^3.0.2
   gap: ^3.0.1
+  flutter_native_splash: ^2.4.8
   file_picker: ^10.3.10
   flutter_map: ^8.3.2
   latlong2: ^0.10.1
@@ -42,14 +45,15 @@ dev_dependencies:
 
   flutter_test:
     sdk: flutter
+  # flutter_native_splash: ^2.4.8
 
 flutter:
   generate: true
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # example:
@@ -65,3 +69,23 @@ flutter:
   #       - asset: fonts/TrajanPro-Regular.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package
+# flutter_native_splash:
+#   color: "#ffffff"
+#   image: assets/images/logo2.jpeg
+#   android_12:
+#     color: "#ffffff"
+#     image: assets/images/logo2.jpeg
+
+flutter_native_splash:
+  color: "#243B53" # اللون اللي اخترته (شيلنا 0xFF وحطينا #)
+  image: assets/images/e.png # مسار الصورة
+
+  # إعدادات أندرويد 12 والأحدث (Android 12+)
+  android_12:
+    image: assets/images/e.png
+    color: "#243B53"
+
+  web: false
