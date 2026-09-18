@@ -54,64 +54,38 @@ class AppTextField extends StatefulWidget {
     this.enableInteractiveSelection = true,
     this.mouseCursor,
   });
+
   final AutovalidateMode autovalidateMode;
   final TextEditingController? controller;
   final bool enableInteractiveSelection;
   final MouseCursor? mouseCursor;
   final FocusNode? focusNode;
-
   final FocusNode? nextFocusNode;
-
   final String? Function(String?)? validator;
-
   final ValueChanged<String>? onChanged;
-
   final ValueChanged<String>? onSubmitted;
-
   final VoidCallback? onTap;
-
   final String? label;
-
   final String? hintText;
-
   final Widget? prefixIcon;
-
   final Widget? suffixIcon;
-
   final AppTextFieldType type;
-
   final bool enabled;
-
   final bool readOnly;
-
   final bool autofocus;
-
   final int? maxLines;
-
   final int? minLines;
-
   final int? maxLength;
-
   final TextInputType? keyboardType;
-
   final TextInputAction? textInputAction;
-
   final TextCapitalization textCapitalization;
-
   final List<TextInputFormatter>? inputFormatters;
-
   final Iterable<String>? autofillHints;
-
   final EdgeInsetsGeometry? contentPadding;
-
   final Color? fillColor;
-
   final double borderRadius;
-
   final bool? obscureText;
-
   final TextAlign textAlign;
-
   final String? initialValue;
 
   @override
@@ -137,7 +111,10 @@ class _AppTextFieldState extends State<AppTextField> {
 
     switch (widget.type) {
       case AppTextFieldType.search:
-        return const Icon(Icons.search_rounded);
+        return const Icon(
+          Icons.search_rounded,
+          color: AppColors.textSecondary,
+        );
 
       default:
         return null;
@@ -164,6 +141,7 @@ class _AppTextFieldState extends State<AppTextField> {
 
       case AppTextFieldType.number:
         return const TextInputType.numberWithOptions(decimal: true);
+
       case AppTextFieldType.multiline:
         return TextInputType.multiline;
 
@@ -218,12 +196,16 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
     final decoration = InputDecoration(
-      labelText: widget.label,
       hintText: widget.hintText,
       prefixIcon: _prefixIcon,
       suffixIcon: _buildSuffixIcon(),
       filled: true,
-      fillColor: widget.fillColor ?? AppColors.surfaceLowest,
+
+      // التغيير: استخدام لون مختلف للحالة المعطلة للحفاظ على وضوح الـ UI.
+      fillColor: widget.enabled
+          ? widget.fillColor ?? AppColors.surfaceLowest
+          : AppColors.disabled,
+
       counterText: '',
       contentPadding:
           widget.contentPadding ??
@@ -233,22 +215,43 @@ class _AppTextFieldState extends State<AppTextField> {
           ),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(widget.borderRadius),
+        borderSide: const BorderSide(
+          color: AppColors.outlineVariant,
+        ),
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(widget.borderRadius),
-        borderSide: const BorderSide(color: AppColors.outlineVariant),
+        borderSide: const BorderSide(
+          color: AppColors.outlineVariant,
+        ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(widget.borderRadius),
-        borderSide: const BorderSide(color: AppColors.primary, width: 2),
+        borderSide: const BorderSide(
+          color: AppColors.primary,
+          width: 2,
+        ),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(widget.borderRadius),
-        borderSide: const BorderSide(color: AppColors.error),
+        borderSide: const BorderSide(
+          color: AppColors.error,
+        ),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(widget.borderRadius),
-        borderSide: const BorderSide(color: AppColors.error, width: 2),
+        borderSide: const BorderSide(
+          color: AppColors.error,
+          width: 2,
+        ),
+      ),
+
+      // التغيير: إضافة Border خاص بالحالة المعطلة.
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(widget.borderRadius),
+        borderSide: const BorderSide(
+          color: AppColors.outlineVariant,
+        ),
       ),
     );
 
@@ -260,10 +263,12 @@ class _AppTextFieldState extends State<AppTextField> {
           AppText(
             widget.label!,
             style: AppTextStyles.labelMedium.copyWith(
-              color: AppColors.textPrimary,
+              color: widget.enabled
+                  ? AppColors.textPrimary
+                  : AppColors.textDisabled,
             ),
           ),
-          Gap(AppSpacing.space8),
+          const Gap(AppSpacing.space8),
         ],
         TextFormField(
           controller: widget.controller,
@@ -287,17 +292,14 @@ class _AppTextFieldState extends State<AppTextField> {
           maxLength: widget.maxLength,
           minLines: widget.minLines,
           autovalidateMode: widget.autovalidateMode,
-
           enableInteractiveSelection: widget.enableInteractiveSelection,
-
           cursorColor: AppColors.primary,
-          selectionControls: MaterialTextSelectionControls(),
-
           mouseCursor: widget.mouseCursor,
 
-          scrollPadding: const EdgeInsets.all(120),
-          enableSuggestions: !_isPassword,
+          // التغيير: استخدام قيمة موجودة في AppSpacing بدل الرقم الثابت 120.
+          scrollPadding: const EdgeInsets.all(AppSpacing.space96),
 
+          enableSuggestions: !_isPassword,
           autocorrect: !_isPassword,
           maxLines: widget.type == AppTextFieldType.multiline
               ? (widget.maxLines ?? 5)
@@ -328,7 +330,11 @@ class _AppTextFieldState extends State<AppTextField> {
         return [FilteringTextInputFormatter.digitsOnly];
 
       case AppTextFieldType.number:
-        return [FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))];
+        return [
+          FilteringTextInputFormatter.allow(
+            RegExp(r'[0-9.]'),
+          ),
+        ];
 
       default:
         return null;
@@ -341,7 +347,9 @@ class _AppTextFieldState extends State<AppTextField> {
         onPressed: _togglePassword,
         splashRadius: 20,
         icon: Icon(
-          _obscure ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+          _obscure
+              ? Icons.visibility_off_outlined
+              : Icons.visibility_outlined,
           color: AppColors.textSecondary,
         ),
       );

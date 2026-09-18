@@ -5,9 +5,12 @@ import 'package:workwise/core/localization/local_cubit.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  final preferences = await SharedPreferences.getInstance();
+ 
+  // =============================================
+  // External Dependencies
+  // =============================================
+final preferences = await SharedPreferences.getInstance();
   sl.registerSingleton<SharedPreferences>(preferences);
-
   // =============================================
   // Data Layer
   // =============================================
@@ -24,5 +27,5 @@ Future<void> init() async {
   // Presentation Layer
   // =============================================
 
-  sl.registerFactory<LocaleCubit>(() => LocaleCubit(sl()));
+  sl.registerLazySingleton<LocaleCubit>(() => LocaleCubit(sl<SharedPreferences>()));
 }

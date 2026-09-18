@@ -13,57 +13,8 @@
   "language": "Language",
   "languageEnglish": "English",
   "languageArabic": "Arabic",
-  "homeScreen": "Home Screen",
-  "notifications": "Notifications",
-  "quickActions": "Quick Actions",
-
-  "todayAttendance": "Today's attendance",
-  "onShift": "On Shift",
-  "checkedInAt": "Checked in at 9:00 AM",
-  "hoursWorked": "hours worked",
-  "insideOffice": "Inside the office",
-  "checkOut": "Check Out",
-
-  "pendingTasks": "Pending Tasks",
-  "nextMeeting": "Next Meeting",
-  "leaveBalance": "Leave Balance",
-
-  "requestLeave": "Request Leave",
-  "submitTask": "Submit Task",
-  "viewCalendar": "View Calendar",
-
-  "aiHrAssistant": "AI HR Assistant",
-
-  "drawerHeader": "Drawer Header",
-  "drawerItem1": "Item 1",
-  "drawerItem2": "Item 2",
-  "drawerItem3": "Item 3",
-
-  "attendance": "Attendance",
-  "attendanceDescription": "Location-validated check in and history",
-  "history": "History",
-  "june2026": "June 2026",
-
-  "insideWorkplaceRadius": "Inside workplace radius",
-  "gpsAccuracy": "GPS accuracy +/-8m - 42m to office",
-
-  "valid": "Valid",
-  "present": "Present",
-  "late": "Late",
-
-  "attendanceDate1": "Mon, Jun 09",
-  "attendanceDetails1": "08:45 AM - 05:32 PM  -  8h 47m",
-
-  "attendanceDate2": "Fri, Jun 06",
-  "attendanceDetails2": "09:18 AM - 05:40 PM  -  8h 22m",
-
-  "attendanceDate3": "Thu, Jun 05",
-  "attendanceDetails3": "08:52 AM - 05:28 PM  -  8h 36m",
-
-  "orders": "Orders",
 
   "loading": "loading...",
-
   "welcomeBack": "Welcome Back",
   "signInWithCorporateCredentials": "Sign in with your corporate credentials",
   "workEmail": "Work Email",
@@ -72,26 +23,60 @@
   "passwordHint": "Enter your password",
   "keepMeSignedIn": "Keep me signed in",
   "forgotPassword": "Forgot Password?",
-
   "quickSignIn": "Quick Sign-In",
   "useFingerprintOrFaceId": "Use Fingerprint or Face ID",
   "or": "OR",
-
   "sessionExpiredWarning": "Your session has expired. Please try again to continue.",
   "invalidCredentialsWarning": "Invalid credentials. Please try again.",
-
   "verifyYourIdentityToAccessYourAccount": "Verify your identity to access your account",
   "tapToScanFingerprintFaceID": "Tap to scan Fingerprint / Face ID",
   "useEmailAndPasswordInstead": "Use email and password instead",
   "biometricsNotAvailable": "Biometric authentication is not available on this device.",
   "authCanceledOrFailed": "Authentication canceled or failed.",
-
   "resetPasswordTitle": "Reset Password",
   "resetPasswordDescription": "Enter your work email and we'll send you a reset link.",
   "sendResetLink": "Send Reset Link",
   "enterWorkEmailMessage": "Please enter your work email",
   "invalidEmailFormatMessage": "Invalid work email format",
   "enterPasswordMessage": "Please enter your password",
+
+  "homeScreen": "Home Screen",
+  "notifications": "Notifications",
+  "quickActions": "Quick Actions",
+  "todayAttendance": "Today's attendance",
+  "onShift": "On Shift",
+  "checkedInAt": "Checked in at 9:00 AM",
+  "hoursWorked": "hours worked",
+  "insideOffice": "Inside the office",
+  "checkOut": "Check Out",
+  "pendingTasks": "Pending Tasks",
+  "nextMeeting": "Next Meeting",
+  "leaveBalance": "Leave Balance",
+  "requestLeave": "Request Leave",
+  "submitTask": "Submit Task",
+  "viewCalendar": "View Calendar",
+  "aiHrAssistant": "AI HR Assistant",
+  "drawerHeader": "Drawer Header",
+  "drawerItem1": "Item 1",
+  "drawerItem2": "Item 2",
+  "drawerItem3": "Item 3",
+  "attendance": "Attendance",
+  "attendanceDescription": "Location-validated check in and history",
+  "history": "History",
+  "june2026": "June 2026",
+  "insideWorkplaceRadius": "Inside workplace radius",
+  "gpsAccuracy": "GPS accuracy +/-8m - 42m to office",
+  "valid": "Valid",
+  "present": "Present",
+  "late": "Late",
+  "attendanceDate1": "Mon, Jun 09",
+  "attendanceDetails1": "08:45 AM - 05:32 PM  -  8h 47m",
+  "attendanceDate2": "Fri, Jun 06",
+  "attendanceDetails2": "09:18 AM - 05:40 PM  -  8h 22m",
+  "attendanceDate3": "Thu, Jun 05",
+  "attendanceDetails3": "08:52 AM - 05:28 PM  -  8h 36m",
+  "orders": "Orders",
+
   "tasks": "Tasks",
   "profile": "Profile",
   "settings": "Settings",
@@ -113,31 +98,22 @@
 
   "submit": "Submit",
   "cancel": "Cancel",
-
   "trackAssignments": "Track assignments and submit for review",
-
   "all": "All",
   "inProgress": "In Progress",
   "underReview": "Under Review",
   "completed": "Completed",
-
   "noTasksHere": "No tasks here",
   "noTasksMessage": "There are no tasks in this filter right now.",
-
   "submitForReview": "Submit for Review",
-
   "notes": "Notes",
   "notesHint": "Add a note for your manager...",
-
   "attachments": "Attachments",
   "tapToUpload": "Tap to upload a file",
   "fileFormatsSupported": "PDF, DOCX, PNG up to 10MB",
   "removeAttachment": "Remove attachment",
-
   "taskSubmittedSuccess": "Task submitted for review.",
-
   "due": "Due",
-
   "managerFeedback": "Manager feedback: {feedback}",
   "@managerFeedback": {
     "placeholders": {
@@ -150,5 +126,47 @@
   "low": "Low",
   "medium": "Medium",
   "high": "High",
-  "urgent": "Urgent"
+  "urgent": "Urgent",
+
+  "leave": "Leave",
+  "balancesRequestsGoals": "Balances, requests, and personal goals",
+  "leaveType": "Leave type",
+  "selectLeaveType": "Select type...",
+  "annualLeave": "Annual Leave",
+  "casualLeave": "Casual Leave",
+  "sickLeave": "Sick Leave",
+  "startDate": "Start date",
+  "endDate": "End date",
+  "reason": "Reason",
+  "reasonHint": "Briefly describe your reason...",
+  "attachSupportingDocument": "Attach supporting document",
+  "uploadImage": "Upload image",
+  "submitRequest": "Submit request",
+  "leaveHistory": "Leave history",
+  "view": "View",
+  "approved": "Approved",
+  "atAGlance": "At a glance",
+  "goodMorning": "Good morning",
+  "thisMonth": "THIS MONTH",
+  "yourPerformance": "Your performance",
+  "fromLastMonth": "from last month",
+  "overall": "overall",
+  "quality": "Quality",
+  "april": "Apr",
+  "may": "May",
+  "june": "Jun",
+  "july": "Jul",
+  "august": "Aug",
+  "september": "Sep",
+  "performanceTrend": "Performance trend",
+  "personalGoals": "Personal goals",
+  "target": "Target:",
+  "onTrack": "On Track",
+  "aiAssistant": "AI Assistant",
+  "careerCoachingHrPolicySupport": "Career coaching & HR policy support",
+  "careerCoach": "Career Coach",
+  "policyAssistant": "Policy Assistant",
+  "actionPlan": "Action plan",
+  "developmentAreas": "Development areas"
 }
+

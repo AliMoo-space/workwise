@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
-import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/generated/app_localizations.dart';
 
 class FingerprintHeaderWidget extends StatelessWidget {
@@ -9,13 +8,13 @@ class FingerprintHeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        final localization = AppLocalizations.of(context);
+    final localization = AppLocalizations.of(context);
 
     return Column(
       children: [
         Container(
           width: double.infinity,
-          color: AppColors.primary,
+          color: Theme.of(context).colorScheme.primary,
           padding: EdgeInsets.symmetric(vertical: 10.h),
           child: Center(
             child: Image.asset(
@@ -28,7 +27,7 @@ class FingerprintHeaderWidget extends StatelessWidget {
         ),
         Container(
           width: double.infinity,
-          color: AppColors.background,
+          color: Theme.of(context).colorScheme.onSurface,
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,18 +35,20 @@ class FingerprintHeaderWidget extends StatelessWidget {
               Gap(26.h),
 
               Text(
-               localization.welcomeBack ,
+                localization.welcomeBack,
                 style: TextStyle(
                   fontSize: 22.sp,
                   fontWeight: FontWeight.bold,
-                  color: AppColors.textPrimary,
+
+                  color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),
               Text(
-               localization.verifyYourIdentityToAccessYourAccount ,
+                localization.verifyYourIdentityToAccessYourAccount,
                 style: TextStyle(
                   fontSize: 14.sp,
-                  color: AppColors.textSecondary,
+
+                  color: Theme.of(context).colorScheme.onSecondary,
                 ),
               ),
             ],

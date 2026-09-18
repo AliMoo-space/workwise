@@ -17,6 +17,7 @@ class AppDropdown<T> extends StatelessWidget {
     this.validator,
     this.enabled = true,
     this.borderRadius = AppRadius.radius12,
+    this.fillColor,
   });
 
   final List<DropdownMenuItem<T>> items;
@@ -32,31 +33,51 @@ class AppDropdown<T> extends StatelessWidget {
 
   final double borderRadius;
 
+  final Color? fillColor;
+
   @override
   Widget build(BuildContext context) {
     final decoration = InputDecoration(
       hintText: hint,
       filled: true,
-      fillColor: AppColors.surfaceLowest,
+      fillColor: enabled
+          ? fillColor ?? AppColors.surfaceLowest
+          : AppColors.disabled,
       contentPadding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.space16,
         vertical: AppSpacing.space16,
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(borderRadius),
-        borderSide: const BorderSide(color: AppColors.outlineVariant),
+        borderSide: const BorderSide(
+          color: AppColors.outlineVariant,
+        ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(borderRadius),
-        borderSide: const BorderSide(color: AppColors.primary, width: 2),
+        borderSide: const BorderSide(
+          color: AppColors.primary,
+          width: 2,
+        ),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(borderRadius),
-        borderSide: const BorderSide(color: AppColors.error),
+        borderSide: const BorderSide(
+          color: AppColors.error,
+        ),
       ),
       focusedErrorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(borderRadius),
-        borderSide: const BorderSide(color: AppColors.error, width: 2),
+        borderSide: const BorderSide(
+          color: AppColors.error,
+          width: 2,
+        ),
+      ),
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(borderRadius),
+        borderSide: const BorderSide(
+          color: AppColors.outlineVariant,
+        ),
       ),
     );
 
@@ -67,7 +88,9 @@ class AppDropdown<T> extends StatelessWidget {
           AppText(
             label!,
             style: AppTextStyles.labelMedium.copyWith(
-              color: AppColors.textPrimary,
+              color: enabled
+                  ? AppColors.textPrimary
+                  : AppColors.textDisabled,
             ),
           ),
           const Gap(AppSpacing.space8),
@@ -83,8 +106,8 @@ class AppDropdown<T> extends StatelessWidget {
             Icons.keyboard_arrow_down_rounded,
             color: AppColors.textSecondary,
           ),
-          dropdownColor: AppColors.surfaceLowest,
-          borderRadius: BorderRadius.circular(AppRadius.radius16),
+          dropdownColor: fillColor ?? AppColors.surfaceLowest,
+          borderRadius: BorderRadius.circular(borderRadius),
           isExpanded: true,
         ),
       ],

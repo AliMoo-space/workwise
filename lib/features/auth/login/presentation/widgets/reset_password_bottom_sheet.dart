@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/generated/app_localizations.dart';
 
 class ResetPasswordBottomSheet extends StatefulWidget {
@@ -43,15 +45,17 @@ class _ResetPasswordBottomSheetState extends State<ResetPasswordBottomSheet> {
       final email = _emailController.text.trim();
       
       Navigator.pop(context); // إغلاق الـ Bottom Sheet
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Reset link sent to $email successfully!'),
-          backgroundColor: Colors.green,
-        ),
-      );
-    }
+void _onSendResetLinkPressed() {
+  if (_formKey.currentState!.validate()) {
+    FocusScope.of(context).unfocus();
+    final email = _emailController.text.trim();
+    
+    Navigator.pop(context);
+    
+    context.push(AppRoutes.otpVerificationScreen, extra: email);
   }
+}
+    }}
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,7 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
+
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 
@@ -30,10 +31,16 @@ class AppLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // التغيير: جعلنا حجم الـ Loader Responsive باستخدام .w.
+    final double resolvedSize = size.w;
+
+    // التغيير: جعلنا سمك الـ Loader Responsive باستخدام .w.
+    final double resolvedStrokeWidth = strokeWidth.w;
+
     return SizedBox.square(
-      dimension: size,
+      dimension: resolvedSize,
       child: CircularProgressIndicator(
-        strokeWidth: strokeWidth,
+        strokeWidth: resolvedStrokeWidth,
         color: color ?? AppColors.primary,
       ),
     );
@@ -41,7 +48,10 @@ class AppLoader extends StatelessWidget {
 }
 
 class AppFullScreenLoader extends StatelessWidget {
-  const AppFullScreenLoader({super.key, this.message});
+  const AppFullScreenLoader({
+    super.key,
+    this.message,
+  });
 
   final String? message;
 
@@ -65,6 +75,32 @@ class AppFullScreenLoader extends StatelessWidget {
   }
 }
 
+class AppLoadingOverlay extends StatelessWidget {
+  const AppLoadingOverlay({
+    super.key,
+    required this.child,
+    required this.isLoading,
+  });
 
+  final Widget child;
+  final bool isLoading;
 
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        child,
 
+        if (isLoading)
+          Positioned.fill(
+            child: ColoredBox(
+              color: Colors.black26,
+              child: const Center(
+                child: AppLoader.large(),
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+}
