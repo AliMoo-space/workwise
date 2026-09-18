@@ -2,228 +2,198 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 
 import '../colors/app_colors.dart';
 @immutable
 final class AppTextStyles {
   const AppTextStyles._();
 
-  // ===========================================================================
+  // ============================================================
   // Font Families
-  // ===========================================================================
+  // ============================================================
 
-  static const String headingFontFamily = 'Manrope';
+  static const String headingFontFamily = 'Inter';
   static const String bodyFontFamily = 'Inter';
 
-  // Arabic
-  static const String arabicHeadingFontFamily = 'Cairo';
-  static const String arabicBodyFontFamily = 'Tajawal';
-
-  // Code
-  static const String codeFontFamily = 'JetBrainsMono';
-
-  // ===========================================================================
+  // ============================================================
   // Display
-  // ===========================================================================
+  // ============================================================
 
-  static const TextStyle displayLarge = TextStyle(
+  static TextStyle displayLarge = TextStyle(
     fontFamily: headingFontFamily,
-    fontSize: 32,
+
+    // التغيير: استخدمنا .sp بدل رقم ثابت عشان حجم الخط يكون Responsive.
+    fontSize: 40.sp,
+    fontWeight: FontWeight.w700,
+
+    // التغيير: الـ height يفضل Ratio ثابت، ومش بنستخدم .h هنا.
+    height: 48 / 40,
+
+    color: AppColors.textPrimary,
+  );
+
+  static TextStyle displayMedium = TextStyle(
+    fontFamily: headingFontFamily,
+
+    // التغيير: حجم الخط أصبح Responsive باستخدام .sp.
+    fontSize: 32.sp,
     fontWeight: FontWeight.w700,
     height: 40 / 32,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle displayMedium = TextStyle(
+  static TextStyle displaySmall = TextStyle(
     fontFamily: headingFontFamily,
-    fontSize: 32,
-    fontWeight: FontWeight.w700,
-    height: 40 / 32,
-    color: AppColors.textPrimary,
-  );
 
-  static const TextStyle displaySmall = TextStyle(
-    fontFamily: headingFontFamily,
-    fontSize: 28,
+    // التغيير: استخدمنا .sp عشان الحجم يتناسب مع حجم الشاشة.
+    fontSize: 28.sp,
     fontWeight: FontWeight.w700,
     height: 36 / 28,
     color: AppColors.textPrimary,
   );
 
-  // ===========================================================================
-  // Headlines
-  // ===========================================================================
+  // ============================================================
+  // Headline
+  // ============================================================
 
-  static const TextStyle headlineLarge = TextStyle(
+  static TextStyle headlineLarge = TextStyle(
     fontFamily: headingFontFamily,
-    fontSize: 28,
+    fontSize: 28.sp,
     fontWeight: FontWeight.w700,
     height: 36 / 28,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle headlineMedium = TextStyle(
+  static TextStyle headlineMedium = TextStyle(
     fontFamily: headingFontFamily,
-    fontSize: 24,
+
+    // التغيير: استخدمنا .sp بدل الحجم الثابت.
+    fontSize: 24.sp,
     fontWeight: FontWeight.w600,
     height: 32 / 24,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle headlineSmall = TextStyle(
+  static TextStyle headlineSmall = TextStyle(
     fontFamily: headingFontFamily,
-    fontSize: 20,
+    fontSize: 20.sp,
     fontWeight: FontWeight.w600,
     height: 28 / 20,
     color: AppColors.textPrimary,
   );
 
-  // ===========================================================================
-  // Titles
-  // ===========================================================================
+  // ============================================================
+  // Title
+  // ============================================================
 
-  static const TextStyle titleLarge = TextStyle(
+  static TextStyle titleLarge = TextStyle(
     fontFamily: headingFontFamily,
-    fontSize: 20,
+    fontSize: 20.sp,
     fontWeight: FontWeight.w600,
     height: 28 / 20,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle titleMedium = TextStyle(
+  static TextStyle titleMedium = TextStyle(
     fontFamily: headingFontFamily,
-    fontSize: 18,
+    fontSize: 16.sp,
     fontWeight: FontWeight.w600,
-    height: 24 / 18,
+    height: 24 / 16,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle titleSmall = TextStyle(
+  static TextStyle titleSmall = TextStyle(
     fontFamily: headingFontFamily,
-    fontSize: 16,
+    fontSize: 14.sp,
     fontWeight: FontWeight.w600,
-    height: 22 / 16,
+    height: 20 / 14,
     color: AppColors.textPrimary,
   );
 
-  // ===========================================================================
+  // ============================================================
   // Body
-  // ===========================================================================
+  // ============================================================
 
-  static const TextStyle bodyLarge = TextStyle(
+  static TextStyle bodyLarge = TextStyle(
     fontFamily: bodyFontFamily,
-    fontSize: 16,
+    fontSize: 16.sp,
     fontWeight: FontWeight.w400,
     height: 24 / 16,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle bodyMedium = TextStyle(
+  static TextStyle bodyMedium = TextStyle(
     fontFamily: bodyFontFamily,
-    fontSize: 14,
+
+    // التغيير: استخدمنا .sp بدل fontSize ثابت.
+    fontSize: 14.sp,
     fontWeight: FontWeight.w400,
     height: 20 / 14,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle bodySmall = TextStyle(
+  static TextStyle bodySmall = TextStyle(
     fontFamily: bodyFontFamily,
-    fontSize: 14,
+    fontSize: 12.sp,
     fontWeight: FontWeight.w400,
-    height: 20 / 14,
+    height: 16 / 12,
     color: AppColors.textSecondary,
   );
 
-  // ===========================================================================
-  // Labels
-  // ===========================================================================
+  // ============================================================
+  // Label
+  // ============================================================
 
-  static const TextStyle labelLarge = TextStyle(
+  static TextStyle labelLarge = TextStyle(
     fontFamily: bodyFontFamily,
-    fontSize: 14,
-    fontWeight: FontWeight.w500,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w600,
     height: 20 / 14,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle labelMedium = TextStyle(
+  static TextStyle labelMedium = TextStyle(
     fontFamily: bodyFontFamily,
-    fontSize: 13,
-    fontWeight: FontWeight.w500,
-    height: 18 / 13,
-    color: AppColors.textPrimary,
-  );
-
-  static const TextStyle labelSmall = TextStyle(
-    fontFamily: bodyFontFamily,
-    fontSize: 12,
+    fontSize: 12.sp,
     fontWeight: FontWeight.w500,
     height: 16 / 12,
     color: AppColors.textSecondary,
   );
 
-  // ===========================================================================
-  // Buttons
-  // ===========================================================================
-
-  static const TextStyle button = TextStyle(
+  static TextStyle labelSmall = TextStyle(
     fontFamily: bodyFontFamily,
-    fontSize: 14,
-    fontWeight: FontWeight.w600,
+    fontSize: 11.sp,
+    fontWeight: FontWeight.w500,
+    height: 16 / 11,
+    color: AppColors.textSecondary,
+  );
+
+  // ============================================================
+  // Custom Styles
+  // ============================================================
+
+  static TextStyle hint = TextStyle(
+    fontFamily: bodyFontFamily,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
     height: 20 / 14,
-    color: AppColors.onPrimary,
-  );
-
-  static const TextStyle buttonLarge = TextStyle(
-    fontFamily: bodyFontFamily,
-    fontSize: 16,
-    fontWeight: FontWeight.w600,
-    height: 24 / 16,
-    color: AppColors.onPrimary,
-  );
-
-  // ===========================================================================
-  // Inputs
-  // ===========================================================================
-
-  static const TextStyle input = TextStyle(
-    fontFamily: bodyFontFamily,
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    height: 24 / 16,
-    color: AppColors.textPrimary,
-  );
-
-  static const TextStyle hint = TextStyle(
-    fontFamily: bodyFontFamily,
-    fontSize: 16,
-    fontWeight: FontWeight.w400,
-    height: 24 / 16,
     color: AppColors.textHint,
   );
 
-  // ===========================================================================
-  // Captions
-  // ===========================================================================
-
-  static const TextStyle caption = TextStyle(
+  static TextStyle disabled = TextStyle(
     fontFamily: bodyFontFamily,
-    fontSize: 12,
-    fontWeight: FontWeight.w400,
-    height: 16 / 12,
-    color: AppColors.textSecondary,
-  );
-
-  // ===========================================================================
-  // Code
-  // ===========================================================================
-
-  static const TextStyle code = TextStyle(
-    fontFamily: codeFontFamily,
-    fontSize: 14,
+    fontSize: 14.sp,
     fontWeight: FontWeight.w400,
     height: 20 / 14,
-    color: AppColors.textPrimary,
-    fontFeatures: [FontFeature.tabularFigures()],
+    color: AppColors.textDisabled,
+  );
+
+  static TextStyle inverse = TextStyle(
+    fontFamily: bodyFontFamily,
+    fontSize: 14.sp,
+    fontWeight: FontWeight.w400,
+    height: 20 / 14,
+    color: AppColors.textInverse,
   );
 }

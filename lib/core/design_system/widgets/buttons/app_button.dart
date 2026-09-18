@@ -6,7 +6,13 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 
-enum AppButtonVariant { primary, secondary, outlined, text, danger }
+enum AppButtonVariant {
+  primary,
+  secondary,
+  outlined,
+  text,
+  danger,
+}
 
 class AppButton extends StatelessWidget {
   const AppButton({
@@ -22,23 +28,16 @@ class AppButton extends StatelessWidget {
     this.height = 56,
     this.backgroundColor,
   });
+
   final Color? backgroundColor;
   final String text;
-
   final VoidCallback? onPressed;
-
   final AppButtonVariant variant;
-
   final bool enabled;
-
   final bool isLoading;
-
   final Widget? leading;
-
   final Widget? trailing;
-
   final double? width;
-
   final double height;
 
   @override
@@ -68,14 +67,12 @@ class AppButton extends StatelessWidget {
                     leading!,
                     const Gap(AppSpacing.space8),
                   ],
-
                   AppText(
                     text,
                     style: AppTextStyles.titleLarge.copyWith(
                       color: style.foregroundColor?.resolve({}),
                     ),
                   ),
-
                   if (trailing != null) ...[
                     const Gap(AppSpacing.space8),
                     trailing!,
@@ -91,7 +88,8 @@ class AppButton extends StatelessWidget {
       case AppButtonVariant.primary:
         return ElevatedButton.styleFrom(
           backgroundColor: backgroundColor ?? AppColors.primary,
-          foregroundColor: Colors.white,
+          // التغيير: استخدمنا اللون الموجود في AppColors بدل Colors.white.
+          foregroundColor: AppColors.onPrimary,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.radius16),
@@ -113,7 +111,9 @@ class AppButton extends StatelessWidget {
           backgroundColor: Colors.transparent,
           foregroundColor: AppColors.primary,
           elevation: 0,
-          side: const BorderSide(color: AppColors.border),
+          side: const BorderSide(
+            color: AppColors.border,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.radius16),
           ),
@@ -130,7 +130,8 @@ class AppButton extends StatelessWidget {
       case AppButtonVariant.danger:
         return ElevatedButton.styleFrom(
           backgroundColor: backgroundColor ?? AppColors.error,
-          foregroundColor: Colors.white,
+          // التغيير: استخدمنا onError من AppColors بدل اللون الثابت.
+          foregroundColor: AppColors.onError,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.radius16),

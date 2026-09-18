@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:workwise/core/design_system/colors/app_colors.dart';
+import 'package:workwise/core/design_system/spacing/app_radius.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 
 class AppCard extends StatelessWidget {
@@ -9,7 +11,7 @@ class AppCard extends StatelessWidget {
     this.padding,
     this.margin,
     this.backgroundColor,
-    this.borderRadius = 20,
+    this.borderRadius = AppRadius.radius20,
     this.border,
     this.boxShadow,
     this.width,
@@ -46,7 +48,10 @@ class AppCard extends StatelessWidget {
         color: backgroundColor ?? AppColors.surface,
         borderRadius: BorderRadius.circular(borderRadius),
 
-        border: border ?? Border.all(color: AppColors.outlineVariant, width: 1),
+        border: border ?? Border.all(
+          color: AppColors.outlineVariant,
+          width: 1,
+        ),
 
         boxShadow:
             boxShadow ??

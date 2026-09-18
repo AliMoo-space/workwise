@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/generated/app_localizations.dart';
 
 class EmptyView extends StatelessWidget {
@@ -23,7 +24,6 @@ class EmptyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
 
     return Center(
       child: Padding(
@@ -37,10 +37,10 @@ class EmptyView extends StatelessWidget {
               color: iconColor ?? Theme.of(context).colorScheme.primary,
             ),
             Gap(12.h),
-            AppText(title ?? l10n.noTasksHere, style: AppTextStyles.titleLarge),
+            AppText(title ?? context.l10n.noTasksHere, style: AppTextStyles.titleLarge),
             Gap(6.h),
             AppText(
-              message ?? l10n.noTasksMessage,
+              message ?? context.l10n.noTasksMessage,
               textAlign: TextAlign.center,
             ),
           ],

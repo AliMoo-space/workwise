@@ -33,10 +33,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get language => 'اللغة';
 
   @override
-  String get languageEnglish => 'الإنجليزيّة';
+  String get languageEnglish => 'الإنجليزية';
 
   @override
-  String get languageArabic => 'العربيّة';
+  String get languageArabic => 'العربية';
 
   @override
   String get loading => 'جاري التحميل...';
@@ -119,7 +119,114 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enterPasswordMessage => 'يرجى إدخال كلمة المرور';
-  String get languageArabic => 'العربية';
+
+  @override
+  String get homeScreen => 'الرئيسية';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get quickActions => 'إجراءات سريعة';
+
+  @override
+  String get todayAttendance => 'حضور اليوم';
+
+  @override
+  String get onShift => 'في الدوام';
+
+  @override
+  String get checkedInAt => 'تم تسجيل الحضور الساعة 9:00 صباحًا';
+
+  @override
+  String get hoursWorked => 'ساعات العمل';
+
+  @override
+  String get insideOffice => 'داخل المكتب';
+
+  @override
+  String get checkOut => 'تسجيل الانصراف';
+
+  @override
+  String get pendingTasks => 'المهام المعلقة';
+
+  @override
+  String get nextMeeting => 'الاجتماع القادم';
+
+  @override
+  String get leaveBalance => 'رصيد الإجازات';
+
+  @override
+  String get requestLeave => 'طلب إجازة';
+
+  @override
+  String get submitTask => 'إرسال مهمة';
+
+  @override
+  String get viewCalendar => 'عرض التقويم';
+
+  @override
+  String get aiHrAssistant => 'مساعد الموارد البشرية الذكي';
+
+  @override
+  String get drawerHeader => 'رأس القائمة';
+
+  @override
+  String get drawerItem1 => 'العنصر 1';
+
+  @override
+  String get drawerItem2 => 'العنصر 2';
+
+  @override
+  String get drawerItem3 => 'العنصر 3';
+
+  @override
+  String get attendance => 'الحضور';
+
+  @override
+  String get attendanceDescription => 'تسجيل الحضور والتحقق من الموقع والسجل';
+
+  @override
+  String get history => 'السجل';
+
+  @override
+  String get june2026 => 'يونيو 2026';
+
+  @override
+  String get insideWorkplaceRadius => 'داخل نطاق موقع العمل';
+
+  @override
+  String get gpsAccuracy => 'دقة GPS +/-8م - 42م إلى المكتب';
+
+  @override
+  String get valid => 'صالح';
+
+  @override
+  String get present => 'حاضر';
+
+  @override
+  String get late => 'متأخر';
+
+  @override
+  String get attendanceDate1 => 'الاثنين، 09 يونيو';
+
+  @override
+  String get attendanceDetails1 => '08:45 ص - 05:32 م  -  8س 47د';
+
+  @override
+  String get attendanceDate2 => 'الجمعة، 06 يونيو';
+
+  @override
+  String get attendanceDetails2 => '09:18 ص - 05:40 م  -  8س 22د';
+
+  @override
+  String get attendanceDate3 => 'الخميس، 05 يونيو';
+
+  @override
+  String get attendanceDetails3 => '08:52 ص - 05:28 م  -  8س 36د';
+
+  @override
+  String get orders => 'الطلبات';
 
   @override
   String get tasks => 'المهام';
@@ -203,4 +310,125 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get urgent => 'عاجلة';
+
+  @override
+  String get leave => 'الإجازات';
+
+  @override
+  String get balancesRequestsGoals => 'الأرصدة والطلبات والأهداف الشخصية';
+
+  @override
+  String get leaveType => 'نوع الإجازة';
+
+  @override
+  String get selectLeaveType => 'اختر نوع الإجازة...';
+
+  @override
+  String get annualLeave => 'إجازة سنوية';
+
+  @override
+  String get casualLeave => 'إجازة عارضة';
+
+  @override
+  String get sickLeave => 'إجازة مرضية';
+
+  @override
+  String get startDate => 'تاريخ البداية';
+
+  @override
+  String get endDate => 'تاريخ النهاية';
+
+  @override
+  String get reason => 'السبب';
+
+  @override
+  String get reasonHint => 'اكتب سبب الإجازة باختصار...';
+
+  @override
+  String get attachSupportingDocument => 'إرفاق مستند داعم';
+
+  @override
+  String get uploadImage => 'رفع صورة';
+
+  @override
+  String get submitRequest => 'إرسال الطلب';
+
+  @override
+  String get leaveHistory => 'سجل الإجازات';
+
+  @override
+  String get view => 'عرض';
+
+  @override
+  String get approved => 'تمت الموافقة';
+
+  @override
+  String get atAGlance => 'نظرة سريعة';
+
+  @override
+  String get goodMorning => 'صباح الخير';
+
+  @override
+  String get thisMonth => 'هذا الشهر';
+
+  @override
+  String get yourPerformance => 'أداؤك';
+
+  @override
+  String get fromLastMonth => 'من الشهر الماضي';
+
+  @override
+  String get overall => 'الإجمالي';
+
+  @override
+  String get quality => 'الجودة';
+
+  @override
+  String get april => 'أبريل';
+
+  @override
+  String get may => 'مايو';
+
+  @override
+  String get june => 'يونيو';
+
+  @override
+  String get july => 'يوليو';
+
+  @override
+  String get august => 'أغسطس';
+
+  @override
+  String get september => 'سبتمبر';
+
+  @override
+  String get performanceTrend => 'اتجاه الأداء';
+
+  @override
+  String get personalGoals => 'الأهداف الشخصية';
+
+  @override
+  String get target => 'الهدف:';
+
+  @override
+  String get onTrack => 'في المسار';
+
+  @override
+  String get aiAssistant => 'المساعد الذكي';
+
+  @override
+  String get careerCoachingHrPolicySupport =>
+      'التوجيه المهني ودعم سياسات الموارد البشرية';
+
+  @override
+  String get careerCoach => 'التوجيه المهني';
+
+  @override
+  String get policyAssistant => 'مساعد السياسات';
+
+  @override
+  String get actionPlan => 'خطة العمل';
+
+  @override
+  String get developmentAreas => 'مجالات التطوير';
 }
