@@ -3,6 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 import '../../domain/models/task_models.dart';
 import 'custom_widgets/priority_badge.dart';
@@ -48,7 +49,7 @@ class TaskCard extends StatelessWidget {
             Gap(20.w),
             TaskDetailWidget(
               icon: Icons.calendar_today_outlined,
-              text: 'Due ${_date(task.deadline)}',
+              text: '${context.l10n.due} ${_date(task.deadline)}',
             ),
           ],
         ),

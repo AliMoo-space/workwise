@@ -20,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
     final screens = <Widget>[
       const HomeScreen(),
       const AttendanceScreen(),
-      const TasksScreen(),
+      TasksScreen(),
       const ProfilePage(),
     ];
 

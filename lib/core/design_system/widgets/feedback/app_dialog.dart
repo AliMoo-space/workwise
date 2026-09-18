@@ -92,6 +92,11 @@ class _AppDialog extends StatelessWidget {
               : AppButtonVariant.primary,
           onPressed: () => Navigator.pop(context, true),
         ),
+        
+        // TextButton(
+        //   child: AppText(confirmText, color: AppColors.error),
+        //   onPressed: () => Navigator.pop(context, true),
+        // ),
       ],
     );
   }

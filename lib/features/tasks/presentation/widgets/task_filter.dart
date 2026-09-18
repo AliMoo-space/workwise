@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/features/tasks/domain/models/task_models.dart';
-import 'package:workwise/generated/app_localizations.dart';
 
 class TaskFilterBar extends StatelessWidget {
   const TaskFilterBar({
@@ -17,13 +17,11 @@ class TaskFilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-
     final labels = {
-      TaskFilter.all: l10n.all,
-      TaskFilter.inProgress: l10n.inProgress,
-      TaskFilter.underReview: l10n.underReview,
-      TaskFilter.completed: l10n.completed,
+      TaskFilter.all: context.l10n.all,
+      TaskFilter.inProgress: context.l10n.inProgress,
+      TaskFilter.underReview: context.l10n.underReview,
+      TaskFilter.completed: context.l10n.completed,
     };
 
     return SizedBox(

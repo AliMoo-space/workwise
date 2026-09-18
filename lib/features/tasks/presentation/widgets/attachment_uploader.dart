@@ -4,7 +4,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
-import 'package:workwise/generated/app_localizations.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 import '../../domain/models/task_models.dart';
 
 class AttachmentUploader extends StatelessWidget {
@@ -45,13 +45,11 @@ class AttachmentUploader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppText(
-          l10n.attachments,
+          context.l10n.attachments,
           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15.sp),
         ),
         Gap(10.h),
@@ -75,10 +73,10 @@ class AttachmentUploader extends StatelessWidget {
                   color: AppColors.focus,
                 ),
                 Gap(8.h),
-                AppText(l10n.tapToUpload),
+                AppText(context.l10n.tapToUpload),
                 Gap(4.h),
                 AppText(
-                  l10n.fileFormatsSupported,
+                  context.l10n.fileFormatsSupported,
                   style: TextStyle(fontSize: 10.sp, color: AppColors.textHint),
                 ),
               ],
@@ -105,7 +103,7 @@ class AttachmentUploader extends StatelessWidget {
                 style: TextStyle(fontSize: 13.sp),
               ),
               trailing: IconButton(
-                tooltip: l10n.removeAttachment,
+                tooltip: context.l10n.removeAttachment,
                 onPressed: () => onRemove(attachment),
                 icon: Icon(Icons.close, size: 20.sp),
               ),

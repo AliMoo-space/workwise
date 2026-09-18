@@ -65,10 +65,8 @@ class DrawerMenu extends StatelessWidget {
               title: 'Profile',
               isSelected: currentRoute == '/profile',
               onTap: () {
-                Navigator.of(context).pop();
-
-                if (currentRoute != '/profile') {
-                  context.go('/profile');
+                if (currentRoute != AppRoutes.profilePage) {
+                  context.go(AppRoutes.profilePage);
                 }
               },
             ),

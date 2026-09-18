@@ -9,6 +9,7 @@ import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 class JobDetailItem extends StatelessWidget {
   const JobDetailItem({
@@ -41,7 +42,10 @@ class JobDetailItem extends StatelessWidget {
 
           Expanded(child: _buildContent()),
 
-          if (showButton) ...[Gap(AppSpacing.space8.w), _buildContactButton()],
+          if (showButton) ...[
+            Gap(AppSpacing.space8.w),
+            _buildContactButton(context),
+          ],
 
           if (badge != null) ...[Gap(AppSpacing.space8.w), _buildBadge()],
 
@@ -87,9 +91,9 @@ class JobDetailItem extends StatelessWidget {
     );
   }
 
-  Widget _buildContactButton() {
+  Widget _buildContactButton(BuildContext context) {
     return AppButton(
-      text: 'Contact',
+      text: context.l10n.profileContact,
       fontSize: 10.sp,
       onPressed: () {},
       variant: AppButtonVariant.secondary,

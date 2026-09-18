@@ -3,7 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
-import 'package:workwise/generated/app_localizations.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 import '../../../domain/models/task_models.dart';
 
 class PriorityBadge extends StatelessWidget {
@@ -13,12 +13,10 @@ class PriorityBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-
     final (label, color) = switch (priority) {
-      TaskPriority.low => (l10n.low, AppColors.success),
-      TaskPriority.medium => (l10n.medium, AppColors.warning),
-      TaskPriority.high => (l10n.high, AppColors.focus),
+      TaskPriority.low => (context.l10n.low, AppColors.success),
+      TaskPriority.medium => (context.l10n.medium, AppColors.warning),
+      TaskPriority.high => (context.l10n.high, AppColors.focus),
     };
 
     return Container(

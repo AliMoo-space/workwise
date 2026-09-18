@@ -7,6 +7,7 @@ import 'package:workwise/core/design_system/spacing/app_radius.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 import 'job_detail_item.dart';
 
@@ -21,7 +22,7 @@ class JobDetailsSection extends StatelessWidget {
         Row(
           children: [
             AppText(
-              'Job details',
+              context.l10n.profileJobDetails,
               style: AppTextStyles.titleLarge,
             ),
 
@@ -34,9 +35,7 @@ class JobDetailsSection extends StatelessWidget {
               ),
               decoration: BoxDecoration(
                 color: AppColors.surfaceContainer,
-                borderRadius: BorderRadius.circular(
-                  AppRadius.radius8.r,
-                ),
+                borderRadius: BorderRadius.circular(AppRadius.radius8.r),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -50,7 +49,7 @@ class JobDetailsSection extends StatelessWidget {
                   Gap(AppSpacing.space4.w),
 
                   AppText(
-                    'Managed by HR',
+                    context.l10n.profileManagedByHr,
                     style: AppTextStyles.labelSmall,
                     color: AppColors.textSecondary,
                   ),
@@ -62,37 +61,37 @@ class JobDetailsSection extends StatelessWidget {
 
         Gap(AppSpacing.space16.h),
 
-        const JobDetailItem(
+        JobDetailItem(
           icon: Icons.person_outline,
-          label: 'DIRECT MANAGER',
+          label: context.l10n.profileDirectManager,
           title: 'Layla Nasser',
-          subtitle: 'Head of Operations',
+          subtitle: context.l10n.profileHeadOfOperations,
           showButton: true,
         ),
 
         Gap(AppSpacing.space12.h),
 
-        const JobDetailItem(
+        JobDetailItem(
           icon: Icons.location_on_outlined,
-          label: 'WORK LOCATION',
+          label: context.l10n.profileWorkLocation,
           title: 'Downtown Campus\n— Tower B',
-          badge: 'Within\nassigned\nradius',
+          badge: context.l10n.profileWithinAssignedRadius,
           badgeColor: AppColors.accent,
         ),
 
         Gap(AppSpacing.space12.h),
 
-        const JobDetailItem(
+        JobDetailItem(
           icon: Icons.email_outlined,
-          label: 'WORK EMAIL',
+          label: context.l10n.profileWorkEmail,
           title: 'omar.haddad@smarthr.co',
         ),
 
         Gap(AppSpacing.space12.h),
 
-        const JobDetailItem(
+        JobDetailItem(
           icon: Icons.phone_outlined,
-          label: 'WORK PHONE',
+          label: context.l10n.profileWorkPhone,
           title: '+971 4 555 0192',
         ),
       ],
