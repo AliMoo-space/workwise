@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
-import 'package:workwise/generated/app_localizations.dart';
 
 class EmptyView extends StatelessWidget {
   const EmptyView({
@@ -24,7 +23,6 @@ class EmptyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Center(
       child: Padding(
         padding: EdgeInsets.all(24.r),
@@ -37,7 +35,10 @@ class EmptyView extends StatelessWidget {
               color: iconColor ?? Theme.of(context).colorScheme.primary,
             ),
             Gap(12.h),
-            AppText(title ?? context.l10n.noTasksHere, style: AppTextStyles.titleLarge),
+            AppText(
+              title ?? context.l10n.noTasksHere,
+              style: AppTextStyles.titleLarge,
+            ),
             Gap(6.h),
             AppText(
               message ?? context.l10n.noTasksMessage,

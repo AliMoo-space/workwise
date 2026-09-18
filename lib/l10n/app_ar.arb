@@ -1,8 +1,6 @@
 {
   "@@locale": "ar",
 
-  "hello": "مرحبا",
-  "welcome": "أهلا وسهلا",
   "hello": "مرحباً",
   "welcome": "أهلاً وسهلاً",
   "goodbye": "مع السلامة",
@@ -16,139 +14,7 @@
   "languageEnglish": "الإنجليزية",
   "languageArabic": "العربية",
 
-  "homeScreen": "الرئيسية",
-  "notifications": "الإشعارات",
-  "quickActions": "إجراءات سريعة",
-
-  "todayAttendance": "حضور اليوم",
-  "onShift": "في الدوام",
-  "checkedInAt": "تم تسجيل الحضور الساعة 9:00 صباحًا",
-  "hoursWorked": "ساعات العمل",
-  "insideOffice": "داخل المكتب",
-  "checkOut": "تسجيل الانصراف",
-
-  "pendingTasks": "المهام المعلقة",
-  "nextMeeting": "الاجتماع القادم",
-  "leaveBalance": "رصيد الإجازات",
-
-  "requestLeave": "طلب إجازة",
-  "submitTask": "إرسال مهمة",
-  "viewCalendar": "عرض التقويم",
-
-  "aiHrAssistant": "مساعد الموارد البشرية الذكي",
-
-  "drawerHeader": "رأس القائمة",
-  "drawerItem1": "العنصر 1",
-  "drawerItem2": "العنصر 2",
-  "drawerItem3": "العنصر 3",
-
-  "attendance": "الحضور",
-  "attendanceDescription": "تسجيل الحضور والتحقق من الموقع والسجل",
-  "history": "السجل",
-  "june2026": "يونيو 2026",
-
-  "insideWorkplaceRadius": "داخل نطاق موقع العمل",
-  "gpsAccuracy": "دقة GPS +/-8م - 42م إلى المكتب",
-
-  "valid": "صالح",
-  "present": "حاضر",
-  "late": "متأخر",
-
-  "attendanceDate1": "الاثنين، 09 يونيو",
-  "attendanceDetails1": "08:45 ص - 05:32 م  -  8س 47د",
-
-  "attendanceDate2": "الجمعة، 06 يونيو",
-  "attendanceDetails2": "09:18 ص - 05:40 م  -  8س 22د",
-
-  "attendanceDate3": "الخميس، 05 يونيو",
-  "attendanceDetails3": "08:52 ص - 05:28 م  -  8س 36د",
-
-  "orders": "الطلبات",
-
-  "tasks": "المهام",
-  "profile": "الملف الشخصي",
-  "settings": "الإعدادات",
-  "logout": "تسجيل الخروج",
-
-  "submit": "إرسال",
-  "cancel": "إلغاء",
-
-  "trackAssignments": "تتبع المهام وإرسالها للمراجعة",
-
-  "all": "الكل",
-  "inProgress": "قيد التنفيذ",
-  "underReview": "قيد المراجعة",
-  "completed": "مكتملة",
-
-  "noTasksHere": "لا توجد مهام هنا",
-  "noTasksMessage": "لا توجد مهام في هذا الفلتر حالياً.",
-
-  "submitForReview": "إرسال للمراجعة",
-
-  "notes": "ملاحظات",
-  "notesHint": "أضف ملاحظة لمديرك...",
-
-  "attachments": "المرفقات",
-  "tapToUpload": "اضغط لرفع ملف",
-  "fileFormatsSupported": "PDF, DOCX, PNG حتى 10 ميجا",
-  "removeAttachment": "حذف المرفق",
-
-  "taskSubmittedSuccess": "تم إرسال المهمة للمراجعة.",
-
-  "due": "الموعد النهائي",
-  "managerFeedback": "ملاحظات المدير: {feedback}",
-
-  "low": "منخفضة",
-  "medium": "متوسطة",
-  "high": "عالية",
-  "urgent": "عاجلة",
-  "requestLeave": "طلب إجازة",
-  "leave": "الإجازات",
-  "balancesRequestsGoals": "الأرصدة والطلبات والأهداف الشخصية",
-  "leaveType": "نوع الإجازة",
-"selectLeaveType": "اختر نوع الإجازة...",
-"annualLeave": "إجازة سنوية",
-"casualLeave": "إجازة عارضة",
-"sickLeave": "إجازة مرضية",
-"startDate": "تاريخ البداية",
-"endDate": "تاريخ النهاية",
-"reason": "السبب",
-"reasonHint": "اكتب سبب الإجازة باختصار...",
-"attachSupportingDocument": "إرفاق مستند داعم",
-"uploadImage": "رفع صورة",
-"submitRequest": "إرسال الطلب",
-"leaveHistory": "سجل الإجازات",
-"view": "عرض",
-"approved": "تمت الموافقة",
-"atAGlance": "نظرة سريعة",
-"goodMorning": "صباح الخير",
-"thisMonth": "هذا الشهر",
-"yourPerformance": "أداؤك",
-"fromLastMonth": "من الشهر الماضي",
-"overall": "الإجمالي",
-"tasks": "المهام",
-"quality": "الجودة",
-"attendance": "الحضور",
-"april": "أبريل",
-"may": "مايو",
-"june": "يونيو",
-"july": "يوليو",
-"august": "أغسطس",
-"september": "سبتمبر",
-"performanceTrend": "اتجاه الأداء",
-"personalGoals": "الأهداف الشخصية",
-"target": "الهدف:",
-"onTrack": "في المسار",
-"aiAssistant": "المساعد الذكي",
-  "careerCoachingHrPolicySupport": "التوجيه المهني ودعم سياسات الموارد البشرية",
-  "careerCoach": "التوجيه المهني",
-  "policyAssistant": "مساعد السياسات",
-  "actionPlan": "خطة العمل",
-  "developmentAreas": "مجالات التطوير",
-
-  "languageEnglish": "الإنجليزيّة",
   "loading": "جاري التحميل...",
-
   "welcomeBack": "مرحباً بعودتك",
   "signInWithCorporateCredentials": "سجّل الدخول باستخدام بيانات حساب الشركة",
   "workEmail": "البريد الإلكتروني للعمل",
@@ -157,20 +23,16 @@
   "passwordHint": "أدخل كلمة المرور",
   "keepMeSignedIn": "الاحتفاظ بتسجيل الدخول",
   "forgotPassword": "نسيت كلمة المرور؟",
-
   "quickSignIn": "تسجيل دخول سريع",
   "useFingerprintOrFaceId": "استخدم بصمة الإصبع أو الوجه",
   "or": "أو",
-
   "sessionExpiredWarning": "انتهت الجلسة الخاصة بك. يرجى إعادة محاولة الدخول للمتابعة.",
   "invalidCredentialsWarning": "بيانات الدخول غير صحيحة. يرجى المحاولة مرة أخرى.",
-
   "verifyYourIdentityToAccessYourAccount": "تأكيد الهوية للوصول إلى حسابك",
   "tapToScanFingerprintFaceID": "انقر للمسح ببصمة الإصبع / الوجه",
   "useEmailAndPasswordInstead": "استخدم البريد الإلكتروني وكلمة المرور بدلاً من ذلك",
   "biometricsNotAvailable": "التحقق بالبصمة غير متوفر على هذا الجهاز.",
   "authCanceledOrFailed": "تم إلغاء عملية التحقق أو فشلت.",
-
   "resetPasswordTitle": "إعادة ضبط كلمة المرور",
   "resetPasswordDescription": "أدخل بريد العمل وسنرسل لك رابطاً لإعادة الضبط.",
   "sendResetLink": "إرسال رابط الضبط",
@@ -214,47 +76,12 @@
   "attendanceDate3": "الخميس، 05 يونيو",
   "attendanceDetails3": "08:52 ص - 05:28 م  -  8س 36د",
   "orders": "الطلبات",
-  "profile": "الملف الشخصي"
-}
-  "languageEnglish": "الإنجليزيّة",
-  "languageArabic": "العربيّة",
-  "loading": "جاري التحميل...",
 
-  "welcomeBack": "مرحباً بعودتك",
-  "signInWithCorporateCredentials": "سجّل الدخول باستخدام بيانات حساب الشركة",
-  "workEmail": "البريد الإلكتروني للعمل",
-  "workEmailHint": "name@company.com",
-  "password": "كلمة المرور",
-  "passwordHint": "أدخل كلمة المرور",
-  "keepMeSignedIn": "الاحتفاظ بتسجيل الدخول",
-  "forgotPassword": "نسيت كلمة المرور؟",
-
-  "quickSignIn": "تسجيل دخول سريع",
-  "useFingerprintOrFaceId": "استخدم بصمة الإصبع أو الوجه",
-  "or": "أو",
-
-  "sessionExpiredWarning": "انتهت الجلسة الخاصة بك. يرجى إعادة محاولة الدخول للمتابعة.",
-  "invalidCredentialsWarning": "بيانات الدخول غير صحيحة. يرجى المحاولة مرة أخرى.",
-
-  "verifyYourIdentityToAccessYourAccount": "تأكيد الهوية للوصول إلى حسابك",
-  "tapToScanFingerprintFaceID": "انقر للمسح ببصمة الإصبع / الوجه",
-  "useEmailAndPasswordInstead": "استخدم البريد الإلكتروني وكلمة المرور بدلاً من ذلك",
-  "biometricsNotAvailable": "التحقق بالبصمة غير متوفر على هذا الجهاز.",
-  "authCanceledOrFailed": "تم إلغاء عملية التحقق أو فشلت.",
-
-  "resetPasswordTitle": "إعادة ضبط كلمة المرور",
-  "resetPasswordDescription": "أدخل بريد العمل وسنرسل لك رابطاً لإعادة الضبط.",
-  "sendResetLink": "إرسال رابط الضبط",
-  "enterWorkEmailMessage": "يرجى إدخال بريد العمل الإلكتروني",
-  "invalidEmailFormatMessage": "صيغة بريد العمل غير صحيحة",
-  "enterPasswordMessage": "يرجى إدخال كلمة المرور"
-}
-  "languageEnglish": "الإنجليزية",
-  "languageArabic": "العربية",
   "tasks": "المهام",
   "profile": "الملف الشخصي",
   "settings": "الإعدادات",
   "logout": "تسجيل الخروج",
+
   "submit": "إرسال",
   "cancel": "إلغاء",
   "trackAssignments": "تتبع المهام وإرسالها للمراجعة",
@@ -274,8 +101,57 @@
   "taskSubmittedSuccess": "تم إرسال المهمة للمراجعة.",
   "due": "الموعد النهائي",
   "managerFeedback": "ملاحظات المدير: {feedback}",
+  "@managerFeedback": {
+    "placeholders": {
+      "feedback": {
+        "type": "String"
+      }
+    }
+  },
+
   "low": "منخفضة",
   "medium": "متوسطة",
   "high": "عالية",
-  "urgent": "عاجلة"
+  "urgent": "عاجلة",
+
+  "leave": "الإجازات",
+  "balancesRequestsGoals": "الأرصدة والطلبات والأهداف الشخصية",
+  "leaveType": "نوع الإجازة",
+  "selectLeaveType": "اختر نوع الإجازة...",
+  "annualLeave": "إجازة سنوية",
+  "casualLeave": "إجازة عارضة",
+  "sickLeave": "إجازة مرضية",
+  "startDate": "تاريخ البداية",
+  "endDate": "تاريخ النهاية",
+  "reason": "السبب",
+  "reasonHint": "اكتب سبب الإجازة باختصار...",
+  "attachSupportingDocument": "إرفاق مستند داعم",
+  "uploadImage": "رفع صورة",
+  "submitRequest": "إرسال الطلب",
+  "leaveHistory": "سجل الإجازات",
+  "view": "عرض",
+  "approved": "تمت الموافقة",
+  "atAGlance": "نظرة سريعة",
+  "goodMorning": "صباح الخير",
+  "thisMonth": "هذا الشهر",
+  "yourPerformance": "أداؤك",
+  "fromLastMonth": "من الشهر الماضي",
+  "overall": "الإجمالي",
+  "quality": "الجودة",
+  "april": "أبريل",
+  "may": "مايو",
+  "june": "يونيو",
+  "july": "يوليو",
+  "august": "أغسطس",
+  "september": "سبتمبر",
+  "performanceTrend": "اتجاه الأداء",
+  "personalGoals": "الأهداف الشخصية",
+  "target": "الهدف:",
+  "onTrack": "في المسار",
+  "aiAssistant": "المساعد الذكي",
+  "careerCoachingHrPolicySupport": "التوجيه المهني ودعم سياسات الموارد البشرية",
+  "careerCoach": "التوجيه المهني",
+  "policyAssistant": "مساعد السياسات",
+  "actionPlan": "خطة العمل",
+  "developmentAreas": "مجالات التطوير"
 }
