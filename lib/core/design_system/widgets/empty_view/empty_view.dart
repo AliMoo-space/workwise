@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
-import 'package:workwise/generated/app_localizations.dart';
 
 class EmptyView extends StatelessWidget {
   const EmptyView({

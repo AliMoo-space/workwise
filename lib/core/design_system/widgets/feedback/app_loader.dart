@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
-
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 

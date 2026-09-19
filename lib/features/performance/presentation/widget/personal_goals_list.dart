@@ -9,7 +9,7 @@ class PersonalGoalsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context)!;
+    final localization = AppLocalizations.of(context);
 
     return ListView.builder(
       shrinkWrap: true,
