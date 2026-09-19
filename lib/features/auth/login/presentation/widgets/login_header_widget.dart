@@ -14,7 +14,6 @@ class LoginHeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // الجزء العلوي الذي يحتوي على اللوجو وزر تغيير اللغة بخلفية شفافة
         SizedBox(
           width: double.infinity,
           child: Stack(
@@ -34,7 +33,7 @@ class LoginHeaderWidget extends StatelessWidget {
                 child: Theme(
                   data: Theme.of(context).copyWith(
                     iconTheme: IconThemeData(
-                      color: Theme.of(context).colorScheme.onPrimary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                   ),
                   child: const LanguageSelector(),
@@ -44,10 +43,9 @@ class LoginHeaderWidget extends StatelessWidget {
           ),
         ),
 
-        // الجزء السفلي الذي يحتوي على نصوص الترحيب
         Container(
           width: double.infinity,
-          color: Theme.of(context).colorScheme.onSurface,
+          color: Theme.of(context).colorScheme.onPrimary,
           padding: const EdgeInsets.symmetric(
             horizontal: AppSpacing.space20,
             vertical: AppSpacing.space16,
@@ -58,14 +56,14 @@ class LoginHeaderWidget extends StatelessWidget {
               AppText(
                 context.l10n.welcomeBack,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
               ),
               const Gap(AppSpacing.space4),
               AppText(
                 context.l10n.signInWithCorporateCredentials,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
               ),
             ],

@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
+import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/features/auth/fingerprint/presentation/logic/finger_print_cubit.dart';
 import 'package:workwise/features/auth/fingerprint/presentation/logic/finger_print_state.dart';
-import 'package:workwise/generated/app_localizations.dart';
 
 class FingerPrintWidget extends StatelessWidget {
   const FingerPrintWidget({super.key});
@@ -14,7 +16,6 @@ class FingerPrintWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<FingerprintCubit>();
-    final localization = AppLocalizations.of(context);
 
     return BlocBuilder<FingerprintCubit, FingerprintState>(
       builder: (context, state) {
@@ -28,9 +29,10 @@ class FingerPrintWidget extends StatelessWidget {
           borderColor = Theme.of(context).colorScheme.error;
           iconColor = Theme.of(context).colorScheme.error;
         }
+
         return Column(
           children: [
-            Gap(30.h),
+            const Gap(AppSpacing.space32),
             GestureDetector(
               onTap: () => cubit.authenticateWithBiometrics(),
               child: Container(
@@ -50,27 +52,25 @@ class FingerPrintWidget extends StatelessWidget {
                 ),
               ),
             ),
-
-            Gap(24.h),
-
-            Text(
-              localization.tapToScanFingerprintFaceID,
+            const Gap(AppSpacing.space24),
+            AppText(
+              context.l10n.tapToScanFingerprintFaceID,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
-                fontWeight: FontWeight.w500,
-              ),
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    fontWeight: FontWeight.w500,
+                  ),
             ),
-            Gap(40.h),
+            const Gap(AppSpacing.space40),
             GestureDetector(
               onTap: () {
                 context.go(AppRoutes.loginScreen);
               },
-              child: Text(
-                localization.useEmailAndPasswordInstead,
+              child: AppText(
+                context.l10n.useEmailAndPasswordInstead,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.secondary,
-                  fontWeight: FontWeight.w600,
-                ),
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.w600,
+                    ),
               ),
             ),
           ],

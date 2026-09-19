@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/features/auth/fingerprint/presentation/logic/finger_print_cubit.dart';
 import 'package:workwise/features/auth/fingerprint/presentation/logic/finger_print_state.dart';
 import 'package:workwise/features/auth/fingerprint/presentation/widgets/finger_print_header_widget.dart';
 import 'package:workwise/features/auth/fingerprint/presentation/widgets/finger_print_widget.dart';
 import 'package:workwise/features/auth/login/presentation/widgets/login_warning_banner.dart';
-import 'package:workwise/generated/app_localizations.dart';
 
 class FingerPrintScreen extends StatelessWidget {
   final bool isSessionExpired;
@@ -18,16 +18,15 @@ class FingerPrintScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context);
     return BlocProvider(
       create: (context) => FingerprintCubit()..authenticateWithBiometrics(),
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.onSurface,
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
         body: SafeArea(
           child: BlocConsumer<FingerprintCubit, FingerprintState>(
             listener: (context, state) {
               if (state is FingerprintSuccessState) {
-                context.go(AppRoutes.homeScreen);
+                context.go(AppRoutes.mainScreen);
               }
             },
             builder: (context, state) {
@@ -35,31 +34,34 @@ class FingerPrintScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Gap(12.h),
+                    const Gap(AppSpacing.space12),
                     const FingerprintHeaderWidget(),
-                    Gap(20.h),
+                    const Gap(AppSpacing.space20),
                     
                     if (isSessionExpired) ...[
-                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.space20,
+                        ),
                         child: LoginWarningBanner(
-                          message: localization.sessionExpiredWarning,
+                          message: context.l10n.sessionExpiredWarning,
                           isSessionExpired: true,
                         ),
                       ),
-                      Gap(16.h),
+                      const Gap(AppSpacing.space16),
                     ] else if (state is FingerprintErrorState) ...[
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.space20,
+                        ),
                         child: LoginWarningBanner(
                           message: state.message,
                           isSessionExpired: false,
                         ),
                       ),
-                      Gap(16.h),
+                      const Gap(AppSpacing.space16),
                     ],
 
-                    // مكون البصمة والزر السفلي
                     const FingerPrintWidget(),
                   ],
                 ),

@@ -925,6 +925,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Development areas'**
   String get developmentAreas;
+
+  /// No description provided for @preferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get preferences;
+
+  /// No description provided for @biometricLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Biometric login'**
+  String get biometricLogin;
+
+  /// No description provided for @fingerprintFaceId.
+  ///
+  /// In en, this message translates to:
+  /// **'Fingerprint / Face ID'**
+  String get fingerprintFaceId;
+
+  /// No description provided for @pushNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Push notifications'**
+  String get pushNotifications;
+
+  /// No description provided for @tasksApprovalsReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks, approvals, reminders'**
+  String get tasksApprovalsReminders;
+
+  /// No description provided for @appDisplayLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'App display language'**
+  String get appDisplayLanguage;
+
+  /// No description provided for @logoutConfirmationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to log out?'**
+  String get logoutConfirmationMessage;
 }
 
 class _AppLocalizationsDelegate

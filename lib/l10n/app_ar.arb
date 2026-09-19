@@ -243,5 +243,12 @@
   "attendanceDate3": "الخميس، 05 يونيو",
   "attendanceDetails3": "08:52 ص - 05:28 م  -  8س 36د",
   "orders": "الطلبات",
-  "profile": "الملف الشخصي"
+  "profile": "الملف الشخصي",
+  "preferences": "التفضيلات",
+  "biometricLogin": "تسجيل الدخول بالبصمة",
+  "fingerprintFaceId": "بصمة الإصبع / الوجه",
+  "pushNotifications": "الإشعارات اللحظية",
+  "tasksApprovalsReminders": "المهام، الموافقات، التذكيرات",
+  "appDisplayLanguage": "لغة عرض التطبيق",
+  "logoutConfirmationMessage": "هل أنت ألكيد من أنك تريد تسجيل الخروج؟"
 }

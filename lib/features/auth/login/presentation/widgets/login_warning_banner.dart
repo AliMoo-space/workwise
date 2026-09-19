@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/spacing/app_radius.dart';
@@ -38,14 +37,14 @@ class LoginWarningBanner extends StatelessWidget {
       borderRadius: AppRadius.radius12,
       border: Border.all(color: borderColor, width: 1.w),
       padding:  EdgeInsets.symmetric(
-        horizontal: AppSpacing.space12,
+        horizontal: AppSpacing.space16,
         vertical: AppSpacing.space12,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(Icons.warning_amber_rounded, color: iconColor, size: 20.sp),
-           Gap(AppSpacing.space12),
+          Gap(AppSpacing.space12),
           Expanded(
             child: AppText(
               message,

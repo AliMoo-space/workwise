@@ -8,8 +8,8 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
-import 'package:workwise/features/auth/login/logic/login_cubit.dart';
-import 'package:workwise/features/auth/login/logic/login_state.dart';
+import 'package:workwise/features/auth/login/presentation/logic/login_cubit.dart';
+import 'package:workwise/features/auth/login/presentation/logic/login_state.dart';
 import 'package:workwise/features/auth/login/presentation/widgets/login_form.dart';
 import 'package:workwise/features/auth/login/presentation/widgets/login_header_widget.dart';
 import 'package:workwise/features/auth/login/presentation/widgets/login_warning_banner.dart';
@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: Scaffold(
-        backgroundColor: Theme.of(context).colorScheme.onSurface,
+        backgroundColor: Theme.of(context).colorScheme.onPrimary,
         body: SafeArea(
           child: BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) {

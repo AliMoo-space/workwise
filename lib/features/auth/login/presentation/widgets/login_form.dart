@@ -10,8 +10,8 @@ import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/utils/app_validator.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/widgets/reset_password_bottom_sheet.dart';
-import 'package:workwise/features/auth/login/logic/login_cubit.dart';
-import 'package:workwise/features/auth/login/logic/login_state.dart';
+import 'package:workwise/features/auth/login/presentation/logic/login_cubit.dart';
+import 'package:workwise/features/auth/login/presentation/logic/login_state.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -37,7 +37,7 @@ class LoginForm extends StatelessWidget {
               type: AppTextFieldType.email,
               prefixIcon: Icon(
                 Icons.mail_outline_rounded,
-                color: Theme.of(context).colorScheme.onSecondary,
+                color: Theme.of(context).colorScheme.outline,
                 size: 20.sp,
               ),
               validator: AppValidators.email(
@@ -54,7 +54,7 @@ class LoginForm extends StatelessWidget {
               type: AppTextFieldType.password,
               prefixIcon: Icon(
                 Icons.lock_outline_rounded,
-                color: Theme.of(context).colorScheme.onSecondary,
+                color: Theme.of(context).colorScheme.outline,
                 size: 20.sp,
               ),
               validator: AppValidators.password(
@@ -96,7 +96,7 @@ class LoginForm extends StatelessWidget {
                     AppText(
                       context.l10n.keepMeSignedIn,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: Theme.of(context).colorScheme.onPrimary,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                     ),
                   ],
