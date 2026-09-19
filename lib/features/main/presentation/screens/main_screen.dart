@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workwise/features/AIAssistant/presentation/screens/AI_assistant.dart';
-import 'package:workwise/features/attendance/presentation/screens/attendance_screen.dart';
 import 'package:workwise/features/home/presentation/screens/home_screen.dart';
 import 'package:workwise/features/leave/presentation/screens/leave_screen.dart';
 import 'package:workwise/features/main/presentation/widgets/main_bottom_navigation_bar.dart';
-import 'package:workwise/features/profile/presentation/screen/profile_page.dart';
 import 'package:workwise/features/tasks/presentation/screens/tasks_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -29,7 +27,6 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       body: screens[currentIndex],
-
       bottomNavigationBar: SafeArea(
         top: false,
         child: MainBottomNavigationBar(

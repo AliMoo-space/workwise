@@ -142,6 +142,8 @@ final class AppTheme {
         ),
       ),
 
+      // تم إضافة focusedErrorBorder
+      // عشان شكل الـTextField يفضل واضح لو عليه Error وهو Focused.
       cardTheme: CardThemeData(
         elevation: 0,
         color: AppColors.surface,

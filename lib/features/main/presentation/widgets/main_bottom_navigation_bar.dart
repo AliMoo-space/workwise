@@ -32,11 +32,7 @@ class MainBottomNavigationBar extends StatelessWidget {
           ),
         ],
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(28.r),
-          topRight: Radius.circular(28.r),
-        ),
+     
         child: Center(
           child: SizedBox(
             width: 330.w,
@@ -75,7 +71,6 @@ class MainBottomNavigationBar extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 }

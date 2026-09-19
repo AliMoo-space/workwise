@@ -1,6 +1,5 @@
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:workwise/core/localization/local_cubit.dart';
 
 import 'package:workwise/features/leave/data/datasourse/leave_remote_data_source.dart';
@@ -26,7 +25,6 @@ Future<void> init() async {
   // =============================================
 
   final preferences = await SharedPreferences.getInstance();
-
   sl.registerSingleton<SharedPreferences>(preferences);
 
   // =============================================

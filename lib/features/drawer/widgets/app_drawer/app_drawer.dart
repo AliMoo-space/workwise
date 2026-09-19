@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
-import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/features/drawer/widgets/app_drawer/drawer_footer.dart';
 import 'package:workwise/features/drawer/widgets/app_drawer/drawer_header.dart'
     as custom;

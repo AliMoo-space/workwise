@@ -247,7 +247,7 @@ class LeaveHistoryList extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(height: 10.h, width: 10.w),
+                        SizedBox(height: 10.h, width: 10.w),
                         Gap(AppSpacing.space8.w),
                         AppText(
                           context.l10n.approved,

@@ -6,8 +6,11 @@ class AppRoutes {
   static const String homeScreen = '/homeScreen';
   static const String mainScreen = '/mainScreen';
   static const String notesScreen = '/notesScreen';
+  static const String otpVerificationScreen = '/otp-verification';
+  static const String createNewPasswordScreen = '/creteNewPasswordScreen';
   static const String tasksScreen = '/tasksScreen';
   static const String aiAssistant = '/aiAssistant';
   static const String performanceScreen = '/performanceScreen';
   static const String attendanceScreen = '/attendanceScreen';
+  static const String settingsScreen = '/setting';
 }

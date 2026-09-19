@@ -8,7 +8,6 @@ import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
-import 'package:workwise/features/attendance/presentation/screens/attendance_screen.dart';
 
 class HomeStatsGrid extends StatelessWidget {
   const HomeStatsGrid({super.key});

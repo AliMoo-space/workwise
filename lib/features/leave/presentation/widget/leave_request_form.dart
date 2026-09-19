@@ -49,7 +49,7 @@ class _LeaveRequestFormState extends State<LeaveRequestForm> {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      height: 550.h,
+      height: 560.h,
       width: double.infinity,
       padding: EdgeInsets.all(15.r),
       backgroundColor: Theme.of(context).colorScheme.onError,
