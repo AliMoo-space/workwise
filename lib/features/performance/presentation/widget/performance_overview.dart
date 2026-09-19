@@ -25,10 +25,15 @@ class PerformanceOverview extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText("92%", style: Theme.of(context).textTheme.headlineMedium),
+              AppText(
+                "92%",
+                style: Theme.of(context).textTheme.headlineMedium,
+                textAlign: TextAlign.start,
+              ),
               AppText(
                 context.l10n.tasks,
                 style: Theme.of(context).textTheme.bodySmall,
+                textAlign: TextAlign.start,
               ),
             ],
           ),
@@ -44,10 +49,15 @@ class PerformanceOverview extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText("88%", style: Theme.of(context).textTheme.headlineMedium),
+              AppText(
+                "88%",
+                style: Theme.of(context).textTheme.headlineMedium,
+                textAlign: TextAlign.start,
+              ),
               AppText(
                 context.l10n.quality,
                 style: Theme.of(context).textTheme.bodySmall,
+                textAlign: TextAlign.start,
               ),
             ],
           ),
@@ -63,10 +73,15 @@ class PerformanceOverview extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText("95%", style: Theme.of(context).textTheme.headlineMedium),
+              AppText(
+                "95%",
+                style: Theme.of(context).textTheme.headlineMedium,
+                textAlign: TextAlign.start,
+              ),
               AppText(
                 context.l10n.attendance,
                 style: Theme.of(context).textTheme.bodySmall,
+                textAlign: TextAlign.start,
               ),
             ],
           ),

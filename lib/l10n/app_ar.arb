@@ -171,5 +171,10 @@
   "sendResetLink": "إرسال رابط الضبط",
   "enterWorkEmailMessage": "يرجى إدخال بريد العمل الإلكتروني",
   "invalidEmailFormatMessage": "صيغة بريد العمل غير صحيحة",
-  "enterPasswordMessage": "يرجى إدخال كلمة المرور"
+  "enterPasswordMessage": "يرجى إدخال كلمة المرور",
+  "dateFormat": "يوم / شهر / سنة",
+  "strengths": "نقاط القوة",
+  "askAboutPolicyOrBalance": "اسأل عن سياسة أو رصيد...",
+  "performance": "الأداء",
+  "attendance":"الحضور"
 }

@@ -23,17 +23,13 @@ class CareerCoach extends StatelessWidget {
 
           const StrengthCard(),
 
-          Gap(AppSpacing.space8),
-
-          Gap(AppSpacing.space8),
+          Gap(AppSpacing.space16),
 
           const DevelopmentAreasTitle(),
 
           Gap(AppSpacing.space16),
 
           const DevelopmentAreaCard(),
-
-          Gap(AppSpacing.space16),
 
           Gap(AppSpacing.space16),
 

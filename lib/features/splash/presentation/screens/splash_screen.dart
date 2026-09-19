@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart'; // 1. إضافة الـ Import
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -15,11 +14,7 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) {
-        FlutterNativeSplash.remove();
-        return SplashCubit()..checkAuthSession();
-      },
-
+      create: (_) => SplashCubit()..checkAuthSession(),
       child: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
           if (state is UnauthenticatedState) {
@@ -35,24 +30,25 @@ class SplashScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Spacer(),
+
                 Image.asset(
                   'assets/images/logo2.jpeg',
                   width: 100.w,
                   height: 100.h,
                   fit: BoxFit.contain,
                 ),
+
                 Gap(32.h),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AppLoader(
                       size: 16.w,
                       strokeWidth: 2.w,
-                      // color: AppColors.textSecondary,
                       color: Theme.of(context).colorScheme.onSecondary,
                     ),
                     Gap(10.w),
-
                     Text(
                       'loading...',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -61,6 +57,7 @@ class SplashScreen extends StatelessWidget {
                     ),
                   ],
                 ),
+
                 const Spacer(),
               ],
             ),

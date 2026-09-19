@@ -17,6 +17,7 @@ class MainBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 60.h,
       decoration: BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.only(
@@ -36,43 +37,43 @@ class MainBottomNavigationBar extends StatelessWidget {
           topLeft: Radius.circular(28.r),
           topRight: Radius.circular(28.r),
         ),
-        child: BottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: onTap,
-
-          backgroundColor: AppColors.primary,
-
-          type: BottomNavigationBarType.fixed,
-
-          elevation: 0,
-
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white.withValues(alpha: 0.55),
-
-          selectedFontSize: 10.dg,
-          unselectedFontSize: 9.dg,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home_rounded),
-              label: context.l10n.homeScreen,
+        child: Center(
+          child: SizedBox(
+            width: 330.w,
+            child: BottomNavigationBar(
+              currentIndex: currentIndex,
+              onTap: onTap,
+              backgroundColor: AppColors.primary,
+              type: BottomNavigationBarType.fixed,
+              elevation: 0,
+              selectedItemColor: Colors.white,
+              unselectedItemColor: Colors.white.withValues(alpha: 0.55),
+              selectedFontSize: 10.dg,
+              unselectedFontSize: 9.dg,
+              items: [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home_outlined),
+                  activeIcon: Icon(Icons.home_rounded),
+                  label: context.l10n.homeScreen,
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.task_alt_rounded),
+                  activeIcon: Icon(Icons.task_alt_sharp),
+                  label: context.l10n.tasks,
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.beach_access_outlined),
+                  activeIcon: Icon(Icons.beach_access_rounded),
+                  label: context.l10n.leave,
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.auto_awesome),
+                  activeIcon: Icon(Icons.auto_awesome),
+                  label: context.l10n.aiAssistant,
+                ),
+              ],
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.location_on_outlined),
-              activeIcon: Icon(Icons.location_on_sharp),
-              label: context.l10n.attendance,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.task_alt_rounded),
-              activeIcon: Icon(Icons.task_alt_sharp),
-              label: context.l10n.tasks,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_outline),
-              activeIcon: Icon(Icons.person_rounded),
-              label: context.l10n.profile,
-            ),
-          ],
+          ),
         ),
       ),
     );

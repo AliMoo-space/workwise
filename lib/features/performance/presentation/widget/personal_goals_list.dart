@@ -19,90 +19,99 @@ class PersonalGoalsList extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       itemCount: 3,
       itemBuilder: (context, index) {
-        return AppCard(
-          height: 130.h,
-          width: double.infinity.w,
-          padding: EdgeInsets.all(AppSpacing.space8.r),
-          backgroundColor: Theme.of(context).colorScheme.onError,
-          borderRadius: AppRadius.radius20.r,
-          border: Border.all(
-            color: Theme.of(context).colorScheme.outline,
-            width: .7.w,
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: index == 2 ? 0 : AppSpacing.space12.h,
           ),
-          boxShadow: const [],
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AppText(
-                        "Complete Advanced\nSQL certification",
-                        style: Theme.of(context).textTheme.titleSmall,
-                        maxLines: 2,
-                      ),
-                      AppText(
-                        "${context.l10n.target} Aug 2026",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                      ),
-                    ],
-                  ),
-
-                  const Spacer(),
-
-                  Container(
-                    width: 100.w,
-                    height: 35.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppRadius.radius32.r),
-                      color: Theme.of(context).colorScheme.outline,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+          child: AppCard(
+            height: 120.h,
+            width: double.infinity.w,
+            padding: EdgeInsets.all(AppSpacing.space8.r),
+            backgroundColor: Theme.of(context).colorScheme.onError,
+            borderRadius: AppRadius.radius20.r,
+            border: Border.all(
+              color: Theme.of(context).colorScheme.outlineVariant,
+              width: .7.w,
+            ),
+            boxShadow: const [],
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          height: 8.h,
-                          width: 8.w,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).colorScheme.primary,
-                            borderRadius: BorderRadius.circular(
-                              AppRadius.radius16.r,
-                            ),
-                          ),
-                        ),
-
-                        Gap(AppSpacing.space8.w),
-
                         AppText(
-                          context.l10n.onTrack,
+                          "Complete Advanced\nSQL certification",
+                          style: Theme.of(context).textTheme.titleSmall,
+                          maxLines: 2,
+                          textAlign: TextAlign.start,
+                        ),
+                        AppText(
+                          "${context.l10n.target} Aug 2026",
                           style: Theme.of(context).textTheme.bodyMedium,
+                          textAlign: TextAlign.start,
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-
-              Gap(AppSpacing.space16.h),
-
-              Row(
-                children: [
-                  Expanded(
-                    child: LinearProgressIndicator(
-                      value: 13 / 25,
-                      backgroundColor: AppColors.border,
-                      minHeight: 8.h,
-                      borderRadius: BorderRadius.circular(AppRadius.radius8.r),
+                    const Spacer(),
+                    AppCard(
+                      width: 100.w,
+                      height: 35.h,
+                      padding: EdgeInsets.zero,
+                      backgroundColor: Theme.of(
+                        context,
+                      ).colorScheme.outlineVariant,
+                      borderRadius: AppRadius.radius32.r,
+                      border: Border.all(color: Colors.transparent, width: 0),
+                      boxShadow: const [],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 8.h,
+                            width: 8.w,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primary,
+                              borderRadius: BorderRadius.circular(
+                                AppRadius.radius16.r,
+                              ),
+                            ),
+                          ),
+                          Gap(AppSpacing.space8.w),
+                          AppText(
+                            context.l10n.onTrack,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            textAlign: TextAlign.start,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-
-                  Gap(AppSpacing.space8.w),
-
-                  AppText("50%", style: Theme.of(context).textTheme.titleSmall),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                Gap(AppSpacing.space16.h),
+                Row(
+                  children: [
+                    Expanded(
+                      child: LinearProgressIndicator(
+                        value: 13 / 25,
+                        backgroundColor: AppColors.border,
+                        minHeight: 8.h,
+                        borderRadius: BorderRadius.circular(
+                          AppRadius.radius8.r,
+                        ),
+                      ),
+                    ),
+                    Gap(AppSpacing.space8.w),
+                    AppText(
+                      "50%",
+                      style: Theme.of(context).textTheme.titleSmall,
+                      textAlign: TextAlign.start,
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         );
       },

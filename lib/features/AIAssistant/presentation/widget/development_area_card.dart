@@ -18,7 +18,7 @@ class DevelopmentAreaCard extends StatelessWidget {
       padding: EdgeInsets.all(AppSpacing.space16.r),
       backgroundColor: Theme.of(context).colorScheme.onError,
       borderRadius: AppRadius.radius32.r,
-      border: Border.all(color: Theme.of(context).colorScheme.outline),
+      border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       boxShadow: const [],
       child: Column(
         children: [
@@ -29,7 +29,7 @@ class DevelopmentAreaCard extends StatelessWidget {
                 width: 35.w,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(AppRadius.radiusFull.r),
-                  color: Theme.of(context).colorScheme.surface,
+                  color: Theme.of(context).colorScheme.outlineVariant,
                 ),
                 child: const Center(child: Icon(Icons.trending_up)),
               ),

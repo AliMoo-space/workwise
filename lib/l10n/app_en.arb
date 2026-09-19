@@ -175,5 +175,10 @@
   "sendResetLink": "Send Reset Link",
   "enterWorkEmailMessage": "Please enter your work email",
   "invalidEmailFormatMessage": "Invalid work email format",
-  "enterPasswordMessage": "Please enter your password"
+  "enterPasswordMessage": "Please enter your password",
+  "dateFormat": "DD / MM / YYYY",
+  "strengths": "Strengths",
+  "askAboutPolicyOrBalance": "Ask about a policy or balance...",
+  "performance": "Performance",
+  "attendance":"Attendance"
 }

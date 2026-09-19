@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-
 import 'package:workwise/core/design_system/theme/app_theme.dart';
 import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/routing/router_generation_config.dart';
 import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/generated/app_localizations.dart';
 
-void main() async {
+Future<void> main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await init();
-
   runApp(BlocProvider(create: (_) => sl<LocaleCubit>(), child: const MyApp()));
+  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatelessWidget {
@@ -39,7 +38,9 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return GestureDetector(
           behavior: HitTestBehavior.translucent,
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: SafeArea(child: child!),
         );
       },

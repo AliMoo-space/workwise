@@ -16,20 +16,37 @@ class AttendanceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 60,
+        title: Column(
+          children: [
+            AppText(
+              context.l10n.attendance,
+              style: AppTextStyles.headlineLarge,
+            ),
+            const Gap(AppSpacing.space4),
+            // AppText(
+            //   context.l10n.attendanceDescription,
+            //   style: AppTextStyles.bodyMedium,
+            //   color: AppColors.textSecondary,
+            // ),
+          ],
+        ),
+      ),
       body: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: AppSpacing.space16.w,
           vertical: AppSpacing.space24.h,
         ),
         children: [
-          AppText(context.l10n.attendance, style: AppTextStyles.headlineLarge),
-          const Gap(AppSpacing.space4),
-          AppText(
-            context.l10n.attendanceDescription,
-            style: AppTextStyles.bodyMedium,
-            color: AppColors.textSecondary,
-          ),
-          const Gap(AppSpacing.space20),
+          // AppText(context.l10n.attendance, style: AppTextStyles.headlineLarge),
+          // const Gap(AppSpacing.space4),
+          // AppText(
+          //   context.l10n.attendanceDescription,
+          //   style: AppTextStyles.bodyMedium,
+          //   color: AppColors.textSecondary,
+          // ),
+          // const Gap(AppSpacing.space20),
           const LocationStatusCard(),
           const Gap(AppSpacing.space20),
           AppButton(

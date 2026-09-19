@@ -430,4 +430,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get enterPasswordMessage => 'Please enter your password';
+
+  @override
+  String get dateFormat => 'DD / MM / YYYY';
+
+  @override
+  String get strengths => 'Strengths';
+
+  @override
+  String get askAboutPolicyOrBalance => 'Ask about a policy or balance...';
+
+  @override
+  String get performance => 'Performance';
 }

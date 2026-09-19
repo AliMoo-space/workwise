@@ -1,24 +1,36 @@
 import 'package:go_router/go_router.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/core/routing/page_transition.dart';
+import 'package:workwise/features/AIAssistant/presentation/screens/AI_assistant.dart';
+import 'package:workwise/features/attendance/presentation/screens/attendance_screen.dart';
 import 'package:workwise/features/auth/fingerprint/presentation/screens/finger_print_screen.dart';
+import 'package:workwise/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:workwise/features/home/presentation/screens/home_screen.dart';
 import 'package:workwise/features/main/presentation/screens/main_screen.dart';
+import 'package:workwise/features/performance/presentation/screens/performance_screen.dart';
+import 'package:workwise/features/splash/presentation/screens/splash_screen.dart';
 import 'package:workwise/features/tasks/presentation/screens/tasks_screen.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
     initialLocation: AppRoutes.mainScreen,
     routes: [
-      // GoRoute(
-      //   name: AppRoutes.signInScreen,
-      //   path: AppRoutes.signInScreen,
-      //   pageBuilder: (context, state) =>
-      //       slideTransitionPage(
-      //         state: state,
-      //         child: const SignInScreen(),
-      //       ),
-      // ),
+      GoRoute(
+        name: AppRoutes.splashScreen,
+        path: AppRoutes.splashScreen,
+        pageBuilder: (context, state) {
+          return slideTransitionPage(state: state, child: const SplashScreen());
+        },
+      ),
+
+      GoRoute(
+        name: AppRoutes.loginScreen,
+        path: AppRoutes.loginScreen,
+        pageBuilder: (context, state) {
+          return slideTransitionPage(state: state, child: const LoginScreen());
+        },
+      ),
+
       GoRoute(
         name: AppRoutes.mainScreen,
         path: AppRoutes.mainScreen,
@@ -36,17 +48,42 @@ class RouterGenerationConfig {
       ),
 
       GoRoute(
-        name: AppRoutes.tasksScreen,
-        path: AppRoutes.tasksScreen,
+        name: AppRoutes.attendanceScreen,
+        path: AppRoutes.attendanceScreen,
         pageBuilder: (context, state) {
-          return slideTransitionPage(state: state, child: const TasksScreen());
+          return slideTransitionPage(
+            state: state,
+            child: const AttendanceScreen(),
+          );
         },
       ),
       GoRoute(
         name: AppRoutes.fingerprintScreen,
         path: AppRoutes.fingerprintScreen,
-        pageBuilder: (context, state) =>
-            slideTransitionPage(state: state, child: const FingerPrintScreen()),
+        pageBuilder: (context, state) {
+          return slideTransitionPage(
+            state: state,
+            child: const FingerPrintScreen(),
+          );
+        },
+      ),
+
+      // GoRoute(
+      //   name: AppRoutes.aiAssistant,
+      //   path: AppRoutes.aiAssistant,
+      //   pageBuilder: (context, state) {
+      //     return slideTransitionPage(state: state, child: const AiAssistant());
+      //   },
+      // ),
+      GoRoute(
+        name: AppRoutes.performanceScreen,
+        path: AppRoutes.performanceScreen,
+        pageBuilder: (context, state) {
+          return slideTransitionPage(
+            state: state,
+            child: const PerformanceScreen(),
+          );
+        },
       ),
     ],
   );

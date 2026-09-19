@@ -17,7 +17,7 @@ class MonthlyPerformance extends StatelessWidget {
       height: 180.h,
       width: double.infinity.w,
       padding: EdgeInsets.symmetric(horizontal: 25.w),
-      backgroundColor: Theme.of(context).colorScheme.outline,
+      backgroundColor: Theme.of(context).colorScheme.outlineVariant,
       borderRadius: AppRadius.radius20.r,
       border: Border.all(color: Colors.transparent, width: 0),
       boxShadow: const [],
@@ -32,6 +32,7 @@ class MonthlyPerformance extends StatelessWidget {
               AppText(
                 context.l10n.thisMonth,
                 style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.start,
               ),
 
               Gap(AppSpacing.space4.h),
@@ -39,6 +40,7 @@ class MonthlyPerformance extends StatelessWidget {
               AppText(
                 context.l10n.yourPerformance,
                 style: Theme.of(context).textTheme.titleMedium,
+                textAlign: TextAlign.start,
               ),
 
               Gap(AppSpacing.space4.h),
@@ -46,6 +48,7 @@ class MonthlyPerformance extends StatelessWidget {
               AppText(
                 "5% ${context.l10n.fromLastMonth}",
                 style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.start,
               ),
             ],
           ),

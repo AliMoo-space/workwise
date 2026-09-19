@@ -925,6 +925,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please enter your password'**
   String get enterPasswordMessage;
+
+  /// No description provided for @dateFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'DD / MM / YYYY'**
+  String get dateFormat;
+
+  /// No description provided for @strengths.
+  ///
+  /// In en, this message translates to:
+  /// **'Strengths'**
+  String get strengths;
+
+  /// No description provided for @askAboutPolicyOrBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about a policy or balance...'**
+  String get askAboutPolicyOrBalance;
+
+  /// No description provided for @performance.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance'**
+  String get performance;
 }
 
 class _AppLocalizationsDelegate

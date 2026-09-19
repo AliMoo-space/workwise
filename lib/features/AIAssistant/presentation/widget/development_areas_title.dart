@@ -9,7 +9,7 @@ class DevelopmentAreasTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: Alignment.topLeft,
+      alignment: AlignmentDirectional.topStart,
       child: AppText(
         context.l10n.developmentAreas,
         style: Theme.of(context).textTheme.titleMedium,

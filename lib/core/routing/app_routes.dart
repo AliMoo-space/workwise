@@ -8,4 +8,6 @@ class AppRoutes {
   static const String notesScreen = '/notesScreen';
   static const String tasksScreen = '/tasksScreen';
   static const String aiAssistant = '/aiAssistant';
+  static const String performanceScreen = '/performanceScreen';
+  static const String attendanceScreen = '/attendanceScreen';
 }

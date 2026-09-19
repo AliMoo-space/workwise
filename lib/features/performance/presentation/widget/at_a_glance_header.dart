@@ -8,16 +8,12 @@ class AtAGlanceHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Align(
-          alignment: Alignment.topLeft,
-          child: AppText(
-            context.l10n.atAGlance,
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-        ),
-      ],
+    return Align(
+      alignment: AlignmentDirectional.topStart,
+      child: AppText(
+        context.l10n.atAGlance,
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
     );
   }
 }

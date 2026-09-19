@@ -431,4 +431,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get enterPasswordMessage => 'يرجى إدخال كلمة المرور';
+
+  @override
+  String get dateFormat => 'يوم / شهر / سنة';
+
+  @override
+  String get strengths => 'نقاط القوة';
+
+  @override
+  String get askAboutPolicyOrBalance => 'اسأل عن سياسة أو رصيد...';
+
+  @override
+  String get performance => 'الأداء';
 }

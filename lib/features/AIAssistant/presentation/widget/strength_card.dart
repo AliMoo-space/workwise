@@ -18,7 +18,7 @@ class StrengthCard extends StatelessWidget {
       padding: EdgeInsets.all(AppSpacing.space16.r),
       backgroundColor: Theme.of(context).colorScheme.onError,
       borderRadius: AppRadius.radius16.r,
-      border: Border.all(color: Theme.of(context).colorScheme.outline),
+      border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
       boxShadow: const [],
       child: Column(
         children: [
@@ -27,6 +27,7 @@ class StrengthCard extends StatelessWidget {
               AppText(
                 "Data storytelling",
                 style: Theme.of(context).textTheme.titleSmall,
+                textAlign: TextAlign.start,
               ),
 
               const Spacer(),
@@ -42,6 +43,7 @@ class StrengthCard extends StatelessWidget {
                   child: AppText(
                     "Strength",
                     color: Theme.of(context).colorScheme.onError,
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
@@ -54,12 +56,13 @@ class StrengthCard extends StatelessWidget {
             height: 90.h,
             width: double.infinity.w,
             padding: EdgeInsets.all(AppSpacing.space16.r),
-            backgroundColor: Theme.of(context).colorScheme.surface,
+            backgroundColor: Theme.of(context).colorScheme.outlineVariant,
             borderRadius: AppRadius.radius16.r,
             border: Border.all(color: Colors.transparent, width: 0),
             boxShadow: const [],
             child: const AppText(
               "“The Q1 report translated complex churn data into a plan leadership acted on the same week.” — Manager review",
+              textAlign: TextAlign.start,
             ),
           ),
         ],
