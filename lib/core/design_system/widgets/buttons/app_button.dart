@@ -6,13 +6,7 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 
-enum AppButtonVariant {
-  primary,
-  secondary,
-  outlined,
-  text,
-  danger,
-}
+enum AppButtonVariant { primary, secondary, outlined, text, danger }
 
 class AppButton extends StatelessWidget {
   const AppButton({
@@ -27,6 +21,7 @@ class AppButton extends StatelessWidget {
     this.width,
     this.height = 56,
     this.backgroundColor,
+    this.textStyle,
   });
 
   final Color? backgroundColor;
@@ -39,6 +34,7 @@ class AppButton extends StatelessWidget {
   final Widget? trailing;
   final double? width;
   final double height;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +65,7 @@ class AppButton extends StatelessWidget {
                   ],
                   AppText(
                     text,
-                    style: AppTextStyles.titleLarge.copyWith(
+                    style: (textStyle ?? AppTextStyles.titleLarge).copyWith(
                       color: style.foregroundColor?.resolve({}),
                     ),
                   ),
@@ -111,9 +107,7 @@ class AppButton extends StatelessWidget {
           backgroundColor: Colors.transparent,
           foregroundColor: AppColors.primary,
           elevation: 0,
-          side: const BorderSide(
-            color: AppColors.border,
-          ),
+          side: const BorderSide(color: AppColors.border),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.radius16),
           ),

@@ -14,46 +14,8 @@ class DrawerMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        DrawerSection(
-          children: [
-            DrawerMenuItem(
-              icon: Icons.home_sharp,
-              title: 'Home',
-              isSelected: currentRoute == AppRoutes.homeScreen,
-              onTap: () {
-                Navigator.of(context).pop();
-
-                if (currentRoute != AppRoutes.homeScreen) {
-                  context.go(AppRoutes.homeScreen);
-                }
-              },
-            ),
-
-            DrawerMenuItem(
-              icon: Icons.task_outlined,
-              title: 'Tasks',
-              isSelected: currentRoute == AppRoutes.tasksScreen,
-              onTap: () {
-                Navigator.of(context).pop();
-
-                if (currentRoute != AppRoutes.tasksScreen) {
-                  context.go(AppRoutes.tasksScreen);
-                }
-              },
-            ),
-
-            DrawerMenuItem(
-              icon: Icons.note_outlined,
-              title: 'Notes',
-              isSelected: currentRoute == AppRoutes.notesScreen,
-              onTap: () {
-                Navigator.of(context).pop();
-
-                if (currentRoute != AppRoutes.notesScreen) {
-                  context.go(AppRoutes.notesScreen);
-                }
-              },
-            ),
+        DrawerSection(children: [
+            
           ],
         ),
 
@@ -63,10 +25,10 @@ class DrawerMenu extends StatelessWidget {
             DrawerMenuItem(
               icon: Icons.person_outline,
               title: 'Profile',
-              isSelected: currentRoute == '/profile',
+              isSelected: currentRoute == AppRoutes.profilePage,
               onTap: () {
                 if (currentRoute != AppRoutes.profilePage) {
-                  context.go(AppRoutes.profilePage);
+                  context.push(AppRoutes.profilePage);
                 }
               },
             ),
@@ -81,30 +43,6 @@ class DrawerMenu extends StatelessWidget {
 
             if (currentRoute != '/settings') {
               context.go('/settings');
-            }
-          },
-        ),
-        DrawerMenuItem(
-          icon: Icons.language_outlined,
-          title: 'language',
-          isSelected: currentRoute == '/settings',
-          onTap: () {
-            Navigator.of(context).pop();
-
-            if (currentRoute != '/settings') {
-              context.go('/settings');
-            }
-          },
-        ),
-        DrawerMenuItem(
-          icon: Icons.help_outline,
-          title: 'Help & Support',
-          isSelected: currentRoute == '/help',
-          onTap: () {
-            Navigator.of(context).pop();
-
-            if (currentRoute != '/help') {
-              context.go('/help');
             }
           },
         ),

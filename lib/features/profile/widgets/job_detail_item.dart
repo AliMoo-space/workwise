@@ -94,6 +94,7 @@ class JobDetailItem extends StatelessWidget {
   Widget _buildContactButton(BuildContext context) {
     return AppButton(
       text: context.l10n.profileContact,
+      textStyle: AppTextStyles.labelSmall,
       // fontSize: 10.sp,
       onPressed: () {},
       variant: AppButtonVariant.secondary,

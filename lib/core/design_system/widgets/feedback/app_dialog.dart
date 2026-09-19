@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
-import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 
 final class AppDialog {
@@ -85,18 +84,10 @@ class _AppDialog extends StatelessWidget {
             child: AppText(cancelText!, color: AppColors.textSecondary),
           ),
 
-        AppButton(
-          text: confirmText,
-          variant: isDestructive
-              ? AppButtonVariant.danger
-              : AppButtonVariant.primary,
+        TextButton(
+          child: AppText(confirmText, color: AppColors.error),
           onPressed: () => Navigator.pop(context, true),
         ),
-        
-        // TextButton(
-        //   child: AppText(confirmText, color: AppColors.error),
-        //   onPressed: () => Navigator.pop(context, true),
-        // ),
       ],
     );
   }
