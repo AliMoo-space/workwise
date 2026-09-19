@@ -9,4 +9,5 @@ class AppRoutes {
   static const String otpVerificationScreen = '/otp-verification';
   static const String createNewPasswordScreen = '/create_new_password';
   static const String tasksScreen = '/tasksScreen';
+  static const String notificationsScreen = '/notificationsScreen';
 }

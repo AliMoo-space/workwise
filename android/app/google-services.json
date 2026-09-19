@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "398090348279",
+    "project_id": "workwise-notification",
+    "storage_bucket": "workwise-notification.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:398090348279:android:b14be8d72678450d3c15f2",
+        "android_client_info": {
+          "package_name": "com.example.workwise"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBvn3T8ndZcFosBLO9hu1C-7BOB-pdXAg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

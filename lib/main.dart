@@ -1,17 +1,26 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-
 import 'package:workwise/core/design_system/theme/app_theme.dart';
 import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/routing/router_generation_config.dart';
 import 'package:workwise/core/services/service_locator.dart';
+import 'package:workwise/features/notification/domain/usecases/initialize_notification.dart';
+import 'package:workwise/features/notification/domain/usecases/show_notification.dart';
+import 'package:workwise/firebase_options.dart';
 import 'package:workwise/generated/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await init();
+  await sl<InitializeNotification>()();
+  await sl<ShowNotification>()(
+  id: 1,
+  title: 'WorkWise',
+  body: 'Notification test',
+);
 
   runApp(BlocProvider(create: (_) => sl<LocaleCubit>(), child: const MyApp()));
 }
