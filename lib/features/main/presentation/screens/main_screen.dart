@@ -23,12 +23,11 @@ class _MainScreenState extends State<MainScreen> {
       const HomeScreen(),
       const AttendanceScreen(),
       const TasksScreen(),
-      const SettingsScreen(),
+      const ProfilePage(),
     ];
 
     return Scaffold(
       body: screens[currentIndex],
-
       bottomNavigationBar: SafeArea(
         top: false,
         child: MainBottomNavigationBar(
