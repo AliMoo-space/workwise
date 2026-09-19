@@ -23,16 +23,23 @@ class AppButton extends StatelessWidget {
     this.backgroundColor,
     this.textStyle,
   });
-
   final Color? backgroundColor;
   final String text;
+
   final VoidCallback? onPressed;
+
   final AppButtonVariant variant;
+
   final bool enabled;
+
   final bool isLoading;
+
   final Widget? leading;
+
   final Widget? trailing;
+
   final double? width;
+
   final double height;
   final TextStyle? textStyle;
 
@@ -47,7 +54,7 @@ class AppButton extends StatelessWidget {
         style: style,
         onPressed: enabled && !isLoading ? onPressed : null,
         child: isLoading
-            ? const SizedBox(
+            ? SizedBox(
                 width: 22,
                 height: 22,
                 child: CircularProgressIndicator(
@@ -59,20 +66,16 @@ class AppButton extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (leading != null) ...[
-                    leading!,
-                    const Gap(AppSpacing.space8),
-                  ],
+                  if (leading != null) ...[leading!, Gap(AppSpacing.space8)],
+
                   AppText(
                     text,
                     style: (textStyle ?? AppTextStyles.titleLarge).copyWith(
                       color: style.foregroundColor?.resolve({}),
                     ),
                   ),
-                  if (trailing != null) ...[
-                    const Gap(AppSpacing.space8),
-                    trailing!,
-                  ],
+
+                  if (trailing != null) ...[Gap(AppSpacing.space8), trailing!],
                 ],
               ),
       ),
@@ -84,8 +87,7 @@ class AppButton extends StatelessWidget {
       case AppButtonVariant.primary:
         return ElevatedButton.styleFrom(
           backgroundColor: backgroundColor ?? AppColors.primary,
-          // التغيير: استخدمنا اللون الموجود في AppColors بدل Colors.white.
-          foregroundColor: AppColors.onPrimary,
+          foregroundColor: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.radius16),
@@ -124,8 +126,7 @@ class AppButton extends StatelessWidget {
       case AppButtonVariant.danger:
         return ElevatedButton.styleFrom(
           backgroundColor: backgroundColor ?? AppColors.error,
-          // التغيير: استخدمنا onError من AppColors بدل اللون الثابت.
-          foregroundColor: AppColors.onError,
+          foregroundColor: Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.radius16),

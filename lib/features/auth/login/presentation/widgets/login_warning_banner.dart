@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
-// import 'package:workwise/core/design_system/colors/app_colors.dart';
+import 'package:workwise/core/design_system/spacing/app_radius.dart';
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
+import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
+import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 
 class LoginWarningBanner extends StatelessWidget {
   final String message;
@@ -15,31 +18,35 @@ class LoginWarningBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final backgroundColor = isSessionExpired
-        ? Theme.of(context).colorScheme.onError // بني/أصفر داكن لانتهاء الجلسة
-        : Theme.of(context).colorScheme.error; // أحمر داكن للخطأ
+        ? theme.colorScheme.onError
+        : theme.colorScheme.error;
 
     final borderColor = isSessionExpired
-        ? Theme.of(context).colorScheme.onError
-        : Theme.of(context).colorScheme.error;
+        ? theme.colorScheme.onError
+        : theme.colorScheme.error;
 
-    final iconColor = isSessionExpired ? Theme.of(context).colorScheme.onError : Theme.of(context).colorScheme.error;
+    final iconColor = isSessionExpired
+        ? theme.colorScheme.onError
+        : theme.colorScheme.error;
 
-    return Container(
+    return AppCard(
       width: double.infinity,
-      padding:  EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
-      decoration: BoxDecoration(
-        color: backgroundColor,
-        borderRadius: BorderRadius.circular(10.r),
-        border: Border.all(color: borderColor, width: 1.w),
+      backgroundColor: backgroundColor,
+      borderRadius: AppRadius.radius12,
+      border: Border.all(color: borderColor, width: 1.w),
+      padding:  EdgeInsets.symmetric(
+        horizontal: AppSpacing.space16,
+        vertical: AppSpacing.space12,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Icon(Icons.warning_amber_rounded, color: iconColor, size: 20.sp),
-          Gap( 10.w),
+          Gap(AppSpacing.space12),
           Expanded(
-            child: Text(
+            child: AppText(
               message,
               style: TextStyle(
                 color: iconColor,

@@ -1,9 +1,10 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
-import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/inputs/app_dropdown.dart';
 import 'package:workwise/core/design_system/widgets/inputs/app_text_field.dart';

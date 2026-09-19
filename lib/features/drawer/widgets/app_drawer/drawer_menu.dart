@@ -37,12 +37,12 @@ class DrawerMenu extends StatelessWidget {
         DrawerMenuItem(
           icon: Icons.settings_outlined,
           title: 'Settings',
-          isSelected: currentRoute == '/settings',
+          isSelected: currentRoute == '/setting',
           onTap: () {
             Navigator.of(context).pop();
 
-            if (currentRoute != '/settings') {
-              context.go('/settings');
+            if (currentRoute != '/setting') {
+              context.go('/setting');
             }
           },
         ),
