@@ -33,92 +33,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get language => 'اللغة';
 
   @override
-  String get languageEnglish => 'الإنجليزية';
+  String get languageEnglish => 'الإنجليزيّة';
 
   @override
   String get languageArabic => 'العربية';
 
   @override
   String get loading => 'جاري التحميل...';
-
-  @override
-  String get welcomeBack => 'مرحباً بعودتك';
-
-  @override
-  String get signInWithCorporateCredentials =>
-      'سجّل الدخول باستخدام بيانات حساب الشركة';
-
-  @override
-  String get workEmail => 'البريد الإلكتروني للعمل';
-
-  @override
-  String get workEmailHint => 'name@company.com';
-
-  @override
-  String get password => 'كلمة المرور';
-
-  @override
-  String get passwordHint => 'أدخل كلمة المرور';
-
-  @override
-  String get keepMeSignedIn => 'الاحتفاظ بتسجيل الدخول';
-
-  @override
-  String get forgotPassword => 'نسيت كلمة المرور؟';
-
-  @override
-  String get quickSignIn => 'تسجيل دخول سريع';
-
-  @override
-  String get useFingerprintOrFaceId => 'استخدم بصمة الإصبع أو الوجه';
-
-  @override
-  String get or => 'أو';
-
-  @override
-  String get sessionExpiredWarning =>
-      'انتهت الجلسة الخاصة بك. يرجى إعادة محاولة الدخول للمتابعة.';
-
-  @override
-  String get invalidCredentialsWarning =>
-      'بيانات الدخول غير صحيحة. يرجى المحاولة مرة أخرى.';
-
-  @override
-  String get verifyYourIdentityToAccessYourAccount =>
-      'تأكيد الهوية للوصول إلى حسابك';
-
-  @override
-  String get tapToScanFingerprintFaceID => 'انقر للمسح ببصمة الإصبع / الوجه';
-
-  @override
-  String get useEmailAndPasswordInstead =>
-      'استخدم البريد الإلكتروني وكلمة المرور بدلاً من ذلك';
-
-  @override
-  String get biometricsNotAvailable =>
-      'التحقق بالبصمة غير متوفر على هذا الجهاز.';
-
-  @override
-  String get authCanceledOrFailed => 'تم إلغاء عملية التحقق أو فشلت.';
-
-  @override
-  String get resetPasswordTitle => 'إعادة ضبط كلمة المرور';
-
-  @override
-  String get resetPasswordDescription =>
-      'أدخل بريد العمل وسنرسل لك رابطاً لإعادة الضبط.';
-
-  @override
-  String get sendResetLink => 'إرسال رابط الضبط';
-
-  @override
-  String get enterWorkEmailMessage => 'يرجى إدخال بريد العمل الإلكتروني';
-
-  @override
-  String get invalidEmailFormatMessage => 'صيغة بريد العمل غير صحيحة';
-
-  @override
-  String get enterPasswordMessage => 'يرجى إدخال كلمة المرور';
 
   @override
   String get homeScreen => 'الرئيسية';
@@ -148,6 +69,31 @@ class AppLocalizationsAr extends AppLocalizations {
   String get checkOut => 'تسجيل الانصراف';
 
   @override
+  String get welcomeBack => 'مرحباً بعودتك';
+
+  @override
+  String get signInWithCorporateCredentials =>
+      'سجّل الدخول باستخدام بيانات حساب الشركة';
+
+  @override
+  String get workEmail => 'البريد الإلكتروني للعمل';
+
+  @override
+  String get workEmailHint => 'name@company.com';
+
+  @override
+  String get password => 'كلمة المرور';
+
+  @override
+  String get passwordHint => 'أدخل كلمة المرور';
+
+  @override
+  String get keepMeSignedIn => 'الاحتفاظ بتسجيل الدخول';
+
+  @override
+  String get forgotPassword => 'نسيت كلمة المرور؟';
+
+  @override
   String get pendingTasks => 'المهام المعلقة';
 
   @override
@@ -155,6 +101,15 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get leaveBalance => 'رصيد الإجازات';
+
+  @override
+  String get quickSignIn => 'تسجيل دخول سريع';
+
+  @override
+  String get useFingerprintOrFaceId => 'استخدم بصمة الإصبع أو الوجه';
+
+  @override
+  String get or => 'أو';
 
   @override
   String get requestLeave => 'طلب إجازة';
@@ -166,7 +121,33 @@ class AppLocalizationsAr extends AppLocalizations {
   String get viewCalendar => 'عرض التقويم';
 
   @override
+  String get sessionExpiredWarning =>
+      'انتهت الجلسة الخاصة بك. يرجى إعادة محاولة الدخول للمتابعة.';
+
+  @override
+  String get invalidCredentialsWarning =>
+      'بيانات الدخول غير صحيحة. يرجى المحاولة مرة أخرى.';
+
+  @override
   String get aiHrAssistant => 'مساعد الموارد البشرية الذكي';
+
+  @override
+  String get verifyYourIdentityToAccessYourAccount =>
+      'تأكيد الهوية للوصول إلى حسابك';
+
+  @override
+  String get tapToScanFingerprintFaceID => 'انقر للمسح ببصمة الإصبع / الوجه';
+
+  @override
+  String get useEmailAndPasswordInstead =>
+      'استخدم البريد الإلكتروني وكلمة المرور بدلاً من ذلك';
+
+  @override
+  String get biometricsNotAvailable =>
+      'التحقق بالبصمة غير متوفر على هذا الجهاز.';
+
+  @override
+  String get authCanceledOrFailed => 'تم إلغاء عملية التحقق أو فشلت.';
 
   @override
   String get drawerHeader => 'رأس القائمة';
@@ -179,6 +160,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get drawerItem3 => 'العنصر 3';
+
+  @override
+  String get resetPasswordTitle => 'إعادة ضبط كلمة المرور';
+
+  @override
+  String get resetPasswordDescription =>
+      'أدخل بريد العمل وسنرسل لك رابطاً لإعادة الضبط.';
+
+  @override
+  String get sendResetLink => 'إرسال رابط الضبط';
+
+  @override
+  String get enterWorkEmailMessage => 'يرجى إدخال بريد العمل الإلكتروني';
+
+  @override
+  String get invalidEmailFormatMessage => 'صيغة بريد العمل غير صحيحة';
+
+  @override
+  String get enterPasswordMessage => 'يرجى إدخال كلمة المرور';
 
   @override
   String get attendance => 'الحضور';
@@ -431,4 +431,26 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get developmentAreas => 'مجالات التطوير';
+
+  @override
+  String get preferences => 'التفضيلات';
+
+  @override
+  String get biometricLogin => 'تسجيل الدخول بالبصمة';
+
+  @override
+  String get fingerprintFaceId => 'بصمة الإصبع / الوجه';
+
+  @override
+  String get pushNotifications => 'الإشعارات اللحظية';
+
+  @override
+  String get tasksApprovalsReminders => 'المهام، الموافقات، التذكيرات';
+
+  @override
+  String get appDisplayLanguage => 'لغة عرض التطبيق';
+
+  @override
+  String get logoutConfirmationMessage =>
+      'هل أنت ألكيد من أنك تريد تسجيل الخروج؟';
 }

@@ -164,150 +164,6 @@ abstract class AppLocalizations {
   /// **'loading...'**
   String get loading;
 
-  /// No description provided for @welcomeBack.
-  ///
-  /// In en, this message translates to:
-  /// **'Welcome Back'**
-  String get welcomeBack;
-
-  /// No description provided for @signInWithCorporateCredentials.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in with your corporate credentials'**
-  String get signInWithCorporateCredentials;
-
-  /// No description provided for @workEmail.
-  ///
-  /// In en, this message translates to:
-  /// **'Work Email'**
-  String get workEmail;
-
-  /// No description provided for @workEmailHint.
-  ///
-  /// In en, this message translates to:
-  /// **'name@company.com'**
-  String get workEmailHint;
-
-  /// No description provided for @password.
-  ///
-  /// In en, this message translates to:
-  /// **'Password'**
-  String get password;
-
-  /// No description provided for @passwordHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your password'**
-  String get passwordHint;
-
-  /// No description provided for @keepMeSignedIn.
-  ///
-  /// In en, this message translates to:
-  /// **'Keep me signed in'**
-  String get keepMeSignedIn;
-
-  /// No description provided for @forgotPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Forgot Password?'**
-  String get forgotPassword;
-
-  /// No description provided for @quickSignIn.
-  ///
-  /// In en, this message translates to:
-  /// **'Quick Sign-In'**
-  String get quickSignIn;
-
-  /// No description provided for @useFingerprintOrFaceId.
-  ///
-  /// In en, this message translates to:
-  /// **'Use Fingerprint or Face ID'**
-  String get useFingerprintOrFaceId;
-
-  /// No description provided for @or.
-  ///
-  /// In en, this message translates to:
-  /// **'OR'**
-  String get or;
-
-  /// No description provided for @sessionExpiredWarning.
-  ///
-  /// In en, this message translates to:
-  /// **'Your session has expired. Please try again to continue.'**
-  String get sessionExpiredWarning;
-
-  /// No description provided for @invalidCredentialsWarning.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid credentials. Please try again.'**
-  String get invalidCredentialsWarning;
-
-  /// No description provided for @verifyYourIdentityToAccessYourAccount.
-  ///
-  /// In en, this message translates to:
-  /// **'Verify your identity to access your account'**
-  String get verifyYourIdentityToAccessYourAccount;
-
-  /// No description provided for @tapToScanFingerprintFaceID.
-  ///
-  /// In en, this message translates to:
-  /// **'Tap to scan Fingerprint / Face ID'**
-  String get tapToScanFingerprintFaceID;
-
-  /// No description provided for @useEmailAndPasswordInstead.
-  ///
-  /// In en, this message translates to:
-  /// **'Use email and password instead'**
-  String get useEmailAndPasswordInstead;
-
-  /// No description provided for @biometricsNotAvailable.
-  ///
-  /// In en, this message translates to:
-  /// **'Biometric authentication is not available on this device.'**
-  String get biometricsNotAvailable;
-
-  /// No description provided for @authCanceledOrFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'Authentication canceled or failed.'**
-  String get authCanceledOrFailed;
-
-  /// No description provided for @resetPasswordTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset Password'**
-  String get resetPasswordTitle;
-
-  /// No description provided for @resetPasswordDescription.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your work email and we\'ll send you a reset link.'**
-  String get resetPasswordDescription;
-
-  /// No description provided for @sendResetLink.
-  ///
-  /// In en, this message translates to:
-  /// **'Send Reset Link'**
-  String get sendResetLink;
-
-  /// No description provided for @enterWorkEmailMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter your work email'**
-  String get enterWorkEmailMessage;
-
-  /// No description provided for @invalidEmailFormatMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid work email format'**
-  String get invalidEmailFormatMessage;
-
-  /// No description provided for @enterPasswordMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Please enter your password'**
-  String get enterPasswordMessage;
-
   /// No description provided for @homeScreen.
   ///
   /// In en, this message translates to:
@@ -362,6 +218,54 @@ abstract class AppLocalizations {
   /// **'Check Out'**
   String get checkOut;
 
+  /// No description provided for @welcomeBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome Back'**
+  String get welcomeBack;
+
+  /// No description provided for @signInWithCorporateCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with your corporate credentials'**
+  String get signInWithCorporateCredentials;
+
+  /// No description provided for @workEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Work Email'**
+  String get workEmail;
+
+  /// No description provided for @workEmailHint.
+  ///
+  /// In en, this message translates to:
+  /// **'name@company.com'**
+  String get workEmailHint;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get password;
+
+  /// No description provided for @passwordHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get passwordHint;
+
+  /// No description provided for @keepMeSignedIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep me signed in'**
+  String get keepMeSignedIn;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot Password?'**
+  String get forgotPassword;
+
   /// No description provided for @pendingTasks.
   ///
   /// In en, this message translates to:
@@ -379,6 +283,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Leave Balance'**
   String get leaveBalance;
+
+  /// No description provided for @quickSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Sign-In'**
+  String get quickSignIn;
+
+  /// No description provided for @useFingerprintOrFaceId.
+  ///
+  /// In en, this message translates to:
+  /// **'Use Fingerprint or Face ID'**
+  String get useFingerprintOrFaceId;
+
+  /// No description provided for @or.
+  ///
+  /// In en, this message translates to:
+  /// **'OR'**
+  String get or;
 
   /// No description provided for @requestLeave.
   ///
@@ -398,11 +320,53 @@ abstract class AppLocalizations {
   /// **'View Calendar'**
   String get viewCalendar;
 
+  /// No description provided for @sessionExpiredWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Your session has expired. Please try again to continue.'**
+  String get sessionExpiredWarning;
+
+  /// No description provided for @invalidCredentialsWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid credentials. Please try again.'**
+  String get invalidCredentialsWarning;
+
   /// No description provided for @aiHrAssistant.
   ///
   /// In en, this message translates to:
   /// **'AI HR Assistant'**
   String get aiHrAssistant;
+
+  /// No description provided for @verifyYourIdentityToAccessYourAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your identity to access your account'**
+  String get verifyYourIdentityToAccessYourAccount;
+
+  /// No description provided for @tapToScanFingerprintFaceID.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to scan Fingerprint / Face ID'**
+  String get tapToScanFingerprintFaceID;
+
+  /// No description provided for @useEmailAndPasswordInstead.
+  ///
+  /// In en, this message translates to:
+  /// **'Use email and password instead'**
+  String get useEmailAndPasswordInstead;
+
+  /// No description provided for @biometricsNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Biometric authentication is not available on this device.'**
+  String get biometricsNotAvailable;
+
+  /// No description provided for @authCanceledOrFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication canceled or failed.'**
+  String get authCanceledOrFailed;
 
   /// No description provided for @drawerHeader.
   ///
@@ -427,6 +391,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Item 3'**
   String get drawerItem3;
+
+  /// No description provided for @resetPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Password'**
+  String get resetPasswordTitle;
+
+  /// No description provided for @resetPasswordDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your work email and we\'ll send you a reset link.'**
+  String get resetPasswordDescription;
+
+  /// No description provided for @sendResetLink.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Reset Link'**
+  String get sendResetLink;
+
+  /// No description provided for @enterWorkEmailMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your work email'**
+  String get enterWorkEmailMessage;
+
+  /// No description provided for @invalidEmailFormatMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid work email format'**
+  String get invalidEmailFormatMessage;
+
+  /// No description provided for @enterPasswordMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your password'**
+  String get enterPasswordMessage;
 
   /// No description provided for @attendance.
   ///
@@ -925,6 +925,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Development areas'**
   String get developmentAreas;
+
+  /// No description provided for @preferences.
+  ///
+  /// In en, this message translates to:
+  /// **'Preferences'**
+  String get preferences;
+
+  /// No description provided for @biometricLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'Biometric login'**
+  String get biometricLogin;
+
+  /// No description provided for @fingerprintFaceId.
+  ///
+  /// In en, this message translates to:
+  /// **'Fingerprint / Face ID'**
+  String get fingerprintFaceId;
+
+  /// No description provided for @pushNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Push notifications'**
+  String get pushNotifications;
+
+  /// No description provided for @tasksApprovalsReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Tasks, approvals, reminders'**
+  String get tasksApprovalsReminders;
+
+  /// No description provided for @appDisplayLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'App display language'**
+  String get appDisplayLanguage;
+
+  /// No description provided for @logoutConfirmationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to log out?'**
+  String get logoutConfirmationMessage;
 }
 
 class _AppLocalizationsDelegate

@@ -42,84 +42,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loading => 'loading...';
 
   @override
-  String get welcomeBack => 'Welcome Back';
-
-  @override
-  String get signInWithCorporateCredentials =>
-      'Sign in with your corporate credentials';
-
-  @override
-  String get workEmail => 'Work Email';
-
-  @override
-  String get workEmailHint => 'name@company.com';
-
-  @override
-  String get password => 'Password';
-
-  @override
-  String get passwordHint => 'Enter your password';
-
-  @override
-  String get keepMeSignedIn => 'Keep me signed in';
-
-  @override
-  String get forgotPassword => 'Forgot Password?';
-
-  @override
-  String get quickSignIn => 'Quick Sign-In';
-
-  @override
-  String get useFingerprintOrFaceId => 'Use Fingerprint or Face ID';
-
-  @override
-  String get or => 'OR';
-
-  @override
-  String get sessionExpiredWarning =>
-      'Your session has expired. Please try again to continue.';
-
-  @override
-  String get invalidCredentialsWarning =>
-      'Invalid credentials. Please try again.';
-
-  @override
-  String get verifyYourIdentityToAccessYourAccount =>
-      'Verify your identity to access your account';
-
-  @override
-  String get tapToScanFingerprintFaceID => 'Tap to scan Fingerprint / Face ID';
-
-  @override
-  String get useEmailAndPasswordInstead => 'Use email and password instead';
-
-  @override
-  String get biometricsNotAvailable =>
-      'Biometric authentication is not available on this device.';
-
-  @override
-  String get authCanceledOrFailed => 'Authentication canceled or failed.';
-
-  @override
-  String get resetPasswordTitle => 'Reset Password';
-
-  @override
-  String get resetPasswordDescription =>
-      'Enter your work email and we\'ll send you a reset link.';
-
-  @override
-  String get sendResetLink => 'Send Reset Link';
-
-  @override
-  String get enterWorkEmailMessage => 'Please enter your work email';
-
-  @override
-  String get invalidEmailFormatMessage => 'Invalid work email format';
-
-  @override
-  String get enterPasswordMessage => 'Please enter your password';
-
-  @override
   String get homeScreen => 'Home Screen';
 
   @override
@@ -147,6 +69,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get checkOut => 'Check Out';
 
   @override
+  String get welcomeBack => 'Welcome Back';
+
+  @override
+  String get signInWithCorporateCredentials =>
+      'Sign in with your corporate credentials';
+
+  @override
+  String get workEmail => 'Work Email';
+
+  @override
+  String get workEmailHint => 'name@company.com';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get passwordHint => 'Enter your password';
+
+  @override
+  String get keepMeSignedIn => 'Keep me signed in';
+
+  @override
+  String get forgotPassword => 'Forgot Password?';
+
+  @override
   String get pendingTasks => 'Pending Tasks';
 
   @override
@@ -154,6 +101,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get leaveBalance => 'Leave Balance';
+
+  @override
+  String get quickSignIn => 'Quick Sign-In';
+
+  @override
+  String get useFingerprintOrFaceId => 'Use Fingerprint or Face ID';
+
+  @override
+  String get or => 'OR';
 
   @override
   String get requestLeave => 'Request Leave';
@@ -165,7 +121,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get viewCalendar => 'View Calendar';
 
   @override
+  String get sessionExpiredWarning =>
+      'Your session has expired. Please try again to continue.';
+
+  @override
+  String get invalidCredentialsWarning =>
+      'Invalid credentials. Please try again.';
+
+  @override
   String get aiHrAssistant => 'AI HR Assistant';
+
+  @override
+  String get verifyYourIdentityToAccessYourAccount =>
+      'Verify your identity to access your account';
+
+  @override
+  String get tapToScanFingerprintFaceID => 'Tap to scan Fingerprint / Face ID';
+
+  @override
+  String get useEmailAndPasswordInstead => 'Use email and password instead';
+
+  @override
+  String get biometricsNotAvailable =>
+      'Biometric authentication is not available on this device.';
+
+  @override
+  String get authCanceledOrFailed => 'Authentication canceled or failed.';
 
   @override
   String get drawerHeader => 'Drawer Header';
@@ -178,6 +159,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get drawerItem3 => 'Item 3';
+
+  @override
+  String get resetPasswordTitle => 'Reset Password';
+
+  @override
+  String get resetPasswordDescription =>
+      'Enter your work email and we\'ll send you a reset link.';
+
+  @override
+  String get sendResetLink => 'Send Reset Link';
+
+  @override
+  String get enterWorkEmailMessage => 'Please enter your work email';
+
+  @override
+  String get invalidEmailFormatMessage => 'Invalid work email format';
+
+  @override
+  String get enterPasswordMessage => 'Please enter your password';
 
   @override
   String get attendance => 'Attendance';
@@ -430,4 +430,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get developmentAreas => 'Development areas';
+
+  @override
+  String get preferences => 'Preferences';
+
+  @override
+  String get biometricLogin => 'Biometric login';
+
+  @override
+  String get fingerprintFaceId => 'Fingerprint / Face ID';
+
+  @override
+  String get pushNotifications => 'Push notifications';
+
+  @override
+  String get tasksApprovalsReminders => 'Tasks, approvals, reminders';
+
+  @override
+  String get appDisplayLanguage => 'App display language';
+
+  @override
+  String get logoutConfirmationMessage => 'Are you sure you want to log out?';
 }

@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
-import 'package:workwise/generated/app_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:workwise/core/design_system/spacing/app_radius.dart';
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
+import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
+import 'package:workwise/core/design_system/widgets/inputs/app_text_field.dart';
+import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/core/routing/app_routes.dart';
+import 'package:workwise/core/utils/app_validator.dart';
+import 'package:workwise/features/auth/forgot_password/presentation/logic/forgot_password_cubit.dart';
+import 'package:workwise/features/auth/forgot_password/presentation/logic/forgot_password_state.dart';
 
 class ResetPasswordBottomSheet extends StatefulWidget {
   const ResetPasswordBottomSheet({super.key});
@@ -9,14 +20,17 @@ class ResetPasswordBottomSheet extends StatefulWidget {
   static Future<void> show(BuildContext context) {
     return showModalBottomSheet(
       context: context,
-      isScrollControlled: true, // عشان يرفع الشيت فوق الكيبورد لما تفتح
+      isScrollControlled: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(24.r),
+          top: Radius.circular(AppRadius.radius24),
         ),
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
-      builder: (context) => const ResetPasswordBottomSheet(),
+      builder: (context) => BlocProvider(
+        create: (context) => ForgotPasswordCubit(),
+        child: const ResetPasswordBottomSheet(),
+      ),
     );
   }
 
@@ -27,149 +41,112 @@ class ResetPasswordBottomSheet extends StatefulWidget {
 
 class _ResetPasswordBottomSheetState extends State<ResetPasswordBottomSheet> {
   final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    super.dispose();
-  }
-
-  void _onSendResetLinkPressed() {
-    if (_formKey.currentState!.validate()) {
-      FocusScope.of(context).unfocus();
-      
-      // TODO: Call Reset Password Endpoint via Cubit
-      final email = _emailController.text.trim();
-      
-      Navigator.pop(context); // إغلاق الـ Bottom Sheet
-
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Reset link sent to $email successfully!'),
-          backgroundColor: Colors.green,
-        ),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-
-        final localization = AppLocalizations.of(context);
+    final cubit = context.read<ForgotPasswordCubit>();
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
 
-    return Padding(
-      padding: EdgeInsets.only(
-        left: 20.w,
-        right: 20.w,
-        top: 12.h,
-        bottom: 20.h + bottomPadding,
-      ),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 40.w,
-                height: 4.h,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.outlineVariant,
-                  borderRadius: BorderRadius.circular(2.r),
-                ),
-              ),
+    return BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
+      listener: (context, state) {
+        if (state is SendOtpSuccessState) {
+          Navigator.pop(context);
+          context.push(
+            AppRoutes.otpVerificationScreen,
+            extra: state.email,
+          );
+        } else if (state is SendOtpErrorState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+              backgroundColor: Theme.of(context).colorScheme.error,
             ),
-            Gap(16.h),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          );
+        }
+      },
+      builder: (context, state) {
+        return Padding(
+          padding: EdgeInsets.only(
+            left: AppSpacing.space20,
+            right: AppSpacing.space20,
+            top: AppSpacing.space12,
+            bottom: AppSpacing.space20 + bottomPadding,
+          ),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  localization.resetPasswordTitle,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onSurface,
+                Center(
+                  child: Container(
+                    width: 40.w,
+                    height: 4.h,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.outlineVariant,
+                      borderRadius: BorderRadius.circular(AppRadius.radius4),
+                    ),
+                  ),
+                ),
+                const Gap(AppSpacing.space16),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AppText(
+                      context.l10n.resetPasswordTitle,
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onSurface,
+                          ),
+                    ),
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(
+                        Icons.close_rounded,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+
+                AppText(
+                  context.l10n.resetPasswordDescription,
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                 ),
-                IconButton(
-                  onPressed: () => Navigator.pop(context),
-                  icon: Icon(
-                    Icons.close_rounded,
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                const Gap(AppSpacing.space20),
+
+                AppTextField(
+                  controller: cubit.emailController,
+                  label: context.l10n.workEmail,
+                  hintText: context.l10n.workEmailHint,
+                  type: AppTextFieldType.email,
+                  prefixIcon: const Icon(Icons.email_outlined),
+                  validator: AppValidators.email(
+                    emptyMessage: context.l10n.enterWorkEmailMessage,
+                    invalidMessage: context.l10n.invalidEmailFormatMessage,
                   ),
+                ),
+                const Gap(AppSpacing.space24),
+
+                AppButton(
+                  text: context.l10n.sendResetLink,
+                  height: 50.h,
+                  isLoading: state is SendOtpLoadingState,
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      FocusScope.of(context).unfocus();
+                      cubit.sendOtp();
+                    }
+                  },
                 ),
               ],
             ),
-
-            Text(
-              localization.resetPasswordDescription,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onSurfaceVariant,
-                  ),
-            ),
-            Gap(20.h),
-
-            Text(
-              localization.workEmail,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
-            ),
-            Gap(8.h),
-
-            TextFormField(
-              controller: _emailController,
-              keyboardType: TextInputType.emailAddress,
-              autovalidateMode: AutovalidateMode.onUserInteraction,
-              style: Theme.of(context).textTheme.bodyMedium,
-              decoration: InputDecoration(
-                hintText: localization.workEmailHint,
-                prefixIcon: const Icon(Icons.email_outlined),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12.r),
-                ),
-              ),
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return localization.enterWorkEmailMessage;
-                }
-                if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                    .hasMatch(value.trim())) {
-                  return localization.enterWorkEmailMessage;
-                }
-                return null;
-              },
-            ),
-            Gap(24.h),
-
-            SizedBox(
-              width: double.infinity,
-              height: 50.h,
-              child: ElevatedButton(
-                onPressed: _onSendResetLinkPressed,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  foregroundColor: Theme.of(context).colorScheme.onPrimary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.r),
-                  ),
-                ),
-                child: Text(
-                  localization.sendResetLink,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onPrimary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
