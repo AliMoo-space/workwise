@@ -29,11 +29,11 @@ class SplashScreen extends StatelessWidget {
           if (state is UnauthenticatedState) {
             context.go(AppRoutes.loginScreen);
           } else if (state is AuthenticatedState) {
-            context.go(AppRoutes.homeScreen);
+            context.go(AppRoutes.mainScreen);
           }
         },
         child: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.primary,
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
           body: SafeArea(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -41,8 +41,8 @@ class SplashScreen extends StatelessWidget {
                 const Spacer(),
                 AppImage(
                   assetPath: getImagePath('logo2'),
-                  width: 100,
-                  height: 100,
+                  width: AppSpacing.space96,
+                  height: AppSpacing.space96,
                   fit: BoxFit.contain,
                 ),
                 const Gap(AppSpacing.space32),
@@ -52,13 +52,13 @@ class SplashScreen extends StatelessWidget {
                     AppLoader(
                       size: 16.w,
                       strokeWidth: 2.w,
-                      color: Theme.of(context).colorScheme.onSecondary,
+                      color: Theme.of(context).colorScheme.primary,
                     ),
                     const Gap(AppSpacing.space12),
                     AppText(
                       context.l10n.loading,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.onSecondary,
+                            color: Theme.of(context).colorScheme.primary,
                           ),
                     ),
                   ],

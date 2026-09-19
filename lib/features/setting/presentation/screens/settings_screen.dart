@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
+import 'package:workwise/core/design_system/widgets/inputs/language_selector.dart';
+import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/features/setting/presentation/logic/setting_cubit.dart';
 import 'package:workwise/features/setting/presentation/logic/setting_state.dart';
+import 'package:workwise/features/setting/presentation/widgets/logout_tile_widget.dart';
+import 'package:workwise/features/setting/presentation/widgets/setting_tile_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
-
-  static const List<String> _languages = ['English', 'العربية'];
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +32,8 @@ class SettingsScreen extends StatelessWidget {
             ),
             onPressed: () => context.pop(),
           ),
-          title: Text(
-            'Settings',
+          title: AppText(
+            context.l10n.settings,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
               color: theme.colorScheme.onSurface,
@@ -43,155 +46,67 @@ class SettingsScreen extends StatelessWidget {
               final cubit = context.read<SettingsCubit>();
 
               return SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.space16,
+                  vertical: AppSpacing.space12,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Preferences',
+                    // عنوان قسم التفضيلات
+                    AppText(
+                      context.l10n.preferences,
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                         color: theme.colorScheme.onSurface,
                       ),
                     ),
-                    Gap(12.h),
+                    const Gap(AppSpacing.space12),
 
-                    // Biometric Login Card
-                    _buildSettingCard(
-                      theme: theme,
+                    // خيار تسجيل الدخول بالبصمة
+                    SettingTileWidget(
                       icon: Icons.fingerprint_rounded,
-                      title: 'Biometric login',
-                      subtitle: 'Fingerprint / Face ID',
+                      title: context.l10n.biometricLogin,
+                      subtitle: context.l10n.fingerprintFaceId,
                       trailing: Switch.adaptive(
                         value: cubit.isBiometricEnabled,
                         activeColor: theme.colorScheme.primary,
                         onChanged: (val) => cubit.toggleBiometric(val),
                       ),
                     ),
-                    Gap(12.h),
+                    const Gap(AppSpacing.space12),
 
-                    // Push Notifications Card
-                    _buildSettingCard(
-                      theme: theme,
+                    // خيار الإشعارات
+                    SettingTileWidget(
                       icon: Icons.notifications_none_rounded,
-                      title: 'Push notifications',
-                      subtitle: 'Tasks, approvals, reminders',
+                      title: context.l10n.pushNotifications,
+                      subtitle: context.l10n.tasksApprovalsReminders,
                       trailing: Switch.adaptive(
                         value: cubit.isNotificationsEnabled,
                         activeColor: theme.colorScheme.primary,
                         onChanged: (val) => cubit.toggleNotifications(val),
                       ),
                     ),
-                    Gap(12.h),
+                    const Gap(AppSpacing.space12),
 
-                    // Language Selector Card
-                    _buildSettingCard(
-                      theme: theme,
+                    // خيار تغيير اللغة
+                    SettingTileWidget(
                       icon: Icons.translate_rounded,
-                      title: 'Language',
-                      subtitle: 'App display language',
-                      trailing: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12.w,
-                          vertical: 4.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: theme.colorScheme.surface,
-                          borderRadius: BorderRadius.circular(20.r),
-                          border: Border.all(
-                            color: theme.colorScheme.outlineVariant,
-                          ),
-                        ),
-                        child: DropdownButtonHideUnderline(
-                          child: DropdownButton<String>(
-                            value: cubit.selectedLanguage,
-                            icon: Icon(
-                              Icons.keyboard_arrow_down_rounded,
-                              color: theme.colorScheme.onSurfaceVariant,
-                            ),
-                            isDense: true,
-                            dropdownColor: theme.colorScheme.surface,
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: theme.colorScheme.onSurface,
-                            ),
-                            items: _languages.map((String language) {
-                              return DropdownMenuItem<String>(
-                                value: language,
-                                child: Text(language),
-                              );
-                            }).toList(),
-                            onChanged: (val) {
-                              if (val != null) cubit.changeLanguage(val);
-                            },
-                          ),
-                        ),
-                      ),
+                      title: context.l10n.language,
+                      subtitle: context.l10n.appDisplayLanguage,
+                      trailing: const LanguageSelector(),
                     ),
+
+                    const Gap(AppSpacing.space24),
+
+                    // زر تسجيل الخروج المنفصل
+                    const LogoutTileWidget(),
                   ],
                 ),
               );
             },
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildSettingCard({
-    required ThemeData theme,
-    required IconData icon,
-    required String title,
-    required String subtitle,
-    required Widget trailing,
-  }) {
-    return Container(
-      padding: EdgeInsets.all(16.r),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(16.r),
-        border: Border.all(
-          color: theme.colorScheme.outlineVariant.withOpacity(0.5),
-        ),
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: EdgeInsets.all(10.r),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.surfaceContainerHigh, 
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              size: 22.sp,
-              color: theme.colorScheme.onSurfaceVariant,
-            ),
-          ),
-          Gap(14.w),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.onSurface,
-                  ),
-                ),
-                Gap(2.h),
-                Text(
-                  subtitle,
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.colorScheme.onSurfaceVariant,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          trailing,
-        ],
       ),
     );
   }

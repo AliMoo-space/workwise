@@ -431,4 +431,26 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get developmentAreas => 'مجالات التطوير';
+
+  @override
+  String get preferences => 'التفضيلات';
+
+  @override
+  String get biometricLogin => 'تسجيل الدخول بالبصمة';
+
+  @override
+  String get fingerprintFaceId => 'بصمة الإصبع / الوجه';
+
+  @override
+  String get pushNotifications => 'الإشعارات اللحظية';
+
+  @override
+  String get tasksApprovalsReminders => 'المهام، الموافقات، التذكيرات';
+
+  @override
+  String get appDisplayLanguage => 'لغة عرض التطبيق';
+
+  @override
+  String get logoutConfirmationMessage =>
+      'هل أنت ألكيد من أنك تريد تسجيل الخروج؟';
 }

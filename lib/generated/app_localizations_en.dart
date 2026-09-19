@@ -430,4 +430,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get developmentAreas => 'Development areas';
+
+  @override
+  String get preferences => 'Preferences';
+
+  @override
+  String get biometricLogin => 'Biometric login';
+
+  @override
+  String get fingerprintFaceId => 'Fingerprint / Face ID';
+
+  @override
+  String get pushNotifications => 'Push notifications';
+
+  @override
+  String get tasksApprovalsReminders => 'Tasks, approvals, reminders';
+
+  @override
+  String get appDisplayLanguage => 'App display language';
+
+  @override
+  String get logoutConfirmationMessage => 'Are you sure you want to log out?';
 }

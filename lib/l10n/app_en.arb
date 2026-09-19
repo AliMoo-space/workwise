@@ -241,5 +241,12 @@
   "attendanceDate3": "Thu, Jun 05",
   "attendanceDetails3": "08:52 AM - 05:28 PM  -  8h 36m",
   "orders": "Orders",
-  "profile": "Profile"
+  "profile": "Profile",
+  "preferences": "Preferences",
+  "biometricLogin": "Biometric login",
+  "fingerprintFaceId": "Fingerprint / Face ID",
+  "pushNotifications": "Push notifications",
+  "tasksApprovalsReminders": "Tasks, approvals, reminders",
+  "appDisplayLanguage": "App display language",
+  "logoutConfirmationMessage": "Are you sure you want to log out?"
 }

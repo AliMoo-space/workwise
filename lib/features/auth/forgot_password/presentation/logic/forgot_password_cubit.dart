@@ -5,22 +5,26 @@ import 'forgot_password_state.dart';
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   ForgotPasswordCubit() : super(ForgotPasswordInitialState());
 
-  // Controllers
   final emailController = TextEditingController();
-  final newPasswordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
   final otpController = TextEditingController();
 
-  // 1. Send OTP to Email
+  TextEditingController? get newPasswordController => null;
+
   Future<void> sendOtp() async {
+    final email = emailController.text.trim();
+    if (email.isEmpty) {
+      emit(SendOtpErrorState('Please enter your email address.'));
+      return;
+    }
+
     emit(SendOtpLoadingState());
-    
+
+    // API Call Simulation
     await Future.delayed(const Duration(seconds: 2));
-    
-    emit(SendOtpSuccessState(emailController.text.trim()));
+
+    emit(SendOtpSuccessState(email));
   }
 
-  // 2. Verify OTP Code
   Future<void> verifyOtp() async {
     final otp = otpController.text.trim();
     if (otp.length < 6) {
@@ -29,40 +33,25 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     }
 
     emit(VerifyOtpLoadingState());
+
+    // API Call Simulation
     await Future.delayed(const Duration(seconds: 2));
 
-    // Mock verification check (e.g., correct code is 123456)
-    if (otp == "123456") {
-      emit(VerifyOtpSuccessState());
-    } else {
-      emit(VerifyOtpErrorState('Invalid verification code. Please try again.'));
-    }
+    emit(VerifyOtpSuccessState());
   }
 
-  // 3. Resend OTP
   Future<void> resendOtp() async {
     emit(ResendOtpLoadingState());
+
+    // API Call Simulation
     await Future.delayed(const Duration(seconds: 2));
+
     emit(ResendOtpSuccessState());
-  }
-
-  // 4. Reset Password
-  Future<void> resetPassword() async {
-    if (newPasswordController.text != confirmPasswordController.text) {
-      emit(ResetPasswordErrorState('Passwords do not match.'));
-      return;
-    }
-
-    emit(ResetPasswordLoadingState());
-    await Future.delayed(const Duration(seconds: 2));
-    emit(ResetPasswordSuccessState());
   }
 
   @override
   Future<void> close() {
     emailController.dispose();
-    newPasswordController.dispose();
-    confirmPasswordController.dispose();
     otpController.dispose();
     return super.close();
   }

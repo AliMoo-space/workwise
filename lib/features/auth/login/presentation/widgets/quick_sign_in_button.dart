@@ -23,7 +23,7 @@ class QuickSignInButton extends StatelessWidget {
         borderRadius: AppRadius.radius20,
         backgroundColor: Theme.of(context).colorScheme.surface,
         border: Border.all(color: primaryColor),
-        padding:  EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.space16,
           vertical: AppSpacing.space16,
         ),
@@ -34,7 +34,7 @@ class QuickSignInButton extends StatelessWidget {
               color: primaryColor,
               size: 28.sp,
             ),
-             Gap(AppSpacing.space12),
+             Gap(AppSpacing.space16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
