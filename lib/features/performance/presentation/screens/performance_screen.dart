@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
-import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/design_system/widgets/app_bar/app_app_bar.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/features/performance/presentation/widget/at_a_glance_header.dart';
 import 'package:workwise/features/performance/presentation/widget/monthly_performance.dart';
@@ -20,14 +20,13 @@ class PerformanceScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
-        toolbarHeight: 60,
-
-        title: AppText(
+      appBar: AppAppBar(
+        title: Text(
           context.l10n.performance,
-          style: Theme.of(context).textTheme.headlineLarge,
+          style: Theme.of(context).textTheme.headlineMedium,
         ),
       ),
+
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.space16),
@@ -47,7 +46,6 @@ class PerformanceScreen extends StatelessWidget {
                 const Gap(AppSpacing.space8),
 
                 const PerformanceTrendHeader(),
-
                 const Gap(AppSpacing.space8),
 
                 const PerformanceTrendChart(),

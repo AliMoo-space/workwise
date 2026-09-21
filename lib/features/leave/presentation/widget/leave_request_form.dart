@@ -246,6 +246,7 @@ class _LeaveRequestFormState extends State<LeaveRequestForm> {
 
             AppButton(
               text: context.l10n.submitRequest,
+              textStyle: Theme.of(context).textTheme.headlineSmall,
               onPressed: submitForm,
               height: 48.h,
               width: double.infinity.w,
