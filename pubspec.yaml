@@ -48,6 +48,7 @@ dependencies:
   supabase_flutter: ^2.15.0
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
@@ -90,3 +91,10 @@ flutter_native_splash:
     color: "#ffffff"
 
   web: false
+
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/icon_app.png"
