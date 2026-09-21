@@ -18,7 +18,6 @@ class HomeStatsSectionWidget extends StatelessWidget {
         Expanded(
           child: AppSection(
             child: AppCard(
-              height: 160.h,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -36,13 +35,10 @@ class HomeStatsSectionWidget extends StatelessWidget {
             ),
           ),
         ),
-
         Gap(AppSpacing.space16.w),
-
         Expanded(
           child: AppSection(
             child: AppCard(
-              height: 160.h,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -58,13 +54,10 @@ class HomeStatsSectionWidget extends StatelessWidget {
             ),
           ),
         ),
-
         Gap(AppSpacing.space16.w),
-
         Expanded(
           child: AppSection(
             child: AppCard(
-              height: 160.h,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

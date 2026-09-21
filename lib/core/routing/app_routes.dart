@@ -14,5 +14,6 @@ class AppRoutes {
   static const String aiAssistant = '/aiAssistant';
   static const String performanceScreen = '/performanceScreen';
   static const String attendanceScreen = '/attendanceScreen';
+  static const String mapScreen = '/mapScreen';
   static const String settingsScreen = '/setting';
 }

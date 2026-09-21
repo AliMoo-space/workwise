@@ -704,6 +704,24 @@ abstract class AppLocalizations {
   /// **'Leave type'**
   String get leaveType;
 
+  /// No description provided for @leaveRequestNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave request not found'**
+  String get leaveRequestNotFound;
+
+  /// No description provided for @dateRange.
+  ///
+  /// In en, this message translates to:
+  /// **'Date range'**
+  String get dateRange;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
+
   /// No description provided for @selectLeaveType.
   ///
   /// In en, this message translates to:
