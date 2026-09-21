@@ -54,7 +54,7 @@ class DrawerMenu extends StatelessWidget {
             Navigator.of(context).pop();
 
             if (currentRoute != '/setting') {
-              context.go('/setting');
+            context.push(AppRoutes.settingsScreen);
             }
           },
         ),
