@@ -405,6 +405,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get performanceTrend => 'اتجاه الأداء';
 
   @override
+  String get performance => 'الأداء';
+
+  @override
   String get personalGoals => 'الأهداف الشخصية';
 
   @override
@@ -425,6 +428,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get policyAssistant => 'مساعد السياسات';
+
+  @override
+  String get askAboutPolicyOrBalance => 'اسأل عن سياسة العمل أو رصيد الإجازات';
 
   @override
   String get actionPlan => 'خطة العمل';
@@ -473,6 +479,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+
+  String get strengths => 'نقاط القوة';
+
+  @override
+  String get dateFormat => 'يوم / شهر / سنة';
 
   @override
   String get preferences => 'التفضيلات';

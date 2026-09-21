@@ -30,7 +30,7 @@ class TaskFilterBar extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: TaskFilter.values.length,
-        separatorBuilder: (_, __) => Gap(4.w),
+        separatorBuilder: (_, _) => Gap(4.w),
         itemBuilder: (context, index) {
           final filter = TaskFilter.values[index];
           return ChoiceChip(

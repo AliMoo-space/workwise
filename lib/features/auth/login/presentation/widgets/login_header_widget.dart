@@ -56,15 +56,15 @@ class LoginHeaderWidget extends StatelessWidget {
               AppText(
                 context.l10n.welcomeBack,
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
               const Gap(AppSpacing.space4),
               AppText(
                 context.l10n.signInWithCorporateCredentials,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
+                  color: Theme.of(context).colorScheme.primary,
+                ),
               ),
             ],
           ),

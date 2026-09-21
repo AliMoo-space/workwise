@@ -11,5 +11,8 @@ class AppRoutes {
   static const String createNewPasswordScreen = '/creteNewPasswordScreen';
   static const String tasksScreen = '/tasksScreen';
   static const String profilePage = '/profilePage';
+  static const String aiAssistant = '/aiAssistant';
+  static const String performanceScreen = '/performanceScreen';
+  static const String attendanceScreen = '/attendanceScreen';
   static const String settingsScreen = '/setting';
 }

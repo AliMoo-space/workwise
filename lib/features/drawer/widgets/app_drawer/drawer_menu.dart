@@ -14,8 +14,20 @@ class DrawerMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        DrawerSection(children: [
-            
+        DrawerSection(
+          children: [
+            DrawerMenuItem(
+              icon: Icons.bar_chart_outlined,
+              title: 'Performance',
+              isSelected: currentRoute == AppRoutes.performanceScreen,
+              onTap: () {
+                Navigator.of(context).pop();
+
+                if (currentRoute != AppRoutes.performanceScreen) {
+                  context.push(AppRoutes.performanceScreen);
+                }
+              },
+            ),
           ],
         ),
 

@@ -37,7 +37,7 @@ class FingerPrintScreen extends StatelessWidget {
                     const Gap(AppSpacing.space12),
                     const FingerprintHeaderWidget(),
                     const Gap(AppSpacing.space20),
-                    
+
                     if (isSessionExpired) ...[
                       Padding(
                         padding: const EdgeInsets.symmetric(
