@@ -4,7 +4,6 @@ import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_icon_button.dart';
-import 'package:workwise/core/design_system/widgets/inputs/language_selector.dart';
 
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
@@ -23,7 +22,6 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(context.l10n.homeScreen),
         actions: [
-          LanguageSelector(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: AppSpacing.space12.w),
             child: AppIconButton(
