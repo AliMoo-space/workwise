@@ -54,13 +54,14 @@ dependencies:
   pinput: ^6.0.2
   skeletonizer: ^3.0.0
 
-
 dev_dependencies:
   flutter_lints: ^6.0.0
 
 
   flutter_test:
     sdk: flutter
+
+
 
 flutter:
   generate: true
