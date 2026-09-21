@@ -84,8 +84,9 @@ class LoginForm extends StatelessWidget {
                               width: 1.5.w,
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius:
-                                  BorderRadius.circular(AppRadius.radius4),
+                              borderRadius: BorderRadius.circular(
+                                AppRadius.radius4,
+                              ),
                             ),
                             onChanged: (val) => cubit.toggleKeepMeSignedIn(val),
                           ),
@@ -96,8 +97,8 @@ class LoginForm extends StatelessWidget {
                     AppText(
                       context.l10n.keepMeSignedIn,
                       style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ],
                 ),
@@ -108,9 +109,9 @@ class LoginForm extends StatelessWidget {
                   child: AppText(
                     context.l10n.forgotPassword,
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                          color: Theme.of(context).colorScheme.secondary,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      color: Theme.of(context).colorScheme.secondary,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ],

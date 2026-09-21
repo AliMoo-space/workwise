@@ -28,7 +28,7 @@ class SettingTileWidget extends StatelessWidget {
       borderRadius: AppRadius.radius16,
       backgroundColor: theme.colorScheme.surfaceContainerLow,
       border: Border.all(
-        color: theme.colorScheme.outlineVariant.withOpacity(0.5),
+        color: theme.colorScheme.outlineVariant.withValues(alpha: 0.5),
       ),
       padding: const EdgeInsets.all(AppSpacing.space16),
       child: Row(

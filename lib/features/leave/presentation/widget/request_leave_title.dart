@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:workwise/generated/app_localizations.dart';
+
+import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 class RequestLeaveTitle extends StatelessWidget {
   const RequestLeaveTitle({super.key});
@@ -7,9 +9,9 @@ class RequestLeaveTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: AlignmentGeometry.centerLeft,
-      child: Text(
-        AppLocalizations.of(context).requestLeave,
+      alignment: AlignmentDirectional.centerStart,
+      child: AppText(
+        context.l10n.requestLeave,
         style: Theme.of(context).textTheme.titleMedium,
       ),
     );

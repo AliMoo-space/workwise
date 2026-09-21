@@ -1,6 +1,5 @@
 {
   "@@locale": "ar",
-
   "hello": "مرحبا",
   "welcome": "أهلا وسهلا",
   "hello": "مرحباً",
@@ -206,6 +205,12 @@
   "enterWorkEmailMessage": "يرجى إدخال بريد العمل الإلكتروني",
   "invalidEmailFormatMessage": "صيغة بريد العمل غير صحيحة",
   "enterPasswordMessage": "يرجى إدخال كلمة المرور",
+  "dateFormat": "يوم / شهر / سنة",
+  "strengths": "نقاط القوة",
+  "askAboutPolicyOrBalance": "اسأل عن سياسة العمل أو رصيد الإجازات",
+  "performance": "الأداء",
+  "attendance":"الحضور",
+
 
   "homeScreen": "الرئيسية",
   "notifications": "الإشعارات",

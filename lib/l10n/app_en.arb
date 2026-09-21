@@ -1,15 +1,12 @@
 {
   "@@locale": "en",
-
   "hello": "Hello",
   "welcome": "Welcome",
   "goodbye": "Goodbye",
   "thank_you": "Thank you",
   "yes": "Yes",
-
   "signIn": "Sign In",
   "signInContent": "Sign In Content",
-
   "language": "Language",
   "languageEnglish": "English",
   "languageArabic": "Arabic",
@@ -165,6 +162,7 @@
 "august": "Aug",
 "september": "Sep",
 "performanceTrend": "Performance trend",
+"performance": "Performance",
 "personalGoals": "Personal goals",
 "target": "Target:",
 "onTrack": "On Track",
@@ -172,8 +170,10 @@
   "careerCoachingHrPolicySupport": "Career coaching & HR policy support",
   "careerCoach": "Career Coach",
   "policyAssistant": "Policy Assistant",
+  "askAboutPolicyOrBalance": "Ask about policy or leave balance",
    "actionPlan": "Action plan",
    "developmentAreas": "Development areas",
+  "strengths": "Strengths",
   "loading": "loading...",
 
   "welcomeBack": "Welcome Back",
@@ -204,6 +204,7 @@
   "enterWorkEmailMessage": "Please enter your work email",
   "invalidEmailFormatMessage": "Invalid work email format",
   "enterPasswordMessage": "Please enter your password",
+  "dateFormat": "DD / MM / YYYY",
 
   "homeScreen": "Home Screen",
   "notifications": "Notifications",

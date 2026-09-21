@@ -60,7 +60,7 @@ class DrawerHeader extends StatelessWidget {
             AppText(
               userEmail,
               style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.onPrimary.withOpacity(0.8),
+                color: AppColors.onPrimary.withValues(alpha: 0.8),
               ),
             ),
           ],

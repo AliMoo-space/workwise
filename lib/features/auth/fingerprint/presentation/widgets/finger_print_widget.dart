@@ -56,9 +56,9 @@ class FingerPrintWidget extends StatelessWidget {
             AppText(
               context.l10n.tapToScanFingerprintFaceID,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    fontWeight: FontWeight.w500,
-                  ),
+                color: Theme.of(context).colorScheme.onPrimary,
+                fontWeight: FontWeight.w500,
+              ),
             ),
             const Gap(AppSpacing.space40),
             GestureDetector(
@@ -68,9 +68,9 @@ class FingerPrintWidget extends StatelessWidget {
               child: AppText(
                 context.l10n.useEmailAndPasswordInstead,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontWeight: FontWeight.w600,
-                    ),
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ],
