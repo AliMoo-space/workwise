@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 
 class StatusBadge extends StatelessWidget {
@@ -23,7 +24,11 @@ class StatusBadge extends StatelessWidget {
             const Gap(6),
             Text(
               label,
-              style: TextStyle(color: color, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                color: color,
+                fontWeight: FontWeight.w600,
+                fontSize: 12.sp,
+              ),
             ),
           ],
         ),

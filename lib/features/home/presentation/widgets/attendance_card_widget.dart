@@ -32,15 +32,24 @@ class AttendanceCardWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              AppCard(
-                height: AppSpacing.space40.h,
-                padding: EdgeInsets.symmetric(horizontal: AppSpacing.space12.w),
-                backgroundColor: AppColors.outlineVariant.withValues(alpha: .2),
-                child: Center(
-                  child: AppText(
-                    context.l10n.onShift,
-                    style: AppTextStyles.bodyLarge.copyWith(
-                      color: AppColors.onPrimary,
+              Flexible(
+                child: Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: AppCard(
+                    height: AppSpacing.space40.h,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppSpacing.space12.w,
+                    ),
+                    backgroundColor: AppColors.outlineVariant.withValues(
+                      alpha: .2,
+                    ),
+                    child: Center(
+                      child: AppText(
+                        context.l10n.onShift,
+                        style: AppTextStyles.titleSmall.copyWith(
+                          color: AppColors.onPrimary,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -60,17 +69,21 @@ class AttendanceCardWidget extends StatelessWidget {
             children: [
               Icon(Icons.access_time, color: AppColors.onPrimary),
               Gap(AppSpacing.space8.w),
-              AppText(
-                '03:20:51 ',
-                style: AppTextStyles.headlineMedium.copyWith(
-                  color: AppColors.onPrimary,
-                  fontSize: 35.sp,
+              Flexible(
+                child: AppText(
+                  '03:20:51 ',
+                  style: AppTextStyles.headlineMedium.copyWith(
+                    color: AppColors.onPrimary,
+                    fontSize: 28.sp,
+                  ),
                 ),
               ),
-              AppText(
-                context.l10n.hoursWorked,
-                style: AppTextStyles.bodyLarge.copyWith(
-                  color: AppColors.onPrimary,
+              Flexible(
+                child: AppText(
+                  context.l10n.hoursWorked,
+                  style: AppTextStyles.bodyLarge.copyWith(
+                    color: AppColors.onPrimary,
+                  ),
                 ),
               ),
             ],

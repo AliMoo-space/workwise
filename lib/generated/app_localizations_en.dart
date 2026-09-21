@@ -320,6 +320,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get leaveType => 'Leave type';
 
   @override
+  String get leaveRequestNotFound => 'Leave request not found';
+
+  @override
+  String get dateRange => 'Date range';
+
+  @override
+  String get status => 'Status';
+
+  @override
   String get selectLeaveType => 'Select type...';
 
   @override

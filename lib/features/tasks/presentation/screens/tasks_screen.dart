@@ -38,6 +38,7 @@ class TasksScreen extends StatelessWidget {
             return Scaffold(
               backgroundColor: AppColors.onPrimary,
               body: SafeArea(
+                bottom: false,
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(16.w, 12.h, 16.w, 0.h),
                   child: Column(

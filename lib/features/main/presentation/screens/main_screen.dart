@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:workwise/features/AIAssistant/presentation/screens/AI_assistant.dart';
 import 'package:workwise/features/home/presentation/screens/home_screen.dart';
 import 'package:workwise/features/leave/presentation/screens/leave_screen.dart';
@@ -14,30 +15,36 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
+  bool isDrawerOpen = false;
 
   @override
   Widget build(BuildContext context) {
     final screens = <Widget>[
-      const HomeScreen(),
-      // const AttendanceScreen(),
+      HomeScreen(
+        onDrawerChanged: (isOpen) {
+          setState(() {
+            isDrawerOpen = isOpen;
+          });
+        },
+      ),
       TasksScreen(),
       const Leavescreen(),
       const AiAssistant(),
     ];
 
     return Scaffold(
+      extendBody: true,
       body: screens[currentIndex],
-      bottomNavigationBar: SafeArea(
-        top: false,
-        child: MainBottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
-        ),
-      ),
+      bottomNavigationBar: isDrawerOpen
+          ? null
+          : MainBottomNavigationBar(
+              currentIndex: currentIndex,
+              onTap: (index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+            ),
     );
   }
 }
