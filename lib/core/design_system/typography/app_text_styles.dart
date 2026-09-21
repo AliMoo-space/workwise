@@ -1,8 +1,10 @@
+// ignore: unnecessary_import
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 
 import '../colors/app_colors.dart';
-
 @immutable
 final class AppTextStyles {
   const AppTextStyles._();

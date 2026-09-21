@@ -21,11 +21,10 @@ class AppButton extends StatelessWidget {
     this.width,
     this.height = 56,
     this.backgroundColor,
-    this.fontSize,
+    this.textStyle,
   });
   final Color? backgroundColor;
   final String text;
-  final double? fontSize;
 
   final VoidCallback? onPressed;
 
@@ -42,6 +41,7 @@ class AppButton extends StatelessWidget {
   final double? width;
 
   final double height;
+  final TextStyle? textStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -70,9 +70,8 @@ class AppButton extends StatelessWidget {
 
                   AppText(
                     text,
-                    style: AppTextStyles.titleLarge.copyWith(
+                    style: (textStyle ?? AppTextStyles.titleLarge).copyWith(
                       color: style.foregroundColor?.resolve({}),
-                      fontSize: fontSize,
                     ),
                   ),
 

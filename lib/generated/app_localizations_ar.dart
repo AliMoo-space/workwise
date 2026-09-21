@@ -445,6 +445,48 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dateFormat => 'يوم / شهر / سنة';
 
   @override
+  String get progress => 'التقدم';
+
+  @override
+  String get profileJobDetails => 'تفاصيل الوظيفة';
+
+  @override
+  String get profileEmployeeId => 'معرف الموظف';
+
+  @override
+  String get profileJoined => 'تاريخ الانضمام';
+
+  @override
+  String get profileManagedByHr => 'إدارة الموارد البشرية';
+
+  @override
+  String get profileDirectManager => 'المدير المباشر';
+
+  @override
+  String get profileHeadOfOperations => 'رئيس العمليات';
+
+  @override
+  String get profileWorkLocation => 'موقع العمل';
+
+  @override
+  String get profileWithinAssignedRadius => 'داخل\nالنطاق\nالمخصص';
+
+  @override
+  String get profileWorkEmail => 'البريد الإلكتروني للعمل';
+
+  @override
+  String get profileWorkPhone => 'هاتف العمل';
+
+  @override
+  String get profileContact => 'تواصل';
+
+  @override
+  String get profileActiveFullTime => 'نشط / دوام كامل';
+
+  @override
+  String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+
+  @override
   String get preferences => 'التفضيلات';
 
   @override

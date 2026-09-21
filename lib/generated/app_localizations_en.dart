@@ -444,6 +444,48 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dateFormat => 'DD / MM / YYYY';
 
   @override
+  String get progress => 'Progress';
+
+  @override
+  String get profileJobDetails => 'Job details';
+
+  @override
+  String get profileEmployeeId => 'Employee ID';
+
+  @override
+  String get profileJoined => 'Joined';
+
+  @override
+  String get profileManagedByHr => 'Managed by HR';
+
+  @override
+  String get profileDirectManager => 'DIRECT MANAGER';
+
+  @override
+  String get profileHeadOfOperations => 'Head of Operations';
+
+  @override
+  String get profileWorkLocation => 'WORK LOCATION';
+
+  @override
+  String get profileWithinAssignedRadius => 'Within\nassigned\nradius';
+
+  @override
+  String get profileWorkEmail => 'WORK EMAIL';
+
+  @override
+  String get profileWorkPhone => 'WORK PHONE';
+
+  @override
+  String get profileContact => 'Contact';
+
+  @override
+  String get profileActiveFullTime => 'Active / Full-Time';
+
+  @override
+  String get logoutConfirmMessage => 'Are you sure you want to logout?';
+
+  @override
   String get preferences => 'Preferences';
 
   @override

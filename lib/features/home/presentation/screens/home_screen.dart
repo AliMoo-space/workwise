@@ -8,7 +8,7 @@ import 'package:workwise/core/design_system/widgets/inputs/language_selector.dar
 
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
-import 'package:workwise/features/home/presentation/widgets/app_drawer_widget.dart';
+import 'package:workwise/features/drawer/widgets/app_drawer/app_drawer.dart';
 import 'package:workwise/features/home/presentation/widgets/attendance_card_widget.dart';
 import 'package:workwise/features/home/presentation/widgets/home_stats_grid_widget.dart';
 import 'package:workwise/features/home/presentation/widgets/home_stats_section_widget.dart';
@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: AppDrawerWidget(),
+      drawer: AppDrawer(),
       appBar: AppBar(
         title: Text(context.l10n.homeScreen),
         actions: [

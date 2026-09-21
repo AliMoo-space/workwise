@@ -9,6 +9,7 @@ import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 class JobDetailItem extends StatelessWidget {
   const JobDetailItem({
@@ -37,11 +38,14 @@ class JobDetailItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Gap(AppSpacing.space12.w),
+          Gap(AppSpacing.space8.w),
 
           Expanded(child: _buildContent()),
 
-          if (showButton) ...[Gap(AppSpacing.space8.w), _buildContactButton()],
+          if (showButton) ...[
+            Gap(AppSpacing.space8.w),
+            _buildContactButton(context),
+          ],
 
           if (badge != null) ...[Gap(AppSpacing.space8.w), _buildBadge()],
 
@@ -72,7 +76,7 @@ class JobDetailItem extends StatelessWidget {
 
         Gap(AppSpacing.space4.h),
 
-        AppText(title, style: AppTextStyles.titleMedium),
+        AppText(title, style: AppTextStyles.titleMedium, fontSize: 14.sp),
 
         if (subtitle != null) ...[
           Gap(AppSpacing.space2.h),
@@ -87,14 +91,15 @@ class JobDetailItem extends StatelessWidget {
     );
   }
 
-  Widget _buildContactButton() {
+  Widget _buildContactButton(BuildContext context) {
     return AppButton(
-      text: 'Contact',
-      
+      text: context.l10n.profileContact,
+      textStyle: AppTextStyles.labelSmall,
+      // fontSize: 10.sp,
       onPressed: () {},
       variant: AppButtonVariant.secondary,
       height: 40.h,
-      width: 80.w,
+      width: 100.w,
     );
   }
 

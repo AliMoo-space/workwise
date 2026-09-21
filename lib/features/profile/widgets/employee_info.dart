@@ -6,6 +6,7 @@ import 'package:workwise/core/design_system/spacing/app_radius.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 class EmployeeInfo extends StatelessWidget {
   const EmployeeInfo({super.key});
@@ -21,13 +22,19 @@ class EmployeeInfo extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: _InfoItem(label: 'Employee ID', value: 'EMP-2026-894'),
+            child: _InfoItem(
+              label: context.l10n.profileEmployeeId,
+              value: 'EMP-2026-894',
+            ),
           ),
 
           Gap(AppSpacing.space16.w),
 
           Expanded(
-            child: _InfoItem(label: 'Joined', value: 'August 2026'),
+            child: _InfoItem(
+              label: context.l10n.profileJoined,
+              value: 'August 2026',
+            ),
           ),
         ],
       ),

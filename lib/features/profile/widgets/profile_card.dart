@@ -7,6 +7,7 @@ import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/media/app_network_image.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 import 'employee_info.dart';
 import 'profile_status_badge.dart';
@@ -59,7 +60,9 @@ class ProfileCard extends StatelessWidget {
 
                     Gap(AppSpacing.space8.h),
 
-                    const ProfileStatusBadge(),
+                    ProfileStatusBadge(
+                      text: context.l10n.profileActiveFullTime,
+                    ),
                   ],
                 ),
               ),

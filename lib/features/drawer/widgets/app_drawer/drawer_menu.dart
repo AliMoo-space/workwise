@@ -37,12 +37,10 @@ class DrawerMenu extends StatelessWidget {
             DrawerMenuItem(
               icon: Icons.person_outline,
               title: 'Profile',
-              isSelected: currentRoute == '/profile',
+              isSelected: currentRoute == AppRoutes.profilePage,
               onTap: () {
-                Navigator.of(context).pop();
-
-                if (currentRoute != '/profile') {
-                  context.go('/profile');
+                if (currentRoute != AppRoutes.profilePage) {
+                  context.push(AppRoutes.profilePage);
                 }
               },
             ),
@@ -57,30 +55,6 @@ class DrawerMenu extends StatelessWidget {
 
             if (currentRoute != '/setting') {
               context.go('/setting');
-            }
-          },
-        ),
-        DrawerMenuItem(
-          icon: Icons.language_outlined,
-          title: 'language',
-          isSelected: currentRoute == '/settings',
-          onTap: () {
-            Navigator.of(context).pop();
-
-            if (currentRoute != '/settings') {
-              context.go('/settings');
-            }
-          },
-        ),
-        DrawerMenuItem(
-          icon: Icons.help_outline,
-          title: 'Help & Support',
-          isSelected: currentRoute == '/help',
-          onTap: () {
-            Navigator.of(context).pop();
-
-            if (currentRoute != '/help') {
-              context.go('/help');
             }
           },
         ),
