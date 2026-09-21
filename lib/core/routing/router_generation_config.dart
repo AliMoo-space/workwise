@@ -17,7 +17,7 @@ import 'package:workwise/features/tasks/presentation/screens/tasks_screen.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
-    initialLocation: AppRoutes.mainScreen,
+    initialLocation: AppRoutes.splashScreen,
     routes: [
       GoRoute(
         name: AppRoutes.mainScreen,
