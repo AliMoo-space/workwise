@@ -68,10 +68,11 @@ class HomeStatsGrid extends StatelessWidget {
             Expanded(
               child: AppCard(
                 height: 80.h,
+                padding: EdgeInsets.all(AppSpacing.space12.w),
                 onTap: () => context.push(AppRoutes.performanceScreen),
                 child: Row(
                   children: [
-                    Icon(Icons.bar_chart_outlined),
+                    Icon(Icons.bar_chart_outlined, size: 20.sp),
                     Gap(AppSpacing.space8.w),
                     Expanded(
                       child: AppText(
@@ -81,7 +82,7 @@ class HomeStatsGrid extends StatelessWidget {
                         // textScaler: TextScaler.noScaling,
                       ),
                     ),
-                    Icon(Icons.arrow_forward_ios, size: 16),
+                    Icon(Icons.arrow_forward_ios, size: 14.sp),
                   ],
                 ),
               ),
@@ -90,10 +91,11 @@ class HomeStatsGrid extends StatelessWidget {
             Expanded(
               child: AppCard(
                 height: 80.h,
+                padding: EdgeInsets.all(AppSpacing.space12.w),
                 onTap: () => context.push(AppRoutes.attendanceScreen),
                 child: Row(
                   children: [
-                    Icon(Icons.calendar_month),
+                    Icon(Icons.calendar_month, size: 20.sp),
                     Gap(AppSpacing.space8.w),
                     Expanded(
                       child: AppText(
@@ -103,7 +105,7 @@ class HomeStatsGrid extends StatelessWidget {
                         // textScaler: TextScaler.noScaling,
                       ),
                     ),
-                    Icon(Icons.arrow_forward_ios, size: 16),
+                    Icon(Icons.arrow_forward_ios, size: 14.sp),
                   ],
                 ),
               ),

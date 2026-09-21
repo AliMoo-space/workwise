@@ -321,6 +321,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get leaveType => 'نوع الإجازة';
 
   @override
+  String get leaveRequestNotFound => 'طلب الإجازة غير موجود';
+
+  @override
+  String get dateRange => 'نطاق التاريخ';
+
+  @override
+  String get status => 'الحالة';
+
+  @override
   String get selectLeaveType => 'اختر نوع الإجازة...';
 
   @override
@@ -505,6 +514,5 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appDisplayLanguage => 'لغة عرض التطبيق';
 
   @override
-  String get logoutConfirmationMessage =>
-      'هل أنت ألكيد من أنك تريد تسجيل الخروج؟';
+  String get logoutConfirmationMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
 }

@@ -67,7 +67,7 @@ class MonthlyPerformance extends StatelessWidget {
                   children: [
                     AppText(
                       "87%",
-                      style: Theme.of(context).textTheme.displayMedium,
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
 
                     Gap(AppSpacing.space4.h),

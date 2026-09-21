@@ -63,6 +63,7 @@ class _AiAssistantState extends State<AiAssistant> {
         ),
       ),
       body: SafeArea(
+        bottom: false,
         child: Padding(
           padding: EdgeInsets.all(AppSpacing.space16.r),
           child: Column(

@@ -132,6 +132,9 @@
   "leave": "الإجازات",
   "balancesRequestsGoals": "الأرصدة والطلبات والأهداف الشخصية",
   "leaveType": "نوع الإجازة",
+  "leaveRequestNotFound": "طلب الإجازة غير موجود",
+  "dateRange": "نطاق التاريخ",
+  "status": "الحالة",
 "selectLeaveType": "اختر نوع الإجازة...",
 "annualLeave": "إجازة سنوية",
 "casualLeave": "إجازة عارضة",
@@ -340,5 +343,5 @@
   "pushNotifications": "الإشعارات اللحظية",
   "tasksApprovalsReminders": "المهام، الموافقات، التذكيرات",
   "appDisplayLanguage": "لغة عرض التطبيق",
-  "logoutConfirmationMessage": "هل أنت ألكيد من أنك تريد تسجيل الخروج؟"
+  "logoutConfirmationMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
 }
