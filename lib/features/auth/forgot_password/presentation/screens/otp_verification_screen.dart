@@ -152,7 +152,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     if (isError) ...[
                       const Gap(AppSpacing.space12),
                       AppText(
-                        (state as VerifyOtpErrorState).message,
+                        (state).message,
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: theme.colorScheme.error,
                           fontWeight: FontWeight.w500,

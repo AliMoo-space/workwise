@@ -36,7 +36,7 @@ class LoginWarningBanner extends StatelessWidget {
       backgroundColor: backgroundColor,
       borderRadius: AppRadius.radius12,
       border: Border.all(color: borderColor, width: 1.w),
-      padding:  EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
         horizontal: AppSpacing.space16,
         vertical: AppSpacing.space12,
       ),

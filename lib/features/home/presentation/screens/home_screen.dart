@@ -44,8 +44,8 @@ class HomeScreen extends StatelessWidget {
               Gap(AppSpacing.space24.h),
 
               AttendanceCardWidget(),
-
               Gap(AppSpacing.space24.h),
+
               HomeStatsSectionWidget(),
 
               Gap(AppSpacing.space24.h),
@@ -59,6 +59,7 @@ class HomeScreen extends StatelessWidget {
               Gap(AppSpacing.space16.h),
 
               HomeStatsGrid(),
+
               Gap(AppSpacing.space16.h),
             ],
           ),

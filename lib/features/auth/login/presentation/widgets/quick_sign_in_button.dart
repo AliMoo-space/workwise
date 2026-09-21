@@ -29,12 +29,8 @@ class QuickSignInButton extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(
-              Icons.fingerprint,
-              color: primaryColor,
-              size: 28.sp,
-            ),
-             Gap(AppSpacing.space16),
+            Icon(Icons.fingerprint, color: primaryColor, size: 28.sp),
+            Gap(AppSpacing.space16),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,24 +38,21 @@ class QuickSignInButton extends StatelessWidget {
                   AppText(
                     context.l10n.quickSignIn,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: primaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      color: primaryColor,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const Gap(AppSpacing.space2),
                   AppText(
                     context.l10n.useFingerprintOrFaceId,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: primaryColor,
-                        ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodySmall?.copyWith(color: primaryColor),
                   ),
                 ],
               ),
             ),
-            Icon(
-              Icons.chevron_right,
-              color: primaryColor,
-            ),
+            Icon(Icons.chevron_right, color: primaryColor),
           ],
         ),
       ),

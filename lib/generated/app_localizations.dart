@@ -872,6 +872,12 @@ abstract class AppLocalizations {
   /// **'Performance trend'**
   String get performanceTrend;
 
+  /// No description provided for @performance.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance'**
+  String get performance;
+
   /// No description provided for @personalGoals.
   ///
   /// In en, this message translates to:
@@ -914,6 +920,12 @@ abstract class AppLocalizations {
   /// **'Policy Assistant'**
   String get policyAssistant;
 
+  /// No description provided for @askAboutPolicyOrBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about policy or leave balance'**
+  String get askAboutPolicyOrBalance;
+
   /// No description provided for @actionPlan.
   ///
   /// In en, this message translates to:
@@ -925,6 +937,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Development areas'**
   String get developmentAreas;
+
+  /// No description provided for @strengths.
+  ///
+  /// In en, this message translates to:
+  /// **'Strengths'**
+  String get strengths;
+
+  /// No description provided for @dateFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'DD / MM / YYYY'**
+  String get dateFormat;
 
   /// No description provided for @preferences.
   ///

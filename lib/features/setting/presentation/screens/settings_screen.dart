@@ -70,7 +70,7 @@ class SettingsScreen extends StatelessWidget {
                       subtitle: context.l10n.fingerprintFaceId,
                       trailing: Switch.adaptive(
                         value: cubit.isBiometricEnabled,
-                        activeColor: theme.colorScheme.primary,
+                        activeThumbColor: theme.colorScheme.primary,
                         onChanged: (val) => cubit.toggleBiometric(val),
                       ),
                     ),
@@ -83,7 +83,7 @@ class SettingsScreen extends StatelessWidget {
                       subtitle: context.l10n.tasksApprovalsReminders,
                       trailing: Switch.adaptive(
                         value: cubit.isNotificationsEnabled,
-                        activeColor: theme.colorScheme.primary,
+                        activeThumbColor: theme.colorScheme.primary,
                         onChanged: (val) => cubit.toggleNotifications(val),
                       ),
                     ),

@@ -7,7 +7,7 @@ import 'package:workwise/core/design_system/widgets/buttons/app_icon_button.dart
 import 'package:workwise/core/design_system/widgets/feedback/app_snack_bar.dart';
 import 'package:workwise/core/design_system/widgets/inputs/app_text_field.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
-import 'package:workwise/features/tasks/presentation/widgets/custom_widgets/Feedback.dart';
+import 'package:workwise/features/tasks/presentation/widgets/custom_widgets/feedback.dart';
 import 'package:workwise/generated/app_localizations.dart';
 import '../../data/static_tasks_data.dart';
 import '../../domain/models/task_models.dart';

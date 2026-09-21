@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:workwise/generated/app_localizations.dart';
+import 'package:workwise/core/design_system/spacing/app_radius.dart';
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
+import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
+import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 class MonthlyPerformance extends StatelessWidget {
   const MonthlyPerformance({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context);
-
-    return Container(
+    return AppCard(
       height: 180.h,
       width: double.infinity.w,
       padding: EdgeInsets.symmetric(horizontal: 25.w),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.outline,
-        borderRadius: BorderRadius.circular(20.r),
-      ),
+      backgroundColor: Theme.of(context).colorScheme.outlineVariant,
+      borderRadius: AppRadius.radius20.r,
+      border: Border.all(color: Colors.transparent, width: 0),
+      boxShadow: const [],
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,23 +29,26 @@ class MonthlyPerformance extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                localization.thisMonth,
+              AppText(
+                context.l10n.thisMonth,
                 style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.start,
               ),
 
-              Gap(5.h),
+              Gap(AppSpacing.space4.h),
 
-              Text(
-                localization.yourPerformance,
+              AppText(
+                context.l10n.yourPerformance,
                 style: Theme.of(context).textTheme.titleMedium,
+                textAlign: TextAlign.start,
               ),
 
-              Gap(5.h),
+              Gap(AppSpacing.space4.h),
 
-              Text(
-                "5% ${localization.fromLastMonth}",
+              AppText(
+                "5% ${context.l10n.fromLastMonth}",
                 style: Theme.of(context).textTheme.bodyMedium,
+                textAlign: TextAlign.start,
               ),
             ],
           ),
@@ -60,15 +65,15 @@ class MonthlyPerformance extends StatelessWidget {
                 center: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    AppText(
                       "87%",
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
 
-                    Gap(4.h),
+                    Gap(AppSpacing.space4.h),
 
-                    Text(
-                      localization.overall,
+                    AppText(
+                      context.l10n.overall,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],

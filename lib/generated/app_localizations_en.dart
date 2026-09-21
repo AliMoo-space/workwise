@@ -404,6 +404,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get performanceTrend => 'Performance trend';
 
   @override
+  String get performance => 'Performance';
+
+  @override
   String get personalGoals => 'Personal goals';
 
   @override
@@ -426,10 +429,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get policyAssistant => 'Policy Assistant';
 
   @override
+  String get askAboutPolicyOrBalance => 'Ask about policy or leave balance';
+
+  @override
   String get actionPlan => 'Action plan';
 
   @override
   String get developmentAreas => 'Development areas';
+
+  @override
+  String get strengths => 'Strengths';
+
+  @override
+  String get dateFormat => 'DD / MM / YYYY';
 
   @override
   String get preferences => 'Preferences';

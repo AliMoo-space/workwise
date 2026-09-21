@@ -35,7 +35,7 @@ class OtpResendSection extends StatelessWidget {
             style: theme.textTheme.bodyMedium?.copyWith(
               color: canResend
                   ? theme.colorScheme.primary
-                  : theme.colorScheme.onSurfaceVariant.withOpacity(0.5),
+                  : theme.colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
               fontWeight: FontWeight.bold,
             ),
           ),

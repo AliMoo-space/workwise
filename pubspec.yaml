@@ -49,11 +49,13 @@ dependencies:
   gap: ^3.0.1
   animated_toggle_switch: ^0.8.7
   local_auth: ^3.0.2
-  flutter_native_splash: ^2.4.8
   flutter_map: ^8.3.2
   latlong2: ^0.10.1
   pinput: ^6.0.2
   flutter_bloc: ^9.1.1
+  flutter_native_splash: ^2.4.8  
+  skeletonizer: ^3.0.0
+
 
 
 dev_dependencies:

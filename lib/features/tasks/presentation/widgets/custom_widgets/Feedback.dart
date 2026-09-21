@@ -5,7 +5,7 @@ import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/generated/app_localizations.dart';
 
 class FeedbackCard extends StatelessWidget {
-  const FeedbackCard({required this.feedback});
+  const FeedbackCard({super.key, required this.feedback});
   final String feedback;
 
   @override
