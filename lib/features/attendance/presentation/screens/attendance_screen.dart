@@ -48,12 +48,22 @@ class AttendanceScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AppText(context.l10n.history, style: AppTextStyles.headlineSmall),
-              OutlinedButton.icon(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(minimumSize: const Size(0, 48)),
-                icon: const Icon(Icons.keyboard_arrow_down, size: 18),
-                label: Text(context.l10n.june2026),
+              Expanded(
+                child: AppText(
+                  context.l10n.history,
+                  style: AppTextStyles.headlineSmall,
+                ),
+              ),
+              const Gap(AppSpacing.space8),
+              Flexible(
+                child: OutlinedButton.icon(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: const Size(0, 48),
+                  ),
+                  icon: const Icon(Icons.keyboard_arrow_down, size: 18),
+                  label: Text(context.l10n.june2026),
+                ),
               ),
             ],
           ),

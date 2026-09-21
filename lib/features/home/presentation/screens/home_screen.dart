@@ -13,12 +13,15 @@ import 'package:workwise/features/home/presentation/widgets/home_stats_grid_widg
 import 'package:workwise/features/home/presentation/widgets/home_stats_section_widget.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key, this.onDrawerChanged});
+
+  final ValueChanged<bool>? onDrawerChanged;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: AppDrawer(),
+      onDrawerChanged: onDrawerChanged,
       appBar: AppBar(
         title: Text(context.l10n.homeScreen),
         actions: [

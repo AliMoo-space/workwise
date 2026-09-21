@@ -14,11 +14,18 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
+  bool isDrawerOpen = false;
 
   @override
   Widget build(BuildContext context) {
     final screens = <Widget>[
-      const HomeScreen(),
+      HomeScreen(
+        onDrawerChanged: (isOpen) {
+          setState(() {
+            isDrawerOpen = isOpen;
+          });
+        },
+      ),
       // const AttendanceScreen(),
       TasksScreen(),
       const Leavescreen(),
@@ -27,17 +34,19 @@ class _MainScreenState extends State<MainScreen> {
 
     return Scaffold(
       body: screens[currentIndex],
-      bottomNavigationBar: SafeArea(
-        top: false,
-        child: MainBottomNavigationBar(
-          currentIndex: currentIndex,
-          onTap: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
-        ),
-      ),
+      bottomNavigationBar: isDrawerOpen
+          ? null
+          : SafeArea(
+              top: false,
+              child: MainBottomNavigationBar(
+                currentIndex: currentIndex,
+                onTap: (index) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                },
+              ),
+            ),
     );
   }
 }

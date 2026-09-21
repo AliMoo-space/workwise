@@ -9,6 +9,7 @@ import 'package:workwise/features/auth/reset_password/presentation/screens/creat
 import 'package:workwise/features/home/presentation/screens/home_screen.dart';
 import 'package:workwise/features/leave/presentation/widget/leavehistoryscreen.dart';
 import 'package:workwise/features/main/presentation/screens/main_screen.dart';
+import 'package:workwise/features/attendance/presentation/screens/map_screen.dart';
 import 'package:workwise/features/profile/presentation/screen/profile_page.dart';
 import 'package:workwise/features/performance/presentation/screens/performance_screen.dart';
 import 'package:workwise/features/setting/presentation/screens/settings_screen.dart';
@@ -17,7 +18,7 @@ import 'package:workwise/features/tasks/presentation/screens/tasks_screen.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
-    initialLocation: AppRoutes.splashScreen,
+    initialLocation: AppRoutes.mainScreen,
     routes: [
       GoRoute(
         name: AppRoutes.mainScreen,
@@ -95,6 +96,12 @@ class RouterGenerationConfig {
             child: const AttendanceScreen(),
           );
         },
+      ),
+      GoRoute(
+        name: AppRoutes.mapScreen,
+        path: AppRoutes.mapScreen,
+        pageBuilder: (context, state) =>
+            slideTransitionPage(state: state, child: const MapScreen()),
       ),
       GoRoute(
         name: AppRoutes.performanceScreen,
