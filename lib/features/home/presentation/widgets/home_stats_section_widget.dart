@@ -18,7 +18,6 @@ class HomeStatsSectionWidget extends StatelessWidget {
         Expanded(
           child: AppSection(
             child: AppCard(
-              height: 160.h,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -27,20 +26,19 @@ class HomeStatsSectionWidget extends StatelessWidget {
                   AppText('3', style: AppTextStyles.headlineSmall),
                   AppText(
                     context.l10n.pendingTasks,
-                    style: AppTextStyles.headlineSmall.copyWith(fontSize: 16),
+                    style: AppTextStyles.headlineSmall.copyWith(
+                      fontSize: 15.sp,
+                    ),
                   ),
                 ],
               ),
             ),
           ),
         ),
-
         Gap(AppSpacing.space16.w),
-
         Expanded(
           child: AppSection(
             child: AppCard(
-              height: 160.h,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -49,20 +47,17 @@ class HomeStatsSectionWidget extends StatelessWidget {
                   AppText('June 12', style: AppTextStyles.headlineSmall),
                   AppText(
                     context.l10n.nextMeeting,
-                    style: AppTextStyles.bodySmall,
+                    style: AppTextStyles.bodySmall.copyWith(fontSize: 10.sp),
                   ),
                 ],
               ),
             ),
           ),
         ),
-
         Gap(AppSpacing.space16.w),
-
         Expanded(
           child: AppSection(
             child: AppCard(
-              height: 160.h,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -71,7 +66,9 @@ class HomeStatsSectionWidget extends StatelessWidget {
                   AppText('13d', style: AppTextStyles.headlineSmall),
                   AppText(
                     context.l10n.leaveBalance,
-                    style: AppTextStyles.headlineSmall.copyWith(fontSize: 16),
+                    style: AppTextStyles.headlineSmall.copyWith(
+                      fontSize: 15.sp,
+                    ),
                   ),
                 ],
               ),

@@ -8,7 +8,9 @@ import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/features/attendance/presentation/widgets/status_badge.dart';
+import 'package:go_router/go_router.dart';
 
 class LocationStatusCard extends StatelessWidget {
   const LocationStatusCard({super.key});
@@ -20,6 +22,7 @@ class LocationStatusCard extends StatelessWidget {
     return AppCard(
       padding: EdgeInsets.zero,
       borderRadius: 24,
+      onTap: () => context.push(AppRoutes.mapScreen),
       child: Column(
         children: [
           ClipRRect(
@@ -105,9 +108,15 @@ class LocationStatusCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                StatusBadge(
-                  label: context.l10n.valid,
-                  color: AppColors.success,
+                Flexible(
+                  child: Align(
+                    alignment: AlignmentDirectional.centerEnd,
+
+                    child: StatusBadge(
+                      label: context.l10n.valid,
+                      color: AppColors.success,
+                    ),
+                  ),
                 ),
               ],
             ),

@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
+import 'package:workwise/core/design_system/widgets/app_bar/app_app_bar.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
@@ -16,20 +17,26 @@ class AttendanceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppAppBar(
+        title: Text(
+          context.l10n.attendance,
+          style: Theme.of(context).textTheme.headlineMedium,
+        ),
+      ),
       body: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: AppSpacing.space16.w,
           vertical: AppSpacing.space24.h,
         ),
         children: [
-          AppText(context.l10n.attendance, style: AppTextStyles.headlineLarge),
-          const Gap(AppSpacing.space4),
-          AppText(
-            context.l10n.attendanceDescription,
-            style: AppTextStyles.bodyMedium,
-            color: AppColors.textSecondary,
-          ),
-          const Gap(AppSpacing.space20),
+          // AppText(context.l10n.attendance, style: AppTextStyles.headlineLarge),
+          // const Gap(AppSpacing.space4),
+          // AppText(
+          //   context.l10n.attendanceDescription,
+          //   style: AppTextStyles.bodyMedium,
+          //   color: AppColors.textSecondary,
+          // ),
+          // const Gap(AppSpacing.space20),
           const LocationStatusCard(),
           const Gap(AppSpacing.space20),
           AppButton(
@@ -41,12 +48,22 @@ class AttendanceScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AppText(context.l10n.history, style: AppTextStyles.headlineSmall),
-              OutlinedButton.icon(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(minimumSize: const Size(0, 48)),
-                icon: const Icon(Icons.keyboard_arrow_down, size: 18),
-                label: Text(context.l10n.june2026),
+              Expanded(
+                child: AppText(
+                  context.l10n.history,
+                  style: AppTextStyles.headlineSmall,
+                ),
+              ),
+              const Gap(AppSpacing.space8),
+              Flexible(
+                child: OutlinedButton.icon(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(
+                    minimumSize: const Size(0, 48),
+                  ),
+                  icon: const Icon(Icons.keyboard_arrow_down, size: 18),
+                  label: Text(context.l10n.june2026),
+                ),
               ),
             ],
           ),
