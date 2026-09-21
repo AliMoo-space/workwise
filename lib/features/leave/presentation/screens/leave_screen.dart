@@ -23,40 +23,39 @@ class Leavescreen extends StatelessWidget {
         BlocProvider(create: (_) => sl<LeaveBalancesCubit>()..getBalances()),
         BlocProvider(create: (_) => sl<LeaveHistoryCubit>()..getHistory()),
       ],
-      child: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.space16),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const LeaveTitle(),
+      child: SafeArea(
+        bottom: false,
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.space16),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                const LeaveTitle(),
 
-                  const LeaveSubtitle(),
+                const LeaveSubtitle(),
 
-                  const Gap(AppSpacing.space16),
+                const Gap(AppSpacing.space16),
 
-                  const LeaveBalancesCard(),
+                const LeaveBalancesCard(),
 
-                  const Gap(AppSpacing.space8),
+                const Gap(AppSpacing.space8),
 
-                  const RequestLeaveTitle(),
+                const RequestLeaveTitle(),
 
-                  const Gap(AppSpacing.space8),
+                const Gap(AppSpacing.space8),
 
-                  const LeaveRequestForm(),
+                const LeaveRequestForm(),
 
-                  const Gap(AppSpacing.space16),
+                const Gap(AppSpacing.space16),
 
-                  const LeaveHistoryTitle(),
+                const LeaveHistoryTitle(),
 
-                  const Gap(AppSpacing.space4),
+                const Gap(AppSpacing.space4),
 
-                  const LeaveHistoryList(),
+                const LeaveHistoryList(),
 
-                  const Gap(AppSpacing.space8),
-                ],
-              ),
+                const Gap(AppSpacing.space8),
+              ],
             ),
           ),
         ),
