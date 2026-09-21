@@ -7,6 +7,7 @@ import 'package:workwise/features/auth/forgot_password/presentation/screens/otp_
 import 'package:workwise/features/auth/login/presentation/screens/login_screen.dart';
 import 'package:workwise/features/auth/reset_password/presentation/screens/create_new_passwors_screen.dart';
 import 'package:workwise/features/home/presentation/screens/home_screen.dart';
+import 'package:workwise/features/leave/presentation/widget/leavehistoryscreen.dart';
 import 'package:workwise/features/main/presentation/screens/main_screen.dart';
 import 'package:workwise/features/attendance/presentation/screens/map_screen.dart';
 import 'package:workwise/features/profile/presentation/screen/profile_page.dart';
@@ -117,6 +118,14 @@ class RouterGenerationConfig {
         path: AppRoutes.settingsScreen,
         pageBuilder: (context, state) =>
             slideTransitionPage(state: state, child: const SettingsScreen()),
+      ),
+      GoRoute(
+        name: AppRoutes.leaveScreen,
+        path: AppRoutes.leaveScreen,
+        pageBuilder: (context, state) => slideTransitionPage(
+          state: state,
+          child: const LeaveHistoryScreen(),
+        ),
       ),
     ],
   );

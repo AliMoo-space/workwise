@@ -14,7 +14,7 @@ class ActionPlanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      height: 250.h,
+      height: 265.h,
       width: double.infinity.w,
       padding: EdgeInsets.zero,
       backgroundColor: Theme.of(context).colorScheme.onError,
