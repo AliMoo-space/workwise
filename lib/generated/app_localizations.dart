@@ -938,6 +938,18 @@ abstract class AppLocalizations {
   /// **'Development areas'**
   String get developmentAreas;
 
+  /// No description provided for @strengths.
+  ///
+  /// In en, this message translates to:
+  /// **'Strengths'**
+  String get strengths;
+
+  /// No description provided for @dateFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'DD / MM / YYYY'**
+  String get dateFormat;
+
   /// No description provided for @progress.
   ///
   /// In en, this message translates to:
@@ -1021,18 +1033,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to logout?'**
   String get logoutConfirmMessage;
-
-  /// No description provided for @strengths.
-  ///
-  /// In en, this message translates to:
-  /// **'Strengths'**
-  String get strengths;
-
-  /// No description provided for @dateFormat.
-  ///
-  /// In en, this message translates to:
-  /// **'DD / MM / YYYY'**
-  String get dateFormat;
 
   /// No description provided for @preferences.
   ///

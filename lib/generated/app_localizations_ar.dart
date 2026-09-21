@@ -439,6 +439,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get developmentAreas => 'مجالات التطوير';
 
   @override
+  String get strengths => 'نقاط القوة';
+
+  @override
+  String get dateFormat => 'يوم / شهر / سنة';
+
+  @override
   String get progress => 'التقدم';
 
   @override
@@ -479,11 +485,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
-
-  String get strengths => 'نقاط القوة';
-
-  @override
-  String get dateFormat => 'يوم / شهر / سنة';
 
   @override
   String get preferences => 'التفضيلات';

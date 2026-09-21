@@ -83,7 +83,7 @@ class RouterGenerationConfig {
         name: AppRoutes.tasksScreen,
         path: AppRoutes.tasksScreen,
         pageBuilder: (context, state) =>
-        slideTransitionPage(state: state, child: TasksScreen()),
+            slideTransitionPage(state: state, child: TasksScreen()),
       ),
       GoRoute(
         name: AppRoutes.attendanceScreen,

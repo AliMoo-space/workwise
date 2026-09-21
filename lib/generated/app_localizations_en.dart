@@ -438,6 +438,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get developmentAreas => 'Development areas';
 
   @override
+  String get strengths => 'Strengths';
+
+  @override
+  String get dateFormat => 'DD / MM / YYYY';
+
+  @override
   String get progress => 'Progress';
 
   @override
@@ -478,11 +484,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logoutConfirmMessage => 'Are you sure you want to logout?';
-
-  String get strengths => 'Strengths';
-
-  @override
-  String get dateFormat => 'DD / MM / YYYY';
 
   @override
   String get preferences => 'Preferences';
