@@ -3,8 +3,9 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
+import 'package:workwise/core/design_system/widgets/feedback/app_dialog.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
-import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/features/drawer/widgets/app_drawer/drawer_footer.dart';
 import 'package:workwise/features/drawer/widgets/app_drawer/drawer_header.dart'
     as custom;
@@ -43,7 +44,19 @@ class AppDrawer extends StatelessWidget {
             onSettingsTap: () {
               // Navigate to settings when route is available.
             },
-            onLogoutTap: () => _showLogoutDialog(context),
+            onLogoutTap: () async {
+              final confirmed = await AppDialog.confirm(
+                context,
+                title: context.l10n.logout,
+                message: context.l10n.logoutConfirmMessage,
+                confirmText: context.l10n.logout,
+                cancelText: context.l10n.cancel,
+              );
+
+              if (confirmed && context.mounted) {
+                context.go('/loginScreen');
+              }
+            },
           ),
         ],
       ),
@@ -73,7 +86,7 @@ class AppDrawer extends StatelessWidget {
                 // TODO: Implement logout logic
                 // context.read<AuthCubit>().logout();
 
-                context.go(AppRoutes.loginScreen);
+                // context.go(AppRoutes.signInScreen);
               },
               child: const AppText('Logout', color: AppColors.error),
             ),

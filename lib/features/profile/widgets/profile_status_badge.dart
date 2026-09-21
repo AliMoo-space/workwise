@@ -9,7 +9,9 @@ import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 
 class ProfileStatusBadge extends StatelessWidget {
-  const ProfileStatusBadge({super.key});
+  const ProfileStatusBadge({super.key, this.text = 'Active / Full-Time'});
+
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,7 @@ class ProfileStatusBadge extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: AppColors.success.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(
-          AppRadius.radius16.r,
-        ),
+        borderRadius: BorderRadius.circular(AppRadius.radius16.r),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -39,7 +39,7 @@ class ProfileStatusBadge extends StatelessWidget {
           Gap(AppSpacing.space4.w),
 
           AppText(
-            'Active / Full-Time',
+            text,
             style: AppTextStyles.labelMedium,
             color: AppColors.success,
             fontSize: 10.sp,

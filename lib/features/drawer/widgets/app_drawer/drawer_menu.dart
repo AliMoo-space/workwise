@@ -17,40 +17,14 @@ class DrawerMenu extends StatelessWidget {
         DrawerSection(
           children: [
             DrawerMenuItem(
-              icon: Icons.home_sharp,
-              title: 'Home',
-              isSelected: currentRoute == AppRoutes.homeScreen,
+              icon: Icons.bar_chart_outlined,
+              title: 'Performance',
+              isSelected: currentRoute == AppRoutes.performanceScreen,
               onTap: () {
                 Navigator.of(context).pop();
 
-                if (currentRoute != AppRoutes.homeScreen) {
-                  context.go(AppRoutes.homeScreen);
-                }
-              },
-            ),
-
-            DrawerMenuItem(
-              icon: Icons.task_outlined,
-              title: 'Tasks',
-              isSelected: currentRoute == AppRoutes.tasksScreen,
-              onTap: () {
-                Navigator.of(context).pop();
-
-                if (currentRoute != AppRoutes.tasksScreen) {
-                  context.go(AppRoutes.tasksScreen);
-                }
-              },
-            ),
-
-            DrawerMenuItem(
-              icon: Icons.note_outlined,
-              title: 'Notes',
-              isSelected: currentRoute == AppRoutes.notesScreen,
-              onTap: () {
-                Navigator.of(context).pop();
-
-                if (currentRoute != AppRoutes.notesScreen) {
-                  context.go(AppRoutes.notesScreen);
+                if (currentRoute != AppRoutes.performanceScreen) {
+                  context.push(AppRoutes.performanceScreen);
                 }
               },
             ),
@@ -63,12 +37,10 @@ class DrawerMenu extends StatelessWidget {
             DrawerMenuItem(
               icon: Icons.person_outline,
               title: 'Profile',
-              isSelected: currentRoute == '/profile',
+              isSelected: currentRoute == AppRoutes.profilePage,
               onTap: () {
-                Navigator.of(context).pop();
-
-                if (currentRoute != '/profile') {
-                  context.go('/profile');
+                if (currentRoute != AppRoutes.profilePage) {
+                  context.push(AppRoutes.profilePage);
                 }
               },
             ),

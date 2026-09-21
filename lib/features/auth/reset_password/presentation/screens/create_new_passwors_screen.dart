@@ -6,16 +6,13 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/features/auth/reset_password/presentation/logic/reset_password_cubit.dart';
 import 'package:workwise/features/auth/reset_password/presentation/logic/reset_password_state.dart';
-import 'package:workwise/features/auth/reset_password/presentation/widgets/ResetPasswordForm.dart';
-import 'package:workwise/features/auth/reset_password/presentation/widgets/ResetPasswordHeaderWidget.dart';
+import 'package:workwise/features/auth/reset_password/presentation/widgets/reset_password_form.dart';
+import 'package:workwise/features/auth/reset_password/presentation/widgets/reset_password_header_widget.dart';
 
 class CreateNewPasswordScreen extends StatefulWidget {
   final String email;
 
-  const CreateNewPasswordScreen({
-    super.key,
-    required this.email,
-  });
+  const CreateNewPasswordScreen({super.key, required this.email});
 
   @override
   State<CreateNewPasswordScreen> createState() =>

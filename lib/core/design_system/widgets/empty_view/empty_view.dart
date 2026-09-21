@@ -23,7 +23,6 @@ class EmptyView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Center(
       child: Padding(
         padding: EdgeInsets.all(24.r),
@@ -36,7 +35,10 @@ class EmptyView extends StatelessWidget {
               color: iconColor ?? Theme.of(context).colorScheme.primary,
             ),
             Gap(12.h),
-            AppText(title ?? context.l10n.noTasksHere, style: AppTextStyles.titleLarge),
+            AppText(
+              title ?? context.l10n.noTasksHere,
+              style: AppTextStyles.titleLarge,
+            ),
             Gap(6.h),
             AppText(
               message ?? context.l10n.noTasksMessage,

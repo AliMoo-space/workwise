@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 class ProgressSlider extends StatelessWidget {
   const ProgressSlider({
@@ -22,7 +23,7 @@ class ProgressSlider extends StatelessWidget {
       Row(
         children: [
           AppText(
-            'Progress',
+            context.l10n.progress,
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15.sp),
           ),
           Spacer(),

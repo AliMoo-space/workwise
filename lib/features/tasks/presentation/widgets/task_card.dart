@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
+import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 import '../../domain/models/task_models.dart';
 import 'custom_widgets/priority_badge.dart';
@@ -48,7 +50,7 @@ class TaskCard extends StatelessWidget {
             Gap(20.w),
             TaskDetailWidget(
               icon: Icons.calendar_today_outlined,
-              text: 'Due ${_date(task.deadline)}',
+              text: '${context.l10n.due} ${_date(task.deadline)}',
             ),
           ],
         ),
@@ -56,7 +58,11 @@ class TaskCard extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: LinearProgressIndicator(value: task.progress / 100),
+              child: LinearProgressIndicator(
+                value: task.progress / 100,
+                valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
+                backgroundColor: AppColors.textDisabled,
+              ),
             ),
             Gap(12.w),
             Text('${task.progress}%', style: TextStyle(fontSize: 14.sp)),

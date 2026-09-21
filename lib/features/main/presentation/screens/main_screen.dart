@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:workwise/features/attendance/presentation/screens/attendance_screen.dart';
+import 'package:workwise/features/AIAssistant/presentation/screens/AI_assistant.dart';
 import 'package:workwise/features/home/presentation/screens/home_screen.dart';
+import 'package:workwise/features/leave/presentation/screens/leave_screen.dart';
 import 'package:workwise/features/main/presentation/widgets/main_bottom_navigation_bar.dart';
-import 'package:workwise/features/profile/presentation/screen/profile_page.dart';
-import 'package:workwise/features/setting/presentation/screens/settings_screen.dart';
 import 'package:workwise/features/tasks/presentation/screens/tasks_screen.dart';
-
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -21,14 +19,14 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final screens = <Widget>[
       const HomeScreen(),
-      const AttendanceScreen(),
-      const TasksScreen(),
-      const ProfilePage(),
+      // const AttendanceScreen(),
+      TasksScreen(),
+      const Leavescreen(),
+      const AiAssistant(),
     ];
 
     return Scaffold(
       body: screens[currentIndex],
-
       bottomNavigationBar: SafeArea(
         top: false,
         child: MainBottomNavigationBar(

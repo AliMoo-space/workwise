@@ -1,8 +1,11 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
+import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/features/performance/presentation/widget/at_a_glance_header.dart';
-import 'package:workwise/features/performance/presentation/widget/home_greeting.dart';
 import 'package:workwise/features/performance/presentation/widget/monthly_performance.dart';
 import 'package:workwise/features/performance/presentation/widget/performance_overview.dart';
 import 'package:workwise/features/performance/presentation/widget/performance_trend_chart.dart';
@@ -16,43 +19,48 @@ class PerformanceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      appBar: AppBar(
+        toolbarHeight: 60,
+
+        title: AppText(
+          context.l10n.performance,
+          style: Theme.of(context).textTheme.headlineLarge,
+        ),
+      ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(15),
+          padding: const EdgeInsets.all(AppSpacing.space16),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const HomeGreeting(),
-
-                Gap(15.h),
-
                 const MonthlyPerformance(),
 
-                Gap(10.h),
+                const Gap(AppSpacing.space8),
 
                 const AtAGlanceHeader(),
 
-                Gap(10.h),
+                const Gap(AppSpacing.space8),
 
                 const PerformanceOverview(),
 
-                Gap(10.h),
+                const Gap(AppSpacing.space8),
 
                 const PerformanceTrendHeader(),
 
-                Gap(10.h),
+                const Gap(AppSpacing.space8),
 
                 const PerformanceTrendChart(),
 
-                Gap(10.h),
+                const Gap(AppSpacing.space8),
 
                 const PersonalGoalsTitle(),
 
-                Gap(10.h),
+                const Gap(AppSpacing.space8),
 
                 const PersonalGoalsList(),
 
-                Gap(10.h),
+                const Gap(AppSpacing.space8),
               ],
             ),
           ),

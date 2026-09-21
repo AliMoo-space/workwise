@@ -12,7 +12,6 @@ import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/logic/forgot_password_cubit.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/logic/forgot_password_state.dart';
-
 import 'package:workwise/features/auth/forgot_password/presentation/widgets/otp_header_widget.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/widgets/otp_resend_section.dart';
 
@@ -152,7 +151,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     if (isError) ...[
                       const Gap(AppSpacing.space12),
                       AppText(
-                        (state as VerifyOtpErrorState).message,
+                        (state).message,
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: theme.colorScheme.error,
                           fontWeight: FontWeight.w500,

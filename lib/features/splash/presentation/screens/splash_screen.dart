@@ -58,8 +58,8 @@ class SplashScreen extends StatelessWidget {
                     AppText(
                       context.l10n.loading,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                     ),
                   ],
                 ),

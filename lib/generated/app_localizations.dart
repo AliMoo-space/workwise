@@ -872,6 +872,12 @@ abstract class AppLocalizations {
   /// **'Performance trend'**
   String get performanceTrend;
 
+  /// No description provided for @performance.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance'**
+  String get performance;
+
   /// No description provided for @personalGoals.
   ///
   /// In en, this message translates to:
@@ -914,6 +920,12 @@ abstract class AppLocalizations {
   /// **'Policy Assistant'**
   String get policyAssistant;
 
+  /// No description provided for @askAboutPolicyOrBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask about policy or leave balance'**
+  String get askAboutPolicyOrBalance;
+
   /// No description provided for @actionPlan.
   ///
   /// In en, this message translates to:
@@ -925,6 +937,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Development areas'**
   String get developmentAreas;
+
+  /// No description provided for @strengths.
+  ///
+  /// In en, this message translates to:
+  /// **'Strengths'**
+  String get strengths;
+
+  /// No description provided for @dateFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'DD / MM / YYYY'**
+  String get dateFormat;
+
+  /// No description provided for @progress.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress'**
+  String get progress;
+
+  /// No description provided for @profileJobDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Job details'**
+  String get profileJobDetails;
+
+  /// No description provided for @profileEmployeeId.
+  ///
+  /// In en, this message translates to:
+  /// **'Employee ID'**
+  String get profileEmployeeId;
+
+  /// No description provided for @profileJoined.
+  ///
+  /// In en, this message translates to:
+  /// **'Joined'**
+  String get profileJoined;
+
+  /// No description provided for @profileManagedByHr.
+  ///
+  /// In en, this message translates to:
+  /// **'Managed by HR'**
+  String get profileManagedByHr;
+
+  /// No description provided for @profileDirectManager.
+  ///
+  /// In en, this message translates to:
+  /// **'DIRECT MANAGER'**
+  String get profileDirectManager;
+
+  /// No description provided for @profileHeadOfOperations.
+  ///
+  /// In en, this message translates to:
+  /// **'Head of Operations'**
+  String get profileHeadOfOperations;
+
+  /// No description provided for @profileWorkLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'WORK LOCATION'**
+  String get profileWorkLocation;
+
+  /// No description provided for @profileWithinAssignedRadius.
+  ///
+  /// In en, this message translates to:
+  /// **'Within\nassigned\nradius'**
+  String get profileWithinAssignedRadius;
+
+  /// No description provided for @profileWorkEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'WORK EMAIL'**
+  String get profileWorkEmail;
+
+  /// No description provided for @profileWorkPhone.
+  ///
+  /// In en, this message translates to:
+  /// **'WORK PHONE'**
+  String get profileWorkPhone;
+
+  /// No description provided for @profileContact.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get profileContact;
+
+  /// No description provided for @profileActiveFullTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Active / Full-Time'**
+  String get profileActiveFullTime;
+
+  /// No description provided for @logoutConfirmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to logout?'**
+  String get logoutConfirmMessage;
 
   /// No description provided for @preferences.
   ///

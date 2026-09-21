@@ -3,7 +3,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
-import 'package:workwise/generated/app_localizations.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 
 import '../../domain/models/task_models.dart';
 
@@ -14,12 +14,10 @@ class TaskStatusBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-
     final (label, color) = switch (status) {
-      TaskStatus.inProgress => (l10n.inProgress, AppColors.secondary),
-      TaskStatus.underReview => (l10n.underReview, AppColors.warning),
-      TaskStatus.completed => (l10n.completed, AppColors.success),
+      TaskStatus.inProgress => (context.l10n.inProgress, AppColors.secondary),
+      TaskStatus.underReview => (context.l10n.underReview, AppColors.warning),
+      TaskStatus.completed => (context.l10n.completed, AppColors.success),
     };
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),

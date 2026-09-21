@@ -1,15 +1,19 @@
 // ignore_for_file: avoid_print
 
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
+import 'package:workwise/core/design_system/spacing/app_radius.dart';
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/inputs/app_dropdown.dart';
 import 'package:workwise/core/design_system/widgets/inputs/app_text_field.dart';
+import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
+import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/utils/app_helpers.dart';
-import 'package:workwise/generated/app_localizations.dart';
+import 'package:workwise/core/utils/app_validator.dart';
 
 // ignore: must_be_immutable
 class LeaveRequestForm extends StatefulWidget {
@@ -20,206 +24,235 @@ class LeaveRequestForm extends StatefulWidget {
 }
 
 class _LeaveRequestFormState extends State<LeaveRequestForm> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   File? selectedImage;
-
+  String? selectedLeaveType;
   final TextEditingController startDateController = TextEditingController();
-
   final TextEditingController endDateController = TextEditingController();
+  final TextEditingController reasonController = TextEditingController();
+
+  @override
+  void dispose() {
+    startDateController.dispose();
+    endDateController.dispose();
+    reasonController.dispose();
+
+    super.dispose();
+  }
+
+  void submitForm() {
+    if (formKey.currentState!.validate()) {
+      // Form is valid.
+      // Submit the leave request here.
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    final localization = AppLocalizations.of(context);
-
-    return SizedBox(
-      height: 520.h,
+    return AppCard(
+      height: 560.h,
       width: double.infinity,
-      child: Card(
-        color: Theme.of(context).colorScheme.onError,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.r),
-          side: BorderSide(
-            color: Theme.of(context).colorScheme.outline,
-            width: 1.w,
-          ),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(15.r),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  localization.leaveType,
-                  style: Theme.of(context).textTheme.labelLarge,
+      padding: EdgeInsets.all(15.r),
+      backgroundColor: Theme.of(context).colorScheme.onError,
+      borderRadius: AppRadius.radius32.r,
+      border: Border.all(
+        color: Theme.of(context).colorScheme.outlineVariant,
+        width: 1.w,
+      ),
+      boxShadow: const [],
+      child: Form(
+        key: formKey,
+        child: Column(
+          children: [
+            Align(
+              alignment: AlignmentDirectional.topStart,
+              child: AppText(
+                context.l10n.leaveType,
+                style: Theme.of(context).textTheme.labelLarge,
+              ),
+            ),
+
+            Gap(AppSpacing.space8.h),
+
+            AppDropdown<String>(
+              hint: context.l10n.selectLeaveType,
+              fillColor: Theme.of(context).colorScheme.surface,
+              borderRadius: AppRadius.radius32.r,
+              items: [
+                DropdownMenuItem(
+                  value: 'Annual Leave',
+                  child: AppText(context.l10n.annualLeave),
                 ),
+                DropdownMenuItem(
+                  value: 'Casual Leave',
+                  child: AppText(context.l10n.casualLeave),
+                ),
+                DropdownMenuItem(
+                  value: 'Sick Leave',
+                  child: AppText(context.l10n.sickLeave),
+                ),
+              ],
+              onChanged: (value) {
+                setState(() {
+                  selectedLeaveType = value;
+                });
+              },
+              validator: AppValidators.required(
+                message: 'Please select a leave type.',
               ),
+            ),
 
-              Gap(10.h),
+            Gap(AppSpacing.space16.h),
 
-              AppDropdown<String>(
-                hint: localization.selectLeaveType,
-                fillColor: Theme.of(context).colorScheme.surface,
-                borderRadius: 30,
-                items: [
-                  DropdownMenuItem(
-                    value: 'Annual Leave',
-                    child: Text(localization.annualLeave),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Casual Leave',
-                    child: Text(localization.casualLeave),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Sick Leave',
-                    child: Text(localization.sickLeave),
-                  ),
-                ],
-                onChanged: (value) {
-                  print(value);
-                },
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppText(
+                        context.l10n.startDate,
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
 
-              Gap(15.h),
+                      Gap(AppSpacing.space8.h),
 
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          localization.startDate,
-                          style: Theme.of(context).textTheme.labelLarge,
+                      AppTextField(
+                        controller: startDateController,
+                        hintText: context.l10n.dateFormat,
+                        readOnly: true,
+                        onTap: () =>
+                            AppHelpers.selectDate(context, startDateController),
+                        suffixIcon: const Icon(Icons.calendar_today_outlined),
+                        fillColor: Theme.of(context).colorScheme.surface,
+                        borderRadius: AppRadius.radius32.r,
+                        validator: AppValidators.required(
+                          message: 'Please select a start date.',
                         ),
+                      ),
+                    ],
+                  ),
+                ),
 
-                        Gap(10.h),
+                Gap(AppSpacing.space16.w),
 
-                        AppTextField(
-                          controller: startDateController,
-                          hintText: 'DD / MM / YYYY',
-                          readOnly: true,
-                          onTap: () => AppHelpers.selectDate(
-                            context,
-                            startDateController,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppText(
+                        context.l10n.endDate,
+                        style: Theme.of(context).textTheme.labelLarge,
+                      ),
+
+                      Gap(AppSpacing.space8.h),
+
+                      AppTextField(
+                        controller: endDateController,
+                        hintText: context.l10n.dateFormat,
+                        readOnly: true,
+                        onTap: () =>
+                            AppHelpers.selectDate(context, endDateController),
+                        suffixIcon: const Icon(Icons.calendar_today_outlined),
+                        fillColor: Theme.of(context).colorScheme.surface,
+                        borderRadius: AppRadius.radius32.r,
+                        validator: AppValidators.required(
+                          message: 'Please select an end date.',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
+            Gap(AppSpacing.space16.h),
+
+            Align(
+              alignment: AlignmentDirectional.topStart,
+              child: AppText(
+                context.l10n.reason,
+                style: Theme.of(context).textTheme.labelLarge,
+              ),
+            ),
+
+            Gap(AppSpacing.space8.h),
+
+            AppTextField(
+              controller: reasonController,
+              hintText: context.l10n.reasonHint,
+              type: AppTextFieldType.multiline,
+              fillColor: Theme.of(context).colorScheme.surface,
+              borderRadius: AppRadius.radius32.r,
+              maxLines: 1,
+              validator: AppValidators.required(
+                message: 'Please enter a reason.',
+              ),
+            ),
+
+            Gap(AppSpacing.space20.h),
+
+            GestureDetector(
+              onTap: () async {
+                final File? image = await AppHelpers.pickImage();
+
+                if (image != null) {
+                  setState(() {
+                    selectedImage = image;
+                  });
+                }
+              },
+              child: AppCard(
+                height: 130.h,
+                width: double.infinity,
+                padding: EdgeInsets.zero,
+                backgroundColor: Theme.of(context).colorScheme.surface,
+                borderRadius: AppRadius.radius16.r,
+                border: Border.all(
+                  width: .5.w,
+                  color: Theme.of(context).colorScheme.outlineVariant,
+                ),
+                boxShadow: const [],
+                child: selectedImage != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                          AppRadius.radius16.r,
+                        ),
+                        child: Image.file(
+                          selectedImage!,
+                          width: double.infinity,
+                          height: 130.h,
+                          fit: BoxFit.cover,
+                        ),
+                      )
+                    : Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.cloud_upload),
+
+                          AppText(
+                            context.l10n.attachSupportingDocument,
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
-                          suffixIcon: const Icon(Icons.calendar_today_outlined),
-                          fillColor: Theme.of(context).colorScheme.surface,
-                          borderRadius: 30,
-                        ),
-                      ],
-                    ),
-                  ),
 
-                  Gap(16.w),
+                          Gap(AppSpacing.space4.h),
 
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          localization.endDate,
-                          style: Theme.of(context).textTheme.labelLarge,
-                        ),
-
-                        Gap(10.h),
-
-                        AppTextField(
-                          controller: endDateController,
-                          hintText: 'DD / MM / YYYY',
-                          readOnly: true,
-                          onTap: () =>
-                              AppHelpers.selectDate(context, endDateController),
-                          suffixIcon: const Icon(Icons.calendar_today_outlined),
-                          fillColor: Theme.of(context).colorScheme.surface,
-                          borderRadius: 30,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                          AppText(context.l10n.uploadImage),
+                        ],
+                      ),
               ),
+            ),
 
-              Gap(15.h),
+            Gap(AppSpacing.space8.h),
 
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  localization.reason,
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-              ),
-
-              Gap(10.h),
-
-              AppTextField(
-                hintText: localization.reasonHint,
-                type: AppTextFieldType.multiline,
-                fillColor: Theme.of(context).colorScheme.surface,
-                borderRadius: 30,
-                maxLines: 1,
-              ),
-
-              Gap(20.h),
-
-              GestureDetector(
-                onTap: () async {
-                  final File? image = await AppHelpers.pickImage();
-
-                  if (image != null) {
-                    setState(() {
-                      selectedImage = image;
-                    });
-                  }
-                },
-                child: Container(
-                  height: 130.h,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    border: Border.all(
-                      width: .5.w,
-                      color: Theme.of(context).colorScheme.outline,
-                    ),
-                    borderRadius: BorderRadius.circular(15.r),
-                  ),
-                  child: selectedImage != null
-                      ? ClipRRect(
-                          borderRadius: BorderRadius.circular(15.r),
-                          child: Image.file(
-                            selectedImage!,
-                            width: double.infinity,
-                            height: 130.h,
-                            fit: BoxFit.cover,
-                          ),
-                        )
-                      : Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.cloud_upload),
-
-                            Text(
-                              localization.attachSupportingDocument,
-                              style: Theme.of(context).textTheme.titleSmall,
-                            ),
-
-                            Gap(5.h),
-
-                            Text(localization.uploadImage),
-                          ],
-                        ),
-                ),
-              ),
-
-              Gap(10.h),
-
-              AppButton(
-                text: localization.submitRequest,
-                onPressed: () {},
-                height: 48.h,
-                width: double.infinity.w,
-              ),
-            ],
-          ),
+            AppButton(
+              text: context.l10n.submitRequest,
+              onPressed: submitForm,
+              height: 48.h,
+              width: double.infinity.w,
+            ),
+          ],
         ),
       ),
     );
