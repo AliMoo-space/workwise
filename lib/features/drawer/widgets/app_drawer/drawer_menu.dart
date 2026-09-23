@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/localization/localization_extension.dart';
 import '../../../../core/routing/app_routes.dart';
 import 'drawer_menu_item.dart';
 import 'drawer_section.dart';
@@ -18,7 +19,7 @@ class DrawerMenu extends StatelessWidget {
           children: [
             DrawerMenuItem(
               icon: Icons.bar_chart_outlined,
-              title: 'Performance',
+              title: context.l10n.performance,
               isSelected: currentRoute == AppRoutes.performanceScreen,
               onTap: () {
                 Navigator.of(context).pop();
@@ -32,11 +33,11 @@ class DrawerMenu extends StatelessWidget {
         ),
 
         DrawerSection(
-          title: 'ACCOUNT',
+          title: context.l10n.account,
           children: [
             DrawerMenuItem(
               icon: Icons.person_outline,
-              title: 'Profile',
+              title: context.l10n.profile,
               isSelected: currentRoute == AppRoutes.profilePage,
               onTap: () {
                 if (currentRoute != AppRoutes.profilePage) {
@@ -48,13 +49,13 @@ class DrawerMenu extends StatelessWidget {
         ),
         DrawerMenuItem(
           icon: Icons.settings_outlined,
-          title: 'Settings',
+          title: context.l10n.settings,
           isSelected: currentRoute == '/setting',
           onTap: () {
             Navigator.of(context).pop();
 
             if (currentRoute != '/setting') {
-            context.push(AppRoutes.settingsScreen);
+              context.push(AppRoutes.settingsScreen);
             }
           },
         ),

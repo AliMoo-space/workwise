@@ -231,6 +231,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tasks => 'Tasks';
 
   @override
+  String get account => 'Account';
+
+  @override
   String get profile => 'Profile';
 
   @override
