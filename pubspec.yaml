@@ -83,7 +83,7 @@ flutter:
     - assets/images/
 
 flutter_native_splash:
-  color: "#ffffff" # اللون اللي اخترته (شيلنا 0xFF وحطينا #)
+  color: "#ffffff"
   image: assets/images/e.png # مسار الصورة
 
   android_12:

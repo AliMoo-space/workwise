@@ -28,11 +28,14 @@ class LoginCubit extends Cubit<LoginState> {
       
       await Future.delayed(const Duration(seconds: 2));
       
-      // بعدين ان شاء الله 
-      // لو تسجيل الدخول تمام
-      emit(LoginSuccessState());
-      // لو مش تمام
-      emit(LoginErrorState('Incorrect email or password. Please try again.'));
+      // يمكنك تغيير قيمة هذا المتغير إلى false لتجربة ظهور الخطأ فقط والشريط الأحمر
+      bool isSuccess = true; 
+
+      if (isSuccess) {
+        emit(LoginSuccessState());
+      } else {
+        emit(LoginErrorState('Incorrect email or password. Please try again.'));
+      }
     }
   }
 
@@ -43,5 +46,3 @@ class LoginCubit extends Cubit<LoginState> {
     return super.close();
   }
 }
-// dispose دي لقيتها وانا بسيرش وعرفت انها بتفضي الكاش من الداتا عشان الذاكره 
-// يعني ممكن منستخدمهاش عادي 

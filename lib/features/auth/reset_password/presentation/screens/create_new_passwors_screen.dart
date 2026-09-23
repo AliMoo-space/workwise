@@ -4,8 +4,8 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/routing/app_routes.dart';
-import 'package:workwise/features/auth/reset_password/presentation/logic/reset_password_cubit.dart';
-import 'package:workwise/features/auth/reset_password/presentation/logic/reset_password_state.dart';
+import 'package:workwise/features/auth/reset_password/presentation/cubit/reset_password_cubit.dart';
+import 'package:workwise/features/auth/reset_password/presentation/cubit/reset_password_state.dart';
 import 'package:workwise/features/auth/reset_password/presentation/widgets/reset_password_form.dart';
 import 'package:workwise/features/auth/reset_password/presentation/widgets/reset_password_header_widget.dart';
 
