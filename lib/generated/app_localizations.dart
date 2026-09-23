@@ -797,7 +797,7 @@ abstract class AppLocalizations {
   /// No description provided for @view.
   ///
   /// In en, this message translates to:
-  /// **'View'**
+  /// **'View All'**
   String get view;
 
   /// No description provided for @approved.
