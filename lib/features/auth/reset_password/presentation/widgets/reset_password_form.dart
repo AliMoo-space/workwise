@@ -6,8 +6,8 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/inputs/app_text_field.dart';
 import 'package:workwise/core/utils/app_validator.dart';
-import 'package:workwise/features/auth/reset_password/presentation/logic/reset_password_cubit.dart';
-import 'package:workwise/features/auth/reset_password/presentation/logic/reset_password_state.dart';
+import 'package:workwise/features/auth/reset_password/presentation/cubit/reset_password_cubit.dart';
+import 'package:workwise/features/auth/reset_password/presentation/cubit/reset_password_state.dart';
 
 class ResetPasswordForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;

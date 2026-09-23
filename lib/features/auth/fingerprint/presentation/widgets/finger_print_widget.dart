@@ -7,8 +7,8 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
-import 'package:workwise/features/auth/fingerprint/presentation/logic/finger_print_cubit.dart';
-import 'package:workwise/features/auth/fingerprint/presentation/logic/finger_print_state.dart';
+import 'package:workwise/features/auth/fingerprint/presentation/cubit/finger_print_cubit.dart';
+import 'package:workwise/features/auth/fingerprint/presentation/cubit/finger_print_state.dart';
 
 class FingerPrintWidget extends StatelessWidget {
   const FingerPrintWidget({super.key});
