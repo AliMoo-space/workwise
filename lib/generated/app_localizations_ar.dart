@@ -232,6 +232,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get tasks => 'المهام';
 
   @override
+  String get account => 'الحساب';
+
+  @override
   String get profile => 'الملف الشخصي';
 
   @override
