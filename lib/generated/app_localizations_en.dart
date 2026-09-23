@@ -368,7 +368,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get leaveHistory => 'Leave history';
 
   @override
-  String get view => 'View';
+  String get view => 'View All';
 
   @override
   String get approved => 'Approved';

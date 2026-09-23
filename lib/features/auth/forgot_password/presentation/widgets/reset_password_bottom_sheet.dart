@@ -11,8 +11,8 @@ import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/core/utils/app_validator.dart';
-import 'package:workwise/features/auth/forgot_password/presentation/logic/forgot_password_cubit.dart';
-import 'package:workwise/features/auth/forgot_password/presentation/logic/forgot_password_state.dart';
+import 'package:workwise/features/auth/forgot_password/presentation/cubit/forgot_password_cubit.dart';
+import 'package:workwise/features/auth/forgot_password/presentation/cubit/forgot_password_state.dart';
 
 class ResetPasswordBottomSheet extends StatefulWidget {
   const ResetPasswordBottomSheet({super.key});

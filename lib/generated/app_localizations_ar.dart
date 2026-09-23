@@ -369,7 +369,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get leaveHistory => 'سجل الإجازات';
 
   @override
-  String get view => 'عرض';
+  String get view => 'عرض الكل';
 
   @override
   String get approved => 'تمت الموافقة';

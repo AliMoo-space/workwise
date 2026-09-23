@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-
 import 'package:workwise/core/design_system/theme/app_theme.dart';
 import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/routing/router_generation_config.dart';
@@ -11,15 +9,8 @@ import 'package:workwise/generated/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await init();
-
-  runApp(
-    BlocProvider(
-      create: (_) => sl<LocaleCubit>(),
-      child: const MyApp(),
-    ),
-  );
+  runApp(BlocProvider(create: (_) => sl<LocaleCubit>(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,7 +19,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = context.watch<LocaleCubit>().state;
-
     return ScreenUtilPlusInit(
       designSize: const Size(375, 812),
       minTextAdapt: true,
