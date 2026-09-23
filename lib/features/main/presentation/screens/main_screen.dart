@@ -33,7 +33,6 @@ class _MainScreenState extends State<MainScreen> {
     ];
 
     return Scaffold(
-      extendBody: true,
       body: screens[currentIndex],
       bottomNavigationBar: isDrawerOpen
           ? null
