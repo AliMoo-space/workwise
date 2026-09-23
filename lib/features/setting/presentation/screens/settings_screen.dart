@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
@@ -49,7 +48,7 @@ class SettingsScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // عنوان قسم التفضيلات
+                    
                     AppText(
                       context.l10n.preferences,
                       style: theme.textTheme.titleMedium?.copyWith(
@@ -59,17 +58,17 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     const Gap(AppSpacing.space12),
 
-                    // خيار تسجيل الدخول بالبصمة
+                    //  تسجيل الدخول بالبصمة
                     SettingTileWidget(
                       icon: Icons.fingerprint_rounded,
                       title: context.l10n.biometricLogin,
                       subtitle: context.l10n.fingerprintFaceId,
                       trailing: Switch.adaptive(
                         value: cubit.isBiometricEnabled,
-                        // ألوان حالة التفعيل (ON)
+                        //  حالة التفعيل 
                         activeColor: Colors.white,
                         activeTrackColor: theme.colorScheme.primary,
-                        // ألوان حالة الإيقاف (OFF)
+                        //  حالة الإيقاف 
                         inactiveThumbColor: theme.colorScheme.outline,
                         inactiveTrackColor: theme.colorScheme.surfaceContainerHighest,
                         onChanged: (val) => cubit.toggleBiometric(val),
@@ -84,10 +83,10 @@ class SettingsScreen extends StatelessWidget {
                       subtitle: context.l10n.tasksApprovalsReminders,
                       trailing: Switch.adaptive(
                         value: cubit.isNotificationsEnabled,
-                        // ألوان حالة التفعيل (ON)
+                        //  حالة التفعيل 
                         activeColor: Colors.white,
                         activeTrackColor: theme.colorScheme.primary,
-                        // ألوان حالة الإيقاف (OFF)
+                        //  حالة الإيقاف 
                         inactiveThumbColor: theme.colorScheme.outline,
                         inactiveTrackColor: theme.colorScheme.surfaceContainerHighest,
                         onChanged: (val) => cubit.toggleNotifications(val),
@@ -95,7 +94,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     const Gap(AppSpacing.space12),
 
-                    // خيار تغيير اللغة
+                    //  تغيير اللغة
                     SettingTileWidget(
                       icon: Icons.translate_rounded,
                       title: context.l10n.language,
