@@ -84,6 +84,7 @@
   "orders": "Orders",
 
   "tasks": "Tasks",
+  "account": "Account",
   "profile": "Profile",
   "settings": "Settings",
   "logout": "Logout",

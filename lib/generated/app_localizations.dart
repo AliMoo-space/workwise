@@ -530,6 +530,12 @@ abstract class AppLocalizations {
   /// **'Tasks'**
   String get tasks;
 
+  /// No description provided for @account.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get account;
+
   /// No description provided for @profile.
   ///
   /// In en, this message translates to:

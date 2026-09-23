@@ -92,6 +92,7 @@
   "orders": "الطلبات",
 
   "tasks": "المهام",
+  "account": "الحساب",
   "profile": "الملف الشخصي",
   "settings": "الإعدادات",
   "logout": "تسجيل الخروج",
@@ -343,5 +344,5 @@
   "pushNotifications": "الإشعارات اللحظية",
   "tasksApprovalsReminders": "المهام، الموافقات، التذكيرات",
   "appDisplayLanguage": "لغة عرض التطبيق",
-  "logoutConfirmationMessage": "هل أنت ألكيد من أنك تريد تسجيل الخروج؟"
+  "logoutConfirmationMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
 }

@@ -232,6 +232,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get tasks => 'المهام';
 
   @override
+  String get account => 'الحساب';
+
+  @override
   String get profile => 'الملف الشخصي';
 
   @override
@@ -514,6 +517,5 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appDisplayLanguage => 'لغة عرض التطبيق';
 
   @override
-  String get logoutConfirmationMessage =>
-      'هل أنت ألكيد من أنك تريد تسجيل الخروج؟';
+  String get logoutConfirmationMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
 }
