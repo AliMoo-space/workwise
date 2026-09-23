@@ -53,6 +53,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+
+
 flutter:
   generate: true
   uses-material-design: true
