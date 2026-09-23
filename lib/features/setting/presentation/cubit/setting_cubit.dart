@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workwise/features/setting/presentation/logic/setting_state.dart';
+import 'package:workwise/features/setting/presentation/cubit/setting_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit() : super(const SettingsState()) {

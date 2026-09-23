@@ -6,8 +6,8 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/media/app_assets.dart';
 import 'package:workwise/core/design_system/widgets/media/app_image.dart';
 import 'package:workwise/core/routing/app_routes.dart';
-import 'package:workwise/features/splash/presentation/logic/splash_cubit.dart';
-import 'package:workwise/features/splash/presentation/logic/splash_state.dart';
+import 'package:workwise/features/splash/presentation/cubit/splash_cubit.dart';
+import 'package:workwise/features/splash/presentation/cubit/splash_state.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
