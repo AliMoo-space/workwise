@@ -19,7 +19,6 @@ class MainBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      top: false,
       child: Padding(
         padding: EdgeInsets.fromLTRB(12.w, 0, 12.w, 8.h),
         child: SizedBox(
