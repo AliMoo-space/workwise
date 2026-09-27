@@ -1,19 +1,45 @@
 import 'package:workwise/core/errors/exception.dart';
 
-class JsonHelper {
+abstract final class JsonHelper {
   const JsonHelper._();
 
-  static T required<T>(Map<String, dynamic> json, String key) {
+  static T required<T>(
+    Map<String, dynamic> json,
+    String key,
+  ) {
     final value = json[key];
 
     if (value == null) {
-      throw ServerException('Missing required field: $key');
+      throw ServerException(
+        'Missing required field: $key',
+      );
     }
 
-    return value as T;
+    if (value is! T) {
+      throw ServerException(
+        'Invalid type for field: $key',
+      );
+    }
+
+    return value;
   }
 
-  static T? optional<T>(Map<String, dynamic> json, String key) {
-    return json[key] as T?;
+  static T? optional<T>(
+    Map<String, dynamic> json,
+    String key,
+  ) {
+    final value = json[key];
+
+    if (value == null) {
+      return null;
+    }
+
+    if (value is! T) {
+      throw ServerException(
+        'Invalid type for field: $key',
+      );
+    }
+
+    return value;
   }
 }
