@@ -39,11 +39,6 @@ class JobDetailItem extends StatelessWidget {
 
           Expanded(child: _buildContent()),
 
-          if (showButton) ...[
-            Gap(AppSpacing.space8.w),
-           
-          ],
-
           if (badge != null) ...[Gap(AppSpacing.space8.w), _buildBadge()],
 
           Gap(AppSpacing.space8.w),
@@ -87,8 +82,6 @@ class JobDetailItem extends StatelessWidget {
       ],
     );
   }
-
-
 
   Widget _buildBadge() {
     return Container(

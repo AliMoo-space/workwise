@@ -65,7 +65,7 @@ class JobDetailsSection extends StatelessWidget {
           icon: Icons.person_outline,
           label: context.l10n.profileDirectManager,
           title: 'Layla Nasser',
-          subtitle: context.l10n.profileHeadOfOperations,
+          badge: context.l10n.profileHeadOfOperations,
           showButton: true,
         ),
 
