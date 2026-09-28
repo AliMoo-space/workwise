@@ -53,10 +53,6 @@ Future<void> init() async {
     () => NetworkInfoImpl(sl<InternetConnectionChecker>()),
   );
 
-  sl.registerLazySingleton<LocaleCubit>(
-    () => LocaleCubit(sl<SharedPreferences>()),
-  );
-
   // =============================================
   // Data Layer
   // =============================================
