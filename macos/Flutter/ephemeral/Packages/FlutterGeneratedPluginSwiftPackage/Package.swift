@@ -16,6 +16,7 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "app_links", path: "../.packages/app_links-7.2.1"),
+        .package(name: "connectivity_plus", path: "../.packages/connectivity_plus-6.1.5"),
         .package(name: "file_picker", path: "../.packages/file_picker-10.3.10"),
         .package(name: "file_selector_macos", path: "../.packages/file_selector_macos-0.9.5+1"),
         .package(name: "local_auth_darwin", path: "../.packages/local_auth_darwin-2.0.4"),
@@ -29,6 +30,7 @@ let package = Package(
             name: "FlutterGeneratedPluginSwiftPackage",
             dependencies: [
                 .product(name: "app-links", package: "app_links"),
+                .product(name: "connectivity-plus", package: "connectivity_plus"),
                 .product(name: "file-picker", package: "file_picker"),
                 .product(name: "file-selector-macos", package: "file_selector_macos"),
                 .product(name: "local-auth-darwin", package: "local_auth_darwin"),
