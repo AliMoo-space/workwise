@@ -30,11 +30,7 @@ class SettingsScreen extends StatelessWidget {
               style: AppTextStyles.headlineLarge,
             ),
             const Gap(AppSpacing.space4),
-            // AppText(
-            //   context.l10n.attendanceDescription,
-            //   style: AppTextStyles.bodyMedium,
-            //   color: AppColors.textSecondary,
-            // ),
+        
           ],
         ),
       ),
@@ -107,7 +103,6 @@ class SettingsScreen extends StatelessWidget {
                     ),
 
                     const Gap(AppSpacing.space24),
-
                   ],
                 ),
               );
