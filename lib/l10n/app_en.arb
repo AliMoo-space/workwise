@@ -342,5 +342,6 @@
   "pushNotifications": "Push notifications",
   "tasksApprovalsReminders": "Tasks, approvals, reminders",
   "appDisplayLanguage": "App display language",
-  "logoutConfirmationMessage": "Are you sure you want to log out?"
+  "logoutConfirmationMessage": "Are you sure you want to log out?",
+  "details": "Details"
 }

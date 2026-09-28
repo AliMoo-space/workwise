@@ -8,13 +8,28 @@ class PersonalGoalsTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: AlignmentDirectional.centerStart,
-      child: AppText(
-        context.l10n.personalGoals,
-        style: Theme.of(context).textTheme.titleLarge,
-        textAlign: TextAlign.start,
-      ),
+    return Row(
+      children: [
+        Align(
+          alignment: AlignmentDirectional.centerStart,
+          child: AppText(
+            context.l10n.personalGoals,
+            style: Theme.of(context).textTheme.titleLarge,
+            textAlign: TextAlign.start,
+          ),
+        ),
+        const Spacer(),
+
+        TextButton(
+          onPressed: () {
+            // context.push(AppRoutes.leaveScreen);
+          },
+          child: AppText(
+            context.l10n.details,
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        ),
+      ],
     );
   }
 }

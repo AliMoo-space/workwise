@@ -517,4 +517,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logoutConfirmationMessage => 'Are you sure you want to log out?';
+
+  @override
+  String get details => 'Details';
 }

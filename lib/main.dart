@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
         locale: locale,
         supportedLocales: AppLocalizations.supportedLocales,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
-
         builder: (context, child) {
           return GestureDetector(
             behavior: HitTestBehavior.translucent,

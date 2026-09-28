@@ -344,5 +344,7 @@
   "pushNotifications": "الإشعارات اللحظية",
   "tasksApprovalsReminders": "المهام، الموافقات، التذكيرات",
   "appDisplayLanguage": "لغة عرض التطبيق",
-  "logoutConfirmationMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
+  "logoutConfirmationMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+  "details": "التفاصيل"
+
 }

@@ -518,4 +518,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logoutConfirmationMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+
+  @override
+  String get details => 'التفاصيل';
 }
