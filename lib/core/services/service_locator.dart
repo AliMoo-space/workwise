@@ -1,6 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:workwise/core/constants/app_constants.dart';
 import 'package:workwise/core/localization/local_cubit.dart';
+import 'package:workwise/core/network/api_consumer.dart';
+import 'package:workwise/core/network/dio/dio_factory.dart';
+import 'package:workwise/core/network/dio_consumer.dart';
+import 'package:workwise/core/network/network_info.dart';
 
 import 'package:workwise/features/leave/data/datasourse/leave_remote_data_source.dart';
 import 'package:workwise/features/leave/data/datasourse/leave_history_remote_data_source.dart';
@@ -25,7 +32,26 @@ Future<void> init() async {
   // =============================================
 
   final preferences = await SharedPreferences.getInstance();
+
   sl.registerSingleton<SharedPreferences>(preferences);
+
+  sl.registerLazySingleton<InternetConnectionChecker>(
+    InternetConnectionChecker.createInstance,
+  );
+
+  // =============================================
+  // Core
+  // =============================================
+
+  sl.registerLazySingleton<Dio>(
+    () => DioFactory(baseUrl: AppConstants.baseUrl).create(),
+  );
+
+  sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(sl<Dio>()));
+
+  sl.registerLazySingleton<NetworkInfo>(
+    () => NetworkInfoImpl(sl<InternetConnectionChecker>()),
+  );
 
   // =============================================
   // Data Layer

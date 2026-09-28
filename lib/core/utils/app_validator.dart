@@ -1,38 +1,15 @@
 import 'package:flutter/material.dart';
 
-final class AppValidators {
+abstract final class AppValidators {
   const AppValidators._();
 
-  // ===========================
-  // Regex
-  // ===========================
+  static final RegExp _emailRegex = RegExp(
+    r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$',
+  );
 
-  static final RegExp _emailRegex = RegExp(r'^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$');
-  static final RegExp _passwordRegex =
-      RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$');
-
-
-
-
-
-
-
-
-
-
-
-
-
-//may remove
-  // static final RegExp _phoneRegex = RegExp(r'^\d{11}$');
-
-  // static final RegExp _uppercaseRegex = RegExp(r'[A-Z]');
-  // static final RegExp _lowercaseRegex = RegExp(r'[a-z]');
-  // static final RegExp _numberRegex = RegExp(r'\d');
-
-  // ===========================
-  // Basic
-  // ===========================
+  static final RegExp _strongPasswordRegex = RegExp(
+    r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$',
+  );
 
   static FormFieldValidator<String> required({
     String message = 'This field is required.',
@@ -47,10 +24,8 @@ final class AppValidators {
   }
 
   static FormFieldValidator<String> email({
-    String emptyMessage = 'email is required',
-    // 'Email is required.',
-    String invalidMessage = ' valid email is required',
-    // 'Enter a valid email address.',
+    String emptyMessage = 'Email is required.',
+    String invalidMessage = 'Enter a valid email address.',
   }) {
     return (value) {
       if (value == null || value.trim().isEmpty) {
@@ -65,17 +40,15 @@ final class AppValidators {
     };
   }
 
-
-
-static FormFieldValidator<String> password({
+  static FormFieldValidator<String> password({
     int minLength = 8,
     bool requireStrongPassword = false,
-    String emptyMessage = 'password is required',
+    String emptyMessage = 'Password is required.',
     String? minLengthMessage,
     String weakPasswordMessage =
-        'password must contain an uppercase letter, a lowercase letter, and a number.',
-  }) 
-  {
+        'Password must contain an uppercase letter, '
+        'a lowercase letter, and a number.',
+  }) {
     return (value) {
       if (value == null || value.isEmpty) {
         return emptyMessage;
@@ -83,162 +56,63 @@ static FormFieldValidator<String> password({
 
       if (value.length < minLength) {
         return minLengthMessage ??
-            'password must be at least $minLength characters.';
+            'Password must be at least $minLength characters.';
       }
 
-      if (requireStrongPassword && !_passwordRegex.hasMatch(value)) {
+      if (requireStrongPassword &&
+          !_strongPasswordRegex.hasMatch(value)) {
         return weakPasswordMessage;
       }
 
-      return null; 
+      return null;
     };
   }
- static FormFieldValidator<String> confirmPassword(
+
+  static FormFieldValidator<String> confirmPassword(
     TextEditingController passwordController, {
-    String message = 'كلمة المرور غير متطابقة.',
+    String message = 'Passwords do not match.',
+    String emptyMessage = 'Password confirmation is required.',
   }) {
     return (value) {
       if (value == null || value.isEmpty) {
-        return 'تأكيد كلمة المرور مطلوب.';
+        return emptyMessage;
       }
+
       if (value != passwordController.text) {
         return message;
       }
+
       return null;
     };
   }
-}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // may remove
-
-  // static FormFieldValidator<String> phone({
-  //   String emptyMessage = 'رقم الهاتف مطلوب.',
-  //   // 'Phone number is required.',
-  //   String invalidMessage = 'أدخل رقم هاتف صالح.',
-  //   // 'Enter a valid phone number.',
-  // }) {
-  //   return (value) {
-  //     if (value == null || value.trim().isEmpty) {
-  //       return emptyMessage;
-  //     }
-
-  //     if (!_phoneRegex.hasMatch(value.trim())) {
-  //       return invalidMessage;
-  //     }
-
-  //     return null;
-  //   };
-  // }
-
-  // static FormFieldValidator<String> password({int minLength = 7}) {
-  //   return (value) {
-  //     if (value == null || value.isEmpty) {
-  //       return 'كلمة المرور مطلوبة.';
-  //       // 'Password is required.';
-  //     }
-
-  //     if (value.length < minLength) {
-  //       return 'كلمة المرور يجب أن تكون على الأقل $minLength أحرف.';
-  //       // 'Password must be at least $minLength characters.';
-  //     }
-
-  //     if (!_uppercaseRegex.hasMatch(value)) {
-  //       return 'كلمة المرور يجب أن تحتوي على حرف كبير.';
-  //       // 'Password must contain an uppercase letter.';
-  //     }
-
-  //     if (!_lowercaseRegex.hasMatch(value)) {
-  //       return 'كلمة المرور يجب أن تحتوي على حرف صغير.';
-  //       // 'Password must contain a lowercase letter.';
-  //     }
-
-  //     if (!_numberRegex.hasMatch(value)) {
-  //       return 'كلمة المرور يجب أن تحتوي على رقم.';
-  //       // 'Password must contain a number.';
-  //     }
-
-  //     return null;
-  //   };
-  // }
-
-  // ===========================
-  // Generic
-  // ===========================
-
-   FormFieldValidator<String> minLength(int length, {String? message}) {
+  static FormFieldValidator<String> minLength(
+    int length, {
+    String? message,
+  }) {
     return (value) {
       if (value == null || value.length < length) {
         return message ?? 'Minimum $length characters required.';
-        //  لازم 8 حروف  علي الاقل
       }
 
       return null;
     };
   }
 
-   FormFieldValidator<String> maxLength(int length, {String? message}) {
-    return (value) {
-      if (value != null && value.length > length) {
-        return message ?? 'aximum $length characters allowed.';
-      }
-
-      return null;
-    };
-  }
-
-   FormFieldValidator<String> confirmPassword(
-    TextEditingController passwordController, {
-    String message = 'Passwords do not match',
+  static FormFieldValidator<String> maxLength(
+    int length, {
+    String? message,
   }) {
     return (value) {
-      if (value != passwordController.text) {
-        return message;
+      if (value != null && value.length > length) {
+        return message ?? 'Maximum $length characters allowed.';
       }
 
       return null;
     };
   }
 
-   FormFieldValidator<String> compose(
+  static FormFieldValidator<String> compose(
     List<FormFieldValidator<String>> validators,
   ) {
     return (value) {
@@ -253,4 +127,4 @@ static FormFieldValidator<String> password({
       return null;
     };
   }
-
+}

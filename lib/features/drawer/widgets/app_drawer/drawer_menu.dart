@@ -52,8 +52,6 @@ class DrawerMenu extends StatelessWidget {
           title: context.l10n.settings,
           isSelected: currentRoute == '/setting',
           onTap: () {
-            Navigator.of(context).pop();
-
             if (currentRoute != '/setting') {
               context.push(AppRoutes.settingsScreen);
             }
