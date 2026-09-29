@@ -8,6 +8,7 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
+import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/auth/login/presentation/cubit/login_cubit.dart';
 import 'package:workwise/features/auth/login/presentation/cubit/login_state.dart';
 import 'package:workwise/features/auth/login/presentation/widgets/login_form.dart';
@@ -18,12 +19,15 @@ import 'package:workwise/features/auth/login/presentation/widgets/quick_sign_in_
 class LoginScreen extends StatelessWidget {
   final bool isSessionExpired;
 
-  const LoginScreen({super.key, this.isSessionExpired = false});
+  const LoginScreen({
+    super.key,
+    this.isSessionExpired = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginCubit(),
+      create: (_) => sl<LoginCubit>(),
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.onPrimary,
         body: SafeArea(
@@ -53,7 +57,6 @@ class LoginScreen extends StatelessWidget {
                         isSessionExpired: false,
                       ),
                     ],
-
                     const LoginForm(),
                     Row(
                       children: [
@@ -66,11 +69,13 @@ class LoginScreen extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 12.w),
                           child: AppText(
                             context.l10n.or,
-                            style: Theme.of(context).textTheme.titleSmall
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
                                 ?.copyWith(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondary,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondary,
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
