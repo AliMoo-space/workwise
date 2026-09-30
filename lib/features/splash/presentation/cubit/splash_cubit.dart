@@ -1,31 +1,30 @@
-// ignore_for_file: dead_code
-
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workwise/core/storage/local_storage.dart';
+import 'package:workwise/core/storage/secure_storage.dart';
+
 import 'splash_state.dart';
 
 class SplashCubit extends Cubit<SplashState> {
-  // الحاله الاولي في ال state
-  SplashCubit() : super(SplashInitial());
+  SplashCubit({
+    required this.secureStorage,
+    required this.localStorage,
+  }) : super(SplashInitial());
 
-  // هنفحص دي اول مره يسجل ولا لا
-  void checkAuthSession() async {
-    // الحاله التانيه في الstate
+  final SecureStorage secureStorage;
+  final LocalStorage localStorage;
+
+  Future<void> checkAuthSession() async {
     emit(SplashLoading());
 
-    // ثانيتين تحميل
-    await Future.delayed(const Duration(seconds: 5));
+    final accessToken = await secureStorage.getAccessToken();
+    final keepMeSignedIn = localStorage.getKeepMeSignedIn();
 
-    // هل اليوزر مسجل
-    bool isLoggedIn = false;
-    bool isFirstTime = false;
-    // الاتنين فولس لحد ما ناخد الداتا من الباك
-    //عشان دايما يبعتني للوج ان
-    if (isFirstTime) {
-      emit(FirstTimeState());// تالت حاله في ال state 
-    } else if (isLoggedIn) {
-      emit(AuthenticatedState()); // رابع حاله في ال state
+    if (accessToken != null &&
+        accessToken.isNotEmpty &&
+        keepMeSignedIn) {
+      emit(AuthenticatedState());
     } else {
-      emit(UnauthenticatedState()); // خامس حاله في ال state
+      emit(UnauthenticatedState());
     }
   }
 }

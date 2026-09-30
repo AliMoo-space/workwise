@@ -7,17 +7,26 @@ class DioInterceptors extends Interceptor {
     this.getToken,
   });
 
-  final String? Function()? getToken;
+  final Future<String?> Function()? getToken;
 
   @override
-  void onRequest(
+  Future<void> onRequest(
     RequestOptions options,
     RequestInterceptorHandler handler,
-  ) {
-    final token = getToken?.call();
+  ) async {
+    try {
+      final token = await getToken?.call();
 
-    if (token != null && token.isNotEmpty) {
-      options.headers['Authorization'] = 'Bearer $token';
+      if (token != null && token.isNotEmpty) {
+        options.headers['Authorization'] = 'Bearer $token';
+      }
+    } catch (e, stackTrace) {
+      log(
+        'Failed to read access token.',
+        name: 'DioInterceptor',
+        error: e,
+        stackTrace: stackTrace,
+      );
     }
 
     handler.next(options);

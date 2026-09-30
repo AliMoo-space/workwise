@@ -6,6 +6,7 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/media/app_assets.dart';
 import 'package:workwise/core/design_system/widgets/media/app_image.dart';
 import 'package:workwise/core/routing/app_routes.dart';
+import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/splash/presentation/cubit/splash_cubit.dart';
 import 'package:workwise/features/splash/presentation/cubit/splash_state.dart';
 
@@ -17,7 +18,7 @@ class SplashScreen extends StatelessWidget {
     return BlocProvider(
       create: (_) {
         FlutterNativeSplash.remove();
-        return SplashCubit()..checkAuthSession();
+        return sl<SplashCubit>()..checkAuthSession();
       },
       child: BlocListener<SplashCubit, SplashState>(
         listener: (context, state) {
@@ -42,7 +43,7 @@ class SplashScreen extends StatelessWidget {
                     fit: BoxFit.contain,
                   ),
                 ),
-                
+
                 const Spacer(),
               ],
             ),

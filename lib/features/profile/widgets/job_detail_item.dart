@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
-
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_radius.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
-import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
-import 'package:workwise/core/localization/localization_extension.dart';
 
 class JobDetailItem extends StatelessWidget {
   const JobDetailItem({
@@ -41,11 +38,6 @@ class JobDetailItem extends StatelessWidget {
           Gap(AppSpacing.space8.w),
 
           Expanded(child: _buildContent()),
-
-          if (showButton) ...[
-            Gap(AppSpacing.space8.w),
-            _buildContactButton(context),
-          ],
 
           if (badge != null) ...[Gap(AppSpacing.space8.w), _buildBadge()],
 
@@ -88,18 +80,6 @@ class JobDetailItem extends StatelessWidget {
           ),
         ],
       ],
-    );
-  }
-
-  Widget _buildContactButton(BuildContext context) {
-    return AppButton(
-      text: context.l10n.profileContact,
-      textStyle: AppTextStyles.labelSmall,
-      // fontSize: 10.sp,
-      onPressed: () {},
-      variant: AppButtonVariant.secondary,
-      height: 40.h,
-      width: 100.w,
     );
   }
 

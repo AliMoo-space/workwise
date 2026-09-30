@@ -1,6 +1,6 @@
 abstract final class AppConstants {
   const AppConstants._();
-  static const String baseUrl = 'https://your-api.com/api';
+  static const String baseUrl = 'https://hr-system.iptvdemo.serv5group.com';
 
   static const String appName = 'WorkWise';
 
