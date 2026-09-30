@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
+import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_radius.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
@@ -28,8 +29,8 @@ class LoginWarningBanner extends StatelessWidget {
         : theme.colorScheme.error;
 
     final iconColor = isSessionExpired
-        ? theme.colorScheme.onError
-        : theme.colorScheme.error;
+        ? AppColors.background
+        : AppColors.background;
 
     return AppCard(
       width: double.infinity,
