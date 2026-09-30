@@ -7,13 +7,15 @@ import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/media/app_network_image.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
-import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/features/profile/domain/entities/profile.dart';
 
 import 'employee_info.dart';
 import 'profile_status_badge.dart';
 
 class ProfileCard extends StatelessWidget {
-  const ProfileCard({super.key});
+  const ProfileCard({super.key, required this.profile});
+
+  final Profile profile;
 
   @override
   Widget build(BuildContext context) {
@@ -24,15 +26,17 @@ class ProfileCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppNetworkImage(
-                imageUrl: 'https://via.placeholder.com/120',
-                width: 80.w,
-                height: 80.h,
-                shape: BoxShape.circle,
-                fit: BoxFit.cover,
-                backgroundColor: AppColors.surfaceContainer,
-                errorWidget: _buildAvatarFallback(),
-              ),
+              profile.avatarUrl.isEmpty
+                  ? _buildAvatarFallback(profile.name)
+                  : AppNetworkImage(
+                      imageUrl: profile.avatarUrl,
+                      width: 80.w,
+                      height: 80.h,
+                      shape: BoxShape.circle,
+                      fit: BoxFit.cover,
+                      backgroundColor: AppColors.surfaceContainer,
+                      errorWidget: _buildAvatarFallback(profile.name),
+                    ),
 
               Gap(AppSpacing.space16.w),
 
@@ -40,12 +44,12 @@ class ProfileCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppText('Omar Haddad', style: AppTextStyles.headlineMedium),
+                    AppText(profile.name, style: AppTextStyles.headlineMedium),
 
                     Gap(AppSpacing.space4.h),
 
                     AppText(
-                      'Senior Product Analyst',
+                      profile.jobTitle,
                       style: AppTextStyles.bodyMedium,
                       color: AppColors.textSecondary,
                     ),
@@ -53,7 +57,7 @@ class ProfileCard extends StatelessWidget {
                     Gap(AppSpacing.space2.h),
 
                     AppText(
-                      'Operations / Product',
+                      profile.departmentName ?? profile.roleLabel,
                       style: AppTextStyles.bodySmall,
                       color: AppColors.textSecondary,
                     ),
@@ -61,7 +65,10 @@ class ProfileCard extends StatelessWidget {
                     Gap(AppSpacing.space8.h),
 
                     ProfileStatusBadge(
-                      text: context.l10n.profileActiveFullTime,
+                      text: [
+                        profile.status,
+                        profile.employmentType,
+                      ].where((value) => value.isNotEmpty).join(' · '),
                     ),
                   ],
                 ),
@@ -71,13 +78,22 @@ class ProfileCard extends StatelessWidget {
 
           Gap(AppSpacing.space16.h),
 
-          const EmployeeInfo(),
+          EmployeeInfo(profile: profile),
         ],
       ),
     );
   }
 
-  Widget _buildAvatarFallback() {
+  Widget _buildAvatarFallback(String name) {
+    final initials = name
+        .trim()
+        .split(RegExp(r'\s+'))
+        .where((part) => part.isNotEmpty)
+        .take(2)
+        .map((part) => part[0])
+        .join()
+        .toUpperCase();
+
     return Container(
       width: 72.w,
       height: 72.h,
@@ -87,7 +103,7 @@ class ProfileCard extends StatelessWidget {
       ),
       alignment: Alignment.center,
       child: AppText(
-        'OH',
+        initials.isEmpty ? '?' : initials,
         style: AppTextStyles.titleLarge,
         color: AppColors.textPrimary,
       ),

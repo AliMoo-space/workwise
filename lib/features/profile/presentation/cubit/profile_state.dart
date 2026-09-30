@@ -1,32 +1,48 @@
 import 'package:equatable/equatable.dart';
-
 import '../../domain/entities/profile.dart';
 
-abstract class ProfileState extends Equatable {
-  const ProfileState();
-
-  @override
-  List<Object?> get props => [];
+enum ProfileStatus {
+  initial,
+  loading,
+  success,
+  failure,
 }
 
-class ProfileInitial extends ProfileState {}
+class ProfileState extends Equatable {
+  const ProfileState({
+    this.status = ProfileStatus.initial,
+    this.profile,
+    this.message,
+  });
 
-class ProfileUpdating extends ProfileState {}
+  final ProfileStatus status;
+  final Profile? profile;
+  final String? message;
 
-class ProfileUpdated extends ProfileState {
-  final Profile profile;
+  bool get isLoading => status == ProfileStatus.loading;
 
-  const ProfileUpdated(this.profile);
+  bool get isSuccess => status == ProfileStatus.success;
+
+  bool get isFailure => status == ProfileStatus.failure;
+
+  ProfileState copyWith({
+    ProfileStatus? status,
+    Profile? profile,
+    String? message,
+    bool clearProfile = false,
+    bool clearMessage = false,
+  }) {
+    return ProfileState(
+      status: status ?? this.status,
+      profile: clearProfile ? null : profile ?? this.profile,
+      message: clearMessage ? null : message ?? this.message,
+    );
+  }
 
   @override
-  List<Object?> get props => [profile];
-}
-
-class ProfileUpdateError extends ProfileState {
-  final String message;
-
-  const ProfileUpdateError(this.message);
-
-  @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [
+        status,
+        profile,
+        message,
+      ];
 }

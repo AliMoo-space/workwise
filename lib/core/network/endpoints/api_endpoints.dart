@@ -10,4 +10,9 @@ abstract final class ApiEndpoints {
   static const String users = '/users';
 
   // Add project-specific endpoints below.
+  static const String employeeProfile = '/employees/profile';
+
+  static String employeeDetails(int employeeId) {
+    return '/employees/$employeeId';
+  }
 }

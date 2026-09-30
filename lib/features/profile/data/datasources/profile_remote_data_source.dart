@@ -1,58 +1,60 @@
-// import 'dart:io';
-// import 'package:dio/dio.dart';
-// import 'package:workwise/core/network/api_endpoints.dart';
+import 'dart:io';
+import 'package:dio/dio.dart';
+import '../../../../core/network/api_consumer.dart';
+import '../../../../core/network/endpoints/api_endpoints.dart';
+import '../models/profile_model.dart';
 
-// import '../models/profile_model.dart';
+class ProfileRemoteDataSource {
+  ProfileRemoteDataSource(this.apiConsumer);
 
-// abstract class ProfileRemoteDataSource {
-//   Future<ProfileModel> updateProfile({
-//     required String name,
-//     required String phone,
-//     required String address,
-//     required String locale,
-//     File? avatar,
-//   });
-// }
+  final ApiConsumer apiConsumer;
 
-// class ProfileRemoteDataSourceImpl
-//     implements ProfileRemoteDataSource {
-//   final Dio dio;
+  Future<ProfileModel> getProfile({
+    required int employeeId,
+    required String language,
+  }) async {
+    final response = await apiConsumer.get(
+      ApiEndpoints.employeeDetails(employeeId),
+      queryParameters: {'lang': language},
+    );
 
-//   ProfileRemoteDataSourceImpl(this.dio);
+    final data = response.data['data'];
 
-//   @override
-//   Future<ProfileModel> updateProfile({
-//     required String name,
-//     required String phone,
-//     required String address,
-//     required String locale,
-//     File? avatar,
-//   }) async {
-//     final formData = FormData.fromMap({
-//       'name': name,
-//       'phone': phone,
-//       'address': address,
-//       'locale': locale,
+    return ProfileModel.fromJson(Map<String, dynamic>.from(data));
+  }
 
-//       if (avatar != null)
-//         'avatar': await MultipartFile.fromFile(
-//           avatar.path,
-//           filename: avatar.path.split(Platform.pathSeparator).last,
-//         ),
-//     });
+  Future<ProfileModel> updateProfile({
+    required String language,
+    String? name,
+    String? phone,
+    String? address,
+    String? locale,
+    File? avatar,
+  }) async {
+    final fields = <String, dynamic>{
+      'name': name,
+      'phone': phone,
+      'address': address,
+      'locale': locale,
+    }..removeWhere((key, value) => value == null);
 
-//     final response = await dio.patch(
-//       ApiEndpoints.updateProfile,
-//       queryParameters: {
-//         'lang': locale,
-//       },
-//       data: formData,
-//     );
+    if (avatar != null) {
+      fields['avatar'] = await MultipartFile.fromFile(
+        avatar.path,
+        filename: avatar.path.split('/').last,
+      );
+    }
 
-//     final data = response.data['data'];
+    final formData = FormData.fromMap(fields);
 
-//     return ProfileModel.fromJson(
-//       data as Map<String, dynamic>,
-//     );
-//   }
-// }
+    final response = await apiConsumer.patch(
+      ApiEndpoints.employeeProfile,
+      queryParameters: {'lang': language},
+      data: formData,
+    );
+
+    final data = response.data['data'];
+
+    return ProfileModel.fromJson(Map<String, dynamic>.from(data));
+  }
+}

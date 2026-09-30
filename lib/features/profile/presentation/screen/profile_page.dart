@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
@@ -10,6 +11,8 @@ import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/features/profile/widgets/job_details_section.dart';
 import 'package:workwise/features/profile/widgets/profile_card.dart';
+import 'package:workwise/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:workwise/features/profile/presentation/cubit/profile_state.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -40,33 +43,46 @@ class ProfilePage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.all(AppSpacing.space16.r),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ProfileCard(),
+          child: BlocBuilder<ProfileCubit, ProfileState>(
+            builder: (context, state) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (state.isLoading || state.status == ProfileStatus.initial)
+                    const Center(child: CircularProgressIndicator())
+                  else if (state.isFailure)
+                    Center(
+                      child: AppText(
+                        state.message ?? context.l10n.profile,
+                        color: AppColors.textSecondary,
+                      ),
+                    )
+                  else if (state.profile != null) ...[
+                    ProfileCard(profile: state.profile!),
+                    Gap(AppSpacing.space16.h),
+                    JobDetailsSection(profile: state.profile!),
+                  ],
+                  Gap(AppSpacing.space20.h),
+                  AppButton(
+                    text: context.l10n.logout,
+                    variant: AppButtonVariant.danger,
+                    onPressed: () async {
+                      final confirmed = await AppDialog.confirm(
+                        context,
+                        title: context.l10n.logout,
+                        message: context.l10n.logoutConfirmMessage,
+                        confirmText: context.l10n.logout,
+                        cancelText: context.l10n.cancel,
+                      );
 
-              Gap(AppSpacing.space16.h),
-
-              const JobDetailsSection(),
-              Gap(AppSpacing.space20.h),
-              AppButton(
-                text: context.l10n.logout,
-                variant: AppButtonVariant.danger,
-                onPressed: () async {
-                  final confirmed = await AppDialog.confirm(
-                    context,
-                    title: context.l10n.logout,
-                    message: context.l10n.logoutConfirmMessage,
-                    confirmText: context.l10n.logout,
-                    cancelText: context.l10n.cancel,
-                  );
-
-                  if (confirmed && context.mounted) {
-                    context.go('/loginScreen');
-                  }
-                },
-              ),
-            ],
+                      if (confirmed && context.mounted) {
+                        context.go('/loginScreen');
+                      }
+                    },
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),

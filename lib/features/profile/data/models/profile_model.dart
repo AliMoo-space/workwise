@@ -1,75 +1,124 @@
-import '../../domain/entities/profile.dart';
-
 class ProfileModel {
-  final int id;
-  final String name;
-  final String email;
-  final String? phone;
-  final String? employeeCode;
-  final String? jobTitle;
-  final String? employmentType;
-  final String? startDate;
-  final String? status;
-  final String? address;
-  final String? avatarUrl;
-  final String? role;
-  final String? roleLabel;
-  final String? locale;
-
   const ProfileModel({
     required this.id,
     required this.name,
     required this.email,
-    this.phone,
-    this.employeeCode,
-    this.jobTitle,
-    this.employmentType,
-    this.startDate,
-    this.status,
-    this.address,
-    this.avatarUrl,
-    this.role,
-    this.roleLabel,
-    this.locale,
+    required this.phone,
+    required this.employeeCode,
+    required this.jobTitle,
+    required this.employmentType,
+    required this.startDate,
+    required this.status,
+    required this.address,
+    required this.avatarUrl,
+    required this.role,
+    required this.roleLabel,
+    required this.locale,
+    required this.department,
+    required this.companyLocation,
+    required this.manager,
+    required this.permissions,
+    required this.createdAt,
   });
 
-  factory ProfileModel.fromJson(
-    Map<String, dynamic> json,
-  ) {
+  final int id;
+  final String name;
+  final String email;
+  final String phone;
+  final String employeeCode;
+  final String jobTitle;
+  final String employmentType;
+  final String startDate;
+  final String status;
+  final String address;
+  final String avatarUrl;
+  final String role;
+  final String roleLabel;
+  final String locale;
+  final DepartmentModel? department;
+  final CompanyLocationModel? companyLocation;
+  final ManagerModel? manager;
+  final List<String> permissions;
+  final String createdAt;
+
+  factory ProfileModel.fromJson(Map<String, dynamic> json) {
     return ProfileModel(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      email: json['email'] as String,
-      phone: json['phone'] as String?,
-      employeeCode: json['employee_code'] as String?,
-      jobTitle: json['job_title'] as String?,
-      employmentType: json['employment_type'] as String?,
-      startDate: json['start_date'] as String?,
-      status: json['status'] as String?,
-      address: json['address'] as String?,
-      avatarUrl: json['avatar_url'] as String?,
-      role: json['role'] as String?,
-      roleLabel: json['role_label'] as String?,
-      locale: json['locale'] as String?,
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      email: json['email'] ?? '',
+      phone: json['phone'] ?? '',
+      employeeCode: json['employee_code'] ?? '',
+      jobTitle: json['job_title'] ?? '',
+      employmentType: json['employment_type'] ?? '',
+      startDate: json['start_date'] ?? '',
+      status: json['status'] ?? '',
+      address: json['address'] ?? '',
+      avatarUrl: json['avatar_url'] ?? '',
+      role: json['role'] ?? '',
+      roleLabel: json['role_label'] ?? '',
+      locale: json['locale'] ?? '',
+      department: json['department'] != null
+          ? DepartmentModel.fromJson(json['department'])
+          : null,
+      companyLocation: json['company_location'] != null
+          ? CompanyLocationModel.fromJson(json['company_location'])
+          : null,
+      manager: json['manager'] != null
+          ? ManagerModel.fromJson(json['manager'])
+          : null,
+      permissions: List<String>.from(json['permissions'] ?? const []),
+      createdAt: json['created_at'] ?? '',
     );
   }
+}
 
-  Profile toEntity() {
-    return Profile(
-      id: id,
-      name: name,
-      email: email,
-      phone: phone,
-      employeeCode: employeeCode,
-      jobTitle: jobTitle,
-      employmentType: employmentType,
-      startDate: startDate,
-      status: status,
-      address: address,
-      avatarUrl: avatarUrl,
-      role: role,
-      roleLabel: roleLabel,
-      locale: locale,
+class DepartmentModel {
+  const DepartmentModel({
+    required this.id,
+    required this.name,
+  });
+
+  final int id;
+  final String name;
+
+  factory DepartmentModel.fromJson(Map<String, dynamic> json) {
+    return DepartmentModel(
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+    );
+  }
+}
+
+class CompanyLocationModel {
+  const CompanyLocationModel({
+    required this.id,
+    required this.name,
+  });
+
+  final int id;
+  final String name;
+
+  factory CompanyLocationModel.fromJson(Map<String, dynamic> json) {
+    return CompanyLocationModel(
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+    );
+  }
+}
+
+class ManagerModel {
+  const ManagerModel({
+    required this.id,
+    required this.name,
+  });
+
+  final int id;
+  final String name;
+
+  factory ManagerModel.fromJson(Map<String, dynamic> json) {
+    return ManagerModel(
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
     );
   }
 }

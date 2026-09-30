@@ -2,12 +2,18 @@ import 'dart:io';
 
 import '../entities/profile.dart';
 
-abstract class ProfileRepository {
+abstract interface class ProfileRepository {
+  Future<Profile> getProfile({
+    required int employeeId,
+    required String language,
+  });
+
   Future<Profile> updateProfile({
-    required String name,
-    required String phone,
-    required String address,
-    required String locale,
+    required String language,
+    String? name,
+    String? phone,
+    String? address,
+    String? locale,
     File? avatar,
   });
 }

@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:workwise/core/constants/app_constants.dart';
 import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/network/api_consumer.dart';
 import 'package:workwise/core/network/dio/dio_factory.dart';
@@ -23,6 +22,10 @@ import 'package:workwise/features/leave/domain/usecase/get_leave_history.dart';
 
 import 'package:workwise/features/leave/presentation/cubit/leave_balances/leave_balances_cubit.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_history/leave_history_cubit.dart';
+import 'package:workwise/features/profile/data/datasources/profile_remote_data_source.dart';
+import 'package:workwise/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:workwise/features/profile/domain/repositories/profile_repository.dart';
+import 'package:workwise/features/profile/presentation/cubit/profile_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -43,9 +46,8 @@ Future<void> init() async {
   // Core
   // =============================================
 
-  sl.registerLazySingleton<Dio>(
-    () => DioFactory(baseUrl: AppConstants.baseUrl).create(),
-  );
+  const apiBaseUrl = String.fromEnvironment('API_BASE_URL');
+  sl.registerLazySingleton<Dio>(() => DioFactory(baseUrl: apiBaseUrl).create());
 
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(sl<Dio>()));
 
@@ -75,6 +77,14 @@ Future<void> init() async {
     ),
   );
 
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSource(sl<ApiConsumer>()),
+  );
+
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(sl<ProfileRemoteDataSource>()),
+  );
+
   // =============================================
   // Domain Layer
   // =============================================
@@ -102,6 +112,8 @@ Future<void> init() async {
   sl.registerFactory<LeaveHistoryCubit>(
     () => LeaveHistoryCubit(getLeaveHistory: sl<GetLeaveHistory>()),
   );
+
+  sl.registerFactory<ProfileCubit>(() => ProfileCubit(sl<ProfileRepository>()));
 
   // =============================================
   // Localization

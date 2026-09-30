@@ -7,9 +7,12 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/features/profile/domain/entities/profile.dart';
 
 class EmployeeInfo extends StatelessWidget {
-  const EmployeeInfo({super.key});
+  const EmployeeInfo({super.key, required this.profile});
+
+  final Profile profile;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class EmployeeInfo extends StatelessWidget {
           Expanded(
             child: _InfoItem(
               label: context.l10n.profileEmployeeId,
-              value: 'EMP-2026-894',
+              value: profile.employeeCode,
             ),
           ),
 
@@ -33,7 +36,7 @@ class EmployeeInfo extends StatelessWidget {
           Expanded(
             child: _InfoItem(
               label: context.l10n.profileJoined,
-              value: 'August 2026',
+              value: profile.startDate,
             ),
           ),
         ],
