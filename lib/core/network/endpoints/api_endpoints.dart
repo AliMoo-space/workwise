@@ -15,9 +15,6 @@ abstract final class ApiEndpoints {
   static const String profile = '/users/profile';
   static const String users = '/users';
 
-  // Add project-specific endpoints below.
-}
-
   // Performance
   static const String performance = '/api/employee/performance';
 
@@ -26,4 +23,6 @@ abstract final class ApiEndpoints {
   static String goalDetails(int goalId) {
     return '/api/goals/$goalId';
   }
+
+  // Add project-specific endpoints below.
 }
