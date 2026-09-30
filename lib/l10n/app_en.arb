@@ -343,5 +343,13 @@
   "tasksApprovalsReminders": "Tasks, approvals, reminders",
   "appDisplayLanguage": "App display language",
   "logoutConfirmationMessage": "Are you sure you want to log out?",
-  "details": "Details"
+  "details": "Details",
+"goalDetails": "Goal Details",
+"progress": "Progress",
+"currentValue": "Current Value",
+"targetValue": "Target Value",
+"targetDate": "Target Date",
+"createdAt": "Created At",
+"goals": "Goals",
+"noGoalsFound": "No goals found"
 }

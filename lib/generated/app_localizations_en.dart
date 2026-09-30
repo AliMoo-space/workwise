@@ -520,4 +520,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get details => 'Details';
+
+  @override
+  String get goalDetails => 'Goal Details';
+
+  @override
+  String get currentValue => 'Current Value';
+
+  @override
+  String get targetValue => 'Target Value';
+
+  @override
+  String get targetDate => 'Target Date';
+
+  @override
+  String get createdAt => 'Created At';
+
+  @override
+  String get goals => 'Goals';
+
+  @override
+  String get noGoalsFound => 'No goals found';
 }

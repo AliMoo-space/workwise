@@ -457,7 +457,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dateFormat => 'يوم / شهر / سنة';
 
   @override
-  String get progress => 'التقدم';
+  String get progress => 'نسبة الإنجاز';
 
   @override
   String get profileJobDetails => 'تفاصيل الوظيفة';
@@ -521,4 +521,25 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get details => 'التفاصيل';
+
+  @override
+  String get goalDetails => 'تفاصيل الهدف';
+
+  @override
+  String get currentValue => 'القيمة الحالية';
+
+  @override
+  String get targetValue => 'القيمة المستهدفة';
+
+  @override
+  String get targetDate => 'تاريخ الهدف';
+
+  @override
+  String get createdAt => 'تاريخ الإنشاء';
+
+  @override
+  String get goals => 'الأهداف';
+
+  @override
+  String get noGoalsFound => 'لا توجد أهداف';
 }

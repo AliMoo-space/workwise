@@ -1105,6 +1105,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Details'**
   String get details;
+
+  /// No description provided for @goalDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal Details'**
+  String get goalDetails;
+
+  /// No description provided for @currentValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Value'**
+  String get currentValue;
+
+  /// No description provided for @targetValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Value'**
+  String get targetValue;
+
+  /// No description provided for @targetDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Date'**
+  String get targetDate;
+
+  /// No description provided for @createdAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created At'**
+  String get createdAt;
+
+  /// No description provided for @goals.
+  ///
+  /// In en, this message translates to:
+  /// **'Goals'**
+  String get goals;
+
+  /// No description provided for @noGoalsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No goals found'**
+  String get noGoalsFound;
 }
 
 class _AppLocalizationsDelegate

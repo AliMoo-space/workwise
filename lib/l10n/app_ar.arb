@@ -345,6 +345,13 @@
   "tasksApprovalsReminders": "المهام، الموافقات، التذكيرات",
   "appDisplayLanguage": "لغة عرض التطبيق",
   "logoutConfirmationMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
-  "details": "التفاصيل"
-
+  "details": "التفاصيل",
+  "goalDetails": "تفاصيل الهدف",
+"progress": "نسبة الإنجاز",
+"currentValue": "القيمة الحالية",
+"targetValue": "القيمة المستهدفة",
+"targetDate": "تاريخ الهدف",
+"createdAt": "تاريخ الإنشاء",
+"goals": "الأهداف",
+"noGoalsFound": "لا توجد أهداف"
 }

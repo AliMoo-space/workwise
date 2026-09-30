@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/core/routing/app_routes.dart';
 
 class PersonalGoalsTitle extends StatelessWidget {
   const PersonalGoalsTitle({super.key});
@@ -22,10 +24,10 @@ class PersonalGoalsTitle extends StatelessWidget {
 
         TextButton(
           onPressed: () {
-            // context.push(AppRoutes.leaveScreen);
+            context.push(AppRoutes.goalViewAll);
           },
           child: AppText(
-            context.l10n.details,
+            context.l10n.view,
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),

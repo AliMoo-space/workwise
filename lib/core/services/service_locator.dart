@@ -2,12 +2,17 @@ import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:workwise/core/constants/app_constants.dart';
+
 import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/network/api_consumer.dart';
+import 'package:workwise/core/network/api_constants.dart';
 import 'package:workwise/core/network/dio/dio_factory.dart';
 import 'package:workwise/core/network/dio_consumer.dart';
 import 'package:workwise/core/network/network_info.dart';
+
+// =============================================
+// Leave
+// =============================================
 
 import 'package:workwise/features/leave/data/datasourse/leave_remote_data_source.dart';
 import 'package:workwise/features/leave/data/datasourse/leave_history_remote_data_source.dart';
@@ -33,8 +38,8 @@ import 'package:workwise/features/performance/data/performance/repositories/perf
 
 import 'package:workwise/features/performance/domain/performance/repositories/performance_repository.dart';
 import 'package:workwise/features/performance/domain/performance/use_cases/get_performance_use_case.dart';
-import 'package:workwise/features/performance/presentation/cubit/goals/goals_cubit.dart';
 
+import 'package:workwise/features/performance/presentation/cubit/goals/goals_cubit.dart';
 import 'package:workwise/features/performance/presentation/cubit/performance/performance_cubit.dart';
 
 // =============================================
@@ -42,10 +47,16 @@ import 'package:workwise/features/performance/presentation/cubit/performance/per
 // =============================================
 
 import 'package:workwise/features/performance/data/goals/datasources/goals_remote_data_source.dart';
+import 'package:workwise/features/performance/data/goals/datasources/goal_details_remote_data_source.dart';
+
 import 'package:workwise/features/performance/data/goals/repositories/goals_repository_impl.dart';
+import 'package:workwise/features/performance/data/goals/repositories/goal_details_repository_impl.dart';
 
 import 'package:workwise/features/performance/domain/goals/repositories/goals_repository.dart';
+import 'package:workwise/features/performance/domain/goals/repositories/goal_details_repository.dart';
+
 import 'package:workwise/features/performance/domain/goals/usecases/get_goals.dart';
+import 'package:workwise/features/performance/domain/goals/usecases/get_goal_details.dart';
 
 final sl = GetIt.instance;
 
@@ -67,7 +78,12 @@ Future<void> init() async {
   // =============================================
 
   sl.registerLazySingleton<Dio>(
-    () => DioFactory(baseUrl: AppConstants.baseUrl).create(),
+    () => DioFactory(
+      baseUrl: ApiConstants.baseUrl,
+      getToken: () {
+        return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2hyLXN5c3RlbS5pcHR2ZGVtby5zZXJ2NWdyb3VwLmNvbS9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc5MDU5MjE5OCwiZXhwIjoxNzkwNjc4NTk4LCJuYmYiOjE3OTA1OTIxOTgsImp0aSI6Im04aEpQck14QmRIUFdKZ3IiLCJzdWIiOiI0MCIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjciLCJyb2xlIjoiT3duZXIifQ.CbIoXehnJXd3TJMD2eNccavqkXwIUpyRiq7tzSoFs2w';
+      },
+    ).create(),
   );
 
   sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(sl<Dio>()));
@@ -75,6 +91,10 @@ Future<void> init() async {
   sl.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(sl<InternetConnectionChecker>()),
   );
+
+  // =============================================
+  // Localization
+  // =============================================
 
   sl.registerLazySingleton<LocaleCubit>(
     () => LocaleCubit(sl<SharedPreferences>()),
@@ -84,7 +104,9 @@ Future<void> init() async {
   // Data Layer
   // =============================================
 
+  // ---------------------------------------------
   // Leave
+  // ---------------------------------------------
 
   sl.registerLazySingleton<LeaveRemoteDataSource>(
     () => LeaveRemoteDataSourceImpl(),
@@ -104,33 +126,49 @@ Future<void> init() async {
     ),
   );
 
+  // ---------------------------------------------
   // Performance
+  // ---------------------------------------------
 
   sl.registerLazySingleton<PerformanceRemoteDataSource>(
-    () => PerformanceRemoteDataSourceImpl(dio: sl<Dio>()),
+    () => PerformanceRemoteDataSourceImpl(apiConsumer: sl<ApiConsumer>()),
   );
 
   sl.registerLazySingleton<PerformanceRepository>(
     () => PerformanceRepositoryImpl(sl<PerformanceRemoteDataSource>()),
   );
 
+  // ---------------------------------------------
   // Goals
+  // ---------------------------------------------
 
   sl.registerLazySingleton<GoalsRemoteDataSource>(
-    () => GoalsRemoteDataSourceImpl(sl<Dio>()),
+    () => GoalsRemoteDataSourceImpl(sl<ApiConsumer>()),
   );
 
   sl.registerLazySingleton<GoalsRepository>(
     () => GoalsRepositoryImpl(sl<GoalsRemoteDataSource>()),
   );
 
+  // ---------------------------------------------
+  // Goal Details
+  // ---------------------------------------------
+
+  sl.registerLazySingleton<GoalDetailsRemoteDataSource>(
+    () => GoalDetailsRemoteDataSourceImpl(apiConsumer: sl<ApiConsumer>()),
+  );
+
+  sl.registerLazySingleton<GoalDetailsRepository>(
+    () => GoalDetailsRepositoryImpl(sl<GoalDetailsRemoteDataSource>()),
+  );
+
   // =============================================
   // Domain Layer
   // =============================================
 
-  // =============================================
+  // ---------------------------------------------
   // Use Cases
-  // =============================================
+  // ---------------------------------------------
 
   sl.registerLazySingleton<GetLeaveBalances>(
     () => GetLeaveBalances(sl<LeaveRepository>()),
@@ -145,6 +183,10 @@ Future<void> init() async {
   );
 
   sl.registerLazySingleton<GetGoals>(() => GetGoals(sl<GoalsRepository>()));
+
+  sl.registerLazySingleton<GetGoalDetails>(
+    () => GetGoalDetails(sl<GoalDetailsRepository>()),
+  );
 
   // =============================================
   // Presentation Layer
@@ -162,13 +204,7 @@ Future<void> init() async {
     () => PerformanceCubit(getPerformanceUseCase: sl<GetPerformanceUseCase>()),
   );
 
-  sl.registerFactory<GoalsCubit>(() => GoalsCubit(sl<GetGoals>()));
-
-  // =============================================
-  // Localization
-  // =============================================
-
-  sl.registerLazySingleton<LocaleCubit>(
-    () => LocaleCubit(sl<SharedPreferences>()),
+  sl.registerFactory<GoalsCubit>(
+    () => GoalsCubit(sl<GetGoals>(), sl<GetGoalDetails>()),
   );
 }
