@@ -1,7 +1,7 @@
-import 'package:dio/dio.dart';
 
-import '../logger/pretty_dio_logger.dart';
-import 'dio_interceptors.dart';
+import 'package:dio/dio.dart';
+import 'package:workwise/core/network/dio/dio_interceptors.dart';
+import 'package:workwise/core/network/logger/pretty_dio_logger.dart';
 
 class DioFactory {
   DioFactory({
@@ -10,8 +10,7 @@ class DioFactory {
   });
 
   final String baseUrl;
-  final String? Function()? getToken;
-
+final Future<String?> Function()? getToken;
   Dio create() {
     final dio = Dio(
       BaseOptions(
