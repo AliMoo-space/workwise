@@ -16,7 +16,7 @@ class AuthRepository {
   final AuthApiService authApiService;
   final NetworkInfo networkInfo;
   final SecureStorage secureStorage;
-  
+
   Future<Either<Failure, LoginResponseModel>> login({
     required String email,
     required String password,

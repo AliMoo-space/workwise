@@ -13,7 +13,6 @@ import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/features/performance/domain/goals/entities/goal.dart';
-
 import 'package:workwise/features/performance/presentation/cubit/goals/goals_cubit.dart';
 import 'package:workwise/features/performance/presentation/cubit/goals/goals_state.dart';
 
@@ -41,15 +40,32 @@ class PersonalGoalsList extends StatelessWidget {
               child: _buildGoalsList(context, isLoading: true),
             );
           }
+
           if (state is GoalsSuccess) {
             final goals = state.goals;
 
+            // No Goals
+            if (goals.isEmpty) {
+              return Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppSpacing.space24.h),
+                  child: AppText(
+                    context.l10n.noGoalsFound,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              );
+            }
+
+            // Goals
             return ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: goals.length,
               itemBuilder: (context, index) {
                 final goal = goals[index];
+
                 return Padding(
                   padding: EdgeInsets.only(
                     bottom: index == goals.length - 1
