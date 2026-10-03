@@ -16,7 +16,7 @@ class AuthRepository {
   final AuthApiService authApiService;
   final NetworkInfo networkInfo;
   final SecureStorage secureStorage;
-  
+
   Future<Either<Failure, LoginResponseModel>> login({
     required String email,
     required String password,
@@ -50,34 +50,40 @@ class AuthRepository {
   }
 
   Failure _mapDioException(DioException exception) {
+    switch (exception.type) {
+      case DioExceptionType.connectionError:
+        return const NetworkFailure(
+          'Unable to connect to the server. Please check your internet connection and try again.',
+        );
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.sendTimeout:
+      case DioExceptionType.receiveTimeout:
+        return const NetworkFailure(
+          'Connection timed out. Please check your internet connection and try again.',
+        );
+      default:
+        break;
+    }
     final response = exception.response;
-
     if (response != null) {
       final data = response.data;
-
       if (data is Map<String, dynamic>) {
         final message = data['message']?.toString();
-
         switch (response.statusCode) {
           case 403:
             return UnauthorizedFailure(message ?? 'Your account is inactive.');
-
           case 422:
             return ValidationFailure(
               message ?? 'The provided credentials are invalid.',
             );
-
           case 429:
             return ServerFailure(message ?? 'Too many login attempts.');
-
           case 500:
             return ServerFailure(message ?? 'Something went wrong.');
         }
-
         return ServerFailure(message ?? 'Something went wrong.');
       }
     }
-
     return NetworkFailure(exception.message ?? 'Network error occurred.');
   }
 }
