@@ -64,7 +64,6 @@ class LoginUserModel {
   final int id;
   final String name;
   final String email;
-
   final String? phone;
 
   final String? employeeCode;
