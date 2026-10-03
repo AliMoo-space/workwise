@@ -68,7 +68,7 @@ class LoginUserModel {
   final int id;
   final String name;
   final String email;
-  final String phone;
+  final String? phone;
   final String employeeCode;
   final String jobTitle;
   final String employmentType;
@@ -87,7 +87,7 @@ class LoginUserModel {
       id: json['id'] as int,
       name: json['name'] as String,
       email: json['email'] as String,
-      phone: json['phone'] as String,
+      phone: json['phone'] as String?,
       employeeCode: json['employee_code'] as String,
       jobTitle: json['job_title'] as String,
       employmentType: json['employment_type'] as String,
