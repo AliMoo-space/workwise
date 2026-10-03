@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 import '../../domain/entities/profile.dart';
 import '../../domain/repositories/profile_repository.dart';
@@ -47,7 +47,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
     String? phone,
     String? address,
     String? locale,
-    File? avatar,
+    XFile? avatar,
   }) async {
     final model = await remoteDataSource.updateProfile(
       language: language,

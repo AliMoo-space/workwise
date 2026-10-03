@@ -1,5 +1,5 @@
-import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../domain/repositories/profile_repository.dart';
 import 'profile_state.dart';
 
@@ -50,7 +50,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     String? phone,
     String? address,
     String? locale,
-    File? avatar,
+    XFile? avatar,
   }) async {
     emit(state.copyWith(status: ProfileStatus.loading, clearMessage: true));
 

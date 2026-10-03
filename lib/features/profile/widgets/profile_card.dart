@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
@@ -13,9 +15,18 @@ import 'employee_info.dart';
 import 'profile_status_badge.dart';
 
 class ProfileCard extends StatelessWidget {
-  const ProfileCard({super.key, required this.profile});
+  const ProfileCard({
+    super.key,
+    required this.profile,
+    required this.onChangeAvatar,
+    this.avatarPreview,
+    this.isUpdatingAvatar = false,
+  });
 
   final Profile profile;
+  final VoidCallback onChangeAvatar;
+  final Uint8List? avatarPreview;
+  final bool isUpdatingAvatar;
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +37,69 @@ class ProfileCard extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              profile.avatarUrl.isEmpty
-                  ? _buildAvatarFallback(profile.name)
-                  : AppNetworkImage(
-                      imageUrl: profile.avatarUrl,
-                      width: 80.w,
-                      height: 80.h,
-                      shape: BoxShape.circle,
-                      fit: BoxFit.cover,
-                      backgroundColor: AppColors.surfaceContainer,
-                      errorWidget: _buildAvatarFallback(profile.name),
+              SizedBox(
+                width: 80.w,
+                height: 80.h,
+                child: Stack(
+                  children: [
+                    Positioned.fill(
+                      child: avatarPreview != null
+                          ? ClipOval(
+                              child: Image.memory(
+                                avatarPreview!,
+                                width: 80.w,
+                                height: 80.h,
+                                fit: BoxFit.cover,
+                              ),
+                            )
+                          : profile.avatarUrl.isEmpty
+                              ? _buildAvatarFallback(profile.name)
+                              : AppNetworkImage(
+                                  imageUrl: profile.avatarUrl,
+                                  width: 80.w,
+                                  height: 80.h,
+                                  shape: BoxShape.circle,
+                                  fit: BoxFit.cover,
+                                  backgroundColor: AppColors.surfaceContainer,
+                                  errorWidget: _buildAvatarFallback(
+                                    profile.name,
+                                  ),
+                                ),
                     ),
+                    PositionedDirectional(
+                      end: 0,
+                      bottom: 0,
+                      child: Material(
+                        color: AppColors.primary,
+                        shape: const CircleBorder(),
+                        child: IconButton(
+                          tooltip: 'Change profile photo',
+                          onPressed: isUpdatingAvatar ? null : onChangeAvatar,
+                          constraints: BoxConstraints.tightFor(
+                            width: 30.w,
+                            height: 30.h,
+                          ),
+                          padding: EdgeInsets.zero,
+                          icon: isUpdatingAvatar
+                              ? SizedBox(
+                                  width: 15.w,
+                                  height: 15.h,
+                                  child: const CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : Icon(
+                                  Icons.camera_alt_outlined,
+                                  size: 16.sp,
+                                  color: Colors.white,
+                                ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
               Gap(AppSpacing.space16.w),
 

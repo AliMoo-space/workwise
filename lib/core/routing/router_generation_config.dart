@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/routing/app_routes.dart';
+import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/core/routing/page_transition.dart';
 import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/attendance/presentation/screens/attendance_screen.dart';
@@ -77,7 +77,7 @@ class RouterGenerationConfig {
         name: AppRoutes.profilePage,
         path: AppRoutes.profilePage,
         pageBuilder: (context, state) {
-          final employeeId = sl<SharedPreferences>().getInt('user_id');
+          final employeeId = sl<LocalStorage>().getUserId();
           final language = sl<LocaleCubit>().state.languageCode;
 
           return slideTransitionPage(

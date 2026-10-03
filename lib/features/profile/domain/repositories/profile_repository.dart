@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 import '../entities/profile.dart';
 
@@ -14,6 +14,6 @@ abstract interface class ProfileRepository {
     String? phone,
     String? address,
     String? locale,
-    File? avatar,
+    XFile? avatar,
   });
 }

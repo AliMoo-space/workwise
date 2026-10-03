@@ -12,13 +12,13 @@ abstract final class ApiEndpoints {
   static const String resetPassword = '/api/auth/forgot-password/reset';
 
   // User
-  static const String profile = '/users/profile';
-  static const String users = '/users';
+  static const String profile = '/api/users/profile';
+  static const String users = '/api/users';
 
   // Add project-specific endpoints below.
-  static const String employeeProfile = '/employees/profile';
+  static const String employeeProfile = '/api/employees/profile';
 
   static String employeeDetails(int employeeId) {
-    return '/employees/$employeeId';
+    return '/api/employees/$employeeId';
   }
 }

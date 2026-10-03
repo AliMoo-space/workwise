@@ -96,6 +96,7 @@ Future<void> init() async {
       authApiService: sl<AuthApiService>(),
       networkInfo: sl<NetworkInfo>(),
       secureStorage: sl<SecureStorage>(),
+      localStorage: sl<LocalStorage>(),
     ),
   );
 
@@ -107,11 +108,11 @@ Future<void> init() async {
   );
 
   sl.registerFactory<SplashCubit>(
-  () => SplashCubit(
-    secureStorage: sl<SecureStorage>(),
-    localStorage: sl<LocalStorage>(),
-  ),
-);
+    () => SplashCubit(
+      secureStorage: sl<SecureStorage>(),
+      localStorage: sl<LocalStorage>(),
+    ),
+  );
 
   // =============================================
   // Leave - Data Layer
