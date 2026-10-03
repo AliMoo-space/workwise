@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_radius.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
@@ -13,9 +11,7 @@ import 'package:workwise/core/design_system/widgets/feedback/app_snack_bar.dart'
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
-import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/core/services/service_locator.dart';
-
 import 'package:workwise/features/performance/presentation/cubit/goals/goals_cubit.dart';
 import 'package:workwise/features/performance/presentation/cubit/goals/goals_state.dart';
 
@@ -118,9 +114,8 @@ Widget _buildGoalsList(
           bottom: index == itemsCount - 1 ? 0 : AppSpacing.space12.h,
         ),
         child: AppCard(
-          height: 130.h,
-          width: double.infinity.w,
-          padding: EdgeInsets.all(AppSpacing.space8.r),
+          width: double.infinity,
+          padding: EdgeInsets.all(AppSpacing.space16.r),
           backgroundColor: Theme.of(context).colorScheme.onError,
           borderRadius: AppRadius.radius20.r,
           border: Border.all(
@@ -129,8 +124,10 @@ Widget _buildGoalsList(
           ),
           boxShadow: const [],
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: Column(
@@ -140,77 +137,81 @@ Widget _buildGoalsList(
                           isLoading
                               ? 'Complete Advanced SQL certification'
                               : goal.title,
-                          style: Theme.of(context).textTheme.titleSmall,
+                          style: Theme.of(context).textTheme.titleMedium,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.start,
                         ),
+
+                        Gap(AppSpacing.space4.h),
+
                         AppText(
                           isLoading
-                              ? '${context.l10n.target} 30/11/2026'
+                              ? 'Improve technical skills'
                               : goal.description,
-                          style: Theme.of(context).textTheme.titleSmall,
-                          maxLines: 1,
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurfaceVariant,
+                              ),
+                          maxLines: 2,
                           overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.start,
-                        ),
-                        Gap(AppSpacing.space8.h),
-                        AppText(
-                          isLoading
-                              ? '${context.l10n.target} 30/11/2026'
-                              : '${context.l10n.target} ${goal.targetDate}',
-                          style: Theme.of(context).textTheme.bodyMedium,
                           textAlign: TextAlign.start,
                         ),
                       ],
                     ),
                   ),
-                  const Spacer(),
+
+                  Gap(AppSpacing.space12.w),
+
                   AppCard(
-                    width: 100.w,
-                    height: 35.h,
+                    width: 92.w,
+                    height: 32.h,
                     padding: EdgeInsets.zero,
                     backgroundColor: Theme.of(
                       context,
-                    ).colorScheme.outlineVariant,
+                    ).colorScheme.outlineVariant.withValues(alpha: .55),
                     borderRadius: AppRadius.radius32.r,
-                    border: Border.all(color: Colors.transparent, width: 0),
+                    border: Border.all(color: Colors.transparent),
                     boxShadow: const [],
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         if (isLoading) ...[
                           Bone(
-                            width: 8.w,
-                            height: 8.h,
+                            width: 7.w,
+                            height: 7.h,
                             borderRadius: BorderRadius.circular(
                               AppRadius.radius16.r,
                             ),
                           ),
-                          Gap(AppSpacing.space8.w),
+                          Gap(AppSpacing.space4.w),
                           Bone(
-                            width: 45.w,
-                            height: 14.h,
+                            width: 42.w,
+                            height: 13.h,
                             borderRadius: BorderRadius.circular(
                               AppRadius.radius4.r,
                             ),
                           ),
                         ] else ...[
                           Container(
-                            height: 8.h,
-                            width: 8.w,
+                            width: 7.w,
+                            height: 7.w,
                             decoration: BoxDecoration(
                               color: Theme.of(context).colorScheme.primary,
-                              borderRadius: BorderRadius.circular(
-                                AppRadius.radius16.r,
-                              ),
+                              shape: BoxShape.circle,
                             ),
                           ),
-                          Gap(AppSpacing.space8.w),
-                          AppText(
-                            goal.status,
-                            style: Theme.of(context).textTheme.bodyMedium,
-                            textAlign: TextAlign.start,
+                          Gap(AppSpacing.space4.w),
+                          Flexible(
+                            child: AppText(
+                              goal.status,
+                              style: Theme.of(context).textTheme.labelMedium,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ],
                       ],
@@ -218,7 +219,9 @@ Widget _buildGoalsList(
                   ),
                 ],
               ),
-              Gap(AppSpacing.space16.h),
+
+              Gap(AppSpacing.space20.h),
+
               Row(
                 children: [
                   Expanded(
@@ -230,7 +233,10 @@ Widget _buildGoalsList(
                             ),
                           )
                         : LinearProgressIndicator(
-                            value: goal.progressPercentage / 100,
+                            value: (goal.progressPercentage / 100).clamp(
+                              0.0,
+                              1.0,
+                            ),
                             backgroundColor: AppColors.border,
                             minHeight: 8.h,
                             borderRadius: BorderRadius.circular(
@@ -238,10 +244,12 @@ Widget _buildGoalsList(
                             ),
                           ),
                   ),
+
                   Gap(AppSpacing.space8.w),
+
                   isLoading
                       ? Bone(
-                          width: 35.w,
+                          width: 38.w,
                           height: 16.h,
                           borderRadius: BorderRadius.circular(
                             AppRadius.radius4.r,
@@ -249,9 +257,34 @@ Widget _buildGoalsList(
                         )
                       : AppText(
                           '${goal.progressPercentage}%',
-                          style: Theme.of(context).textTheme.titleSmall,
-                          textAlign: TextAlign.start,
+                          style: Theme.of(context).textTheme.titleSmall
+                              ?.copyWith(fontWeight: FontWeight.w700),
+                          textAlign: TextAlign.end,
                         ),
+                ],
+              ),
+
+              Gap(AppSpacing.space12.h),
+
+              Row(
+                children: [
+                  Icon(
+                    Icons.calendar_today_outlined,
+                    size: 15.sp,
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
+
+                  Gap(AppSpacing.space4.w),
+
+                  AppText(
+                    isLoading
+                        ? '${context.l10n.target} 30/11/2026'
+                        : '${context.l10n.target} ${goal.targetDate}',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.onSurfaceVariant,
+                    ),
+                    textAlign: TextAlign.start,
+                  ),
                 ],
               ),
             ],

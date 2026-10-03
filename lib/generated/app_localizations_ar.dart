@@ -542,4 +542,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noGoalsFound => 'لا توجد أهداف';
+
+  @override
+  String get noLeaveHistory => 'لا يوجد سجل إجازات';
 }

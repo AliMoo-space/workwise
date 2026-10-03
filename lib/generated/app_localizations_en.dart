@@ -541,4 +541,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noGoalsFound => 'No goals found';
+
+  @override
+  String get noLeaveHistory => 'No leave history';
 }

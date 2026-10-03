@@ -353,5 +353,7 @@
 "targetDate": "تاريخ الهدف",
 "createdAt": "تاريخ الإنشاء",
 "goals": "الأهداف",
-"noGoalsFound": "لا توجد أهداف"
+"noGoalsFound": "لا توجد أهداف",
+  "noLeaveHistory": "لا يوجد سجل إجازات"
+
 }

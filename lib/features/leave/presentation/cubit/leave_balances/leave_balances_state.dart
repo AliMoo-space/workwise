@@ -1,33 +1,35 @@
-part of 'leave_balances_cubit.dart';
+import 'package:equatable/equatable.dart';
 
-abstract class LeaveBalancesState extends Equatable {
+import 'package:workwise/features/leave/domain/entity/leave_balance_entity.dart';
+
+sealed class LeaveBalancesState extends Equatable {
   const LeaveBalancesState();
 
   @override
   List<Object?> get props => [];
 }
 
-class LeaveBalancesInitial extends LeaveBalancesState {
+final class LeaveBalancesInitial extends LeaveBalancesState {
   const LeaveBalancesInitial();
 }
 
-class LeaveBalancesLoading extends LeaveBalancesState {
+final class LeaveBalancesLoading extends LeaveBalancesState {
   const LeaveBalancesLoading();
 }
 
-class LeaveBalancesSuccess extends LeaveBalancesState {
-  final List<LeaveBalance> balances;
-
+final class LeaveBalancesSuccess extends LeaveBalancesState {
   const LeaveBalancesSuccess(this.balances);
+
+  final List<LeaveBalanceEntity> balances;
 
   @override
   List<Object?> get props => [balances];
 }
 
-class LeaveBalancesFailure extends LeaveBalancesState {
-  final String message;
-
+final class LeaveBalancesFailure extends LeaveBalancesState {
   const LeaveBalancesFailure(this.message);
+
+  final String message;
 
   @override
   List<Object?> get props => [message];

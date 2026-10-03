@@ -3,38 +3,38 @@ import 'package:dio/dio.dart';
 import 'package:workwise/core/network/api_consumer.dart';
 import 'package:workwise/core/network/endpoints/api_endpoints.dart';
 
-import '../models/leave_history_model.dart';
+import '../models/leave_balance_model.dart';
 
-abstract interface class LeaveHistoryRemoteDataSource {
-  Future<List<LeaveHistoryModel>> getLeaveHistory();
+abstract interface class LeaveBalanceRemoteDataSource {
+  Future<List<LeaveBalanceModel>> getLeaveBalances();
 }
 
-class LeaveHistoryRemoteDataSourceImpl implements LeaveHistoryRemoteDataSource {
-  const LeaveHistoryRemoteDataSourceImpl(this.apiConsumer);
+class LeaveBalanceRemoteDataSourceImpl implements LeaveBalanceRemoteDataSource {
+  const LeaveBalanceRemoteDataSourceImpl(this.apiConsumer);
 
   final ApiConsumer apiConsumer;
 
   @override
-  Future<List<LeaveHistoryModel>> getLeaveHistory() async {
+  Future<List<LeaveBalanceModel>> getLeaveBalances() async {
     try {
-      final response = await apiConsumer.get(ApiEndpoints.leaveHistory);
+      final response = await apiConsumer.get(ApiEndpoints.leaveBalances);
 
       final responseData = response.data;
 
       if (responseData is! Map<String, dynamic>) {
-        throw const FormatException('Invalid leave history response format');
+        throw const FormatException('Invalid leave balances response format');
       }
 
       final data = responseData['data'];
 
       if (data is! List) {
-        throw const FormatException('Invalid leave history data format');
+        throw const FormatException('Invalid leave balances data format');
       }
 
       return data
           .map(
             (leave) =>
-                LeaveHistoryModel.fromJson(leave as Map<String, dynamic>),
+                LeaveBalanceModel.fromJson(leave as Map<String, dynamic>),
           )
           .toList();
     } on DioException catch (e) {

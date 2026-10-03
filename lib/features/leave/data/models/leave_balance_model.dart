@@ -1,21 +1,21 @@
-import 'package:workwise/features/leave/domain/entity/leave_balance.dart';
+import 'package:workwise/features/leave/domain/entity/leave_balance_entity.dart';
 
-class LeaveBalanceModel extends LeaveBalance {
+class LeaveBalanceModel extends LeaveBalanceEntity {
   const LeaveBalanceModel({
-    required super.type,
+    required super.id,
+    required super.leaveTypeName,
+    required super.allocatedDays,
     required super.usedDays,
-    required super.totalDays,
+    required super.remainingDays,
   });
 
   factory LeaveBalanceModel.fromJson(Map<String, dynamic> json) {
     return LeaveBalanceModel(
-      type: json['type'] as String,
+      id: json['id'] as int,
+      leaveTypeName: json['leave_type']['name'] as String,
+      allocatedDays: json['allocated_days'] as int,
       usedDays: json['used_days'] as int,
-      totalDays: json['total_days'] as int,
+      remainingDays: json['remaining_days'] as int,
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {'type': type, 'used_days': usedDays, 'total_days': totalDays};
   }
 }

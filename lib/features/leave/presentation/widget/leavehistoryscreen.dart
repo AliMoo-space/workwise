@@ -15,7 +15,7 @@ class LeaveHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => sl<LeaveHistoryCubit>()..getHistory(),
+      create: (_) => sl<LeaveHistoryCubit>()..getLeaveHistory(),
       child: Scaffold(
         appBar: AppAppBar(
           title: AppText(

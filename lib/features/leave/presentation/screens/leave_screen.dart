@@ -5,6 +5,7 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_balances/leave_balances_cubit.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_history/leave_history_cubit.dart';
+import 'package:workwise/features/leave/presentation/cubit/leave_request/leave_request_cubit.dart';
 import 'package:workwise/features/leave/presentation/widget/leave_balances_card.dart';
 import 'package:workwise/features/leave/presentation/widget/leave_history_list.dart';
 import 'package:workwise/features/leave/presentation/widget/leave_history_title.dart';
@@ -20,8 +21,13 @@ class Leavescreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => sl<LeaveBalancesCubit>()..getBalances()),
-        BlocProvider(create: (_) => sl<LeaveHistoryCubit>()..getHistory()),
+        BlocProvider(
+          create: (_) => sl<LeaveBalancesCubit>()..getLeaveBalances(),
+        ),
+
+        BlocProvider(create: (_) => sl<LeaveHistoryCubit>()..getLeaveHistory()),
+
+        BlocProvider(create: (_) => sl<LeaveRequestCubit>()),
       ],
       child: SafeArea(
         bottom: false,

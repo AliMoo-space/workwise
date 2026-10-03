@@ -1,31 +1,23 @@
-import 'package:workwise/features/leave/domain/entity/leave_history.dart';
+import 'package:workwise/features/leave/domain/entity/leave_history_entity.dart';
 
-class LeaveHistoryModel extends LeaveHistory {
+class LeaveHistoryModel extends LeaveHistoryEntity {
   const LeaveHistoryModel({
-    required super.type,
+    required super.id,
     required super.startDate,
     required super.endDate,
     required super.days,
     required super.status,
+    required super.name,
   });
 
   factory LeaveHistoryModel.fromJson(Map<String, dynamic> json) {
     return LeaveHistoryModel(
-      type: json['type'] as String,
-      startDate: json['start_date'] as String,
-      endDate: json['end_date'] as String,
+      id: json['id'] as int,
+      startDate: DateTime.parse(json['start_date'] as String),
+      endDate: DateTime.parse(json['end_date'] as String),
       days: json['days'] as int,
       status: json['status'] as String,
+      name: (json['leave_type'] as Map<String, dynamic>)['name'] as String,
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'type': type,
-      'start_date': startDate,
-      'end_date': endDate,
-      'days': days,
-      'status': status,
-    };
   }
 }

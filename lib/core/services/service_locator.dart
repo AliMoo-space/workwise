@@ -12,6 +12,7 @@ import 'package:workwise/core/network/dio_consumer.dart';
 import 'package:workwise/core/network/network_info.dart';
 import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/core/storage/secure_storage.dart';
+
 import 'package:workwise/features/auth/login/data/Repository/auth_repository.dart';
 import 'package:workwise/features/auth/login/data/web_services/auth_api_service.dart';
 import 'package:workwise/features/auth/login/data/web_services/permissions_api_service.dart';
@@ -22,16 +23,26 @@ import 'package:workwise/features/splash/presentation/cubit/splash_cubit.dart';
 // Leave
 // =============================================
 
-import 'package:workwise/features/leave/data/datasourse/leave_remote_data_source.dart';
-import 'package:workwise/features/leave/data/datasourse/leave_history_remote_data_source.dart';
-import 'package:workwise/features/leave/data/repo/leave_repository_impl.dart';
-import 'package:workwise/features/leave/data/repo/leave_history_repository_impl.dart';
-import 'package:workwise/features/leave/domain/repo/leave_repository.dart';
-import 'package:workwise/features/leave/domain/repo/leave_history_repository.dart';
-import 'package:workwise/features/leave/domain/usecase/get_leave_balances.dart';
-import 'package:workwise/features/leave/domain/usecase/get_leave_history.dart';
+// Leave Balances
+import 'package:workwise/features/leave/data/datasourse/leave_balance_remote_data_source.dart';
+import 'package:workwise/features/leave/data/repo/leave_balance_repository_impl.dart';
+import 'package:workwise/features/leave/domain/repo/leave_balance_repository.dart';
+import 'package:workwise/features/leave/domain/usecase/get_leave_balances_use_case.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_balances/leave_balances_cubit.dart';
+
+// Leave History
+import 'package:workwise/features/leave/data/datasourse/leave_history_remote_data_source.dart';
+import 'package:workwise/features/leave/data/repo/leave_history_repository_impl.dart';
+import 'package:workwise/features/leave/domain/repo/leave_history_repository.dart';
+import 'package:workwise/features/leave/domain/usecase/get_leave_history_use_case.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_history/leave_history_cubit.dart';
+
+// Leave Request
+import 'package:workwise/features/leave/data/datasourse/leave_remote_data_source.dart';
+import 'package:workwise/features/leave/data/repo/leave_repository_impl.dart';
+import 'package:workwise/features/leave/domain/repo/leave_repository.dart';
+import 'package:workwise/features/leave/domain/usecase/create_leave_request_use_case.dart';
+import 'package:workwise/features/leave/presentation/cubit/leave_request/leave_request_cubit.dart';
 
 // =============================================
 // Performance
@@ -106,15 +117,16 @@ Future<void> init() async {
     ).create(),
   );
 
-  sl.registerLazySingleton<ApiConsumer>(() => DioConsumer(sl<Dio>()));
-
+  // Network Info
   sl.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(sl<InternetConnectionChecker>()),
   );
 
-  // =============================================
-  // Localization
-  // =============================================
+  // Dio Consumer
+  sl.registerLazySingleton<DioConsumer>(() => DioConsumer(sl<Dio>()));
+
+  // Api Consumer
+  sl.registerLazySingleton<ApiConsumer>(() => sl<DioConsumer>());
 
   // =============================================
   // Localization
@@ -161,42 +173,56 @@ Future<void> init() async {
   // =============================================
 
   // ---------------------------------------------
-  // Leave
+  // Leave Balances
   // ---------------------------------------------
 
-  sl.registerLazySingleton<LeaveRemoteDataSource>(
-    () => LeaveRemoteDataSourceImpl(),
+  sl.registerLazySingleton<LeaveBalanceRemoteDataSource>(
+    () => LeaveBalanceRemoteDataSourceImpl(sl<ApiConsumer>()),
   );
+
+  sl.registerLazySingleton<LeaveBalanceRepository>(
+    () => LeaveBalanceRepositoryImpl(sl<LeaveBalanceRemoteDataSource>()),
+  );
+
+  // ---------------------------------------------
+  // Leave History
+  // ---------------------------------------------
 
   sl.registerLazySingleton<LeaveHistoryRemoteDataSource>(
-    () => LeaveHistoryRemoteDataSourceImpl(),
-  );
-
-  sl.registerLazySingleton<LeaveRepository>(
-    () => LeaveRepositoryImpl(remoteDataSource: sl<LeaveRemoteDataSource>()),
+    () => LeaveHistoryRemoteDataSourceImpl(sl<ApiConsumer>()),
   );
 
   sl.registerLazySingleton<LeaveHistoryRepository>(
-    () => LeaveHistoryRepositoryImpl(
-      remoteDataSource: sl<LeaveHistoryRemoteDataSource>(),
-    ),
+    () => LeaveHistoryRepositoryImpl(sl<LeaveHistoryRemoteDataSource>()),
   );
 
   // ---------------------------------------------
-  // Performance
+  // Leave Request
   // ---------------------------------------------
 
+  sl.registerLazySingleton<LeaveRemoteDataSource>(
+    () => LeaveRemoteDataSourceImpl(sl<DioConsumer>()),
+  );
+
+  sl.registerLazySingleton<LeaveRepository>(
+    () => LeaveRepositoryImpl(sl<LeaveRemoteDataSource>()),
+  );
+
+  // =============================================
+  // Performance - Data Layer
+  // =============================================
+
   sl.registerLazySingleton<PerformanceRemoteDataSource>(
-    () => PerformanceRemoteDataSourceImpl(apiConsumer: sl<ApiConsumer>()),
+    () => PerformanceRemoteDataSourceImpl(apiConsumer: sl<DioConsumer>()),
   );
 
   sl.registerLazySingleton<PerformanceRepository>(
     () => PerformanceRepositoryImpl(sl<PerformanceRemoteDataSource>()),
   );
 
-  // ---------------------------------------------
-  // Goals
-  // ---------------------------------------------
+  // =============================================
+  // Goals - Data Layer
+  // =============================================
 
   sl.registerLazySingleton<GoalsRemoteDataSource>(
     () => GoalsRemoteDataSourceImpl(sl<ApiConsumer>()),
@@ -219,24 +245,40 @@ Future<void> init() async {
   );
 
   // =============================================
-  // Leave - Use Cases
+  // Use Cases
   // =============================================
 
   // ---------------------------------------------
-  // Use Cases
+  // Leave
   // ---------------------------------------------
 
-  sl.registerLazySingleton<GetLeaveBalances>(
-    () => GetLeaveBalances(sl<LeaveRepository>()),
+  sl.registerLazySingleton<GetLeaveBalancesUseCase>(
+    () => GetLeaveBalancesUseCase(sl<LeaveBalanceRepository>()),
   );
 
-  sl.registerLazySingleton<GetLeaveHistory>(
-    () => GetLeaveHistory(sl<LeaveHistoryRepository>()),
+  sl.registerLazySingleton<GetLeaveHistoryUseCase>(
+    () => GetLeaveHistoryUseCase(sl<LeaveHistoryRepository>()),
   );
+
+  // ---------------------------------------------
+  // Leave Request
+  // ---------------------------------------------
+
+  sl.registerLazySingleton<CreateLeaveRequestUseCase>(
+    () => CreateLeaveRequestUseCase(sl<LeaveRepository>()),
+  );
+
+  // ---------------------------------------------
+  // Performance
+  // ---------------------------------------------
 
   sl.registerLazySingleton<GetPerformanceUseCase>(
     () => GetPerformanceUseCase(sl<PerformanceRepository>()),
   );
+
+  // ---------------------------------------------
+  // Goals
+  // ---------------------------------------------
 
   sl.registerLazySingleton<GetGoals>(() => GetGoals(sl<GoalsRepository>()));
 
@@ -245,20 +287,36 @@ Future<void> init() async {
   );
 
   // =============================================
-  // Leave - Presentation Layer
+  // Presentation - Cubits
   // =============================================
 
+  // ---------------------------------------------
+  // Leave
+  // ---------------------------------------------
+
   sl.registerFactory<LeaveBalancesCubit>(
-    () => LeaveBalancesCubit(getLeaveBalances: sl<GetLeaveBalances>()),
+    () => LeaveBalancesCubit(sl<GetLeaveBalancesUseCase>()),
   );
 
   sl.registerFactory<LeaveHistoryCubit>(
-    () => LeaveHistoryCubit(getLeaveHistory: sl<GetLeaveHistory>()),
+    () => LeaveHistoryCubit(sl<GetLeaveHistoryUseCase>()),
   );
+
+  sl.registerFactory<LeaveRequestCubit>(
+    () => LeaveRequestCubit(sl<CreateLeaveRequestUseCase>()),
+  );
+
+  // ---------------------------------------------
+  // Performance
+  // ---------------------------------------------
 
   sl.registerFactory<PerformanceCubit>(
     () => PerformanceCubit(getPerformanceUseCase: sl<GetPerformanceUseCase>()),
   );
+
+  // ---------------------------------------------
+  // Goals
+  // ---------------------------------------------
 
   sl.registerFactory<GoalsCubit>(
     () => GoalsCubit(sl<GetGoals>(), sl<GetGoalDetails>()),

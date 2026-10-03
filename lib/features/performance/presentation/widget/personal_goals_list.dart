@@ -77,7 +77,7 @@ class PersonalGoalsList extends StatelessWidget {
                       context.push('${AppRoutes.goalDetailsScreen}/${goal.id}');
                     },
                     child: AppCard(
-                      height: 120.h,
+                      height: 140.h,
                       width: double.infinity.w,
                       padding: EdgeInsets.all(AppSpacing.space8.r),
                       backgroundColor: Theme.of(context).colorScheme.onError,
@@ -221,7 +221,7 @@ Widget _buildGoalsList(
           bottom: index == itemsCount - 1 ? 0 : AppSpacing.space12.h,
         ),
         child: AppCard(
-          height: 120.h,
+          height: 130.h,
           width: double.infinity.w,
           padding: EdgeInsets.all(AppSpacing.space8.r),
           backgroundColor: Theme.of(context).colorScheme.onError,

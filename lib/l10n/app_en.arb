@@ -351,5 +351,7 @@
 "targetDate": "Target Date",
 "createdAt": "Created At",
 "goals": "Goals",
-"noGoalsFound": "No goals found"
+"noGoalsFound": "No goals found",
+  "noLeaveHistory": "No leave history"
+
 }

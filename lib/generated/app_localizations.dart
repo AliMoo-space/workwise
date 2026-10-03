@@ -1147,6 +1147,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No goals found'**
   String get noGoalsFound;
+
+  /// No description provided for @noLeaveHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'No leave history'**
+  String get noLeaveHistory;
 }
 
 class _AppLocalizationsDelegate
