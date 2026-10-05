@@ -8,6 +8,7 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/media/app_network_image.dart';
+import 'package:workwise/core/design_system/widgets/media/profile_photo_viewer.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/features/profile/domain/entities/profile.dart';
 
@@ -43,28 +44,37 @@ class ProfileCard extends StatelessWidget {
                 child: Stack(
                   children: [
                     Positioned.fill(
-                      child: avatarPreview != null
-                          ? ClipOval(
-                              child: Image.memory(
-                                avatarPreview!,
-                                width: 80.w,
-                                height: 80.h,
-                                fit: BoxFit.cover,
-                              ),
-                            )
-                          : profile.avatarUrl.isEmpty
-                              ? _buildAvatarFallback(profile.name)
-                              : AppNetworkImage(
-                                  imageUrl: profile.avatarUrl,
+                      child: GestureDetector(
+                        onTap:
+                            avatarPreview != null ||
+                                profile.avatarUrl.isNotEmpty
+                            ? () => showProfilePhotoViewer(
+                                context,
+                                bytes: avatarPreview,
+                                imageUrl: profile.avatarUrl,
+                              )
+                            : null,
+                        child: avatarPreview != null
+                            ? ClipOval(
+                                child: Image.memory(
+                                  avatarPreview!,
                                   width: 80.w,
                                   height: 80.h,
-                                  shape: BoxShape.circle,
                                   fit: BoxFit.cover,
-                                  backgroundColor: AppColors.surfaceContainer,
-                                  errorWidget: _buildAvatarFallback(
-                                    profile.name,
-                                  ),
                                 ),
+                              )
+                            : profile.avatarUrl.isEmpty
+                            ? _buildAvatarFallback(profile.name)
+                            : AppNetworkImage(
+                                imageUrl: profile.avatarUrl,
+                                width: 80.w,
+                                height: 80.h,
+                                shape: BoxShape.circle,
+                                fit: BoxFit.cover,
+                                backgroundColor: AppColors.surfaceContainer,
+                                errorWidget: _buildAvatarFallback(profile.name),
+                              ),
+                      ),
                     ),
                     PositionedDirectional(
                       end: 0,
@@ -75,15 +85,19 @@ class ProfileCard extends StatelessWidget {
                         child: IconButton(
                           tooltip: 'Change profile photo',
                           onPressed: isUpdatingAvatar ? null : onChangeAvatar,
+                          visualDensity: VisualDensity.compact,
+                          style: IconButton.styleFrom(
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
                           constraints: BoxConstraints.tightFor(
-                            width: 30.w,
-                            height: 30.h,
+                            width: 40.w,
+                            height: 40.h,
                           ),
                           padding: EdgeInsets.zero,
                           icon: isUpdatingAvatar
                               ? SizedBox(
-                                  width: 15.w,
-                                  height: 15.h,
+                                  width: 18.w,
+                                  height: 18.h,
                                   child: const CircularProgressIndicator(
                                     strokeWidth: 2,
                                     color: Colors.white,
@@ -91,7 +105,7 @@ class ProfileCard extends StatelessWidget {
                                 )
                               : Icon(
                                   Icons.camera_alt_outlined,
-                                  size: 16.sp,
+                                  size: 20.sp,
                                   color: Colors.white,
                                 ),
                         ),

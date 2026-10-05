@@ -13,18 +13,13 @@ class AuthApiService {
   }) {
     return _apiConsumer.post(
       ApiEndpoints.login,
-      queryParameters: const {
-        'lang': 'en',
-      },
-      options: Options(
-        headers: const {
-          'Accept-Language': 'en',
-        },
-      ),
-      data: {
-        'email': email,
-        'password': password,
-      },
+      queryParameters: const {'lang': 'en'},
+      options: Options(headers: const {'Accept-Language': 'en'}),
+      data: {'email': email, 'password': password},
     );
+  }
+
+  Future<Response<dynamic>> logout() {
+    return _apiConsumer.post(ApiEndpoints.logout);
   }
 }

@@ -3,7 +3,7 @@ abstract final class ApiEndpoints {
   static const String login = '/api/auth/login';
   static const String register = '/auth/register';
   static const String refreshToken = '/auth/refresh-token';
-  static const String logout = '/auth/logout';
+  static const String logout = '/api/auth/logout';
 
   // Forgot Password
   static const String forgetPassword = '/api/auth/forget-password';

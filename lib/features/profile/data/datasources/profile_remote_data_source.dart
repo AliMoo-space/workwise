@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/network/api_consumer.dart';
 import '../../../../core/network/endpoints/api_endpoints.dart';
@@ -14,14 +15,16 @@ class ProfileRemoteDataSource {
       return <String, dynamic>{};
     }
 
-    final map = Map<String, dynamic>.from(payload);
+    var map = Map<String, dynamic>.from(payload);
 
     if (map.containsKey('data') && map['data'] is Map) {
-      return Map<String, dynamic>.from(map['data'] as Map);
+      map = Map<String, dynamic>.from(map['data'] as Map);
     }
 
     if (map.containsKey('employee') && map['employee'] is Map) {
-      return Map<String, dynamic>.from(map['employee'] as Map);
+      map = Map<String, dynamic>.from(map['employee'] as Map);
+    } else if (map.containsKey('user') && map['user'] is Map) {
+      map = Map<String, dynamic>.from(map['user'] as Map);
     }
 
     return map;
@@ -54,22 +57,47 @@ class ProfileRemoteDataSource {
       'phone': phone,
       'address': address,
       'locale': locale,
+      '_method': 'PATCH',
     }..removeWhere((key, value) => value == null);
 
     if (avatar != null) {
+      final ext = avatar.name.contains('.')
+          ? avatar.name.split('.').last.toLowerCase()
+          : 'jpg';
+      final mimeSubtype = (ext == 'jpg' || ext == 'jpeg')
+          ? 'jpeg'
+          : (ext == 'png' ? 'png' : (ext == 'webp' ? 'webp' : 'jpeg'));
+
       fields['avatar'] = MultipartFile.fromBytes(
         await avatar.readAsBytes(),
         filename: avatar.name,
+        contentType: MediaType('image', mimeSubtype),
       );
     }
 
     final formData = FormData.fromMap(fields);
 
-    final response = await apiConsumer.patch(
-      ApiEndpoints.employeeProfile,
-      queryParameters: {'lang': language},
-      data: formData,
-    );
+    Response<dynamic> response;
+    try {
+      response = await apiConsumer.post(
+        ApiEndpoints.employeeProfile,
+        queryParameters: {'lang': language},
+        data: formData,
+        options: Options(
+          headers: {'X-HTTP-Method-Override': 'PATCH'},
+        ),
+      );
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 405) {
+        response = await apiConsumer.patch(
+          ApiEndpoints.employeeProfile,
+          queryParameters: {'lang': language},
+          data: formData,
+        );
+      } else {
+        rethrow;
+      }
+    }
 
     final data = normalizeProfilePayload(response.data);
 

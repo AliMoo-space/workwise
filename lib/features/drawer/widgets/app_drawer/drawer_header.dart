@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/design_system/widgets/media/profile_photo_viewer.dart';
 
 import '../../../../core/design_system/colors/app_colors.dart';
 import '../../../../core/design_system/spacing/app_spacing.dart';
@@ -30,20 +31,25 @@ class DrawerHeader extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CircleAvatar(
-              radius: 36.r,
-              backgroundColor: AppColors.secondary,
-              backgroundImage: avatarUrl != null
-                  ? NetworkImage(avatarUrl!)
+            GestureDetector(
+              onTap: avatarUrl != null && avatarUrl!.isNotEmpty
+                  ? () => showProfilePhotoViewer(context, imageUrl: avatarUrl)
                   : null,
-              child: avatarUrl == null
-                  ? AppText(
-                      _getInitials(userName),
-                      style: AppTextStyles.titleLarge.copyWith(
-                        color: AppColors.onPrimary,
-                      ),
-                    )
-                  : null,
+              child: CircleAvatar(
+                radius: 36.r,
+                backgroundColor: AppColors.secondary,
+                backgroundImage: avatarUrl != null && avatarUrl!.isNotEmpty
+                    ? NetworkImage(avatarUrl!)
+                    : null,
+                child: avatarUrl == null || avatarUrl!.isEmpty
+                    ? AppText(
+                        _getInitials(userName),
+                        style: AppTextStyles.titleLarge.copyWith(
+                          color: AppColors.onPrimary,
+                        ),
+                      )
+                    : null,
+              ),
             ),
 
             Gap(16.h),

@@ -53,6 +53,15 @@ class AuthRepository {
     }
   }
 
+  Future<void> logout() async {
+    try {
+      await authApiService.logout();
+    } catch (_) {}
+
+    await secureStorage.clearSession();
+    await localStorage.clearSession();
+  }
+
   Failure _mapDioException(DioException exception) {
     switch (exception.type) {
       case DioExceptionType.connectionError:

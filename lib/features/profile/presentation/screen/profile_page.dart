@@ -14,10 +14,12 @@ import 'package:workwise/core/design_system/widgets/feedback/app_dialog.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/profile/widgets/job_details_section.dart';
 import 'package:workwise/features/profile/widgets/profile_card.dart';
 import 'package:workwise/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:workwise/features/profile/presentation/cubit/profile_state.dart';
+import 'package:workwise/features/auth/login/data/Repository/auth_repository.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -41,6 +43,28 @@ class _ProfilePageState extends State<ProfilePage> {
     await context.read<ProfileCubit>().updateProfile(
       language: Localizations.localeOf(context).languageCode,
       avatar: avatar,
+    );
+  }
+
+  Widget _buildLogoutButton(BuildContext context) {
+    return AppButton(
+      text: context.l10n.logout,
+      variant: AppButtonVariant.danger,
+      onPressed: () async {
+        final confirmed = await AppDialog.confirm(
+          context,
+          title: context.l10n.logout,
+          message: context.l10n.logoutConfirmMessage,
+          confirmText: context.l10n.logout,
+          cancelText: context.l10n.cancel,
+        );
+
+        if (confirmed && context.mounted) {
+          await sl<AuthRepository>().logout();
+          if (!context.mounted) return;
+          context.go('/loginScreen');
+        }
+      },
     );
   }
 
@@ -72,6 +96,10 @@ class _ProfilePageState extends State<ProfilePage> {
           padding: EdgeInsets.all(AppSpacing.space16.r),
           child: BlocBuilder<ProfileCubit, ProfileState>(
             builder: (context, state) {
+              final isLoadingProfile =
+                  state.profile == null &&
+                  (state.isLoading || state.status == ProfileStatus.initial);
+
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -84,16 +112,22 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     if (state.isFailure && state.message != null) ...[
                       Gap(AppSpacing.space8.h),
-                      AppText(
-                        state.message!,
-                        color: AppColors.textSecondary,
-                      ),
+                      AppText(state.message!, color: AppColors.textSecondary),
                     ],
                     Gap(AppSpacing.space16.h),
                     JobDetailsSection(profile: state.profile!),
                   ] else if (state.isLoading ||
                       state.status == ProfileStatus.initial)
-                    Skeletonizer(enabled: true, child: _ProfileSkeleton())
+                    Skeletonizer(
+                      enabled: true,
+                      child: Column(
+                        children: [
+                          _ProfileSkeleton(),
+                          Gap(AppSpacing.space20.h),
+                          _buildLogoutButton(context),
+                        ],
+                      ),
+                    )
                   else if (state.isFailure)
                     Center(
                       child: AppText(
@@ -101,24 +135,10 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: AppColors.textSecondary,
                       ),
                     ),
-                  Gap(AppSpacing.space20.h),
-                  AppButton(
-                    text: context.l10n.logout,
-                    variant: AppButtonVariant.danger,
-                    onPressed: () async {
-                      final confirmed = await AppDialog.confirm(
-                        context,
-                        title: context.l10n.logout,
-                        message: context.l10n.logoutConfirmMessage,
-                        confirmText: context.l10n.logout,
-                        cancelText: context.l10n.cancel,
-                      );
-
-                      if (confirmed && context.mounted) {
-                        context.go('/loginScreen');
-                      }
-                    },
-                  ),
+                  if (!isLoadingProfile) ...[
+                    Gap(AppSpacing.space20.h),
+                    _buildLogoutButton(context),
+                  ],
                 ],
               );
             },

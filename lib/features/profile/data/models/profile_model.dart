@@ -1,3 +1,5 @@
+import 'package:workwise/core/constants/app_constants.dart';
+
 class ProfileModel {
   const ProfileModel({
     required this.id,
@@ -41,6 +43,30 @@ class ProfileModel {
   final List<String> permissions;
   final String createdAt;
 
+  static String _parseAvatarUrl(Map<String, dynamic> json) {
+    final dynamic rawUrl = json['avatar_url'] ??
+        json['avatar'] ??
+        json['image'] ??
+        json['photo'] ??
+        json['profile_photo'] ??
+        json['profile_image'];
+
+    if (rawUrl == null || rawUrl.toString().trim().isEmpty) {
+      return '';
+    }
+
+    final url = rawUrl.toString().trim();
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+
+    final base = AppConstants.baseUrl.endsWith('/')
+        ? AppConstants.baseUrl.substring(0, AppConstants.baseUrl.length - 1)
+        : AppConstants.baseUrl;
+    final path = url.startsWith('/') ? url : '/$url';
+    return '$base$path';
+  }
+
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
     return ProfileModel(
       id: json['id'] ?? 0,
@@ -53,7 +79,7 @@ class ProfileModel {
       startDate: json['start_date'] ?? '',
       status: json['status'] ?? '',
       address: json['address'] ?? '',
-      avatarUrl: json['avatar_url'] ?? '',
+      avatarUrl: _parseAvatarUrl(json),
       role: json['role'] ?? '',
       roleLabel: json['role_label'] ?? '',
       locale: json['locale'] ?? '',
