@@ -1,92 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
-
 import 'package:workwise/core/design_system/spacing/app_radius.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 
+import 'package:workwise/features/performance/domain/performance/entities/performance_entity.dart';
+
 class PerformanceOverview extends StatelessWidget {
-  const PerformanceOverview({super.key});
+  const PerformanceOverview({super.key, required this.performance});
+
+  final PerformanceEntity performance;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        AppCard(
-          height: 100.h,
-          width: 110.w,
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.space16.w),
-          borderRadius: AppRadius.radius16.r,
-          boxShadow: const [],
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppText(
-                "92%",
-                style: Theme.of(context).textTheme.headlineMedium,
-                textAlign: TextAlign.start,
-              ),
-              AppText(
-                context.l10n.tasks,
-                style: Theme.of(context).textTheme.bodySmall,
-                textAlign: TextAlign.start,
-              ),
-            ],
-          ),
+        _buildCard(
+          context,
+          value: '${performance.tasksRate.toStringAsFixed(0)}%',
+          title: context.l10n.tasks,
         ),
-
-        AppCard(
-          height: 100.h,
-          width: 110.w,
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.space16.w),
-          borderRadius: AppRadius.radius16.r,
-          boxShadow: const [],
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppText(
-                "88%",
-                style: Theme.of(context).textTheme.headlineMedium,
-                textAlign: TextAlign.start,
-              ),
-              AppText(
-                context.l10n.quality,
-                style: Theme.of(context).textTheme.bodySmall,
-                textAlign: TextAlign.start,
-              ),
-            ],
-          ),
+        _buildCard(
+          context,
+          value: '${performance.qualityRate.toStringAsFixed(0)}%',
+          title: context.l10n.quality,
         ),
-
-        AppCard(
-          height: 100.h,
-          width: 110.w,
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.space16.w),
-          borderRadius: AppRadius.radius16.r,
-          boxShadow: const [],
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppText(
-                "95%",
-                style: Theme.of(context).textTheme.headlineMedium,
-                textAlign: TextAlign.start,
-              ),
-              AppText(
-                context.l10n.attendance,
-                style: Theme.of(context).textTheme.bodySmall,
-                textAlign: TextAlign.start,
-              ),
-            ],
-          ),
+        _buildCard(
+          context,
+          value: '${performance.attendanceRate.toStringAsFixed(0)}%',
+          title: context.l10n.attendance,
         ),
       ],
+    );
+  }
+
+  Widget _buildCard(
+    BuildContext context, {
+    required String value,
+    required String title,
+  }) {
+    return AppCard(
+      height: 100.h,
+      width: 110.w,
+      padding: EdgeInsets.symmetric(horizontal: AppSpacing.space16.w),
+      borderRadius: AppRadius.radius16.r,
+      boxShadow: const [],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppText(
+            value,
+            style: Theme.of(context).textTheme.headlineMedium,
+            textAlign: TextAlign.start,
+          ),
+          AppText(
+            title,
+            style: Theme.of(context).textTheme.bodySmall,
+            textAlign: TextAlign.start,
+          ),
+        ],
+      ),
     );
   }
 }

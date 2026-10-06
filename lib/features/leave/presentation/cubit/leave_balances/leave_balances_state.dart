@@ -1,4 +1,6 @@
-part of 'leave_balances_cubit.dart';
+import 'package:equatable/equatable.dart';
+
+import 'package:workwise/features/leave/domain/entity/leave_balance_entity.dart';
 
 abstract class LeaveBalancesState extends Equatable {
   const LeaveBalancesState();
@@ -16,7 +18,7 @@ class LeaveBalancesLoading extends LeaveBalancesState {
 }
 
 class LeaveBalancesSuccess extends LeaveBalancesState {
-  final List<LeaveBalance> balances;
+  final List<LeaveBalanceEntity> balances;
 
   const LeaveBalancesSuccess(this.balances);
 

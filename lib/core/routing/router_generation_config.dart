@@ -10,6 +10,8 @@ import 'package:workwise/features/home/presentation/screens/home_screen.dart';
 import 'package:workwise/features/leave/presentation/widget/leavehistoryscreen.dart';
 import 'package:workwise/features/main/presentation/screens/main_screen.dart';
 import 'package:workwise/features/attendance/presentation/screens/map_screen.dart';
+import 'package:workwise/features/performance/presentation/screens/goal_details_screen.dart';
+import 'package:workwise/features/performance/presentation/screens/goalsviewallscreen.dart';
 import 'package:workwise/features/profile/presentation/screen/profile_page.dart';
 import 'package:workwise/features/performance/presentation/screens/performance_screen.dart';
 import 'package:workwise/features/setting/presentation/screens/settings_screen.dart';
@@ -113,6 +115,29 @@ class RouterGenerationConfig {
           );
         },
       ),
+
+      GoRoute(
+        name: 'goalDetailsScreen',
+        path: '${AppRoutes.goalDetailsScreen}/:goalId',
+        pageBuilder: (context, state) {
+          final goalId = int.parse(state.pathParameters['goalId']!);
+
+          return slideTransitionPage(
+            state: state,
+            child: GoalDetailsScreen(goalId: goalId),
+          );
+        },
+      ),
+
+      GoRoute(
+        name: AppRoutes.goalViewAll,
+        path: AppRoutes.goalViewAll,
+        pageBuilder: (context, state) => slideTransitionPage(
+          state: state,
+          child: const GoalsViewAllScreen(),
+        ),
+      ),
+
       GoRoute(
         name: AppRoutes.settingsScreen,
         path: AppRoutes.settingsScreen,

@@ -60,7 +60,6 @@ class HomeScreen extends StatelessWidget {
               Gap(AppSpacing.space16.h),
 
               HomeStatsGrid(),
-
               Gap(AppSpacing.space16.h),
             ],
           ),

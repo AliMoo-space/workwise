@@ -1,24 +1,28 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workwise/features/leave/domain/entity/leave_balance.dart';
-import 'package:workwise/features/leave/domain/usecase/get_leave_balances.dart';
+import 'package:workwise/features/leave/domain/usecase/get_leave_balances_use_case.dart';
 
-part 'leave_balances_state.dart';
+import 'leave_balances_state.dart';
 
 class LeaveBalancesCubit extends Cubit<LeaveBalancesState> {
-  final GetLeaveBalances getLeaveBalances;
+  final GetLeaveBalancesUseCase getLeaveBalancesUseCase;
 
-  LeaveBalancesCubit({required this.getLeaveBalances})
+  LeaveBalancesCubit({required this.getLeaveBalancesUseCase})
     : super(const LeaveBalancesInitial());
 
-  Future<void> getBalances() async {
+  Future<void> getLeaveBalances() async {
     emit(const LeaveBalancesLoading());
 
-    final result = await getLeaveBalances();
+    final result = await getLeaveBalancesUseCase();
+
+    if (isClosed) return;
 
     result.fold(
-      (failure) => emit(LeaveBalancesFailure(failure.message)),
-      (balances) => emit(LeaveBalancesSuccess(balances)),
+      (failure) {
+        emit(LeaveBalancesFailure(failure.message));
+      },
+      (balances) {
+        emit(LeaveBalancesSuccess(balances));
+      },
     );
   }
 }

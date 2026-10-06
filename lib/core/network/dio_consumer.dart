@@ -13,11 +13,7 @@ class DioConsumer implements ApiConsumer {
     Map<String, dynamic>? queryParameters,
     Options? options,
   }) {
-    return _dio.get(
-      path,
-      queryParameters: queryParameters,
-      options: options,
-    );
+    return _dio.get(path, queryParameters: queryParameters, options: options);
   }
 
   @override
