@@ -7,20 +7,22 @@ import 'leave_request_state.dart';
 class LeaveRequestCubit extends Cubit<LeaveRequestState> {
   final CreateLeaveRequestUseCase createLeaveRequestUseCase;
 
-  LeaveRequestCubit(this.createLeaveRequestUseCase)
-    : super(LeaveRequestInitial());
+  LeaveRequestCubit({required this.createLeaveRequestUseCase})
+    : super(const LeaveRequestInitial());
 
   Future<void> createLeaveRequest(LeaveRequestEntity request) async {
-    emit(LeaveRequestLoading());
+    emit(const LeaveRequestLoading());
 
     final result = await createLeaveRequestUseCase(request);
+
+    if (isClosed) return;
 
     result.fold(
       (failure) {
         emit(LeaveRequestFailure(failure.message));
       },
       (_) {
-        emit(LeaveRequestSuccess());
+        emit(const LeaveRequestSuccess());
       },
     );
   }

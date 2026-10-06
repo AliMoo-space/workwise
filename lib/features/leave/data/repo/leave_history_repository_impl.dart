@@ -5,14 +5,14 @@ import 'package:workwise/features/leave/domain/entity/leave_history_entity.dart'
 import 'package:workwise/features/leave/domain/repo/leave_history_repository.dart';
 
 class LeaveHistoryRepositoryImpl implements LeaveHistoryRepository {
-  const LeaveHistoryRepositoryImpl(this.remoteDataSource);
-
   final LeaveHistoryRemoteDataSource remoteDataSource;
 
+  LeaveHistoryRepositoryImpl(this.remoteDataSource);
+
   @override
-  Future<Either<Failure, List<LeaveHistoryEntity>>> getLeaveHistory() async {
+  Future<Either<Failure, List<LeaveHistoryEntity>>> getLeaveRequests() async {
     try {
-      final result = await remoteDataSource.getLeaveHistory();
+      final result = await remoteDataSource.getLeaveRequests();
 
       return Right(result);
     } catch (e) {

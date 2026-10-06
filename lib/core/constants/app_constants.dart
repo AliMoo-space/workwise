@@ -1,12 +1,8 @@
 abstract final class AppConstants {
   const AppConstants._();
   // static const String baseUrl = 'https://hr-system.iptvdemo.serv5group.com';
-<<<<<<< HEAD
   static const String baseUrl =
       'https://nontelepathically-pamphletary-cyndi.ngrok-free.dev';
-=======
-  static const String baseUrl = 'https://nontelepathically-pamphletary-cyndi.ngrok-free.dev';
->>>>>>> main
 
   static const String appName = 'WorkWise';
 

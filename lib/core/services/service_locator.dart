@@ -117,15 +117,12 @@ Future<void> init() async {
     ).create(),
   );
 
-  // Network Info
   sl.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(sl<InternetConnectionChecker>()),
   );
 
-  // Dio Consumer
   sl.registerLazySingleton<DioConsumer>(() => DioConsumer(sl<Dio>()));
 
-  // Api Consumer
   sl.registerLazySingleton<ApiConsumer>(() => sl<DioConsumer>());
 
   // =============================================
@@ -189,7 +186,7 @@ Future<void> init() async {
   // ---------------------------------------------
 
   sl.registerLazySingleton<LeaveHistoryRemoteDataSource>(
-    () => LeaveHistoryRemoteDataSourceImpl(sl<ApiConsumer>()),
+    () => LeaveHistoryRemoteDataSourceImpl(apiConsumer: sl<ApiConsumer>()),
   );
 
   sl.registerLazySingleton<LeaveHistoryRepository>(
@@ -201,7 +198,7 @@ Future<void> init() async {
   // ---------------------------------------------
 
   sl.registerLazySingleton<LeaveRemoteDataSource>(
-    () => LeaveRemoteDataSourceImpl(sl<DioConsumer>()),
+    () => LeaveRemoteDataSourceImpl(sl<ApiConsumer>()),
   );
 
   sl.registerLazySingleton<LeaveRepository>(
@@ -213,7 +210,7 @@ Future<void> init() async {
   // =============================================
 
   sl.registerLazySingleton<PerformanceRemoteDataSource>(
-    () => PerformanceRemoteDataSourceImpl(apiConsumer: sl<DioConsumer>()),
+    () => PerformanceRemoteDataSourceImpl(apiConsumer: sl<ApiConsumer>()),
   );
 
   sl.registerLazySingleton<PerformanceRepository>(
@@ -295,7 +292,9 @@ Future<void> init() async {
   // ---------------------------------------------
 
   sl.registerFactory<LeaveBalancesCubit>(
-    () => LeaveBalancesCubit(sl<GetLeaveBalancesUseCase>()),
+    () => LeaveBalancesCubit(
+      getLeaveBalancesUseCase: sl<GetLeaveBalancesUseCase>(),
+    ),
   );
 
   sl.registerFactory<LeaveHistoryCubit>(
@@ -303,7 +302,9 @@ Future<void> init() async {
   );
 
   sl.registerFactory<LeaveRequestCubit>(
-    () => LeaveRequestCubit(sl<CreateLeaveRequestUseCase>()),
+    () => LeaveRequestCubit(
+      createLeaveRequestUseCase: sl<CreateLeaveRequestUseCase>(),
+    ),
   );
 
   // ---------------------------------------------

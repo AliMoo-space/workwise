@@ -2,34 +2,34 @@ import 'package:equatable/equatable.dart';
 
 import 'package:workwise/features/leave/domain/entity/leave_balance_entity.dart';
 
-sealed class LeaveBalancesState extends Equatable {
+abstract class LeaveBalancesState extends Equatable {
   const LeaveBalancesState();
 
   @override
   List<Object?> get props => [];
 }
 
-final class LeaveBalancesInitial extends LeaveBalancesState {
+class LeaveBalancesInitial extends LeaveBalancesState {
   const LeaveBalancesInitial();
 }
 
-final class LeaveBalancesLoading extends LeaveBalancesState {
+class LeaveBalancesLoading extends LeaveBalancesState {
   const LeaveBalancesLoading();
 }
 
-final class LeaveBalancesSuccess extends LeaveBalancesState {
-  const LeaveBalancesSuccess(this.balances);
-
+class LeaveBalancesSuccess extends LeaveBalancesState {
   final List<LeaveBalanceEntity> balances;
+
+  const LeaveBalancesSuccess(this.balances);
 
   @override
   List<Object?> get props => [balances];
 }
 
-final class LeaveBalancesFailure extends LeaveBalancesState {
-  const LeaveBalancesFailure(this.message);
-
+class LeaveBalancesFailure extends LeaveBalancesState {
   final String message;
+
+  const LeaveBalancesFailure(this.message);
 
   @override
   List<Object?> get props => [message];

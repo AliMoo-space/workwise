@@ -7,11 +7,17 @@ abstract class LeaveRequestState extends Equatable {
   List<Object?> get props => [];
 }
 
-class LeaveRequestInitial extends LeaveRequestState {}
+class LeaveRequestInitial extends LeaveRequestState {
+  const LeaveRequestInitial();
+}
 
-class LeaveRequestLoading extends LeaveRequestState {}
+class LeaveRequestLoading extends LeaveRequestState {
+  const LeaveRequestLoading();
+}
 
-class LeaveRequestSuccess extends LeaveRequestState {}
+class LeaveRequestSuccess extends LeaveRequestState {
+  const LeaveRequestSuccess();
+}
 
 class LeaveRequestFailure extends LeaveRequestState {
   final String message;

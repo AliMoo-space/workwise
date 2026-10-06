@@ -15,7 +15,7 @@ class LeaveRequestModel extends LeaveRequestEntity {
       'start_date': startDate,
       'end_date': endDate,
       'reason': reason,
-      if (image != null) 'image': image,
+      if (image != null && image!.isNotEmpty) 'image': image,
     };
   }
 }

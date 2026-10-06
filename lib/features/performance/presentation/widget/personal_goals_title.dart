@@ -6,7 +6,9 @@ import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 
 class PersonalGoalsTitle extends StatelessWidget {
-  const PersonalGoalsTitle({super.key});
+  const PersonalGoalsTitle({super.key, required this.hasGoals});
+
+  final bool hasGoals;
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +23,16 @@ class PersonalGoalsTitle extends StatelessWidget {
           ),
         ),
         const Spacer(),
-
-        TextButton(
-          onPressed: () {
-            context.push(AppRoutes.goalViewAll);
-          },
-          child: AppText(
-            context.l10n.view,
-            style: Theme.of(context).textTheme.bodyLarge,
+        if (hasGoals)
+          TextButton(
+            onPressed: () {
+              context.push(AppRoutes.goalViewAll);
+            },
+            child: AppText(
+              context.l10n.view,
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ),
-        ),
       ],
     );
   }

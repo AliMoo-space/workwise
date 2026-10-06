@@ -1,10 +1,6 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-<<<<<<< HEAD
 export "FLUTTER_ROOT=C:\src\flutter"
-=======
-export "FLUTTER_ROOT=C:\flutter"
->>>>>>> main
 export "FLUTTER_APPLICATION_PATH=C:\flutter_projects\workwise"
 export "FLUTTER_FRAMEWORK_SWIFT_PACKAGE_PATH=C:\flutter_projects\workwise\macos\Flutter\ephemeral\Packages\.packages\FlutterFramework"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"

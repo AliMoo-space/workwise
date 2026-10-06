@@ -17,12 +17,12 @@ class LeaveHistoryLoading extends LeaveHistoryState {
 }
 
 class LeaveHistorySuccess extends LeaveHistoryState {
-  final List<LeaveHistoryEntity> leaveHistory;
+  final List<LeaveHistoryEntity> leaveRequests;
 
-  const LeaveHistorySuccess(this.leaveHistory);
+  const LeaveHistorySuccess(this.leaveRequests);
 
   @override
-  List<Object?> get props => [leaveHistory];
+  List<Object?> get props => [leaveRequests];
 }
 
 class LeaveHistoryFailure extends LeaveHistoryState {

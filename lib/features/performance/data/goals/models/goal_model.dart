@@ -1,3 +1,4 @@
+import 'package:workwise/core/utils/json_helper.dart';
 import 'package:workwise/features/performance/domain/goals/entities/goal.dart';
 
 class GoalModel extends Goal {
@@ -5,23 +6,19 @@ class GoalModel extends Goal {
     required super.id,
     required super.title,
     required super.description,
-    required super.targetValue,
-    required super.currentValue,
-    required super.progressPercentage,
     required super.targetDate,
     required super.status,
+    required super.createdAt,
   });
 
   factory GoalModel.fromJson(Map<String, dynamic> json) {
     return GoalModel(
-      id: json['id'] as int,
-      title: json['title'] as String,
-      description: json['description'] as String,
-      targetValue: json['target_value'] as int,
-      currentValue: json['current_value'] as int,
-      progressPercentage: json['progress_percentage'] as int,
-      targetDate: json['target_date'] as String,
-      status: json['status'] as String,
+      id: JsonHelper.required<int>(json, 'id'),
+      title: JsonHelper.required<String>(json, 'title'),
+      description: JsonHelper.required<String>(json, 'description'),
+      targetDate: JsonHelper.required<String>(json, 'target_date'),
+      status: JsonHelper.required<String>(json, 'status'),
+      createdAt: JsonHelper.required<String>(json, 'created_at'),
     );
   }
 
@@ -30,11 +27,9 @@ class GoalModel extends Goal {
       'id': id,
       'title': title,
       'description': description,
-      'target_value': targetValue,
-      'current_value': currentValue,
-      'progress_percentage': progressPercentage,
       'target_date': targetDate,
       'status': status,
+      'created_at': createdAt,
     };
   }
 }

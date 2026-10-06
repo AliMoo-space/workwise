@@ -8,7 +8,7 @@ class CreateLeaveRequestUseCase {
 
   CreateLeaveRequestUseCase(this.repository);
 
-  Future<Either<Failure, void>> call(LeaveRequestEntity request) async {
-    return await repository.createLeaveRequest(request);
+  Future<Either<Failure, void>> call(LeaveRequestEntity request) {
+    return repository.createLeaveRequest(request);
   }
 }

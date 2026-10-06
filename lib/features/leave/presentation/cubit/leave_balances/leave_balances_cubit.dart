@@ -4,15 +4,17 @@ import 'package:workwise/features/leave/domain/usecase/get_leave_balances_use_ca
 import 'leave_balances_state.dart';
 
 class LeaveBalancesCubit extends Cubit<LeaveBalancesState> {
-  LeaveBalancesCubit(this.getLeaveBalancesUseCase)
-    : super(const LeaveBalancesInitial());
-
   final GetLeaveBalancesUseCase getLeaveBalancesUseCase;
+
+  LeaveBalancesCubit({required this.getLeaveBalancesUseCase})
+    : super(const LeaveBalancesInitial());
 
   Future<void> getLeaveBalances() async {
     emit(const LeaveBalancesLoading());
 
     final result = await getLeaveBalancesUseCase();
+
+    if (isClosed) return;
 
     result.fold(
       (failure) {

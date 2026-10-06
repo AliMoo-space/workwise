@@ -41,7 +41,7 @@ abstract final class ApiEndpoints {
 
   static const String leaveHistory = '/api/leaves/leave-requests?lang=en';
 
-  static const String leaveBalances = '/api/leaves/leave-balances';
+  static const String leaveBalances = '/api/leaves/leave-balances?lang=en';
 
   static const String leaveRequests = '/api/leaves/leave-requests';
   // Add project-specific endpoints below.
