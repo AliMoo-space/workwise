@@ -91,7 +91,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onShift => 'في الدوام';
 
   @override
-  String get checkedInAt => 'تم تسجيل الحضور الساعة 9:00 صباحًا';
+  String get checkedInAt => 'تم تسجيل الحضور الساعة ';
 
   @override
   String get hoursWorked => 'ساعات العمل';
@@ -100,7 +100,26 @@ class AppLocalizationsAr extends AppLocalizations {
   String get insideOffice => 'داخل المكتب';
 
   @override
+  String get outsideOffice => 'خارج المكتب';
+
+  @override
+  String get checkIn => 'تسجيل الحضور';
+
+  @override
   String get checkOut => 'تسجيل الانصراف';
+
+  @override
+  String get checkInSuccess => 'تم تسجيل الحضور بنجاح';
+
+  @override
+  String get checkOutSuccess => 'تم تسجيل الانصراف بنجاح';
+
+  @override
+  String get locationPermissionDenied => 'إذن الموقع مطلوب للتحقق من الحضور.';
+
+  @override
+  String get locationServiceDisabled =>
+      'يرجى تفعيل خدمة تحديد الموقع (GPS) على جهازك.';
 
   @override
   String get sessionExpiredWarning =>

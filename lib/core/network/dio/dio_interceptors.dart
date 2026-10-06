@@ -38,7 +38,8 @@ class DioInterceptors extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     log(
-      'Dio Error: ${err.message}',
+      'Dio Error: ${err.response?.statusCode ?? 'no status'} '
+      '${err.response?.data ?? err.message}',
       name: 'DioInterceptor',
       error: err.error,
       stackTrace: err.stackTrace,

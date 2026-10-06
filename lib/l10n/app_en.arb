@@ -34,10 +34,16 @@
 
   "todayAttendance": "Today's attendance",
   "onShift": "On Shift",
-  "checkedInAt": "Checked in at 9:00 AM",
-  "hoursWorked": "Hours worked",
+  "checkedInAt": "Checked in at ",
+  "hoursWorked": "hours worked",
   "insideOffice": "Inside the office",
+  "outsideOffice": "Outside the office",
+  "checkIn": "Check In",
   "checkOut": "Check Out",
+  "checkInSuccess": "Checked in successfully",
+  "checkOutSuccess": "Checked out successfully",
+  "locationPermissionDenied": "Location permission is required to verify attendance.",
+  "locationServiceDisabled": "Please enable GPS/location services on your device.",
 
   "sessionExpiredWarning": "Your session has expired. Please try again to continue.",
   "invalidCredentialsWarning": "Invalid credentials. Please try again.",

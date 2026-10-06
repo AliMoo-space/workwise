@@ -1,7 +1,10 @@
 import 'package:go_router/go_router.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/core/routing/page_transition.dart';
+import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/attendance/presentation/screens/attendance_screen.dart';
+import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
 import 'package:workwise/features/auth/fingerprint/presentation/screens/finger_print_screen.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/screens/otp_verification_screen.dart';
 import 'package:workwise/features/auth/login/presentation/screens/login_screen.dart';
@@ -20,7 +23,7 @@ import 'package:workwise/features/tasks/presentation/screens/tasks_screen.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
-    initialLocation: AppRoutes.splashScreen,
+    initialLocation: AppRoutes.mainScreen,
     routes: [
       GoRoute(
         name: AppRoutes.mainScreen,
@@ -95,7 +98,10 @@ class RouterGenerationConfig {
         pageBuilder: (context, state) {
           return slideTransitionPage(
             state: state,
-            child: const AttendanceScreen(),
+            child: BlocProvider(
+              create: (_) => sl<AttendanceCubit>(),
+              child: const AttendanceScreen(),
+            ),
           );
         },
       ),

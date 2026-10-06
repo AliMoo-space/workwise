@@ -34,10 +34,16 @@
 
   "todayAttendance": "حضور اليوم",
   "onShift": "في الدوام",
-  "checkedInAt": "تم تسجيل الحضور الساعة 9:00 صباحًا",
+  "checkedInAt": "تم تسجيل الحضور الساعة ",
   "hoursWorked": "ساعات العمل",
   "insideOffice": "داخل المكتب",
+  "outsideOffice": "خارج المكتب",
+  "checkIn": "تسجيل الحضور",
   "checkOut": "تسجيل الانصراف",
+  "checkInSuccess": "تم تسجيل الحضور بنجاح",
+  "checkOutSuccess": "تم تسجيل الانصراف بنجاح",
+  "locationPermissionDenied": "إذن الموقع مطلوب للتحقق من الحضور.",
+  "locationServiceDisabled": "يرجى تفعيل خدمة تحديد الموقع (GPS) على جهازك.",
 
   "sessionExpiredWarning": "انتهت الجلسة الخاصة بك. يرجى إعادة محاولة الدخول للمتابعة.",
   "invalidCredentialsWarning": "بيانات الدخول غير صحيحة. يرجى المحاولة مرة أخرى.",

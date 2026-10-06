@@ -1,4 +1,10 @@
 abstract final class ApiEndpoints {
+  // Attendance
+  static const String todayAttendance = 'api/attendance/today';
+  static const String checkIn = 'api/attendance/check-in';
+  static const String checkOut = 'api/attendance/check-out';
+  static const String attendanceHistory = 'api/attendance/history';
+
   // Auth
 
   static const String login = '/api/auth/login';

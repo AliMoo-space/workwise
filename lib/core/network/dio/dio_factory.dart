@@ -4,10 +4,7 @@ import 'package:workwise/core/network/dio/dio_interceptors.dart';
 import 'package:workwise/core/network/logger/pretty_dio_logger.dart';
 
 class DioFactory {
-  DioFactory({
-    required this.baseUrl,
-    this.getToken,
-  });
+  DioFactory({required this.baseUrl, this.getToken});
 
   final String baseUrl;
 final Future<String?> Function()? getToken;
@@ -21,19 +18,13 @@ final Future<String?> Function()? getToken;
         headers: const {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
+          'Accept-Language': 'en',
         },
       ),
     );
 
-    dio.interceptors.add(
-      DioInterceptors(
-        getToken: getToken,
-      ),
-    );
-
-    dio.interceptors.add(
-      createPrettyDioLogger(),
-    );
+    dio.interceptors.add(createPrettyDioLogger());
+    dio.interceptors.add(DioInterceptors(getToken: getToken));
 
     return dio;
   }

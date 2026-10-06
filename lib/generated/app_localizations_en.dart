@@ -91,16 +91,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onShift => 'On Shift';
 
   @override
-  String get checkedInAt => 'Checked in at 9:00 AM';
+  String get checkedInAt => 'Checked in at ';
 
   @override
-  String get hoursWorked => 'Hours worked';
+  String get hoursWorked => 'hours worked';
 
   @override
   String get insideOffice => 'Inside the office';
 
   @override
+  String get outsideOffice => 'Outside the office';
+
+  @override
+  String get checkIn => 'Check In';
+
+  @override
   String get checkOut => 'Check Out';
+
+  @override
+  String get checkInSuccess => 'Checked in successfully';
+
+  @override
+  String get checkOutSuccess => 'Checked out successfully';
+
+  @override
+  String get locationPermissionDenied =>
+      'Location permission is required to verify attendance.';
+
+  @override
+  String get locationServiceDisabled =>
+      'Please enable GPS/location services on your device.';
 
   @override
   String get sessionExpiredWarning =>
