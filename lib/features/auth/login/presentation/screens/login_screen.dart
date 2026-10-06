@@ -19,7 +19,10 @@ import 'package:workwise/features/auth/login/presentation/widgets/quick_sign_in_
 class LoginScreen extends StatelessWidget {
   final bool isSessionExpired;
 
-  const LoginScreen({super.key, this.isSessionExpired = false});
+  const LoginScreen({
+    super.key,
+    this.isSessionExpired = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +69,13 @@ class LoginScreen extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 12.w),
                           child: AppText(
                             context.l10n.or,
-                            style: Theme.of(context).textTheme.titleSmall
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
                                 ?.copyWith(
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.secondary,
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .secondary,
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
