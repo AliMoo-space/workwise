@@ -496,6 +496,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profileActiveFullTime => 'نشط / دوام كامل';
 
   @override
+  String get profilePhotoUpdated => 'تم تحديث الصورة الشخصية بنجاح';
+
+  @override
   String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
 
   @override

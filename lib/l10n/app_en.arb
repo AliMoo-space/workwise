@@ -261,6 +261,7 @@
   "profileWorkPhone": "WORK PHONE",
   "profileContact": "Contact",
   "profileActiveFullTime": "Active / Full-Time",
+  "profilePhotoUpdated": "Profile photo updated successfully",
   "logoutConfirmMessage": "Are you sure you want to logout?",
 
   "submit": "Submit",

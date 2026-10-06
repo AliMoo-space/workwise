@@ -1052,6 +1052,12 @@ abstract class AppLocalizations {
   /// **'Active / Full-Time'**
   String get profileActiveFullTime;
 
+  /// No description provided for @profilePhotoUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo updated successfully'**
+  String get profilePhotoUpdated;
+
   /// No description provided for @logoutConfirmMessage.
   ///
   /// In en, this message translates to:

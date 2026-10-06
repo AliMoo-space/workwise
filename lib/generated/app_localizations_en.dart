@@ -495,6 +495,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileActiveFullTime => 'Active / Full-Time';
 
   @override
+  String get profilePhotoUpdated => 'Profile photo updated successfully';
+
+  @override
   String get logoutConfirmMessage => 'Are you sure you want to logout?';
 
   @override

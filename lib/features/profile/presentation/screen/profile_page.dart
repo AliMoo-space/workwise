@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
@@ -15,6 +15,7 @@ import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/services/service_locator.dart';
+import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/features/profile/widgets/job_details_section.dart';
 import 'package:workwise/features/profile/widgets/profile_card.dart';
 import 'package:workwise/features/profile/presentation/cubit/profile_cubit.dart';
@@ -32,18 +33,64 @@ class _ProfilePageState extends State<ProfilePage> {
   Uint8List? _avatarPreview;
 
   Future<void> _changeAvatar() async {
-    final avatar = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final avatar = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1024,
+      maxHeight: 1024,
+      imageQuality: 85,
+    );
+    
     if (avatar == null) return;
 
     final bytes = await avatar.readAsBytes();
     if (!mounted) return;
 
+    // Show preview immediately
     setState(() => _avatarPreview = bytes);
 
-    await context.read<ProfileCubit>().updateProfile(
+    // Upload to server
+    final success = await context.read<ProfileCubit>().updateProfile(
       language: Localizations.localeOf(context).languageCode,
       avatar: avatar,
     );
+
+    if (!mounted) return;
+
+    // Clear preview on success so the new URL from server is used
+    if (success) {
+      // Clear the old cached image
+      final oldAvatarUrl = context.read<ProfileCubit>().state.profile?.avatarUrl;
+      if (oldAvatarUrl != null && oldAvatarUrl.isNotEmpty) {
+        await CachedNetworkImage.evictFromCache(oldAvatarUrl);
+      }
+      
+      setState(() => _avatarPreview = null);
+      
+      // Show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: AppText(
+            context.l10n.profilePhotoUpdated,
+            color: Colors.white,
+          ),
+          backgroundColor: AppColors.success,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+      
+      // Force reload profile after a short delay to get the new avatar URL
+      await Future.delayed(const Duration(milliseconds: 500));
+      if (mounted) {
+        final employeeId = sl<LocalStorage>().getUserId();
+        await context.read<ProfileCubit>().getProfile(
+          employeeId: employeeId,
+          language: Localizations.localeOf(context).languageCode,
+        );
+      }
+    } else {
+      // Revert preview on failure
+      setState(() => _avatarPreview = null);
+    }
   }
 
   Widget _buildLogoutButton(BuildContext context) {

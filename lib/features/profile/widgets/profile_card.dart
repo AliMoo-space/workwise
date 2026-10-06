@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
@@ -7,15 +8,15 @@ import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
-import 'package:workwise/core/design_system/widgets/media/app_network_image.dart';
 import 'package:workwise/core/design_system/widgets/media/profile_photo_viewer.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/profile/domain/entities/profile.dart';
 
 import 'employee_info.dart';
 import 'profile_status_badge.dart';
 
-class ProfileCard extends StatelessWidget {
+class ProfileCard extends StatefulWidget {
   const ProfileCard({
     super.key,
     required this.profile,
@@ -28,6 +29,119 @@ class ProfileCard extends StatelessWidget {
   final VoidCallback onChangeAvatar;
   final Uint8List? avatarPreview;
   final bool isUpdatingAvatar;
+
+  @override
+  State<ProfileCard> createState() => _ProfileCardState();
+}
+
+class _ProfileCardState extends State<ProfileCard> {
+  Future<Uint8List?>? _avatarFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAvatar();
+  }
+
+  @override
+  void didUpdateWidget(covariant ProfileCard oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.profile.avatarUrl != widget.profile.avatarUrl) {
+      _loadAvatar();
+    }
+  }
+
+  void _loadAvatar() {
+    if (widget.profile.avatarUrl.isEmpty) {
+      _avatarFuture = null;
+      return;
+    }
+
+    _avatarFuture = _fetchAvatar(widget.profile.avatarUrl);
+  }
+
+  Future<Uint8List?> _fetchAvatar(String url) async {
+    try {
+      final response = await sl<Dio>().get<List<int>>(
+        url,
+        options: Options(responseType: ResponseType.bytes),
+      );
+
+      if (response.data == null) {
+        return null;
+      }
+
+      return Uint8List.fromList(response.data!);
+    } catch (e) {
+      debugPrint('========== AVATAR ERROR ==========');
+      debugPrint('Avatar URL: $url');
+      debugPrint('Avatar Error: $e');
+      debugPrint('===================================');
+
+      return null;
+    }
+  }
+
+  Widget _buildDefaultAvatar() {
+    return Container(
+      width: 80.w,
+      height: 80.h,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: AppColors.surfaceContainer,
+      ),
+      child: Icon(Icons.person, size: 40.sp, color: AppColors.textSecondary),
+    );
+  }
+
+  Widget _buildAvatar() {
+    if (widget.avatarPreview != null) {
+      return ClipOval(
+        child: Image.memory(
+          widget.avatarPreview!,
+          width: 90.w,
+          height: 90.h,
+          fit: BoxFit.cover,
+        ),
+      );
+    }
+
+    if (widget.profile.avatarUrl.isEmpty) {
+      return _buildDefaultAvatar();
+    }
+
+    return FutureBuilder<Uint8List?>(
+      future: _avatarFuture,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container(
+            width: 80.w,
+            height: 80.h,
+            color: AppColors.surfaceContainer,
+            child: const Center(
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          );
+        }
+
+        final bytes = snapshot.data;
+
+        if (bytes == null || bytes.isEmpty) {
+          return _buildDefaultAvatar();
+        }
+
+        return ClipOval(
+          child: Image.memory(
+            bytes,
+            width: 0.w,
+            height: 80.h,
+            fit: BoxFit.cover,
+          ),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,36 +160,18 @@ class ProfileCard extends StatelessWidget {
                     Positioned.fill(
                       child: GestureDetector(
                         onTap:
-                            avatarPreview != null ||
-                                profile.avatarUrl.isNotEmpty
+                            widget.avatarPreview != null ||
+                                widget.profile.avatarUrl.isNotEmpty
                             ? () => showProfilePhotoViewer(
                                 context,
-                                bytes: avatarPreview,
-                                imageUrl: profile.avatarUrl,
+                                bytes: widget.avatarPreview,
+                                imageUrl: widget.profile.avatarUrl,
                               )
                             : null,
-                        child: avatarPreview != null
-                            ? ClipOval(
-                                child: Image.memory(
-                                  avatarPreview!,
-                                  width: 80.w,
-                                  height: 80.h,
-                                  fit: BoxFit.cover,
-                                ),
-                              )
-                            : profile.avatarUrl.isEmpty
-                            ? _buildAvatarFallback(profile.name)
-                            : AppNetworkImage(
-                                imageUrl: profile.avatarUrl,
-                                width: 80.w,
-                                height: 80.h,
-                                shape: BoxShape.circle,
-                                fit: BoxFit.cover,
-                                backgroundColor: AppColors.surfaceContainer,
-                                errorWidget: _buildAvatarFallback(profile.name),
-                              ),
+                        child: _buildAvatar(),
                       ),
                     ),
+
                     PositionedDirectional(
                       end: 0,
                       bottom: 0,
@@ -84,17 +180,19 @@ class ProfileCard extends StatelessWidget {
                         shape: const CircleBorder(),
                         child: IconButton(
                           tooltip: 'Change profile photo',
-                          onPressed: isUpdatingAvatar ? null : onChangeAvatar,
+                          onPressed: widget.isUpdatingAvatar
+                              ? null
+                              : widget.onChangeAvatar,
                           visualDensity: VisualDensity.compact,
                           style: IconButton.styleFrom(
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
                           constraints: BoxConstraints.tightFor(
-                            width: 40.w,
-                            height: 40.h,
+                            width: 30.w,
+                            height: 30.h,
                           ),
                           padding: EdgeInsets.zero,
-                          icon: isUpdatingAvatar
+                          icon: widget.isUpdatingAvatar
                               ? SizedBox(
                                   width: 18.w,
                                   height: 18.h,
@@ -105,7 +203,7 @@ class ProfileCard extends StatelessWidget {
                                 )
                               : Icon(
                                   Icons.camera_alt_outlined,
-                                  size: 20.sp,
+                                  size: 15.sp,
                                   color: Colors.white,
                                 ),
                         ),
@@ -121,12 +219,15 @@ class ProfileCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppText(profile.name, style: AppTextStyles.headlineMedium),
+                    AppText(
+                      widget.profile.name,
+                      style: AppTextStyles.headlineMedium,
+                    ),
 
                     Gap(AppSpacing.space4.h),
 
                     AppText(
-                      profile.jobTitle,
+                      widget.profile.jobTitle,
                       style: AppTextStyles.bodyMedium,
                       color: AppColors.textSecondary,
                     ),
@@ -134,7 +235,7 @@ class ProfileCard extends StatelessWidget {
                     Gap(AppSpacing.space2.h),
 
                     AppText(
-                      profile.departmentName ?? profile.roleLabel,
+                      widget.profile.departmentName ?? widget.profile.roleLabel,
                       style: AppTextStyles.bodySmall,
                       color: AppColors.textSecondary,
                     ),
@@ -143,8 +244,8 @@ class ProfileCard extends StatelessWidget {
 
                     ProfileStatusBadge(
                       text: [
-                        profile.status,
-                        profile.employmentType,
+                        widget.profile.status,
+                        widget.profile.employmentType,
                       ].where((value) => value.isNotEmpty).join(' · '),
                     ),
                   ],
@@ -155,34 +256,8 @@ class ProfileCard extends StatelessWidget {
 
           Gap(AppSpacing.space16.h),
 
-          EmployeeInfo(profile: profile),
+          EmployeeInfo(profile: widget.profile),
         ],
-      ),
-    );
-  }
-
-  Widget _buildAvatarFallback(String name) {
-    final initials = name
-        .trim()
-        .split(RegExp(r'\s+'))
-        .where((part) => part.isNotEmpty)
-        .take(2)
-        .map((part) => part[0])
-        .join()
-        .toUpperCase();
-
-    return Container(
-      width: 72.w,
-      height: 72.h,
-      decoration: const BoxDecoration(
-        shape: BoxShape.circle,
-        color: AppColors.surfaceContainer,
-      ),
-      alignment: Alignment.center,
-      child: AppText(
-        initials.isEmpty ? '?' : initials,
-        style: AppTextStyles.titleLarge,
-        color: AppColors.textPrimary,
       ),
     );
   }

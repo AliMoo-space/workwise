@@ -263,6 +263,7 @@
   "profileWorkPhone": "هاتف العمل",
   "profileContact": "تواصل",
   "profileActiveFullTime": "نشط / دوام كامل",
+  "profilePhotoUpdated": "تم تحديث الصورة الشخصية بنجاح",
   "logoutConfirmMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
 
   "submit": "إرسال",

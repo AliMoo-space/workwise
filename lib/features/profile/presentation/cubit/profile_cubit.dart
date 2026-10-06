@@ -44,7 +44,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  Future<void> updateProfile({
+  Future<bool> updateProfile({
     required String language,
     String? name,
     String? phone,
@@ -71,10 +71,14 @@ class ProfileCubit extends Cubit<ProfileState> {
           message: 'Profile updated successfully.',
         ),
       );
+      
+      return true;
     } catch (e) {
       emit(
         state.copyWith(status: ProfileStatus.failure, message: e.toString()),
       );
+      
+      return false;
     }
   }
 }
