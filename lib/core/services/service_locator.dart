@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:workwise/core/utils/location_helper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -17,12 +18,17 @@ import 'package:workwise/core/storage/secure_storage.dart';
 // =============================================
 
 import 'package:workwise/features/attendance/data/datasource/attendance_remote_data_source.dart';
+import 'package:workwise/features/attendance/data/datasource/attendance_history_remote_data_source.dart';
+import 'package:workwise/features/attendance/data/repo/attendance_history_repo_impl.dart';
 import 'package:workwise/features/attendance/data/repo/attendance_repo_impl.dart';
+import 'package:workwise/features/attendance/domain/repo/attendance_history_repo.dart';
 import 'package:workwise/features/attendance/domain/repo/attendance_repo.dart';
 import 'package:workwise/features/attendance/domain/usecases/check_in.dart';
 import 'package:workwise/features/attendance/domain/usecases/check_out.dart';
+import 'package:workwise/features/attendance/domain/usecases/get_attendance_history.dart';
 import 'package:workwise/features/attendance/domain/usecases/get_today_attendance.dart';
 import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
+import 'package:workwise/features/attendance/presentation/cubit/attendance_history_cubit.dart';
 
 // =============================================
 // Auth
@@ -158,32 +164,12 @@ Future<void> init() async {
   sl.registerLazySingleton<ApiConsumer>(() => sl<DioConsumer>());
 
   // =============================================
-  // Attendance
-  // =============================================
-  sl.registerLazySingleton<AttendanceRemoteDataSource>(
-    () => AttendanceRemoteDataSourceImpl(apiConsumer: sl()),
-  );
-  sl.registerLazySingleton<AttendanceRepo>(
-    () => AttendanceRepoImpl(remoteDataSource: sl()),
-  );
-  sl.registerLazySingleton<GetTodayAttendance>(
-    () => GetTodayAttendance(attendanceRepo: sl()),
-  );
-  sl.registerLazySingleton<CheckIn>(() => CheckIn(sl()));
-  sl.registerLazySingleton<CheckOut>(() => CheckOut(sl()));
-  sl.registerFactory<AttendanceCubit>(
-    () => AttendanceCubit(
-      getTodayAttendance: sl(),
-      checkIn: sl(),
-      checkOut: sl(),
-    ),
-  );
-
-  // =============================================
   // Localization
   // =============================================
 
-  sl.registerFactory<LocaleCubit>(() => LocaleCubit(sl<SharedPreferences>()));
+  sl.registerLazySingleton<LocaleCubit>(
+    () => LocaleCubit(sl<SharedPreferences>()),
+  );
 
   // =============================================
   // Auth
@@ -217,6 +203,23 @@ Future<void> init() async {
       secureStorage: sl<SecureStorage>(),
       localStorage: sl<LocalStorage>(),
     ),
+  );
+
+  // =============================================
+  // Attendance - Data Layer
+  // =============================================
+
+  sl.registerLazySingleton<AttendanceRemoteDataSource>(
+    () => AttendanceRemoteDataSourceImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton<AttendanceRepo>(
+    () => AttendanceRepoImpl(remoteDataSource: sl()),
+  );
+  sl.registerLazySingleton<AttendanceHistoryRemoteDataSource>(
+    () => AttendanceHistoryRemoteDataSourceImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton<AttendanceHistoryRepo>(
+    () => AttendanceHistoryRepoImpl(remoteDataSource: sl()),
   );
 
   // =============================================
@@ -314,6 +317,19 @@ Future<void> init() async {
   // =============================================
 
   // ---------------------------------------------
+  // Attendance
+  // ---------------------------------------------
+
+  sl.registerLazySingleton<GetTodayAttendance>(
+    () => GetTodayAttendance(attendanceRepo: sl()),
+  );
+  sl.registerLazySingleton<CheckIn>(() => CheckIn(sl()));
+  sl.registerLazySingleton<CheckOut>(() => CheckOut(sl()));
+  sl.registerLazySingleton<GetAttendanceHistory>(
+    () => GetAttendanceHistory(sl()),
+  );
+
+  // ---------------------------------------------
   // Leave
   // ---------------------------------------------
 
@@ -360,9 +376,24 @@ Future<void> init() async {
   // =============================================
 
   // ---------------------------------------------
-  // Leave
+  // Attendance
   // ---------------------------------------------
 
+  sl.registerFactory<AttendanceCubit>(
+    () => AttendanceCubit(
+      getTodayAttendance: sl(),
+      checkIn: sl(),
+      checkOut: sl(),
+      locationProvider: LocationHelper.getCurrentPosition,
+    ),
+  );
+  sl.registerFactory<AttendanceHistoryCubit>(
+    () => AttendanceHistoryCubit(getAttendanceHistory: sl()),
+  );
+
+  // ---------------------------------------------
+  // Leave
+  // ---------------------------------------------
   sl.registerFactory<LeaveBalancesCubit>(
     () => LeaveBalancesCubit(
       getLeaveBalancesUseCase: sl<GetLeaveBalancesUseCase>(),

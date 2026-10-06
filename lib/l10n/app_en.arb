@@ -78,6 +78,8 @@
 
   "attendance": "Attendance",
   "attendanceDescription": "Location-validated check in and history",
+  "noAttendanceRecords": "No attendance records",
+  "noAttendanceRecordsMessage": "There are no attendance records for this month.",
   "history": "History",
   "june2026": "June 2026",
 

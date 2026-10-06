@@ -25,4 +25,3 @@ class AttendanceActionEntity {
       ? AttendanceEntity.parseWorkedTimeToSeconds(workedTime)
       : null;
 }
-

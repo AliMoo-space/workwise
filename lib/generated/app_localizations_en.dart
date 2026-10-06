@@ -206,6 +206,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get attendanceDescription => 'Location-validated check in and history';
 
   @override
+  String get noAttendanceRecords => 'No attendance records';
+
+  @override
+  String get noAttendanceRecordsMessage =>
+      'There are no attendance records for this month.';
+
+  @override
   String get history => 'History';
 
   @override

@@ -206,6 +206,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get attendanceDescription => 'تسجيل الحضور والتحقق من الموقع والسجل';
 
   @override
+  String get noAttendanceRecords => 'لا توجد سجلات حضور';
+
+  @override
+  String get noAttendanceRecordsMessage => 'لا توجد سجلات حضور لهذا الشهر.';
+
+  @override
   String get history => 'السجل';
 
   @override

@@ -7,9 +7,12 @@ import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_section.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/features/attendance/domain/entities/attendance_entity.dart';
 
 class HomeStatsSectionWidget extends StatelessWidget {
-  const HomeStatsSectionWidget({super.key});
+  const HomeStatsSectionWidget({super.key, this.widgets});
+
+  final AttendanceWidgetsEntity? widgets;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +26,12 @@ class HomeStatsSectionWidget extends StatelessWidget {
                 children: [
                   Icon(Icons.task_alt_sharp),
                   Gap(AppSpacing.space12.h),
-                  AppText('3', style: AppTextStyles.headlineSmall),
                   AppText(
-                    context.l10n.pendingTasks,
+                    '${widgets?.pendingTasks?.count ?? 0}',
+                    style: AppTextStyles.headlineSmall,
+                  ),
+                  AppText(
+                    widgets?.pendingTasks?.label ?? context.l10n.pendingTasks,
                     style: AppTextStyles.headlineSmall.copyWith(
                       fontSize: 15.sp,
                     ),
@@ -44,9 +50,12 @@ class HomeStatsSectionWidget extends StatelessWidget {
                 children: [
                   Icon(Icons.calendar_month),
                   Gap(AppSpacing.space12.h),
-                  AppText('June 12', style: AppTextStyles.headlineSmall),
                   AppText(
-                    context.l10n.nextMeeting,
+                    widgets?.nextDeadline?.date ?? '-',
+                    style: AppTextStyles.headlineSmall,
+                  ),
+                  AppText(
+                    widgets?.nextDeadline?.label ?? context.l10n.nextMeeting,
                     style: AppTextStyles.bodySmall.copyWith(fontSize: 10.sp),
                   ),
                 ],
@@ -63,9 +72,14 @@ class HomeStatsSectionWidget extends StatelessWidget {
                 children: [
                   Icon(Icons.wallet_travel_outlined),
                   Gap(AppSpacing.space12.h),
-                  AppText('13d', style: AppTextStyles.headlineSmall),
                   AppText(
-                    context.l10n.leaveBalance,
+                    widgets?.leaveBalance?.days == null
+                        ? '-'
+                        : '${widgets!.leaveBalance!.days}d',
+                    style: AppTextStyles.headlineSmall,
+                  ),
+                  AppText(
+                    widgets?.leaveBalance?.label ?? context.l10n.leaveBalance,
                     style: AppTextStyles.headlineSmall.copyWith(
                       fontSize: 15.sp,
                     ),

@@ -78,6 +78,8 @@
 
   "attendance": "الحضور",
   "attendanceDescription": "تسجيل الحضور والتحقق من الموقع والسجل",
+  "noAttendanceRecords": "لا توجد سجلات حضور",
+  "noAttendanceRecordsMessage": "لا توجد سجلات حضور لهذا الشهر.",
   "history": "السجل",
   "june2026": "يونيو 2026",
 

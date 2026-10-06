@@ -9,24 +9,33 @@ import 'package:workwise/core/design_system/widgets/feedback/app_error_state.dar
 
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
-import 'package:workwise/core/services/service_locator.dart';
-import 'package:workwise/core/utils/location_helper.dart';
 import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
 import 'package:workwise/features/drawer/widgets/app_drawer/app_drawer.dart';
 import 'package:workwise/features/home/presentation/widgets/attendance_card_widget.dart';
 import 'package:workwise/features/home/presentation/widgets/home_stats_grid_widget.dart';
 import 'package:workwise/features/home/presentation/widgets/home_stats_section_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, this.onDrawerChanged});
 
   final ValueChanged<bool>? onDrawerChanged;
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<AttendanceCubit>().loadCurrentAttendance();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: AppDrawer(),
-      onDrawerChanged: onDrawerChanged,
+      onDrawerChanged: widget.onDrawerChanged,
       appBar: AppBar(
         title: Text(context.l10n.homeScreen),
         actions: [
@@ -49,47 +58,40 @@ class HomeScreen extends StatelessWidget {
             children: [
               Gap(AppSpacing.space24.h),
 
-              BlocProvider(
-                create: (context) =>
-                    sl<AttendanceCubit>()
-                      ..loadAttendance(latitude: 30.0444, longitude: 31.2357),
-                child: BlocConsumer<AttendanceCubit, AttendanceState>(
-                  listener: (context, state) {
-                    if (state is AttendanceActionSuccess) {
-                      final cubit = context.read<AttendanceCubit>();
-                      LocationHelper.getCurrentPosition().then((position) {
-                        if (position != null && context.mounted) {
-                          cubit.loadAttendance(
-                            latitude: position.latitude,
-                            longitude: position.longitude,
-                          );
-                        }
-                      });
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is AttendanceLoading) {
-                      return const AttendanceCardSkeleton();
-                    }
-
-                    if (state is AttendanceSuccess) {
-                      return AttendanceCardWidget(
-                        attendanceEntity: state.attendance,
-                        onCheckOut: () {
-                          context.read<AttendanceCubit>().checkOut();
-                        },
-                      );
-                    }
-                    if (state is AttendanceFailure) {
-                      return AppErrorState(message: state.message);
-                    }
-                    return SizedBox.shrink();
-                  },
-                ),
+              BlocBuilder<AttendanceCubit, AttendanceState>(
+                builder: (context, state) {
+                  if (state is AttendanceLoading ||
+                      state is AttendanceInitial ||
+                      state is AttendanceActionSuccess) {
+                    return const AttendanceCardSkeleton();
+                  }
+                  if (state is AttendanceSuccess) {
+                    return AttendanceCardWidget(
+                      attendanceEntity: state.attendance,
+                      onCheckOut: () =>
+                          context.read<AttendanceCubit>().checkOut(),
+                    );
+                  }
+                  if (state is AttendanceFailure) {
+                    return AppErrorState(
+                      message: state.message,
+                      onRetry: context
+                          .read<AttendanceCubit>()
+                          .loadCurrentAttendance,
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
               ),
               Gap(AppSpacing.space24.h),
 
-              HomeStatsSectionWidget(),
+              BlocBuilder<AttendanceCubit, AttendanceState>(
+                builder: (context, state) => HomeStatsSectionWidget(
+                  widgets: state is AttendanceSuccess
+                      ? state.attendance.widgets
+                      : null,
+                ),
+              ),
 
               Gap(AppSpacing.space24.h),
               Align(

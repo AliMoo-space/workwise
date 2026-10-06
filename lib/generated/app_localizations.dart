@@ -476,6 +476,18 @@ abstract class AppLocalizations {
   /// **'Location-validated check in and history'**
   String get attendanceDescription;
 
+  /// No description provided for @noAttendanceRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No attendance records'**
+  String get noAttendanceRecords;
+
+  /// No description provided for @noAttendanceRecordsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no attendance records for this month.'**
+  String get noAttendanceRecordsMessage;
+
   /// No description provided for @history.
   ///
   /// In en, this message translates to:
