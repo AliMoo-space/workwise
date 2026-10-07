@@ -3,9 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 
 class DioInterceptors extends Interceptor {
-  DioInterceptors({
-    this.getToken,
-  });
+  DioInterceptors({this.getToken});
 
   final Future<String?> Function()? getToken;
 
@@ -33,18 +31,12 @@ class DioInterceptors extends Interceptor {
   }
 
   @override
-  void onResponse(
-    Response response,
-    ResponseInterceptorHandler handler,
-  ) {
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
     handler.next(response);
   }
 
   @override
-  void onError(
-    DioException err,
-    ErrorInterceptorHandler handler,
-  ) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     log(
       'Dio Error: ${err.message}',
       name: 'DioInterceptor',

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../cubit/tasks_cubit.dart';
 import '../../../domain/models/task_models.dart';
 import '../../screens/task_submission_screen.dart';
 
@@ -20,6 +22,7 @@ class TaskUpdownSheet extends StatelessWidget {
     required Task task,
     VoidCallback? onSubmitted,
   }) {
+    final tasksCubit = context.read<TasksCubit>();
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -29,7 +32,10 @@ class TaskUpdownSheet extends StatelessWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      builder: (_) => TaskUpdownSheet(task: task, onSubmitted: onSubmitted),
+      builder: (_) => BlocProvider.value(
+        value: tasksCubit,
+        child: TaskUpdownSheet(task: task, onSubmitted: onSubmitted),
+      ),
     );
   }
 }
