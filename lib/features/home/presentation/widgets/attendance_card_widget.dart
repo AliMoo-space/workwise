@@ -15,9 +15,11 @@ class AttendanceCardWidget extends StatefulWidget {
   const AttendanceCardWidget({
     super.key,
     required this.attendanceEntity,
+    required this.onCheckIn,
     required this.onCheckOut,
   });
   final AttendanceEntity attendanceEntity;
+  final VoidCallback onCheckIn;
   final VoidCallback onCheckOut;
 
   @override
@@ -26,6 +28,9 @@ class AttendanceCardWidget extends StatefulWidget {
 
 class _AttendanceCardWidgetState extends State<AttendanceCardWidget> {
   late Stream<int> _workedSecondsStream;
+
+  bool get _isCheckedIn =>
+      widget.attendanceEntity.checkInTime?.trim().isNotEmpty == true;
 
   @override
   void initState() {
@@ -168,10 +173,19 @@ class _AttendanceCardWidgetState extends State<AttendanceCardWidget> {
           ),
           Gap(AppSpacing.space12.h),
           AppButton(
-            text: context.l10n.checkOut,
-            backgroundColor: AppColors.outlineVariant.withValues(alpha: .4),
-            onPressed:
-                widget.attendanceEntity.canCheckOut ? widget.onCheckOut : null,
+            text: !_isCheckedIn ? context.l10n.checkIn : context.l10n.checkOut,
+            backgroundColor: !_isCheckedIn
+                ? AppColors.success
+                : AppColors.outlineVariant.withValues(alpha: .4),
+            onPressed: !_isCheckedIn
+                ? widget.onCheckIn
+                : widget.attendanceEntity.canCheckOut
+                ? widget.onCheckOut
+                : null,
+            leading: Icon(
+              !_isCheckedIn ? Icons.login : Icons.logout,
+              color: AppColors.onPrimary,
+            ),
           ),
         ],
       ),

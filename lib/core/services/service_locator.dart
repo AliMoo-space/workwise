@@ -149,9 +149,8 @@ Future<void> init() async {
   sl.registerLazySingleton<Dio>(
     () => DioFactory(
       baseUrl: ApiConstants.baseUrl,
-      getToken: () async {
-        return sl<SecureStorage>().getAccessToken();
-      },
+      getToken: () => sl<SecureStorage>().getAccessToken(),
+      localStorage: sl<LocalStorage>(),
     ).create(),
   );
 

@@ -10,6 +10,7 @@ import 'package:workwise/core/design_system/widgets/feedback/app_error_state.dar
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
+import 'package:workwise/features/attendance/domain/entities/attendance_entity.dart';
 import 'package:workwise/features/drawer/widgets/app_drawer/app_drawer.dart';
 import 'package:workwise/features/home/presentation/widgets/attendance_card_widget.dart';
 import 'package:workwise/features/home/presentation/widgets/home_stats_grid_widget.dart';
@@ -25,6 +26,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  AttendanceEntity? _lastAttendance;
+
   @override
   void initState() {
     super.initState();
@@ -33,79 +36,106 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: AppDrawer(),
-      onDrawerChanged: widget.onDrawerChanged,
-      appBar: AppBar(
-        title: Text(context.l10n.homeScreen),
-        actions: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppSpacing.space12.w),
-            child: AppIconButton(
-              icon: Icons.notifications,
-              variant: AppIconButtonVariant.outlined,
-              onPressed: () {},
-              tooltip: context.l10n.notifications,
-              iconSize: AppSpacing.space24.sp,
+    return BlocListener<AttendanceCubit, AttendanceState>(
+      listener: (context, state) {
+        if (state is AttendanceSuccess) {
+          _lastAttendance = state.attendance;
+        } else if (state is AttendanceFailure) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text(state.message)));
+        }
+      },
+      child: Scaffold(
+        drawer: AppDrawer(),
+        onDrawerChanged: widget.onDrawerChanged,
+        appBar: AppBar(
+          title: Text(context.l10n.homeScreen),
+          actions: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: AppSpacing.space12.w),
+              child: AppIconButton(
+                icon: Icons.notifications,
+                variant: AppIconButtonVariant.outlined,
+                onPressed: () {},
+                tooltip: context.l10n.notifications,
+                iconSize: AppSpacing.space24.sp,
+              ),
             ),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSpacing.space16.w),
-          child: Column(
-            children: [
-              Gap(AppSpacing.space24.h),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: AppSpacing.space16.w),
+            child: Column(
+              children: [
+                Gap(AppSpacing.space24.h),
 
-              BlocBuilder<AttendanceCubit, AttendanceState>(
-                builder: (context, state) {
-                  if (state is AttendanceLoading ||
-                      state is AttendanceInitial ||
-                      state is AttendanceActionSuccess) {
-                    return const AttendanceCardSkeleton();
-                  }
-                  if (state is AttendanceSuccess) {
-                    return AttendanceCardWidget(
-                      attendanceEntity: state.attendance,
-                      onCheckOut: () =>
-                          context.read<AttendanceCubit>().checkOut(),
-                    );
-                  }
-                  if (state is AttendanceFailure) {
-                    return AppErrorState(
-                      message: state.message,
-                      onRetry: context
-                          .read<AttendanceCubit>()
-                          .loadCurrentAttendance,
-                    );
-                  }
-                  return const SizedBox.shrink();
-                },
-              ),
-              Gap(AppSpacing.space24.h),
-
-              BlocBuilder<AttendanceCubit, AttendanceState>(
-                builder: (context, state) => HomeStatsSectionWidget(
-                  widgets: state is AttendanceSuccess
-                      ? state.attendance.widgets
-                      : null,
+                BlocBuilder<AttendanceCubit, AttendanceState>(
+                  builder: (context, state) {
+                    if (state is AttendanceLoading ||
+                        state is AttendanceInitial ||
+                        state is AttendanceActionSuccess) {
+                      return const AttendanceCardSkeleton();
+                    }
+                    if (state is AttendanceSuccess) {
+                      return AttendanceCardWidget(
+                        attendanceEntity: state.attendance,
+                        onCheckIn: () => context
+                            .read<AttendanceCubit>()
+                            .checkInCurrentLocation(),
+                        onCheckOut: () =>
+                            context.read<AttendanceCubit>().checkOut(),
+                      );
+                    }
+                    if (state is AttendanceFailure) {
+                      if (_lastAttendance != null) {
+                        return AttendanceCardWidget(
+                          attendanceEntity: _lastAttendance!,
+                          onCheckIn: () => context
+                              .read<AttendanceCubit>()
+                              .checkInCurrentLocation(),
+                          onCheckOut: () =>
+                              context.read<AttendanceCubit>().checkOut(),
+                        );
+                      }
+                      return AppErrorState(
+                        message: state.message,
+                        onRetry: context
+                            .read<AttendanceCubit>()
+                            .loadCurrentAttendance,
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  },
                 ),
-              ),
+                Gap(AppSpacing.space24.h),
 
-              Gap(AppSpacing.space24.h),
-              Align(
-                alignment: AlignmentDirectional.centerStart,
-                child: AppText(
-                  context.l10n.quickActions,
-                  style: AppTextStyles.headlineMedium,
+                BlocBuilder<AttendanceCubit, AttendanceState>(
+                  builder: (context, state) => HomeStatsSectionWidget(
+                    widgets:
+                        (state is AttendanceSuccess
+                                ? state.attendance
+                                : _lastAttendance)
+                            ?.widgets,
+                  ),
                 ),
-              ),
-              Gap(AppSpacing.space16.h),
 
-              HomeStatsGrid(),
-              Gap(AppSpacing.space16.h),
-            ],
+                Gap(AppSpacing.space24.h),
+                Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: AppText(
+                    context.l10n.quickActions,
+                    style: AppTextStyles.headlineMedium,
+                  ),
+                ),
+                Gap(AppSpacing.space16.h),
+
+                HomeStatsGrid(),
+
+                Gap(AppSpacing.space16.h),
+              ],
+            ),
           ),
         ),
       ),

@@ -1,3 +1,5 @@
+import 'package:workwise/core/utils/json_helper.dart';
+
 class LoginResponseModel {
   const LoginResponseModel({
     required this.success,
@@ -11,9 +13,11 @@ class LoginResponseModel {
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
     return LoginResponseModel(
-      success: json['success'] as bool,
-      message: json['message'] as String,
-      data: LoginDataModel.fromJson(json['data'] as Map<String, dynamic>),
+      success: JsonHelper.required<bool>(json, 'success'),
+      message: JsonHelper.required<String>(json, 'message'),
+      data: LoginDataModel.fromJson(
+        JsonHelper.required<Map<String, dynamic>>(json, 'data'),
+      ),
     );
   }
 }
@@ -33,10 +37,12 @@ class LoginDataModel {
 
   factory LoginDataModel.fromJson(Map<String, dynamic> json) {
     return LoginDataModel(
-      accessToken: json['access_token'] as String,
-      tokenType: json['token_type'] as String,
-      expiresIn: json['expires_in'] as String,
-      user: LoginUserModel.fromJson(json['user'] as Map<String, dynamic>),
+      accessToken: JsonHelper.required<String>(json, 'access_token'),
+      tokenType: JsonHelper.required<String>(json, 'token_type'),
+      expiresIn: JsonHelper.required<String>(json, 'expires_in'),
+      user: LoginUserModel.fromJson(
+        JsonHelper.required<Map<String, dynamic>>(json, 'user'),
+      ),
     );
   }
 }
@@ -64,6 +70,7 @@ class LoginUserModel {
   final int id;
   final String name;
   final String email;
+
   final String? phone;
 
   final String? employeeCode;
@@ -85,30 +92,51 @@ class LoginUserModel {
   final String createdAt;
 
   factory LoginUserModel.fromJson(Map<String, dynamic> json) {
+    final permissionsJson = JsonHelper.required<List<dynamic>>(
+      json,
+      'permissions',
+    );
+
     return LoginUserModel(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      email: json['email'] as String,
+      id: JsonHelper.required<int>(json, 'id'),
+      name: JsonHelper.required<String>(json, 'name'),
+      email: JsonHelper.required<String>(json, 'email'),
 
-      phone: json['phone'] as String?,
+      phone: JsonHelper.optional<String>(json, 'phone'),
 
-      employeeCode: json['employee_code'] as String?,
-      jobTitle: json['job_title'] as String?,
-      employmentType: json['employment_type'] as String?,
-      startDate: json['start_date'] as String?,
+      employeeCode: JsonHelper.optional<String>(
+        json,
+        'employee_code',
+      ),
+      jobTitle: JsonHelper.optional<String>(
+        json,
+        'job_title',
+      ),
+      employmentType: JsonHelper.optional<String>(
+        json,
+        'employment_type',
+      ),
+      startDate: JsonHelper.optional<String>(
+        json,
+        'start_date',
+      ),
 
-      status: json['status'] as String,
+      status: JsonHelper.required<String>(json, 'status'),
 
-      address: json['address'] as String?,
-      avatarUrl: json['avatar_url'] as String?,
+      address: JsonHelper.optional<String>(json, 'address'),
+      avatarUrl: JsonHelper.optional<String>(json, 'avatar_url'),
 
-      role: json['role'] as String,
-      roleLabel: json['role_label'] as String,
-      locale: json['locale'] as String,
+      role: JsonHelper.required<String>(json, 'role'),
+      roleLabel: JsonHelper.required<String>(json, 'role_label'),
+      locale: JsonHelper.required<String>(json, 'locale'),
 
-      permissions: List<String>.from(json['permissions'] ?? const []),
+      permissions: permissionsJson
+          .map(
+            (permission) => permission as String,
+          )
+          .toList(),
 
-      createdAt: json['created_at'] as String,
+      createdAt: JsonHelper.required<String>(json, 'created_at'),
     );
   }
 }

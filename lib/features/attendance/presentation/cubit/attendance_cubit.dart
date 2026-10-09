@@ -112,6 +112,18 @@ class AttendanceCubit extends Cubit<AttendanceState> {
     }
   }
 
+  Future<void> checkInCurrentLocation() async {
+    final position =
+        await (_locationProvider ?? LocationHelper.getCurrentPosition)();
+    if (position == null) {
+      emit(
+        const AttendanceFailure('Unable to determine your current location.'),
+      );
+      return;
+    }
+    await checkIn(latitude: position.latitude, longitude: position.longitude);
+  }
+
   Future<void> checkOut({double? latitude, double? longitude}) async {
     emit(const AttendanceLoading());
     final result = await _checkOut(latitude: latitude, longitude: longitude);

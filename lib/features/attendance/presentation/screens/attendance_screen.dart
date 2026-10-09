@@ -134,7 +134,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                 // const Gap(AppSpacing.space20),
                 LocationStatusCard(attendance: attendance),
                 const Gap(AppSpacing.space20),
-                if (attendance.canCheckIn)
+                if (attendance.checkInTime == null)
                   AppButton(
                     text: context.l10n.checkIn,
                     onPressed: _checkIn,
@@ -143,7 +143,8 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
                       color: AppColors.onPrimary,
                     ),
                   ),
-                if (attendance.canCheckIn) const Gap(AppSpacing.space12),
+                if (attendance.checkInTime == null)
+                  const Gap(AppSpacing.space12),
                 AppButton(
                   text: context.l10n.checkOut,
                   onPressed: attendance.canCheckOut ? _checkOut : null,
