@@ -24,6 +24,7 @@ class _AiAssistantState extends State<AiAssistant> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
         toolbarHeight: 70,
 
@@ -131,7 +132,7 @@ class _AiAssistantState extends State<AiAssistant> {
                 ),
               ),
 
-              Gap(AppSpacing.space20.h),
+              Gap(AppSpacing.space12.h),
 
               Expanded(
                 child: currentIndex == 0
