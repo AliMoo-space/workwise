@@ -44,5 +44,10 @@ abstract final class ApiEndpoints {
   static const String leaveBalances = '/api/leaves/leave-balances?lang=en';
 
   static const String leaveRequests = '/api/leaves/leave-requests';
+
+  // Career Coach
+
+  static const String careerCoach = '/api/ai/career-coach';
+
   // Add project-specific endpoints below.
 }

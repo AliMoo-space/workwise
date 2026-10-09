@@ -13,10 +13,19 @@ import 'package:workwise/core/network/network_info.dart';
 import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/core/storage/secure_storage.dart';
 
+// =============================================
+// Auth
+// =============================================
+
 import 'package:workwise/features/auth/login/data/Repository/auth_repository.dart';
 import 'package:workwise/features/auth/login/data/web_services/auth_api_service.dart';
 import 'package:workwise/features/auth/login/data/web_services/permissions_api_service.dart';
 import 'package:workwise/features/auth/login/presentation/cubit/login_cubit.dart';
+
+// =============================================
+// Splash
+// =============================================
+
 import 'package:workwise/features/splash/presentation/cubit/splash_cubit.dart';
 
 // =============================================
@@ -72,6 +81,18 @@ import 'package:workwise/features/performance/domain/goals/repositories/goal_det
 
 import 'package:workwise/features/performance/domain/goals/usecases/get_goals.dart';
 import 'package:workwise/features/performance/domain/goals/usecases/get_goal_details.dart';
+
+// =============================================
+// AI Assistant - Career Coach
+// =============================================
+
+import 'package:workwise/features/AIAssistant/data/datasource/career_coach_remote_data_source.dart';
+import 'package:workwise/features/AIAssistant/data/repositories/career_coach_repository_impl.dart';
+
+import 'package:workwise/features/AIAssistant/domain/repositories/career_coach_repository.dart';
+import 'package:workwise/features/AIAssistant/domain/usecases/get_career_coach.dart';
+
+import 'package:workwise/features/AIAssistant/presentation/cubit/career_coach_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -242,6 +263,20 @@ Future<void> init() async {
   );
 
   // =============================================
+  // AI Assistant - Data Layer
+  // =============================================
+
+  sl.registerLazySingleton<CareerCoachRemoteDataSource>(
+    () => CareerCoachRemoteDataSourceImpl(apiConsumer: sl<ApiConsumer>()),
+  );
+
+  sl.registerLazySingleton<CareerCoachRepository>(
+    () => CareerCoachRepositoryImpl(
+      remoteDataSource: sl<CareerCoachRemoteDataSource>(),
+    ),
+  );
+
+  // =============================================
   // Use Cases
   // =============================================
 
@@ -256,10 +291,6 @@ Future<void> init() async {
   sl.registerLazySingleton<GetLeaveHistoryUseCase>(
     () => GetLeaveHistoryUseCase(sl<LeaveHistoryRepository>()),
   );
-
-  // ---------------------------------------------
-  // Leave Request
-  // ---------------------------------------------
 
   sl.registerLazySingleton<CreateLeaveRequestUseCase>(
     () => CreateLeaveRequestUseCase(sl<LeaveRepository>()),
@@ -281,6 +312,14 @@ Future<void> init() async {
 
   sl.registerLazySingleton<GetGoalDetails>(
     () => GetGoalDetails(sl<GoalDetailsRepository>()),
+  );
+
+  // ---------------------------------------------
+  // AI Assistant
+  // ---------------------------------------------
+
+  sl.registerLazySingleton<GetCareerCoach>(
+    () => GetCareerCoach(sl<CareerCoachRepository>()),
   );
 
   // =============================================
@@ -321,5 +360,13 @@ Future<void> init() async {
 
   sl.registerFactory<GoalsCubit>(
     () => GoalsCubit(sl<GetGoals>(), sl<GetGoalDetails>()),
+  );
+
+  // ---------------------------------------------
+  // AI Assistant
+  // ---------------------------------------------
+
+  sl.registerFactory<CareerCoachCubit>(
+    () => CareerCoachCubit(getCareerCoach: sl<GetCareerCoach>()),
   );
 }
