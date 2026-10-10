@@ -5,6 +5,19 @@ abstract final class ApiEndpoints {
   static const String checkOut = '/api/attendance/check-out';
   static const String attendanceHistory = '/api/attendance/history';
 
+  // Notifications
+  static const String notifications = '/api/notifications';
+  static const String unreadNotificationsCount =
+      '/api/notifications/unread-count';
+  static const String markAllNotificationsAsRead =
+      '/api/notifications/read-all';
+  static const String clearAllNotifications = '/api/notifications/clear-all';
+
+  static String markNotificationAsRead(String id) =>
+      '/api/notifications/$id/read';
+
+  static String deleteNotification(String id) => '/api/notifications/$id';
+
   // Auth
 
   static const String login = '/api/auth/login';

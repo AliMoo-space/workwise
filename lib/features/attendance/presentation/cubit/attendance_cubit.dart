@@ -18,7 +18,7 @@ class AttendanceCubit extends Cubit<AttendanceState> {
     CheckOut? checkOut,
     CheckIn? checkInUseCase,
     CheckOut? checkOutUseCase,
-    this._locationProvider,
+    this.locationProvider,
   }) : _checkIn = checkIn ?? checkInUseCase!,
        _checkOut = checkOut ?? checkOutUseCase!,
        super(const AttendanceInitial());
@@ -26,14 +26,14 @@ class AttendanceCubit extends Cubit<AttendanceState> {
   final GetTodayAttendance getTodayAttendance;
   final CheckIn _checkIn;
   final CheckOut _checkOut;
-  final Future<Position?> Function()? _locationProvider;
+  final Future<Position?> Function()? locationProvider;
   Future<void>? _loadFuture;
   bool _hasLoadedAttendance = false;
 
   Future<void> loadCurrentAttendance() async {
     if (_hasLoadedAttendance && state is AttendanceSuccess) return;
     final position =
-        await (_locationProvider ?? LocationHelper.getCurrentPosition)();
+        await (locationProvider ?? LocationHelper.getCurrentPosition)();
     if (position == null) {
       emit(
         const AttendanceFailure('Unable to determine your current location.'),
@@ -88,33 +88,44 @@ class AttendanceCubit extends Cubit<AttendanceState> {
     required double latitude,
     required double longitude,
   }) async {
-    emit(const AttendanceLoading());
+    if (state is AttendanceActionLoading) return;
+    final attendance = _attendanceFromState;
+    if (attendance != null) {
+      emit(AttendanceActionLoading(attendance));
+    } else {
+      emit(const AttendanceLoading());
+    }
     final result = await _checkIn(latitude: latitude, longitude: longitude);
 
-    var succeeded = false;
     result.fold(
       (failure) {
-        emit(AttendanceFailure(failure.message));
+        if (attendance == null) {
+          emit(AttendanceFailure(failure.message));
+        } else {
+          emit(
+            AttendanceActionFailure(
+              message: failure.message,
+              attendance: attendance,
+            ),
+          );
+        }
       },
       (action) {
+        _hasLoadedAttendance = false;
         emit(
           AttendanceActionSuccess(
             message: 'Checked in successfully.',
             action: action,
+            attendance: attendance,
           ),
         );
-        succeeded = true;
       },
     );
-    if (succeeded) {
-      _hasLoadedAttendance = false;
-      if (_locationProvider != null) await loadCurrentAttendance();
-    }
   }
 
   Future<void> checkInCurrentLocation() async {
     final position =
-        await (_locationProvider ?? LocationHelper.getCurrentPosition)();
+        await (locationProvider ?? LocationHelper.getCurrentPosition)();
     if (position == null) {
       emit(
         const AttendanceFailure('Unable to determine your current location.'),
@@ -125,28 +136,39 @@ class AttendanceCubit extends Cubit<AttendanceState> {
   }
 
   Future<void> checkOut({double? latitude, double? longitude}) async {
-    emit(const AttendanceLoading());
+    if (state is AttendanceActionLoading) return;
+    final attendance = _attendanceFromState;
+    if (attendance != null) {
+      emit(AttendanceActionLoading(attendance));
+    } else {
+      emit(const AttendanceLoading());
+    }
     final result = await _checkOut(latitude: latitude, longitude: longitude);
 
-    var succeeded = false;
     result.fold(
       (failure) {
-        emit(AttendanceFailure(failure.message));
+        if (attendance == null) {
+          emit(AttendanceFailure(failure.message));
+        } else {
+          emit(
+            AttendanceActionFailure(
+              message: failure.message,
+              attendance: attendance,
+            ),
+          );
+        }
       },
       (action) {
+        _hasLoadedAttendance = false;
         emit(
           AttendanceActionSuccess(
             message: 'Checked out successfully.',
             action: action,
+            attendance: attendance,
           ),
         );
-        succeeded = true;
       },
     );
-    if (succeeded) {
-      _hasLoadedAttendance = false;
-      if (_locationProvider != null) await loadCurrentAttendance();
-    }
   }
 
   Future<void> performCheckIn({
@@ -158,4 +180,19 @@ class AttendanceCubit extends Cubit<AttendanceState> {
     required double latitude,
     required double longitude,
   }) => checkOut(latitude: latitude, longitude: longitude);
+
+  AttendanceEntity? get _attendanceFromState {
+    final currentState = state;
+    if (currentState is AttendanceSuccess) return currentState.attendance;
+    if (currentState is AttendanceActionLoading) {
+      return currentState.attendance;
+    }
+    if (currentState is AttendanceActionFailure) {
+      return currentState.attendance;
+    }
+    if (currentState is AttendanceActionSuccess) {
+      return currentState.attendance;
+    }
+    return null;
+  }
 }

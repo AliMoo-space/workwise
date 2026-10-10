@@ -26,6 +26,8 @@
 
   "homeScreen": "Home Screen",
   "notifications": "Notifications",
+  "markAllNotificationsAsRead": "Mark all as read",
+  "clearAllNotifications": "Clear all notifications",
   "quickActions": "Quick Actions",
 
   "quickSignIn": "Quick Sign-In",

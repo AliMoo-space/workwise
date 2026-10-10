@@ -16,6 +16,4 @@ abstract final class AppConstants {
 
   static const String defaultLanguage = 'en';
 
-  static void method() {}
-
 }

@@ -73,6 +73,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notifications => 'Notifications';
 
   @override
+  String get markAllNotificationsAsRead => 'Mark all as read';
+
+  @override
+  String get clearAllNotifications => 'Clear all notifications';
+
+  @override
   String get quickActions => 'Quick Actions';
 
   @override

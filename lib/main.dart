@@ -5,7 +5,6 @@ import 'package:workwise/core/design_system/theme/app_theme.dart';
 import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/routing/router_generation_config.dart';
 import 'package:workwise/core/services/service_locator.dart';
-import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
 import 'package:workwise/generated/app_localizations.dart';
 
 void main() async {
@@ -15,7 +14,6 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => sl<LocaleCubit>()),
-        BlocProvider(create: (_) => sl<AttendanceCubit>()),
       ],
       child: const MyApp(),
     ),

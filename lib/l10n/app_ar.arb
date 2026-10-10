@@ -26,6 +26,8 @@
 
   "homeScreen": "الرئيسية",
   "notifications": "الإشعارات",
+  "markAllNotificationsAsRead": "تحديد كل الإشعارات كمقروءة",
+  "clearAllNotifications": "مسح كل الإشعارات",
   "quickActions": "إجراءات سريعة",
 
   "quickSignIn": "تسجيل دخول سريع",

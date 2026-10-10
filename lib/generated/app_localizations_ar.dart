@@ -73,6 +73,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notifications => 'الإشعارات';
 
   @override
+  String get markAllNotificationsAsRead => 'تحديد كل الإشعارات كمقروءة';
+
+  @override
+  String get clearAllNotifications => 'مسح كل الإشعارات';
+
+  @override
   String get quickActions => 'إجراءات سريعة';
 
   @override

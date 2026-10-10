@@ -1,6 +1,5 @@
 part of 'attendance_cubit.dart';
 
-// AttendanceActionEntity is imported by the library containing this part.
 sealed class AttendanceState extends Equatable {
   const AttendanceState();
 
@@ -14,6 +13,15 @@ final class AttendanceInitial extends AttendanceState {
 
 final class AttendanceLoading extends AttendanceState {
   const AttendanceLoading();
+}
+
+final class AttendanceActionLoading extends AttendanceState {
+  const AttendanceActionLoading(this.attendance);
+
+  final AttendanceEntity attendance;
+
+  @override
+  List<Object> get props => [attendance];
 }
 
 final class AttendanceSuccess extends AttendanceState {
@@ -34,15 +42,30 @@ final class AttendanceFailure extends AttendanceState {
   List<Object> get props => [message];
 }
 
+final class AttendanceActionFailure extends AttendanceState {
+  const AttendanceActionFailure({
+    required this.message,
+    required this.attendance,
+  });
+
+  final String message;
+  final AttendanceEntity attendance;
+
+  @override
+  List<Object> get props => [message, attendance];
+}
+
 final class AttendanceActionSuccess extends AttendanceState {
   const AttendanceActionSuccess({
     required this.message,
     this.action,
+    this.attendance,
   });
 
   final String message;
   final AttendanceActionEntity? action;
+  final AttendanceEntity? attendance;
 
   @override
-  List<Object> get props => [message, ?action];
+  List<Object> get props => [message, ?action, ?attendance];
 }

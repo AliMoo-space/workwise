@@ -17,23 +17,33 @@ class HomeStatsSectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      // Fix: A Row inside a scroll view has unbounded height; stretch would
+      // propagate that infinite constraint to the card columns.
       children: [
         Expanded(
           child: AppSection(
             child: AppCard(
+              height: 150.h,
+              padding: EdgeInsets.all(AppSpacing.space12.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Icon(Icons.task_alt_sharp),
                   Gap(AppSpacing.space12.h),
-                  AppText(
-                    '${widgets?.pendingTasks?.count ?? 0}',
-                    style: AppTextStyles.headlineSmall,
+                  SizedBox(
+                    height: 28.h,
+                    child: AppText(
+                      '${widgets?.pendingTasks?.count ?? 0}',
+                      style: AppTextStyles.headlineSmall,
+                    ),
                   ),
-                  AppText(
-                    widgets?.pendingTasks?.label ?? context.l10n.pendingTasks,
-                    style: AppTextStyles.headlineSmall.copyWith(
-                      fontSize: 15.sp,
+                  SizedBox(
+                    height: 32.h,
+                    child: AppText(
+                      widgets?.pendingTasks?.label ?? context.l10n.pendingTasks,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.bodySmall.copyWith(fontSize: 11.sp),
                     ),
                   ),
                 ],
@@ -45,18 +55,28 @@ class HomeStatsSectionWidget extends StatelessWidget {
         Expanded(
           child: AppSection(
             child: AppCard(
+              height: 150.h,
+              padding: EdgeInsets.all(AppSpacing.space12.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Icon(Icons.calendar_month),
                   Gap(AppSpacing.space12.h),
-                  AppText(
-                    widgets?.nextDeadline?.date ?? '-',
-                    style: AppTextStyles.headlineSmall,
+                  SizedBox(
+                    height: 28.h,
+                    child: AppText(
+                      widgets?.nextDeadline?.date ?? '-',
+                      style: AppTextStyles.headlineSmall,
+                    ),
                   ),
-                  AppText(
-                    widgets?.nextDeadline?.label ?? context.l10n.nextMeeting,
-                    style: AppTextStyles.bodySmall.copyWith(fontSize: 10.sp),
+                  SizedBox(
+                    height: 32.h,
+                    child: AppText(
+                      widgets?.nextDeadline?.label ?? context.l10n.nextMeeting,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.bodySmall.copyWith(fontSize: 11.sp),
+                    ),
                   ),
                 ],
               ),
@@ -67,21 +87,29 @@ class HomeStatsSectionWidget extends StatelessWidget {
         Expanded(
           child: AppSection(
             child: AppCard(
+              height: 150.h,
+              padding: EdgeInsets.all(AppSpacing.space12.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Icon(Icons.wallet_travel_outlined),
                   Gap(AppSpacing.space12.h),
-                  AppText(
-                    widgets?.leaveBalance?.days == null
-                        ? '-'
-                        : '${widgets!.leaveBalance!.days}d',
-                    style: AppTextStyles.headlineSmall,
+                  SizedBox(
+                    height: 28.h,
+                    child: AppText(
+                      widgets?.leaveBalance?.days == null
+                          ? '-'
+                          : '${widgets!.leaveBalance!.days}d',
+                      style: AppTextStyles.headlineSmall,
+                    ),
                   ),
-                  AppText(
-                    widgets?.leaveBalance?.label ?? context.l10n.leaveBalance,
-                    style: AppTextStyles.headlineSmall.copyWith(
-                      fontSize: 15.sp,
+                  SizedBox(
+                    height: 32.h,
+                    child: AppText(
+                      widgets?.leaveBalance?.label ?? context.l10n.leaveBalance,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTextStyles.bodySmall.copyWith(fontSize: 11.sp),
                     ),
                   ),
                 ],

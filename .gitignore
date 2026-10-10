@@ -11,6 +11,7 @@
 .svn/
 .swiftpm/
 .agents/
+.github/
 migrate_working_dir/
 
 # IntelliJ related

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/core/routing/page_transition.dart';
 import 'package:workwise/features/attendance/presentation/screens/attendance_screen.dart';
+import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
 import 'package:workwise/features/attendance/presentation/cubit/attendance_history_cubit.dart';
 import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/auth/fingerprint/presentation/screens/finger_print_screen.dart';
@@ -20,10 +21,12 @@ import 'package:workwise/features/performance/presentation/screens/performance_s
 import 'package:workwise/features/setting/presentation/screens/settings_screen.dart';
 import 'package:workwise/features/splash/presentation/screens/splash_screen.dart';
 import 'package:workwise/features/tasks/presentation/screens/tasks_screen.dart';
+import 'package:workwise/features/notification/presentation/cubit/notification_cubit.dart';
+import 'package:workwise/features/notification/presentation/screens/notification_screen.dart';
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
-    initialLocation: AppRoutes.splashScreen,
+    initialLocation: AppRoutes.mainScreen,
     routes: [
       GoRoute(
         name: AppRoutes.mainScreen,
@@ -100,6 +103,7 @@ class RouterGenerationConfig {
             state: state,
             child: MultiBlocProvider(
               providers: [
+                BlocProvider(create: (_) => sl<AttendanceCubit>()),
                 BlocProvider(create: (_) => sl<AttendanceHistoryCubit>()),
               ],
               child: const AttendanceScreen(),
@@ -158,6 +162,17 @@ class RouterGenerationConfig {
         pageBuilder: (context, state) => slideTransitionPage(
           state: state,
           child: const LeaveHistoryScreen(),
+        ),
+      ),
+      GoRoute(
+        name: AppRoutes.notificationScreen,
+        path: AppRoutes.notificationScreen,
+        pageBuilder: (context, state) => slideTransitionPage(
+          state: state,
+          child: BlocProvider(
+            create: (_) => sl<NotificationCubit>(),
+            child: const NotificationScreen(),
+          ),
         ),
       ),
     ],

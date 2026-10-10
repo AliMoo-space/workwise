@@ -29,6 +29,12 @@ import 'package:workwise/features/attendance/domain/usecases/get_attendance_hist
 import 'package:workwise/features/attendance/domain/usecases/get_today_attendance.dart';
 import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
 import 'package:workwise/features/attendance/presentation/cubit/attendance_history_cubit.dart';
+import 'package:workwise/features/notification/data/datasource/notification_remote_data_source.dart';
+import 'package:workwise/features/notification/data/repo/notification_repository_impl.dart';
+import 'package:workwise/features/notification/domain/repo/notification_repository.dart';
+import 'package:workwise/features/notification/domain/usecases/get_notifications.dart';
+import 'package:workwise/features/notification/domain/usecases/notification_actions.dart';
+import 'package:workwise/features/notification/presentation/cubit/notification_cubit.dart';
 
 // =============================================
 // Auth
@@ -406,6 +412,44 @@ Future<void> init() async {
   sl.registerFactory<LeaveRequestCubit>(
     () => LeaveRequestCubit(
       createLeaveRequestUseCase: sl<CreateLeaveRequestUseCase>(),
+    ),
+  );
+
+  // =============================================
+  // Notifications
+  // =============================================
+  sl.registerLazySingleton<NotificationRemoteDataSource>(
+    () => NotificationRemoteDataSourceImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton<NotificationRepository>(
+    () => NotificationRepositoryImpl(remoteDataSource: sl()),
+  );
+  sl.registerLazySingleton<GetNotifications>(
+    () => GetNotifications(sl()),
+  );
+  sl.registerLazySingleton<GetUnreadNotificationsCount>(
+    () => GetUnreadNotificationsCount(sl()),
+  );
+  sl.registerLazySingleton<MarkNotificationAsRead>(
+    () => MarkNotificationAsRead(sl()),
+  );
+  sl.registerLazySingleton<MarkAllNotificationsAsRead>(
+    () => MarkAllNotificationsAsRead(sl()),
+  );
+  sl.registerLazySingleton<ClearAllNotifications>(
+    () => ClearAllNotifications(sl()),
+  );
+  sl.registerLazySingleton<DeleteNotification>(
+    () => DeleteNotification(sl()),
+  );
+  sl.registerFactory<NotificationCubit>(
+    () => NotificationCubit(
+      getNotifications: sl(),
+      getUnreadNotificationsCount: sl(),
+      markNotificationAsRead: sl(),
+      markAllNotificationsAsRead: sl(),
+      clearAllNotifications: sl(),
+      deleteNotification: sl(),
     ),
   );
 

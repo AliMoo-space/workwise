@@ -67,69 +67,101 @@ void main() {
   });
 
   group('loadAttendance', () {
-    test('emits [AttendanceLoading, AttendanceSuccess] on successful load', () async {
-      final entity = AttendanceEntity(
-        status: 'On Shift',
-        checkInTime: '09:00 AM',
-        checkOutTime: null,
-        workedTime: '01:00:00',
-        distanceMeters: 10.0,
-        isInsideRadius: true,
-        canCheckIn: false,
-        canCheckOut: true,
-      );
-      fakeRepo.todayResult = Right(entity);
+    test(
+      'emits [AttendanceLoading, AttendanceSuccess] on successful load',
+      () async {
+        final entity = AttendanceEntity(
+          status: 'On Shift',
+          checkInTime: '09:00 AM',
+          checkOutTime: null,
+          workedTime: '01:00:00',
+          distanceMeters: 10.0,
+          isInsideRadius: true,
+          canCheckIn: false,
+          canCheckOut: true,
+        );
+        fakeRepo.todayResult = Right(entity);
 
-      final expected = [
-        const AttendanceLoading(),
-        AttendanceSuccess(entity),
-      ];
+        final expected = [const AttendanceLoading(), AttendanceSuccess(entity)];
 
-      expectLater(cubit.stream, emitsInOrder(expected));
+        expectLater(cubit.stream, emitsInOrder(expected));
 
-      await cubit.loadAttendance(latitude: 30.0444, longitude: 31.2357);
-    });
+        await cubit.loadAttendance(latitude: 30.0444, longitude: 31.2357);
+      },
+    );
 
-    test('emits [AttendanceLoading, AttendanceFailure] when repository fails', () async {
-      fakeRepo.todayResult = const Left(ServerFailure('Server Error'));
+    test(
+      'emits [AttendanceLoading, AttendanceFailure] when repository fails',
+      () async {
+        fakeRepo.todayResult = const Left(ServerFailure('Server Error'));
 
-      final expected = [
-        const AttendanceLoading(),
-        const AttendanceFailure('Server Error'),
-      ];
+        final expected = [
+          const AttendanceLoading(),
+          const AttendanceFailure('Server Error'),
+        ];
 
-      expectLater(cubit.stream, emitsInOrder(expected));
+        expectLater(cubit.stream, emitsInOrder(expected));
 
-      await cubit.loadAttendance(latitude: 30.0444, longitude: 31.2357);
-    });
+        await cubit.loadAttendance(latitude: 30.0444, longitude: 31.2357);
+      },
+    );
   });
 
   group('checkIn', () {
-    test('emits [AttendanceLoading, AttendanceActionSuccess] on success', () async {
-      final actionEntity = AttendanceActionEntity(
-        id: 1,
-        userId: 1,
-        date: '2026-10-05',
-        checkIn: '09:00 AM',
-        checkOut: null,
-        status: 'Present',
-        workedTime: null,
-        isException: false,
+    test('preserves attendance when the action fails', () async {
+      final attendance = AttendanceEntity(
+        status: 'Off Shift',
+        checkInTime: null,
+        checkOutTime: null,
+        workedTime: '0h 0m 0s',
+        distanceMeters: 10,
+        isInsideRadius: true,
+        canCheckIn: true,
+        canCheckOut: false,
       );
-      fakeRepo.checkInResult = Right(actionEntity);
+      fakeRepo.todayResult = Right(attendance);
+      fakeRepo.checkInResult = const Left(ValidationFailure('Outside radius'));
 
-      final expected = [
-        const AttendanceLoading(),
-        AttendanceActionSuccess(
-          message: 'Checked in successfully.',
-          action: actionEntity,
-        ),
-      ];
-
-      expectLater(cubit.stream, emitsInOrder(expected));
-
+      await cubit.loadAttendance(latitude: 30.0444, longitude: 31.2357);
       await cubit.checkIn(latitude: 30.0444, longitude: 31.2357);
+
+      expect(
+        cubit.state,
+        AttendanceActionFailure(
+          message: 'Outside radius',
+          attendance: attendance,
+        ),
+      );
     });
+
+    test(
+      'emits [AttendanceLoading, AttendanceActionSuccess] on success',
+      () async {
+        final actionEntity = AttendanceActionEntity(
+          id: 1,
+          userId: 1,
+          date: '2026-10-05',
+          checkIn: '09:00 AM',
+          checkOut: null,
+          status: 'Present',
+          workedTime: null,
+          isException: false,
+        );
+        fakeRepo.checkInResult = Right(actionEntity);
+
+        final expected = [
+          const AttendanceLoading(),
+          AttendanceActionSuccess(
+            message: 'Checked in successfully.',
+            action: actionEntity,
+          ),
+        ];
+
+        expectLater(cubit.stream, emitsInOrder(expected));
+
+        await cubit.checkIn(latitude: 30.0444, longitude: 31.2357);
+      },
+    );
 
     test('emits [AttendanceLoading, AttendanceFailure] on error', () async {
       fakeRepo.checkInResult = const Left(ValidationFailure('Outside radius'));
@@ -146,31 +178,34 @@ void main() {
   });
 
   group('checkOut', () {
-    test('emits [AttendanceLoading, AttendanceActionSuccess] on success', () async {
-      final actionEntity = AttendanceActionEntity(
-        id: 1,
-        userId: 1,
-        date: '2026-10-05',
-        checkIn: '09:00 AM',
-        checkOut: '05:00 PM',
-        status: 'Present',
-        workedTime: '08:00:00',
-        isException: false,
-      );
-      fakeRepo.checkOutResult = Right(actionEntity);
+    test(
+      'emits [AttendanceLoading, AttendanceActionSuccess] on success',
+      () async {
+        final actionEntity = AttendanceActionEntity(
+          id: 1,
+          userId: 1,
+          date: '2026-10-05',
+          checkIn: '09:00 AM',
+          checkOut: '05:00 PM',
+          status: 'Present',
+          workedTime: '08:00:00',
+          isException: false,
+        );
+        fakeRepo.checkOutResult = Right(actionEntity);
 
-      final expected = [
-        const AttendanceLoading(),
-        AttendanceActionSuccess(
-          message: 'Checked out successfully.',
-          action: actionEntity,
-        ),
-      ];
+        final expected = [
+          const AttendanceLoading(),
+          AttendanceActionSuccess(
+            message: 'Checked out successfully.',
+            action: actionEntity,
+          ),
+        ];
 
-      expectLater(cubit.stream, emitsInOrder(expected));
+        expectLater(cubit.stream, emitsInOrder(expected));
 
-      await cubit.checkOut();
-    });
+        await cubit.checkOut();
+      },
+    );
 
     test('emits [AttendanceLoading, AttendanceFailure] on error', () async {
       fakeRepo.checkOutResult = const Left(ServerFailure('Checkout failed'));
