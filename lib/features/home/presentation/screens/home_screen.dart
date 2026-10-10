@@ -12,6 +12,7 @@ import 'package:workwise/core/design_system/widgets/feedback/app_error_state.dar
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/extensions/context_extensions.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/core/utils/location_helper.dart';
 import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
 import 'package:workwise/features/attendance/domain/entities/attendance_entity.dart';
 import 'package:workwise/features/drawer/widgets/app_drawer/app_drawer.dart';
@@ -29,13 +30,49 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
   AttendanceEntity? _lastAttendance;
 
   @override
   void initState() {
     super.initState();
-    context.read<AttendanceCubit>().loadCurrentAttendance();
+    WidgetsBinding.instance.addObserver(this);
+    context.read<AttendanceCubit>().loadCurrentAttendance(
+      isUserInitiated: false,
+    );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && mounted) {
+      context.read<AttendanceCubit>().onAppResumed();
+    }
+  }
+
+  SnackBarAction? _buildSettingsSnackBarAction(
+    BuildContext context, {
+    required bool canOpenLocationSettings,
+    required bool canOpenAppSettings,
+  }) {
+    if (canOpenLocationSettings) {
+      return SnackBarAction(
+        label: context.l10n.openLocationSettings,
+        onPressed: LocationHelper.openLocationSettings,
+      );
+    }
+    if (canOpenAppSettings) {
+      return SnackBarAction(
+        label: context.l10n.openAppSettings,
+        onPressed: LocationHelper.openAppSettings,
+      );
+    }
+    return null;
   }
 
   @override
@@ -44,10 +81,43 @@ class _HomeScreenState extends State<HomeScreen> {
       listener: (context, state) {
         if (state is AttendanceSuccess) {
           _lastAttendance = state.attendance;
-        } else if (state is AttendanceFailure) {
+        } else if (state is AttendanceActionSuccess) {
+          if (state.attendance != null) {
+            _lastAttendance = state.attendance;
+          }
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(content: Text(state.message)));
+          context.read<AttendanceCubit>().loadCurrentAttendance(
+            isUserInitiated: false,
+          );
+        } else if (state is AttendanceFailure) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(state.localizedMessage(context.l10n)),
+                action: _buildSettingsSnackBarAction(
+                  context,
+                  canOpenLocationSettings: state.canOpenLocationSettings,
+                  canOpenAppSettings: state.canOpenAppSettings,
+                ),
+              ),
+            );
+        } else if (state is AttendanceActionFailure) {
+          _lastAttendance = state.attendance;
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(state.localizedMessage(context.l10n)),
+                action: _buildSettingsSnackBarAction(
+                  context,
+                  canOpenLocationSettings: state.canOpenLocationSettings,
+                  canOpenAppSettings: state.canOpenAppSettings,
+                ),
+              ),
+            );
         }
       },
       child: Scaffold(
@@ -71,10 +141,38 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: BlocBuilder<AttendanceCubit, AttendanceState>(
           builder: (context, state) {
+            final currentAttendance = switch (state) {
+              AttendanceSuccess(:final attendance) => attendance,
+              AttendanceActionLoading(:final attendance) => attendance,
+              AttendanceActionFailure(:final attendance) => attendance,
+              AttendanceActionSuccess(:final attendance) =>
+                attendance ?? _lastAttendance,
+              _ => _lastAttendance,
+            };
+
             final isLoading =
                 state is AttendanceLoading ||
                 state is AttendanceInitial ||
-                state is AttendanceActionSuccess;
+                (state is AttendanceActionSuccess && currentAttendance == null);
+
+            final secondaryText = state is AttendanceFailure
+                ? (state.canOpenLocationSettings
+                      ? context.l10n.openLocationSettings
+                      : state.canOpenAppSettings
+                      ? context.l10n.openAppSettings
+                      : null)
+                : null;
+            final secondaryAction = state is AttendanceFailure
+                ? (state.canOpenLocationSettings
+                      ? () {
+                          LocationHelper.openLocationSettings();
+                        }
+                      : state.canOpenAppSettings
+                      ? () {
+                          LocationHelper.openAppSettings();
+                        }
+                      : null)
+                : null;
 
             return Skeletonizer(
               enabled: isLoading,
@@ -87,46 +185,33 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Gap(AppSpacing.space24.h),
 
-                      if (state is AttendanceLoading ||
-                          state is AttendanceInitial ||
-                          state is AttendanceActionSuccess)
+                      if (isLoading)
                         const AttendanceCardSkeleton()
-                      else if (state is AttendanceSuccess)
+                      else if (currentAttendance != null)
                         AttendanceCardWidget(
-                          attendanceEntity: state.attendance,
+                          attendanceEntity: currentAttendance,
+                          isActionLoading: state is AttendanceActionLoading,
                           onCheckIn: () => context
                               .read<AttendanceCubit>()
-                              .checkInCurrentLocation(),
-                          onCheckOut: () =>
-                              context.read<AttendanceCubit>().checkOut(),
-                        )
-                      else if (state is AttendanceFailure &&
-                          _lastAttendance != null)
-                        AttendanceCardWidget(
-                          attendanceEntity: _lastAttendance!,
-                          onCheckIn: () => context
-                              .read<AttendanceCubit>()
-                              .checkInCurrentLocation(),
+                              .checkInCurrentLocation(isUserInitiated: true),
                           onCheckOut: () =>
                               context.read<AttendanceCubit>().checkOut(),
                         )
                       else if (state is AttendanceFailure)
                         AppErrorState(
-                          message: state.message,
-                          onRetry: context
+                          message: state.localizedMessage(context.l10n),
+                          onRetry: () => context
                               .read<AttendanceCubit>()
-                              .loadCurrentAttendance,
+                              .loadCurrentAttendance(isUserInitiated: true),
+                          secondaryButtonText: secondaryText,
+                          onSecondaryPressed: secondaryAction,
                         )
                       else
                         const SizedBox.shrink(),
                       Gap(AppSpacing.space24.h),
 
                       HomeStatsSectionWidget(
-                        widgets:
-                            (state is AttendanceSuccess
-                                    ? state.attendance
-                                    : _lastAttendance)
-                                ?.widgets,
+                        widgets: currentAttendance?.widgets,
                       ),
 
                       Gap(AppSpacing.space24.h),

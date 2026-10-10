@@ -17,10 +17,12 @@ class AttendanceCardWidget extends StatefulWidget {
     required this.attendanceEntity,
     required this.onCheckIn,
     required this.onCheckOut,
+    this.isActionLoading = false,
   });
   final AttendanceEntity attendanceEntity;
   final VoidCallback onCheckIn;
   final VoidCallback onCheckOut;
+  final bool isActionLoading;
 
   @override
   State<AttendanceCardWidget> createState() => _AttendanceCardWidgetState();
@@ -177,7 +179,9 @@ class _AttendanceCardWidgetState extends State<AttendanceCardWidget> {
             backgroundColor: !_isCheckedIn
                 ? AppColors.success
                 : AppColors.outlineVariant.withValues(alpha: .4),
-            onPressed: !_isCheckedIn
+            onPressed: widget.isActionLoading
+                ? null
+                : !_isCheckedIn
                 ? widget.onCheckIn
                 : widget.attendanceEntity.canCheckOut
                 ? widget.onCheckOut

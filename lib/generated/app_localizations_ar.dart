@@ -128,6 +128,51 @@ class AppLocalizationsAr extends AppLocalizations {
       'يرجى تفعيل خدمة تحديد الموقع (GPS) على جهازك.';
 
   @override
+  String get locationPermissionRequired =>
+      'إذن الوصول إلى الموقع مطلوب للتحقق من حضورك في مقر العمل.';
+
+  @override
+  String get locationPermissionDeniedMessage =>
+      'تم رفض إذن الموقع. يرجى منح صلاحية الموقع للتحقق من الحضور.';
+
+  @override
+  String get locationPermissionDeniedRepeatedly =>
+      'تم رفض إذن الموقع عدة مرات. يرجى تفعيله من إعدادات التطبيق أو المحاولة مرة أخرى.';
+
+  @override
+  String get locationPermissionPermanentlyDenied =>
+      'تم رفض إذن الموقع بشكل دائم. يرجى فتح إعدادات التطبيق والسماح بالوصول إلى الموقع أثناء استخدام التطبيق.';
+
+  @override
+  String get locationPreciseRequired =>
+      'يلزم تفعيل الموقع الدقيق للتحقق من الحضور في مقر العمل. يرجى تفعيل الموقع الدقيق من إعدادات التطبيق.';
+
+  @override
+  String get locationUnableToDetermine =>
+      'تعذر تحديد موقعك الحالي. يرجى التحقق من إعدادات الموقع والمحاولة مرة أخرى.';
+
+  @override
+  String get locationTimeout =>
+      'انتهت مهلة تحديد الموقع. يرجى الانتقال إلى مكان ذي إشارة GPS أوضح والمحاولة مرة أخرى.';
+
+  @override
+  String get locationTemporarilyUnavailable =>
+      'موقعك الحالي غير متاح مؤقتاً. يرجى الانتظار قليلاً والمحاولة مرة أخرى.';
+
+  @override
+  String get locationUnexpectedError =>
+      'حدث خطأ غير متوقع أثناء جلب موقعك. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
+  String get openAppSettings => 'فتح إعدادات التطبيق';
+
+  @override
+  String get openLocationSettings => 'تفعيل خدمات الموقع';
+
+  @override
   String get sessionExpiredWarning =>
       'انتهت الجلسة الخاصة بك. يرجى إعادة محاولة الدخول للمتابعة.';
 

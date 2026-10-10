@@ -332,6 +332,78 @@ abstract class AppLocalizations {
   /// **'Please enable GPS/location services on your device.'**
   String get locationServiceDisabled;
 
+  /// No description provided for @locationPermissionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is required to verify your workplace attendance.'**
+  String get locationPermissionRequired;
+
+  /// No description provided for @locationPermissionDeniedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission was denied. Please grant location access to verify attendance.'**
+  String get locationPermissionDeniedMessage;
+
+  /// No description provided for @locationPermissionDeniedRepeatedly.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission was denied multiple times. Please enable it in App Settings or tap retry.'**
+  String get locationPermissionDeniedRepeatedly;
+
+  /// No description provided for @locationPermissionPermanentlyDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is permanently denied. Please open App Settings and allow location access while using the app.'**
+  String get locationPermissionPermanentlyDenied;
+
+  /// No description provided for @locationPreciseRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Precise location is required to verify workplace attendance. Please enable Precise Location in App Settings.'**
+  String get locationPreciseRequired;
+
+  /// No description provided for @locationUnableToDetermine.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to determine your current location. Please check your location settings and try again.'**
+  String get locationUnableToDetermine;
+
+  /// No description provided for @locationTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Location request timed out. Please move to an area with a clearer GPS signal and try again.'**
+  String get locationTimeout;
+
+  /// No description provided for @locationTemporarilyUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Your current location is temporarily unavailable. Please wait a moment and try again.'**
+  String get locationTemporarilyUnavailable;
+
+  /// No description provided for @locationUnexpectedError.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred while retrieving your location. Please try again.'**
+  String get locationUnexpectedError;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @openAppSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open App Settings'**
+  String get openAppSettings;
+
+  /// No description provided for @openLocationSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Location Services'**
+  String get openLocationSettings;
+
   /// No description provided for @sessionExpiredWarning.
   ///
   /// In en, this message translates to:
