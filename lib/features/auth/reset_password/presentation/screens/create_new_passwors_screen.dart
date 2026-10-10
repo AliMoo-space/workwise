@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/routing/app_routes.dart';
+import 'package:workwise/features/auth/reset_password/data/Repository/reset_password_repository.dart';
 import 'package:workwise/features/auth/reset_password/presentation/cubit/reset_password_cubit.dart';
 import 'package:workwise/features/auth/reset_password/presentation/cubit/reset_password_state.dart';
 import 'package:workwise/features/auth/reset_password/presentation/widgets/reset_password_form.dart';
 import 'package:workwise/features/auth/reset_password/presentation/widgets/reset_password_header_widget.dart';
 
 class CreateNewPasswordScreen extends StatefulWidget {
-  final String email;
+  const CreateNewPasswordScreen({
+    super.key,
+    required this.resetToken,
+  });
 
-  const CreateNewPasswordScreen({super.key, required this.email});
+  final String resetToken;
 
   @override
   State<CreateNewPasswordScreen> createState() =>
@@ -27,7 +32,10 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
     final theme = Theme.of(context);
 
     return BlocProvider(
-      create: (context) => ResetPasswordCubit(),
+      create: (context) => ResetPasswordCubit(
+        resetPasswordRepository: GetIt.instance<ResetPasswordRepository>(),
+        resetToken: widget.resetToken,
+      ),
       child: BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
         listener: (context, state) {
           if (state is ResetPasswordSuccessState) {
@@ -39,6 +47,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                 backgroundColor: theme.colorScheme.tertiary,
               ),
             );
+
             context.go(AppRoutes.loginScreen);
           } else if (state is ResetPasswordErrorState) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -74,7 +83,9 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                   children: [
                     const ResetPasswordHeaderWidget(),
                     const Gap(AppSpacing.space32),
-                    ResetPasswordForm(formKey: _formKey),
+                    ResetPasswordForm(
+                      formKey: _formKey,
+                    ),
                   ],
                 ),
               ),

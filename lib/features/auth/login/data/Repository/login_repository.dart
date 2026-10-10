@@ -1,19 +1,20 @@
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:workwise/core/errors/failure.dart';
 import 'package:workwise/core/network/network_info.dart';
 import 'package:workwise/core/storage/secure_storage.dart';
 import 'package:workwise/features/auth/login/data/models/login_response_model.dart';
-import 'package:workwise/features/auth/login/data/web_services/auth_api_service.dart';
+import 'package:workwise/features/auth/login/data/web_services/login_api_service.dart';
 
-class AuthRepository {
-  AuthRepository({
-    required this.authApiService,
+class LoginRepository {
+  LoginRepository({
+    required this.loginApiService,
     required this.networkInfo,
     required this.secureStorage,
   });
 
-  final AuthApiService authApiService;
+  final LoginApiService loginApiService;
   final NetworkInfo networkInfo;
   final SecureStorage secureStorage;
 
@@ -22,7 +23,7 @@ class AuthRepository {
     required String password,
   }) async {
     try {
-      final response = await authApiService.login(
+      final response = await loginApiService.login(
         email: email,
         password: password,
       );
@@ -32,20 +33,27 @@ class AuthRepository {
       if (response.statusCode == 200) {
         final loginModel = LoginResponseModel.fromJson(responseData);
 
-        await secureStorage.saveAccessToken(loginModel.data.accessToken);
+        await secureStorage.saveAccessToken(
+          loginModel.data.accessToken,
+        );
 
         return Right(loginModel);
       }
 
       return Left(
         ServerFailure(
-          responseData['message']?.toString() ?? 'Something went wrong.',
+          responseData['message']?.toString() ??
+              'Something went wrong.',
         ),
       );
     } on DioException catch (e) {
       return Left(_mapDioException(e));
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      return Left(
+        ServerFailure(
+          e.toString(),
+        ),
+      );
     }
   }
 
@@ -55,35 +63,56 @@ class AuthRepository {
         return const NetworkFailure(
           'Unable to connect to the server. Please check your internet connection and try again.',
         );
+
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
         return const NetworkFailure(
           'Connection timed out. Please check your internet connection and try again.',
         );
+
       default:
         break;
     }
+
     final response = exception.response;
+
     if (response != null) {
       final data = response.data;
+
       if (data is Map<String, dynamic>) {
         final message = data['message']?.toString();
+
         switch (response.statusCode) {
           case 403:
-            return UnauthorizedFailure(message ?? 'Your account is inactive.');
+            return UnauthorizedFailure(
+              message ?? 'Your account is inactive.',
+            );
+
           case 422:
             return ValidationFailure(
               message ?? 'The provided credentials are invalid.',
             );
+
           case 429:
-            return ServerFailure(message ?? 'Too many login attempts.');
+            return ServerFailure(
+              message ?? 'Too many login attempts.',
+            );
+
           case 500:
-            return ServerFailure(message ?? 'Something went wrong.');
+            return ServerFailure(
+              message ?? 'Something went wrong.',
+            );
         }
-        return ServerFailure(message ?? 'Something went wrong.');
+
+        return ServerFailure(
+           'Something went wrong.',
+        );
       }
     }
-    return NetworkFailure(exception.message ?? 'Network error occurred.');
+
+    return NetworkFailure(
+      exception.message ?? 'Network error occurred.',
+    );
   }
 }

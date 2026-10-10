@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:workwise/core/network/api_consumer.dart';
 import 'package:workwise/core/network/endpoints/api_endpoints.dart';
 
-class AuthApiService {
-  AuthApiService(this._apiConsumer);
+class LoginApiService {
+  LoginApiService(this._apiConsumer);
 
   final ApiConsumer _apiConsumer;
 

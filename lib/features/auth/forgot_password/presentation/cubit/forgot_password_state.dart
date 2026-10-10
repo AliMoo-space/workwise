@@ -2,35 +2,46 @@ abstract class ForgotPasswordState {}
 
 class ForgotPasswordInitialState extends ForgotPasswordState {}
 
-// --- حالات إرسال كود الـ OTP للبريد الإلكتروني ---
 class SendOtpLoadingState extends ForgotPasswordState {}
 
 class SendOtpSuccessState extends ForgotPasswordState {
-  final String email;
   SendOtpSuccessState(this.email);
+
+  final String email;
 }
 
 class SendOtpErrorState extends ForgotPasswordState {
-  final String message;
   SendOtpErrorState(this.message);
+
+  final String message;
 }
 
-// --- حالات التحقق من كود الـ OTP ---
+
 class VerifyOtpLoadingState extends ForgotPasswordState {}
 
-class VerifyOtpSuccessState extends ForgotPasswordState {}
+class VerifyOtpSuccessState extends ForgotPasswordState {
+  VerifyOtpSuccessState(this.resetToken);
 
-class VerifyOtpErrorState extends ForgotPasswordState {
-  final String message;
-  VerifyOtpErrorState(this.message);
+  final String resetToken;
 }
 
-// --- حالات إعادة إرسال الكود ---
+class VerifyOtpErrorState extends ForgotPasswordState {
+  VerifyOtpErrorState(this.message);
+
+  final String message;
+}
+
+
 class ResendOtpLoadingState extends ForgotPasswordState {}
 
-class ResendOtpSuccessState extends ForgotPasswordState {}
+class ResendOtpSuccessState extends ForgotPasswordState {
+  ResendOtpSuccessState(this.message);
+
+  final String message;
+}
 
 class ResendOtpErrorState extends ForgotPasswordState {
-  final String message;
   ResendOtpErrorState(this.message);
+
+  final String message;
 }

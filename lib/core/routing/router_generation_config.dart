@@ -54,11 +54,11 @@ class RouterGenerationConfig {
         name: AppRoutes.createNewPasswordScreen,
         path: AppRoutes.createNewPasswordScreen,
         pageBuilder: (context, state) {
-          final email = state.extra as String? ?? '';
+          final resetToken = state.extra as String? ?? '';
 
           return slideTransitionPage(
             state: state,
-            child: CreateNewPasswordScreen(email: email),
+            child: CreateNewPasswordScreen(resetToken: resetToken),
           );
         },
       ),

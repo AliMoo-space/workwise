@@ -25,6 +25,25 @@ class SecureStorage {
     );
   }
 
+  Future<void> saveBiometricToken(String token) {
+    return _storage.write(
+      key: StorageKeys.biometricToken,
+      value: token,
+    );
+  }
+
+  Future<String?> getBiometricToken() {
+    return _storage.read(
+      key: StorageKeys.biometricToken,
+    );
+  }
+
+  Future<void> removeBiometricToken() {
+    return _storage.delete(
+      key: StorageKeys.biometricToken,
+    );
+  }
+
   Future<void> clearSession() async {
     await _storage.delete(
       key: StorageKeys.accessToken,

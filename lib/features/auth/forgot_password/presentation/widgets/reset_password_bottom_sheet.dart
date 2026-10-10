@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workwise/core/design_system/spacing/app_radius.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
@@ -11,12 +12,12 @@ import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/core/utils/app_validator.dart';
+import 'package:workwise/features/auth/forgot_password/data/Repository/forgot_password_repository.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/cubit/forgot_password_cubit.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/cubit/forgot_password_state.dart';
 
 class ResetPasswordBottomSheet extends StatefulWidget {
   const ResetPasswordBottomSheet({super.key});
-
   static Future<void> show(BuildContext context) {
     return showModalBottomSheet(
       context: context,
@@ -28,7 +29,9 @@ class ResetPasswordBottomSheet extends StatefulWidget {
       ),
       backgroundColor: Theme.of(context).colorScheme.surface,
       builder: (context) => BlocProvider(
-        create: (context) => ForgotPasswordCubit(),
+        create: (context) => ForgotPasswordCubit(
+          forgotPasswordRepository: GetIt.instance<ForgotPasswordRepository>(),
+        ),
         child: const ResetPasswordBottomSheet(),
       ),
     );
@@ -41,27 +44,15 @@ class ResetPasswordBottomSheet extends StatefulWidget {
 
 class _ResetPasswordBottomSheetState extends State<ResetPasswordBottomSheet> {
   final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ForgotPasswordCubit>();
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
-
     return BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
       listener: (context, state) {
         if (state is SendOtpSuccessState) {
           Navigator.pop(context);
-          context.push(
-            AppRoutes.otpVerificationScreen,
-            extra: state.email,
-          );
-        } else if (state is SendOtpErrorState) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.message),
-              backgroundColor: Theme.of(context).colorScheme.error,
-            ),
-          );
+          context.push(AppRoutes.otpVerificationScreen, extra: state.email);
         }
       },
       builder: (context, state) {
@@ -89,16 +80,15 @@ class _ResetPasswordBottomSheetState extends State<ResetPasswordBottomSheet> {
                   ),
                 ),
                 const Gap(AppSpacing.space16),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AppText(
                       context.l10n.resetPasswordTitle,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Theme.of(context).colorScheme.onSurface,
-                          ),
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                     ),
                     IconButton(
                       onPressed: () => Navigator.pop(context),
@@ -109,15 +99,13 @@ class _ResetPasswordBottomSheetState extends State<ResetPasswordBottomSheet> {
                     ),
                   ],
                 ),
-
                 AppText(
                   context.l10n.resetPasswordDescription,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      ),
+                    color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 const Gap(AppSpacing.space20),
-
                 AppTextField(
                   controller: cubit.emailController,
                   label: context.l10n.workEmail,
@@ -129,8 +117,17 @@ class _ResetPasswordBottomSheetState extends State<ResetPasswordBottomSheet> {
                     invalidMessage: context.l10n.invalidEmailFormatMessage,
                   ),
                 ),
+                if (state is SendOtpErrorState) ...[
+                  const Gap(AppSpacing.space8),
+                  AppText(
+                    state.message,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(context).colorScheme.error,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
                 const Gap(AppSpacing.space24),
-
                 AppButton(
                   text: context.l10n.sendResetLink,
                   height: 50.h,

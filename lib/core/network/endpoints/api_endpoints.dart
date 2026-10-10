@@ -4,6 +4,9 @@ abstract final class ApiEndpoints {
   static const String register = '/auth/register';
   static const String refreshToken = '/auth/refresh-token';
   static const String logout = '/auth/logout';
+  static const String toggleBiometrics = '/api/auth/toggle-biometrics';
+
+  static const String biometricLogin = '/api/auth/biometric-login';
 
   // Forgot Password
   static const String forgetPassword = '/api/auth/forget-password';

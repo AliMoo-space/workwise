@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
 import 'package:workwise/core/design_system/spacing/app_radius.dart';
@@ -10,19 +11,23 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/routing/app_routes.dart';
+import 'package:workwise/features/auth/forgot_password/data/Repository/forgot_password_repository.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/cubit/forgot_password_cubit.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/cubit/forgot_password_state.dart';
-
 import 'package:workwise/features/auth/forgot_password/presentation/widgets/otp_header_widget.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/widgets/otp_resend_section.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
+  const OtpVerificationScreen({
+    super.key,
+    required this.email,
+  });
+
   final String email;
 
-  const OtpVerificationScreen({super.key, required this.email});
-
   @override
-  State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
+  State<OtpVerificationScreen> createState() =>
+      _OtpVerificationScreenState();
 }
 
 class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
@@ -37,23 +42,31 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   void _startTimer() {
+    _timer?.cancel();
+
     setState(() {
       _startSeconds = 60;
       _canResend = false;
     });
-    _timer?.cancel();
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (_startSeconds == 0) {
-        setState(() {
-          _timer?.cancel();
-          _canResend = true;
-        });
-      } else {
-        setState(() {
-          _startSeconds--;
-        });
-      }
-    });
+
+    _timer = Timer.periodic(
+      const Duration(seconds: 1),
+      (timer) {
+        if (_startSeconds == 0) {
+          timer.cancel();
+
+          if (mounted) {
+            setState(() {
+              _canResend = true;
+            });
+          }
+        } else if (mounted) {
+          setState(() {
+            _startSeconds--;
+          });
+        }
+      },
+    );
   }
 
   @override
@@ -75,45 +88,71 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       ),
       decoration: BoxDecoration(
         color: theme.colorScheme.surfaceContainerLow,
-        borderRadius: BorderRadius.circular(AppRadius.radius12),
-        border: Border.all(color: theme.colorScheme.outlineVariant),
+        borderRadius: BorderRadius.circular(
+          AppRadius.radius12,
+        ),
+        border: Border.all(
+          color: theme.colorScheme.outlineVariant,
+        ),
       ),
     );
 
     final focusedPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
-        border: Border.all(color: theme.colorScheme.primary, width: 2.w),
+        border: Border.all(
+          color: theme.colorScheme.primary,
+          width: 2.w,
+        ),
       ),
     );
 
     final errorPinTheme = defaultPinTheme.copyWith(
       decoration: defaultPinTheme.decoration?.copyWith(
-        border: Border.all(color: theme.colorScheme.error, width: 2.w),
+        border: Border.all(
+          color: theme.colorScheme.error,
+          width: 2.w,
+        ),
       ),
     );
 
     return BlocProvider(
-      create: (context) => ForgotPasswordCubit(),
+      create: (context) => ForgotPasswordCubit(
+        forgotPasswordRepository:
+            GetIt.instance<ForgotPasswordRepository>(),
+        email: widget.email,
+      ),
       child: BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
         listener: (context, state) {
           if (state is VerifyOtpSuccessState) {
             context.push(
               AppRoutes.createNewPasswordScreen,
-              extra: widget.email,
+              extra: state.resetToken,
             );
           } else if (state is ResendOtpSuccessState) {
             _startTimer();
+
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('Verification code resent to ${widget.email}'),
+                content: Text(
+                  state.message,
+                ),
                 backgroundColor: theme.colorScheme.tertiary,
+              ),
+            );
+          } else if (state is ResendOtpErrorState) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: theme.colorScheme.error,
               ),
             );
           }
         },
         builder: (context, state) {
           final cubit = context.read<ForgotPasswordCubit>();
-          final isError = state is VerifyOtpErrorState;
+
+          final isVerifyError = state is VerifyOtpErrorState;
+          final isResendLoading = state is ResendOtpLoadingState;
 
           return Scaffold(
             backgroundColor: theme.colorScheme.surface,
@@ -137,7 +176,10 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    OtpHeaderWidget(email: widget.email),
+                    OtpHeaderWidget(
+                      email: widget.email,
+                    ),
+
                     const Gap(AppSpacing.space32),
 
                     Pinput(
@@ -146,13 +188,14 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       defaultPinTheme: defaultPinTheme,
                       focusedPinTheme: focusedPinTheme,
                       errorPinTheme: errorPinTheme,
-                      forceErrorState: isError,
+                      forceErrorState: isVerifyError,
+                      enabled: !isResendLoading,
                     ),
 
-                    if (isError) ...[
+                    if (isVerifyError) ...[
                       const Gap(AppSpacing.space12),
                       AppText(
-                        (state).message,
+                        state.message,
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: theme.colorScheme.error,
                           fontWeight: FontWeight.w500,
@@ -163,7 +206,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                     const Gap(AppSpacing.space32),
 
                     OtpResendSection(
-                      canResend: _canResend,
+                      canResend: _canResend && !isResendLoading,
                       startSeconds: _startSeconds,
                       onResend: () => cubit.resendOtp(),
                     ),
@@ -174,7 +217,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       text: 'Verify Code',
                       height: 52.h,
                       isLoading: state is VerifyOtpLoadingState,
-                      onPressed: () => cubit.verifyOtp(),
+                      onPressed: isResendLoading
+                          ? null
+                          : () => cubit.verifyOtp(),
                     ),
                   ],
                 ),

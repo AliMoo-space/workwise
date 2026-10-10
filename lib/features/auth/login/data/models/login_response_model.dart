@@ -1,3 +1,5 @@
+import 'package:workwise/core/utils/json_helper.dart';
+
 class LoginResponseModel {
   const LoginResponseModel({
     required this.success,
@@ -11,10 +13,10 @@ class LoginResponseModel {
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) {
     return LoginResponseModel(
-      success: json['success'] as bool,
-      message: json['message'] as String,
+      success: JsonHelper.required<bool>(json, 'success'),
+      message: JsonHelper.required<String>(json, 'message'),
       data: LoginDataModel.fromJson(
-        json['data'] as Map<String, dynamic>,
+        JsonHelper.required<Map<String, dynamic>>(json, 'data'),
       ),
     );
   }
@@ -35,11 +37,11 @@ class LoginDataModel {
 
   factory LoginDataModel.fromJson(Map<String, dynamic> json) {
     return LoginDataModel(
-      accessToken: json['access_token'] as String,
-      tokenType: json['token_type'] as String,
-      expiresIn: json['expires_in'] as String,
+      accessToken: JsonHelper.required<String>(json, 'access_token'),
+      tokenType: JsonHelper.required<String>(json, 'token_type'),
+      expiresIn: JsonHelper.required<String>(json, 'expires_in'),
       user: LoginUserModel.fromJson(
-        json['user'] as Map<String, dynamic>,
+        JsonHelper.required<Map<String, dynamic>>(json, 'user'),
       ),
     );
   }
@@ -68,40 +70,73 @@ class LoginUserModel {
   final int id;
   final String name;
   final String email;
+
   final String? phone;
-  final String employeeCode;
-  final String jobTitle;
-  final String employmentType;
-  final String startDate;
+
+  final String? employeeCode;
+  final String? jobTitle;
+  final String? employmentType;
+  final String? startDate;
+
   final String status;
+
   final String? address;
   final String? avatarUrl;
+
   final String role;
   final String roleLabel;
   final String locale;
+
   final List<String> permissions;
+
   final String createdAt;
 
   factory LoginUserModel.fromJson(Map<String, dynamic> json) {
+    final permissionsJson = JsonHelper.required<List<dynamic>>(
+      json,
+      'permissions',
+    );
+
     return LoginUserModel(
-      id: json['id'] as int,
-      name: json['name'] as String,
-      email: json['email'] as String,
-      phone: json['phone'] as String?,
-      employeeCode: json['employee_code'] as String,
-      jobTitle: json['job_title'] as String,
-      employmentType: json['employment_type'] as String,
-      startDate: json['start_date'] as String,
-      status: json['status'] as String,
-      address: json['address'] as String?,
-      avatarUrl: json['avatar_url'] as String?,
-      role: json['role'] as String,
-      roleLabel: json['role_label'] as String,
-      locale: json['locale'] as String,
-      permissions: List<String>.from(
-        json['permissions'] as List,
+      id: JsonHelper.required<int>(json, 'id'),
+      name: JsonHelper.required<String>(json, 'name'),
+      email: JsonHelper.required<String>(json, 'email'),
+
+      phone: JsonHelper.optional<String>(json, 'phone'),
+
+      employeeCode: JsonHelper.optional<String>(
+        json,
+        'employee_code',
       ),
-      createdAt: json['created_at'] as String,
+      jobTitle: JsonHelper.optional<String>(
+        json,
+        'job_title',
+      ),
+      employmentType: JsonHelper.optional<String>(
+        json,
+        'employment_type',
+      ),
+      startDate: JsonHelper.optional<String>(
+        json,
+        'start_date',
+      ),
+
+      status: JsonHelper.required<String>(json, 'status'),
+
+      address: JsonHelper.optional<String>(json, 'address'),
+      avatarUrl: JsonHelper.optional<String>(json, 'avatar_url'),
+
+      role: JsonHelper.required<String>(json, 'role'),
+      roleLabel: JsonHelper.required<String>(json, 'role_label'),
+      locale: JsonHelper.required<String>(json, 'locale'),
+
+      permissions: permissionsJson
+          .map(
+            (permission) => permission as String,
+          )
+          .toList(),
+
+      createdAt: JsonHelper.required<String>(json, 'created_at'),
     );
   }
 }
