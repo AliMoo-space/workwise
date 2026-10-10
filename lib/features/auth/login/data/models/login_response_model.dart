@@ -71,7 +71,14 @@ class LoginUserModel {
   final String name;
   final String email;
 
+
   final String? phone;
+
+  final String? employeeCode;
+  final String? jobTitle;
+  final String? employmentType;
+  final String? startDate;
+
 
   final String? employeeCode;
   final String? jobTitle;
@@ -80,14 +87,18 @@ class LoginUserModel {
 
   final String status;
 
+
   final String? address;
   final String? avatarUrl;
+
 
   final String role;
   final String roleLabel;
   final String locale;
 
+
   final List<String> permissions;
+
 
   final String createdAt;
 

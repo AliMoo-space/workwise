@@ -1,33 +1,34 @@
-part of 'leave_history_cubit.dart';
+import 'package:equatable/equatable.dart';
+import 'package:workwise/features/leave/domain/entity/leave_history_entity.dart';
 
-sealed class LeaveHistoryState extends Equatable {
+abstract class LeaveHistoryState extends Equatable {
   const LeaveHistoryState();
 
   @override
   List<Object?> get props => [];
 }
 
-final class LeaveHistoryInitial extends LeaveHistoryState {
+class LeaveHistoryInitial extends LeaveHistoryState {
   const LeaveHistoryInitial();
 }
 
-final class LeaveHistoryLoading extends LeaveHistoryState {
+class LeaveHistoryLoading extends LeaveHistoryState {
   const LeaveHistoryLoading();
 }
 
-final class LeaveHistorySuccess extends LeaveHistoryState {
-  final List<LeaveHistory> history;
+class LeaveHistorySuccess extends LeaveHistoryState {
+  final List<LeaveHistoryEntity> leaveRequests;
 
-  const LeaveHistorySuccess({required this.history});
+  const LeaveHistorySuccess(this.leaveRequests);
 
   @override
-  List<Object?> get props => [history];
+  List<Object?> get props => [leaveRequests];
 }
 
-final class LeaveHistoryFailure extends LeaveHistoryState {
+class LeaveHistoryFailure extends LeaveHistoryState {
   final String message;
 
-  const LeaveHistoryFailure({required this.message});
+  const LeaveHistoryFailure(this.message);
 
   @override
   List<Object?> get props => [message];
