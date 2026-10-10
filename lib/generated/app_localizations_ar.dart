@@ -100,7 +100,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get checkedInAt => 'تم تسجيل الحضور الساعة ';
 
   @override
-  String get hoursWorked => 'ساعات العمل';
+  String get hoursWorked => ' ساعات العمل ';
 
   @override
   String get insideOffice => 'داخل المكتب';
@@ -559,9 +559,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
-
-  @override
-  String get logoutConfirmationMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
 
   @override
   String get preferences => 'التفضيلات';

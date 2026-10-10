@@ -281,7 +281,7 @@ abstract class AppLocalizations {
   /// No description provided for @hoursWorked.
   ///
   /// In en, this message translates to:
-  /// **'hours worked'**
+  /// **' hours worked '**
   String get hoursWorked;
 
   /// No description provided for @insideOffice.
@@ -1177,12 +1177,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to logout?'**
   String get logoutConfirmMessage;
-
-  /// No description provided for @logoutConfirmationMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to log out?'**
-  String get logoutConfirmationMessage;
 
   /// No description provided for @preferences.
   ///

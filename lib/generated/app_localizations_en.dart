@@ -100,7 +100,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get checkedInAt => 'Checked in at ';
 
   @override
-  String get hoursWorked => 'hours worked';
+  String get hoursWorked => ' hours worked ';
 
   @override
   String get insideOffice => 'Inside the office';
@@ -561,9 +561,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logoutConfirmMessage => 'Are you sure you want to logout?';
-
-  @override
-  String get logoutConfirmationMessage => 'Are you sure you want to log out?';
 
   @override
   String get preferences => 'Preferences';

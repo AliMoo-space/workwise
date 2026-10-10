@@ -37,7 +37,7 @@
   "todayAttendance": "حضور اليوم",
   "onShift": "في الدوام",
   "checkedInAt": "تم تسجيل الحضور الساعة ",
-  "hoursWorked": "ساعات العمل",
+  "hoursWorked": " ساعات العمل ",
   "insideOffice": "داخل المكتب",
   "outsideOffice": "خارج المكتب",
   "checkIn": "تسجيل الحضور",
@@ -236,7 +236,6 @@
   "profileActiveFullTime": "نشط / دوام كامل",
 
   "logoutConfirmMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
-  "logoutConfirmationMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
 
   "preferences": "التفضيلات",
   "biometricLogin": "تسجيل الدخول بالبصمة",

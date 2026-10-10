@@ -37,7 +37,7 @@
   "todayAttendance": "Today's attendance",
   "onShift": "On Shift",
   "checkedInAt": "Checked in at ",
-  "hoursWorked": "hours worked",
+  "hoursWorked": " hours worked ",
   "insideOffice": "Inside the office",
   "outsideOffice": "Outside the office",
   "checkIn": "Check In",
@@ -236,7 +236,6 @@
   "profileActiveFullTime": "Active / Full-Time",
 
   "logoutConfirmMessage": "Are you sure you want to logout?",
-  "logoutConfirmationMessage": "Are you sure you want to log out?",
 
   "preferences": "Preferences",
   "biometricLogin": "Biometric login",
