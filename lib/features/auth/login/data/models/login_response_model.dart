@@ -71,14 +71,7 @@ class LoginUserModel {
   final String name;
   final String email;
 
-
   final String? phone;
-
-  final String? employeeCode;
-  final String? jobTitle;
-  final String? employmentType;
-  final String? startDate;
-
 
   final String? employeeCode;
   final String? jobTitle;
@@ -87,18 +80,14 @@ class LoginUserModel {
 
   final String status;
 
-
   final String? address;
   final String? avatarUrl;
-
 
   final String role;
   final String roleLabel;
   final String locale;
 
-
   final List<String> permissions;
-
 
   final String createdAt;
 
@@ -115,22 +104,10 @@ class LoginUserModel {
 
       phone: JsonHelper.optional<String>(json, 'phone'),
 
-      employeeCode: JsonHelper.optional<String>(
-        json,
-        'employee_code',
-      ),
-      jobTitle: JsonHelper.optional<String>(
-        json,
-        'job_title',
-      ),
-      employmentType: JsonHelper.optional<String>(
-        json,
-        'employment_type',
-      ),
-      startDate: JsonHelper.optional<String>(
-        json,
-        'start_date',
-      ),
+      employeeCode: JsonHelper.optional<String>(json, 'employee_code'),
+      jobTitle: JsonHelper.optional<String>(json, 'job_title'),
+      employmentType: JsonHelper.optional<String>(json, 'employment_type'),
+      startDate: JsonHelper.optional<String>(json, 'start_date'),
 
       status: JsonHelper.required<String>(json, 'status'),
 
@@ -142,9 +119,7 @@ class LoginUserModel {
       locale: JsonHelper.required<String>(json, 'locale'),
 
       permissions: permissionsJson
-          .map(
-            (permission) => permission as String,
-          )
+          .map((permission) => permission as String)
           .toList(),
 
       createdAt: JsonHelper.required<String>(json, 'created_at'),

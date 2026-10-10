@@ -16,9 +16,6 @@ import 'package:workwise/core/storage/secure_storage.dart';
 // =============================================
 // Auth
 // =============================================
-
-import 'package:workwise/features/auth/login/data/Repository/auth_repository.dart';
-import 'package:workwise/features/auth/login/data/web_services/auth_api_service.dart';
 import 'package:workwise/features/auth/fingerprint/data/Repository/fingerprint_repository.dart';
 import 'package:workwise/features/auth/fingerprint/data/web_services/fingerprint_api_service.dart';
 import 'package:workwise/features/auth/fingerprint/presentation/cubit/finger_print_cubit.dart';
@@ -30,11 +27,6 @@ import 'package:workwise/features/auth/login/data/Repository/login_repository.da
 import 'package:workwise/features/auth/login/data/web_services/login_api_service.dart';
 import 'package:workwise/features/auth/login/data/web_services/permissions_api_service.dart';
 import 'package:workwise/features/auth/login/presentation/cubit/login_cubit.dart';
-
-// =============================================
-// Splash
-// =============================================
-
 
 // =============================================
 // Auth - Forgot Password
@@ -58,27 +50,18 @@ import 'package:workwise/features/splash/presentation/cubit/splash_cubit.dart';
 // =============================================
 // Leave
 // =============================================
-
-// Leave Balances
 import 'package:workwise/features/leave/data/datasourse/leave_balance_remote_data_source.dart';
 import 'package:workwise/features/leave/data/repo/leave_balance_repository_impl.dart';
 import 'package:workwise/features/leave/domain/repo/leave_balance_repository.dart';
 import 'package:workwise/features/leave/domain/usecase/get_leave_balances_use_case.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_balances/leave_balances_cubit.dart';
 
-// Leave History
-
-// =============================================
-// Leave
-// =============================================
-import 'package:workwise/features/leave/data/datasourse/leave_remote_data_source.dart';
 import 'package:workwise/features/leave/data/datasourse/leave_history_remote_data_source.dart';
 import 'package:workwise/features/leave/data/repo/leave_history_repository_impl.dart';
 import 'package:workwise/features/leave/domain/repo/leave_history_repository.dart';
 import 'package:workwise/features/leave/domain/usecase/get_leave_history_use_case.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_history/leave_history_cubit.dart';
 
-// Leave Request
 import 'package:workwise/features/leave/data/datasourse/leave_remote_data_source.dart';
 import 'package:workwise/features/leave/data/repo/leave_repository_impl.dart';
 import 'package:workwise/features/leave/domain/repo/leave_repository.dart';
@@ -88,42 +71,32 @@ import 'package:workwise/features/leave/presentation/cubit/leave_request/leave_r
 // =============================================
 // Performance
 // =============================================
-
 import 'package:workwise/features/performance/data/performance/datasources/performance_remote_data_source.dart';
 import 'package:workwise/features/performance/data/performance/repositories/performance_repository_impl.dart';
-
 import 'package:workwise/features/performance/domain/performance/repositories/performance_repository.dart';
 import 'package:workwise/features/performance/domain/performance/use_cases/get_performance_use_case.dart';
-
 import 'package:workwise/features/performance/presentation/cubit/goals/goals_cubit.dart';
 import 'package:workwise/features/performance/presentation/cubit/performance/performance_cubit.dart';
 
 // =============================================
 // Goals
 // =============================================
-
 import 'package:workwise/features/performance/data/goals/datasources/goals_remote_data_source.dart';
 import 'package:workwise/features/performance/data/goals/datasources/goal_details_remote_data_source.dart';
-
 import 'package:workwise/features/performance/data/goals/repositories/goals_repository_impl.dart';
 import 'package:workwise/features/performance/data/goals/repositories/goal_details_repository_impl.dart';
-
 import 'package:workwise/features/performance/domain/goals/repositories/goals_repository.dart';
 import 'package:workwise/features/performance/domain/goals/repositories/goal_details_repository.dart';
-
 import 'package:workwise/features/performance/domain/goals/usecases/get_goals.dart';
 import 'package:workwise/features/performance/domain/goals/usecases/get_goal_details.dart';
 
 // =============================================
 // AI Assistant - Career Coach
 // =============================================
-
 import 'package:workwise/features/AIAssistant/data/datasource/career_coach_remote_data_source.dart';
 import 'package:workwise/features/AIAssistant/data/repositories/career_coach_repository_impl.dart';
-
 import 'package:workwise/features/AIAssistant/domain/repositories/career_coach_repository.dart';
 import 'package:workwise/features/AIAssistant/domain/usecases/get_career_coach.dart';
-
 import 'package:workwise/features/AIAssistant/presentation/cubit/career_coach_cubit.dart';
 
 final sl = GetIt.instance;
@@ -174,12 +147,6 @@ Future<void> init() async {
     ).create(),
   );
 
-  sl.registerLazySingleton<ApiConsumer>(
-    () => DioConsumer(
-      sl<Dio>(),
-    ),
-  );
-
   sl.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(
       sl<InternetConnectionChecker>(),
@@ -194,7 +161,7 @@ Future<void> init() async {
   // Localization
   // =============================================
 
-  sl.registerFactory<LocaleCubit>(() => LocaleCubit(sl<SharedPreferences>()));
+  sl.registerLazySingleton<LocaleCubit>(() => LocaleCubit(sl<SharedPreferences>()));
 
   // =============================================
   // Auth - Login
@@ -220,13 +187,12 @@ Future<void> init() async {
     ),
   );
 
-sl.registerFactory<LoginCubit>(
-  () => LoginCubit(
-    loginRepository: sl<LoginRepository>(),
-    localStorage: sl<LocalStorage>(),
-  ),
-);
-
+  sl.registerFactory<LoginCubit>(
+    () => LoginCubit(
+      loginRepository: sl<LoginRepository>(),
+      localStorage: sl<LocalStorage>(),
+    ),
+  );
 
   // =============================================
   // Auth - Forgot Password
@@ -266,49 +232,44 @@ sl.registerFactory<LoginCubit>(
     ),
   );
 
+  // =============================================
+  // Auth - Fingerprint
+  // =============================================
 
-// =============================================
-// Auth - Fingerprint
-// =============================================
+  sl.registerLazySingleton<FingerprintApiService>(
+    () => FingerprintApiService(
+      sl<ApiConsumer>(),
+    ),
+  );
 
-sl.registerLazySingleton<FingerprintApiService>(
-  () => FingerprintApiService(
-    sl<ApiConsumer>(),
-  ),
-);
+  sl.registerLazySingleton<FingerprintRepository>(
+    () => FingerprintRepository(
+      fingerprintApiService: sl<FingerprintApiService>(),
+      secureStorage: sl<SecureStorage>(),
+    ),
+  );
 
-sl.registerLazySingleton<FingerprintRepository>(
-  () => FingerprintRepository(
-    fingerprintApiService: sl<FingerprintApiService>(),
-    secureStorage: sl<SecureStorage>(),
-  ),
-);
+  sl.registerFactory<FingerprintCubit>(
+    () => FingerprintCubit(
+      fingerprintRepository: sl<FingerprintRepository>(),
+    ),
+  );
 
-sl.registerFactory<FingerprintCubit>(
-  () => FingerprintCubit(
-    fingerprintRepository: sl<FingerprintRepository>(),
-  ),
-);
+  // =============================================
+  // Settings
+  // =============================================
 
-// =============================================
-// Settings
-// =============================================
+  sl.registerFactory<SettingsCubit>(
+    () => SettingsCubit(
+      fingerprintRepository: sl<FingerprintRepository>(),
+    ),
+  );
 
-sl.registerFactory<SettingsCubit>(
-  () => SettingsCubit(
-    fingerprintRepository: sl<FingerprintRepository>(),
-  ),
-);
   // =============================================
   // Splash
   // =============================================
 
   sl.registerFactory<SplashCubit>(
-    () => SplashCubit(
-      secureStorage: sl<SecureStorage>(),
-      localStorage: sl<LocalStorage>(),
-    ),
-  );
     () => SplashCubit(
       secureStorage: sl<SecureStorage>(),
       localStorage: sl<LocalStorage>(),
@@ -365,9 +326,6 @@ sl.registerFactory<SettingsCubit>(
 
   sl.registerLazySingleton<PerformanceRepository>(
     () => PerformanceRepositoryImpl(sl<PerformanceRemoteDataSource>()),
-    () => LeaveRepositoryImpl(
-      remoteDataSource: sl<LeaveRemoteDataSource>(),
-    ),
   );
 
   // =============================================
@@ -418,10 +376,6 @@ sl.registerFactory<SettingsCubit>(
 
   sl.registerLazySingleton<GetLeaveBalancesUseCase>(
     () => GetLeaveBalancesUseCase(sl<LeaveBalanceRepository>()),
-  sl.registerLazySingleton<GetLeaveBalances>(
-    () => GetLeaveBalances(
-      sl<LeaveRepository>(),
-    ),
   );
 
   sl.registerLazySingleton<GetLeaveHistoryUseCase>(
@@ -456,10 +410,6 @@ sl.registerFactory<SettingsCubit>(
 
   sl.registerLazySingleton<GetCareerCoach>(
     () => GetCareerCoach(sl<CareerCoachRepository>()),
-  sl.registerLazySingleton<GetLeaveHistory>(
-    () => GetLeaveHistory(
-      sl<LeaveHistoryRepository>(),
-    ),
   );
 
   // =============================================
@@ -474,9 +424,6 @@ sl.registerFactory<SettingsCubit>(
     () => LeaveBalancesCubit(
       getLeaveBalancesUseCase: sl<GetLeaveBalancesUseCase>(),
     ),
-    () => LeaveBalancesCubit(
-      getLeaveBalances: sl<GetLeaveBalances>(),
-    ),
   );
 
   sl.registerFactory<LeaveHistoryCubit>(
@@ -486,9 +433,6 @@ sl.registerFactory<SettingsCubit>(
   sl.registerFactory<LeaveRequestCubit>(
     () => LeaveRequestCubit(
       createLeaveRequestUseCase: sl<CreateLeaveRequestUseCase>(),
-    ),
-    () => LeaveHistoryCubit(
-      getLeaveHistory: sl<GetLeaveHistory>(),
     ),
   );
 
@@ -514,13 +458,5 @@ sl.registerFactory<SettingsCubit>(
 
   sl.registerFactory<CareerCoachCubit>(
     () => CareerCoachCubit(getCareerCoach: sl<GetCareerCoach>()),
-  // =============================================
-  // Localization
-  // =============================================
-
-  sl.registerLazySingleton<LocaleCubit>(
-    () => LocaleCubit(
-      sl<SharedPreferences>(),
-    ),
   );
 }

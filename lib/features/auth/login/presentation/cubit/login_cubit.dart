@@ -5,10 +5,6 @@ import 'package:workwise/features/auth/login/data/Repository/login_repository.da
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit({required this.authRepository, required this.localStorage})
-    : super(LoginInitialState());
-
-  final AuthRepository authRepository;
   LoginCubit({
     required this.loginRepository,
     required this.localStorage,
@@ -17,15 +13,12 @@ class LoginCubit extends Cubit<LoginState> {
   final LoginRepository loginRepository;
   final LocalStorage localStorage;
 
-
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-
   bool isPasswordHidden = true;
   bool keepMeSignedIn = false;
-
 
   void togglePasswordVisibility() {
     isPasswordHidden = !isPasswordHidden;
@@ -42,16 +35,12 @@ class LoginCubit extends Cubit<LoginState> {
       return;
     }
 
-
     emit(LoginLoadingState());
-
-    final result = await authRepository.login(
 
     final result = await loginRepository.login(
       email: emailController.text.trim(),
       password: passwordController.text,
     );
-
 
     result.fold(
       (failure) {
@@ -94,11 +83,6 @@ class LoginCubit extends Cubit<LoginState> {
           '${localStorage.getEmployeeCode()}',
         );
         debugPrint('=================================');
-
-      (_) async {
-        await localStorage.saveKeepMeSignedIn(
-          keepMeSignedIn,
-        );
 
         emit(LoginSuccessState());
       },

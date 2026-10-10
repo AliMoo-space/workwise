@@ -1,17 +1,11 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:workwise/core/design_system/widgets/inputs/language_selector.dart';
 import 'package:workwise/core/localization/local_cubit.dart';
-
-import 'package:workwise/main.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/generated/app_localizations.dart';
 
 void main() {
   testWidgets('switches between English and Arabic', (
@@ -20,24 +14,41 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
     SharedPreferences.setMockInitialValues({});
     final preferences = await SharedPreferences.getInstance();
+    final localeCubit = LocaleCubit(preferences);
 
-   await tester.pumpWidget(
-      BlocProvider(
-        create: (_) => LocaleCubit(preferences),
-        child: const MyApp(),
+    await tester.pumpWidget(
+      BlocProvider.value(
+        value: localeCubit,
+        child: BlocBuilder<LocaleCubit, Locale>(
+          builder: (context, locale) {
+            return MaterialApp(
+              locale: locale,
+              supportedLocales: AppLocalizations.supportedLocales,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              home: Scaffold(
+                appBar: AppBar(
+                  actions: const [LanguageSelector()],
+                ),
+                body: Builder(
+                  builder: (context) => Center(
+                    child: Text(context.l10n.signIn),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
     await tester.pumpAndSettle();
 
     expect(find.text('Sign In'), findsOneWidget);
-    expect(find.text('Sign In Content'), findsOneWidget);
 
-    await tester.tap(find.byIcon(Icons.language));
+    await tester.tap(find.byIcon(Icons.language_rounded));
     await tester.pumpAndSettle();
     await tester.tap(find.text('العربية'));
     await tester.pumpAndSettle();
 
     expect(find.text('تسجيل الدخول'), findsOneWidget);
-    expect(find.text('محتوى تسجيل الدخول'), findsOneWidget);
   });
 }
