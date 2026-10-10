@@ -73,6 +73,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notifications => 'الإشعارات';
 
   @override
+  String get markAllNotificationsAsRead => 'تحديد كل الإشعارات كمقروءة';
+
+  @override
+  String get clearAllNotifications => 'مسح كل الإشعارات';
+
+  @override
   String get quickActions => 'إجراءات سريعة';
 
   @override
@@ -91,16 +97,35 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onShift => 'في الدوام';
 
   @override
-  String get checkedInAt => 'تم تسجيل الحضور الساعة 9:00 صباحًا';
+  String get checkedInAt => 'تم تسجيل الحضور الساعة ';
 
   @override
-  String get hoursWorked => 'ساعات العمل';
+  String get hoursWorked => ' ساعات العمل ';
 
   @override
   String get insideOffice => 'داخل المكتب';
 
   @override
+  String get outsideOffice => 'خارج المكتب';
+
+  @override
+  String get checkIn => 'تسجيل الحضور';
+
+  @override
   String get checkOut => 'تسجيل الانصراف';
+
+  @override
+  String get checkInSuccess => 'تم تسجيل الحضور بنجاح';
+
+  @override
+  String get checkOutSuccess => 'تم تسجيل الانصراف بنجاح';
+
+  @override
+  String get locationPermissionDenied => 'إذن الموقع مطلوب للتحقق من الحضور.';
+
+  @override
+  String get locationServiceDisabled =>
+      'يرجى تفعيل خدمة تحديد الموقع (GPS) على جهازك.';
 
   @override
   String get sessionExpiredWarning =>
@@ -185,6 +210,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get attendanceDescription => 'تسجيل الحضور والتحقق من الموقع والسجل';
+
+  @override
+  String get noAttendanceRecords => 'لا توجد سجلات حضور';
+
+  @override
+  String get noAttendanceRecordsMessage => 'لا توجد سجلات حضور لهذا الشهر.';
 
   @override
   String get history => 'السجل';
@@ -528,9 +559,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
-
-  @override
-  String get logoutConfirmationMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
 
   @override
   String get preferences => 'التفضيلات';

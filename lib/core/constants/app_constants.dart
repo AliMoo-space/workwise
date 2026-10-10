@@ -2,6 +2,9 @@ abstract final class AppConstants {
   const AppConstants._();
   // static const String baseUrl = 'https://hr-system.iptvdemo.serv5group.com';
   // static const String baseUrl = 'https://nontelepathically-pamphletary-cyndi.ngrok-free.dev';
+  static const String baseUrl =
+      'https://workwise-production-3941.up.railway.app';
+  // static const String baseUrl = 'https://nontelepathically-pamphletary-cyndi.ngrok-free.dev';
   // static const String baseUrl = 'https://nontelepathically-pamphletary-cyndi.ngrok-free.dev';
   static const String baseUrl = 'https://workwise-production-3941.up.railway.app/';
 
@@ -15,4 +18,5 @@ abstract final class AppConstants {
   static const int maxImageSizeInMb = 5;
 
   static const String defaultLanguage = 'en';
+
 }

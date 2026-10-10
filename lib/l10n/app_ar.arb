@@ -26,6 +26,8 @@
 
   "homeScreen": "الرئيسية",
   "notifications": "الإشعارات",
+  "markAllNotificationsAsRead": "تحديد كل الإشعارات كمقروءة",
+  "clearAllNotifications": "مسح كل الإشعارات",
   "quickActions": "إجراءات سريعة",
 
   "quickSignIn": "تسجيل دخول سريع",
@@ -34,10 +36,16 @@
 
   "todayAttendance": "حضور اليوم",
   "onShift": "في الدوام",
-  "checkedInAt": "تم تسجيل الحضور الساعة 9:00 صباحًا",
-  "hoursWorked": "ساعات العمل",
+  "checkedInAt": "تم تسجيل الحضور الساعة ",
+  "hoursWorked": " ساعات العمل ",
   "insideOffice": "داخل المكتب",
+  "outsideOffice": "خارج المكتب",
+  "checkIn": "تسجيل الحضور",
   "checkOut": "تسجيل الانصراف",
+  "checkInSuccess": "تم تسجيل الحضور بنجاح",
+  "checkOutSuccess": "تم تسجيل الانصراف بنجاح",
+  "locationPermissionDenied": "إذن الموقع مطلوب للتحقق من الحضور.",
+  "locationServiceDisabled": "يرجى تفعيل خدمة تحديد الموقع (GPS) على جهازك.",
 
   "sessionExpiredWarning": "انتهت الجلسة الخاصة بك. يرجى إعادة محاولة الدخول للمتابعة.",
   "invalidCredentialsWarning": "بيانات الدخول غير صحيحة. يرجى المحاولة مرة أخرى.",
@@ -72,6 +80,8 @@
 
   "attendance": "الحضور",
   "attendanceDescription": "تسجيل الحضور والتحقق من الموقع والسجل",
+  "noAttendanceRecords": "لا توجد سجلات حضور",
+  "noAttendanceRecordsMessage": "لا توجد سجلات حضور لهذا الشهر.",
   "history": "السجل",
   "june2026": "يونيو 2026",
 
@@ -226,7 +236,6 @@
   "profileActiveFullTime": "نشط / دوام كامل",
 
   "logoutConfirmMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
-  "logoutConfirmationMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
 
   "preferences": "التفضيلات",
   "biometricLogin": "تسجيل الدخول بالبصمة",

@@ -224,6 +224,18 @@ abstract class AppLocalizations {
   /// **'Notifications'**
   String get notifications;
 
+  /// No description provided for @markAllNotificationsAsRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all as read'**
+  String get markAllNotificationsAsRead;
+
+  /// No description provided for @clearAllNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all notifications'**
+  String get clearAllNotifications;
+
   /// No description provided for @quickActions.
   ///
   /// In en, this message translates to:
@@ -263,13 +275,13 @@ abstract class AppLocalizations {
   /// No description provided for @checkedInAt.
   ///
   /// In en, this message translates to:
-  /// **'Checked in at 9:00 AM'**
+  /// **'Checked in at '**
   String get checkedInAt;
 
   /// No description provided for @hoursWorked.
   ///
   /// In en, this message translates to:
-  /// **'Hours worked'**
+  /// **' hours worked '**
   String get hoursWorked;
 
   /// No description provided for @insideOffice.
@@ -278,11 +290,47 @@ abstract class AppLocalizations {
   /// **'Inside the office'**
   String get insideOffice;
 
+  /// No description provided for @outsideOffice.
+  ///
+  /// In en, this message translates to:
+  /// **'Outside the office'**
+  String get outsideOffice;
+
+  /// No description provided for @checkIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Check In'**
+  String get checkIn;
+
   /// No description provided for @checkOut.
   ///
   /// In en, this message translates to:
   /// **'Check Out'**
   String get checkOut;
+
+  /// No description provided for @checkInSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Checked in successfully'**
+  String get checkInSuccess;
+
+  /// No description provided for @checkOutSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Checked out successfully'**
+  String get checkOutSuccess;
+
+  /// No description provided for @locationPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is required to verify attendance.'**
+  String get locationPermissionDenied;
+
+  /// No description provided for @locationServiceDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enable GPS/location services on your device.'**
+  String get locationServiceDisabled;
 
   /// No description provided for @sessionExpiredWarning.
   ///
@@ -439,6 +487,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Location-validated check in and history'**
   String get attendanceDescription;
+
+  /// No description provided for @noAttendanceRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No attendance records'**
+  String get noAttendanceRecords;
+
+  /// No description provided for @noAttendanceRecordsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no attendance records for this month.'**
+  String get noAttendanceRecordsMessage;
 
   /// No description provided for @history.
   ///
@@ -1117,12 +1177,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Are you sure you want to logout?'**
   String get logoutConfirmMessage;
-
-  /// No description provided for @logoutConfirmationMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to log out?'**
-  String get logoutConfirmationMessage;
 
   /// No description provided for @preferences.
   ///

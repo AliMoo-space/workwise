@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:workwise/core/utils/location_helper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/network/api_consumer.dart';
 import 'package:workwise/core/network/api_constants.dart';
@@ -12,6 +12,29 @@ import 'package:workwise/core/network/dio_consumer.dart';
 import 'package:workwise/core/network/network_info.dart';
 import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/core/storage/secure_storage.dart';
+
+// =============================================
+// Attendance
+// =============================================
+
+import 'package:workwise/features/attendance/data/datasource/attendance_remote_data_source.dart';
+import 'package:workwise/features/attendance/data/datasource/attendance_history_remote_data_source.dart';
+import 'package:workwise/features/attendance/data/repo/attendance_history_repo_impl.dart';
+import 'package:workwise/features/attendance/data/repo/attendance_repo_impl.dart';
+import 'package:workwise/features/attendance/domain/repo/attendance_history_repo.dart';
+import 'package:workwise/features/attendance/domain/repo/attendance_repo.dart';
+import 'package:workwise/features/attendance/domain/usecases/check_in.dart';
+import 'package:workwise/features/attendance/domain/usecases/check_out.dart';
+import 'package:workwise/features/attendance/domain/usecases/get_attendance_history.dart';
+import 'package:workwise/features/attendance/domain/usecases/get_today_attendance.dart';
+import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
+import 'package:workwise/features/attendance/presentation/cubit/attendance_history_cubit.dart';
+import 'package:workwise/features/notification/data/datasource/notification_remote_data_source.dart';
+import 'package:workwise/features/notification/data/repo/notification_repository_impl.dart';
+import 'package:workwise/features/notification/domain/repo/notification_repository.dart';
+import 'package:workwise/features/notification/domain/usecases/get_notifications.dart';
+import 'package:workwise/features/notification/domain/usecases/notification_actions.dart';
+import 'package:workwise/features/notification/presentation/cubit/notification_cubit.dart';
 
 // =============================================
 // Auth
@@ -141,9 +164,8 @@ Future<void> init() async {
   sl.registerLazySingleton<Dio>(
     () => DioFactory(
       baseUrl: ApiConstants.baseUrl,
-      getToken: () async {
-        return sl<SecureStorage>().getAccessToken();
-      },
+      getToken: () => sl<SecureStorage>().getAccessToken(),
+      localStorage: sl<LocalStorage>(),
     ).create(),
   );
 
@@ -277,6 +299,23 @@ Future<void> init() async {
   );
 
   // =============================================
+  // Attendance - Data Layer
+  // =============================================
+
+  sl.registerLazySingleton<AttendanceRemoteDataSource>(
+    () => AttendanceRemoteDataSourceImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton<AttendanceRepo>(
+    () => AttendanceRepoImpl(remoteDataSource: sl()),
+  );
+  sl.registerLazySingleton<AttendanceHistoryRemoteDataSource>(
+    () => AttendanceHistoryRemoteDataSourceImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton<AttendanceHistoryRepo>(
+    () => AttendanceHistoryRepoImpl(remoteDataSource: sl()),
+  );
+
+  // =============================================
   // Leave - Data Layer
   // =============================================
 
@@ -371,6 +410,19 @@ Future<void> init() async {
   // =============================================
 
   // ---------------------------------------------
+  // Attendance
+  // ---------------------------------------------
+
+  sl.registerLazySingleton<GetTodayAttendance>(
+    () => GetTodayAttendance(attendanceRepo: sl()),
+  );
+  sl.registerLazySingleton<CheckIn>(() => CheckIn(sl()));
+  sl.registerLazySingleton<CheckOut>(() => CheckOut(sl()));
+  sl.registerLazySingleton<GetAttendanceHistory>(
+    () => GetAttendanceHistory(sl()),
+  );
+
+  // ---------------------------------------------
   // Leave
   // ---------------------------------------------
 
@@ -417,9 +469,24 @@ Future<void> init() async {
   // =============================================
 
   // ---------------------------------------------
-  // Leave
+  // Attendance
   // ---------------------------------------------
 
+  sl.registerFactory<AttendanceCubit>(
+    () => AttendanceCubit(
+      getTodayAttendance: sl(),
+      checkIn: sl(),
+      checkOut: sl(),
+      locationProvider: LocationHelper.getCurrentPosition,
+    ),
+  );
+  sl.registerFactory<AttendanceHistoryCubit>(
+    () => AttendanceHistoryCubit(getAttendanceHistory: sl()),
+  );
+
+  // ---------------------------------------------
+  // Leave
+  // ---------------------------------------------
   sl.registerFactory<LeaveBalancesCubit>(
     () => LeaveBalancesCubit(
       getLeaveBalancesUseCase: sl<GetLeaveBalancesUseCase>(),
@@ -433,6 +500,44 @@ Future<void> init() async {
   sl.registerFactory<LeaveRequestCubit>(
     () => LeaveRequestCubit(
       createLeaveRequestUseCase: sl<CreateLeaveRequestUseCase>(),
+    ),
+  );
+
+  // =============================================
+  // Notifications
+  // =============================================
+  sl.registerLazySingleton<NotificationRemoteDataSource>(
+    () => NotificationRemoteDataSourceImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton<NotificationRepository>(
+    () => NotificationRepositoryImpl(remoteDataSource: sl()),
+  );
+  sl.registerLazySingleton<GetNotifications>(
+    () => GetNotifications(sl()),
+  );
+  sl.registerLazySingleton<GetUnreadNotificationsCount>(
+    () => GetUnreadNotificationsCount(sl()),
+  );
+  sl.registerLazySingleton<MarkNotificationAsRead>(
+    () => MarkNotificationAsRead(sl()),
+  );
+  sl.registerLazySingleton<MarkAllNotificationsAsRead>(
+    () => MarkAllNotificationsAsRead(sl()),
+  );
+  sl.registerLazySingleton<ClearAllNotifications>(
+    () => ClearAllNotifications(sl()),
+  );
+  sl.registerLazySingleton<DeleteNotification>(
+    () => DeleteNotification(sl()),
+  );
+  sl.registerFactory<NotificationCubit>(
+    () => NotificationCubit(
+      getNotifications: sl(),
+      getUnreadNotificationsCount: sl(),
+      markNotificationAsRead: sl(),
+      markAllNotificationsAsRead: sl(),
+      clearAllNotifications: sl(),
+      deleteNotification: sl(),
     ),
   );
 

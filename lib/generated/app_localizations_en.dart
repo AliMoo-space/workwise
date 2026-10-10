@@ -73,6 +73,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notifications => 'Notifications';
 
   @override
+  String get markAllNotificationsAsRead => 'Mark all as read';
+
+  @override
+  String get clearAllNotifications => 'Clear all notifications';
+
+  @override
   String get quickActions => 'Quick Actions';
 
   @override
@@ -91,16 +97,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onShift => 'On Shift';
 
   @override
-  String get checkedInAt => 'Checked in at 9:00 AM';
+  String get checkedInAt => 'Checked in at ';
 
   @override
-  String get hoursWorked => 'Hours worked';
+  String get hoursWorked => ' hours worked ';
 
   @override
   String get insideOffice => 'Inside the office';
 
   @override
+  String get outsideOffice => 'Outside the office';
+
+  @override
+  String get checkIn => 'Check In';
+
+  @override
   String get checkOut => 'Check Out';
+
+  @override
+  String get checkInSuccess => 'Checked in successfully';
+
+  @override
+  String get checkOutSuccess => 'Checked out successfully';
+
+  @override
+  String get locationPermissionDenied =>
+      'Location permission is required to verify attendance.';
+
+  @override
+  String get locationServiceDisabled =>
+      'Please enable GPS/location services on your device.';
 
   @override
   String get sessionExpiredWarning =>
@@ -184,6 +210,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get attendanceDescription => 'Location-validated check in and history';
+
+  @override
+  String get noAttendanceRecords => 'No attendance records';
+
+  @override
+  String get noAttendanceRecordsMessage =>
+      'There are no attendance records for this month.';
 
   @override
   String get history => 'History';
@@ -528,9 +561,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logoutConfirmMessage => 'Are you sure you want to logout?';
-
-  @override
-  String get logoutConfirmationMessage => 'Are you sure you want to log out?';
 
   @override
   String get preferences => 'Preferences';

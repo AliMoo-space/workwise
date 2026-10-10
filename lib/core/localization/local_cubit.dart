@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:workwise/core/constants/storage_keys.dart';
 
 class LocaleCubit extends Cubit<Locale> {
   LocaleCubit(SharedPreferences preferences)
-    : _preferences = preferences,
-      super(_localeFromCode(preferences.getString(_localeKey)));
+      : _preferences = preferences,
+        super(
+          _localeFromCode(
+            preferences.getString(StorageKeys.locale),
+          ),
+        );
 
-  static const _localeKey = 'locale';
   final SharedPreferences _preferences;
 
   Future<void> setLocale(Locale locale) async {
@@ -16,7 +20,11 @@ class LocaleCubit extends Cubit<Locale> {
     }
 
     emit(locale);
-    await _preferences.setString(_localeKey, locale.languageCode);
+
+    await _preferences.setString(
+      StorageKeys.locale,
+      locale.languageCode,
+    );
   }
 
   static Locale _localeFromCode(String? languageCode) {
@@ -29,5 +37,8 @@ class LocaleCubit extends Cubit<Locale> {
     return _supportedLanguageCodes.contains(locale.languageCode);
   }
 
-  static const _supportedLanguageCodes = <String>{'en', 'ar'};
+  static const _supportedLanguageCodes = <String>{
+    'en',
+    'ar',
+  };
 }

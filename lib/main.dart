@@ -10,10 +10,18 @@ import 'package:workwise/generated/app_localizations.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
-  runApp(BlocProvider(create: (_) => sl<LocaleCubit>(), child: const MyApp()));
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => sl<LocaleCubit>()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
+  
   const MyApp({super.key});
 
   @override
