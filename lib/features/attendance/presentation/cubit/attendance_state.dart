@@ -34,25 +34,60 @@ final class AttendanceSuccess extends AttendanceState {
 }
 
 final class AttendanceFailure extends AttendanceState {
-  const AttendanceFailure(this.message);
+  const AttendanceFailure(
+    this.message, {
+    this.locationErrorType,
+    this.permissionState,
+  });
 
   final String message;
+  final LocationErrorType? locationErrorType;
+  final LocationPermissionState? permissionState;
+
+  bool get isLocationError => locationErrorType != null;
+
+  bool get canOpenAppSettings => locationErrorType?.canOpenAppSettings ?? false;
+
+  bool get canOpenLocationSettings =>
+      locationErrorType?.canOpenLocationSettings ?? false;
+
+  String localizedMessage(AppLocalizations l10n) =>
+      locationErrorType?.localizedMessage(l10n) ?? message;
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [message, ?locationErrorType, ?permissionState];
 }
 
 final class AttendanceActionFailure extends AttendanceState {
   const AttendanceActionFailure({
     required this.message,
     required this.attendance,
+    this.locationErrorType,
+    this.permissionState,
   });
 
   final String message;
   final AttendanceEntity attendance;
+  final LocationErrorType? locationErrorType;
+  final LocationPermissionState? permissionState;
+
+  bool get isLocationError => locationErrorType != null;
+
+  bool get canOpenAppSettings => locationErrorType?.canOpenAppSettings ?? false;
+
+  bool get canOpenLocationSettings =>
+      locationErrorType?.canOpenLocationSettings ?? false;
+
+  String localizedMessage(AppLocalizations l10n) =>
+      locationErrorType?.localizedMessage(l10n) ?? message;
 
   @override
-  List<Object> get props => [message, attendance];
+  List<Object> get props => [
+    message,
+    attendance,
+    ?locationErrorType,
+    ?permissionState,
+  ];
 }
 
 final class AttendanceActionSuccess extends AttendanceState {

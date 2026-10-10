@@ -129,6 +129,51 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please enable GPS/location services on your device.';
 
   @override
+  String get locationPermissionRequired =>
+      'Location permission is required to verify your workplace attendance.';
+
+  @override
+  String get locationPermissionDeniedMessage =>
+      'Location permission was denied. Please grant location access to verify attendance.';
+
+  @override
+  String get locationPermissionDeniedRepeatedly =>
+      'Location permission was denied multiple times. Please enable it in App Settings or tap retry.';
+
+  @override
+  String get locationPermissionPermanentlyDenied =>
+      'Location permission is permanently denied. Please open App Settings and allow location access while using the app.';
+
+  @override
+  String get locationPreciseRequired =>
+      'Precise location is required to verify workplace attendance. Please enable Precise Location in App Settings.';
+
+  @override
+  String get locationUnableToDetermine =>
+      'Unable to determine your current location. Please check your location settings and try again.';
+
+  @override
+  String get locationTimeout =>
+      'Location request timed out. Please move to an area with a clearer GPS signal and try again.';
+
+  @override
+  String get locationTemporarilyUnavailable =>
+      'Your current location is temporarily unavailable. Please wait a moment and try again.';
+
+  @override
+  String get locationUnexpectedError =>
+      'An unexpected error occurred while retrieving your location. Please try again.';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get openAppSettings => 'Open App Settings';
+
+  @override
+  String get openLocationSettings => 'Enable Location Services';
+
+  @override
   String get sessionExpiredWarning =>
       'Your session has expired. Please try again to continue.';
 

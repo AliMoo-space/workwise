@@ -478,6 +478,8 @@ Future<void> init() async {
       checkIn: sl(),
       checkOut: sl(),
       locationProvider: LocationHelper.getCurrentPosition,
+      locationAcquirer: LocationHelper.acquireCurrentLocation,
+      locationStatusChecker: LocationHelper.checkLocationStatus,
     ),
   );
   sl.registerFactory<AttendanceHistoryCubit>(
@@ -512,9 +514,7 @@ Future<void> init() async {
   sl.registerLazySingleton<NotificationRepository>(
     () => NotificationRepositoryImpl(remoteDataSource: sl()),
   );
-  sl.registerLazySingleton<GetNotifications>(
-    () => GetNotifications(sl()),
-  );
+  sl.registerLazySingleton<GetNotifications>(() => GetNotifications(sl()));
   sl.registerLazySingleton<GetUnreadNotificationsCount>(
     () => GetUnreadNotificationsCount(sl()),
   );
@@ -527,9 +527,7 @@ Future<void> init() async {
   sl.registerLazySingleton<ClearAllNotifications>(
     () => ClearAllNotifications(sl()),
   );
-  sl.registerLazySingleton<DeleteNotification>(
-    () => DeleteNotification(sl()),
-  );
+  sl.registerLazySingleton<DeleteNotification>(() => DeleteNotification(sl()));
   sl.registerFactory<NotificationCubit>(
     () => NotificationCubit(
       getNotifications: sl(),
