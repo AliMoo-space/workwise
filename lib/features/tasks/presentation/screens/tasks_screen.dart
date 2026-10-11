@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
@@ -108,8 +109,31 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
               Expanded(
                 child: BlocBuilder<TasksCubit, TasksState>(
                   builder: (context, state) {
-                    if (state is TasksLoading && state is! TasksLoaded) {
-                      return const Center(child: CircularProgressIndicator());
+                    if (state is TasksLoading) {
+                      return Skeletonizer(
+                        enabled: true,
+                        effect: const ShimmerEffect(
+                          baseColor: Color(0xFFEDF1F4),
+                          highlightColor: Color(0xFFF9FAFB),
+                          duration: Duration(milliseconds: 1600),
+                        ),
+                        child: ListView.separated(
+                          itemCount: 5,
+                          separatorBuilder: (_, _) => Gap(12.h),
+                          itemBuilder: (_, _) => TaskCard(
+                            task: Task(
+                              id: '1234',
+                              title: 'Task title placeholder',
+                              managerName: 'Manager name',
+                              priority: TaskPriority.medium,
+                              deadline: DateTime(2025, 1, 1),
+                              progress: 65,
+                              status: TaskStatus.inProgress,
+                            ),
+                            onTap: () {},
+                          ),
+                        ),
+                      );
                     }
 
                     if (state is TasksError) {
