@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
@@ -8,7 +9,7 @@ import 'package:workwise/core/design_system/widgets/feedback/app_snack_bar.dart'
 import 'package:workwise/core/design_system/widgets/inputs/app_text_field.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
-import '../../data/static_tasks_data.dart';
+import 'package:workwise/features/tasks/presentation/cubit/tasks_cubit.dart';
 import '../../domain/models/task_models.dart';
 import '../widgets/attachment_uploader.dart';
 import '../widgets/custom_widgets/priority_badge.dart';
@@ -46,18 +47,65 @@ class TaskSubmissionScreen extends StatelessWidget {
   Future<void> _submitForReview(BuildContext context) async {
     _isSubmitting.value = true;
 
-    await Future.delayed(const Duration(milliseconds: 600));
+    final taskId = int.tryParse(task.id);
+    if (taskId == null) {
+      _isSubmitting.value = false;
+      if (context.mounted) {
+        AppSnackBar.error(context, message: context.l10n.invalidTaskId);
+      }
+      return;
+    }
 
-    StaticTasksData.updateTask(
-      task.id,
-      _draftProgress.value,
-      TaskStatus.underReview,
+    // التحقق من الملاحظة
+    if (_notesController.text.trim().isEmpty) {
+      _isSubmitting.value = false;
+      if (context.mounted) {
+        AppSnackBar.error(context, message: context.l10n.addNoteBeforeSubmit);
+      }
+      return;
+    }
+
+    // جمع file paths من الـ attachments
+    final filePaths = _attachments.value
+        .where((attachment) => attachment.localPath != null && attachment.localPath!.isNotEmpty)
+        .map((attachment) => attachment.localPath!)
+        .toList();
+
+    // إظهار رسالة أثناء الرفع
+    if (context.mounted && filePaths.isNotEmpty) {
+      AppSnackBar.info(context, message: context.l10n.uploadingFiles);
+    }
+
+    // تحديث نسبة الإنجاز إذا تم تغييرها
+    if (_draftProgress.value != task.progress) {
+      await context.read<TasksCubit>().updateTaskProgress(
+        taskId: taskId,
+        progress: _draftProgress.value,
+      );
+    }
+
+    if (!context.mounted) return;
+
+    // استدعاء الـ API
+    final (success, errorMessage) = await context.read<TasksCubit>().submitTask(
+      taskId: taskId,
+      note: _notesController.text.trim(),
+      filePaths: filePaths.isNotEmpty ? filePaths : null,
     );
 
+    _isSubmitting.value = false;
+
     if (context.mounted) {
-      AppSnackBar.success(context, message: context.l10n.taskSubmittedSuccess);
-      Navigator.of(context).pop();
-      onSubmitted?.call();
+      if (success) {
+        AppSnackBar.success(context, message: context.l10n.taskSubmittedSuccess);
+        Navigator.of(context).pop();
+        onSubmitted?.call();
+      } else {
+        AppSnackBar.error(
+          context,
+          message: errorMessage ?? context.l10n.taskSubmitFailed,
+        );
+      }
     }
   }
 
@@ -72,9 +120,9 @@ class TaskSubmissionScreen extends StatelessWidget {
             return ValueListenableBuilder<bool>(
               valueListenable: _isSubmitting,
               builder: (context, isSubmitting, _) {
-                return Material(
-                  color: AppColors.onPrimary,
-                  child: SafeArea(
+                return Scaffold(
+                  backgroundColor: AppColors.onPrimary,
+                  body: SafeArea(
                     top: false,
                     child: Column(
                       children: [

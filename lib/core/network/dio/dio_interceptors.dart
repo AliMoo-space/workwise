@@ -39,18 +39,12 @@ class DioInterceptors extends Interceptor {
   }
 
   @override
-  void onResponse(
-    Response response,
-    ResponseInterceptorHandler handler,
-  ) {
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
     handler.next(response);
   }
 
   @override
-  void onError(
-    DioException err,
-    ErrorInterceptorHandler handler,
-  ) {
+  void onError(DioException err, ErrorInterceptorHandler handler) {
     log(
       'Dio Error: ${err.response?.statusCode ?? 'no status'} '
       '${err.response?.data ?? err.message}',

@@ -629,6 +629,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appDisplayLanguage => 'App display language';
 
   @override
+  String get logoutConfirmationMessage => 'Are you sure you want to log out?';
+
+  @override
+  String get addNoteBeforeSubmit => 'Please add a note before submitting';
+
+  @override
+  String get uploadingFiles => 'Uploading files...';
+
+  @override
+  String get invalidTaskId => 'Invalid task ID';
+
+  @override
+  String get taskSubmitFailed =>
+      'Failed to submit task. Please check your internet connection and try again.';
+
+  @override
   String get details => 'Details';
 
   @override
