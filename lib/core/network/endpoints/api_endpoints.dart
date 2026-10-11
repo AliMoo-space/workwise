@@ -12,6 +12,7 @@ abstract final class ApiEndpoints {
   static const String markAllNotificationsAsRead =
       '/api/notifications/read-all';
   static const String clearAllNotifications = '/api/notifications/clear-all';
+  static const String updateFcmToken = '/api/notifications/fcm-token';
 
   static String markNotificationAsRead(String id) =>
       '/api/notifications/$id/read';
@@ -26,7 +27,7 @@ abstract final class ApiEndpoints {
 
   static const String refreshToken = '/auth/refresh-token';
 
-  static const String logout = '/auth/logout';
+  static const String logout = '/api/auth/logout';
 
   // Forgot Password
 

@@ -51,3 +51,13 @@ class DeleteNotification {
     return _repository.deleteNotification(id);
   }
 }
+
+class UpdateFcmToken {
+  const UpdateFcmToken(this._repository);
+
+  final NotificationRepository _repository;
+
+  Future<Either<Failure, void>> call(String fcmToken) {
+    return _repository.updateFcmToken(fcmToken);
+  }
+}

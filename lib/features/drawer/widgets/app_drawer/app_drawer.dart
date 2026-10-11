@@ -5,6 +5,8 @@ import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/feedback/app_dialog.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/core/services/fcm_notification_service.dart';
+import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/drawer/widgets/app_drawer/drawer_footer.dart';
 import 'package:workwise/features/drawer/widgets/app_drawer/drawer_header.dart'
     as custom;
@@ -52,8 +54,13 @@ class AppDrawer extends StatelessWidget {
                 cancelText: context.l10n.cancel,
               );
 
-              if (confirmed && context.mounted) {
-                context.go('/loginScreen');
+              if (confirmed) {
+                if (sl.isRegistered<FcmNotificationService>()) {
+                  await sl<FcmNotificationService>().handleLogout();
+                }
+                if (context.mounted) {
+                  context.go('/loginScreen');
+                }
               }
             },
           ),

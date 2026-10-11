@@ -16,4 +16,6 @@ abstract interface class NotificationRepository {
   Future<Either<Failure, void>> clearAllNotifications();
 
   Future<Either<Failure, void>> deleteNotification(String id);
+
+  Future<Either<Failure, void>> updateFcmToken(String fcmToken);
 }

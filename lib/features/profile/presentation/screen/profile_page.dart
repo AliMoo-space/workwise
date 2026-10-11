@@ -8,6 +8,8 @@ import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/feedback/app_dialog.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/core/services/fcm_notification_service.dart';
+import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/profile/widgets/job_details_section.dart';
 import 'package:workwise/features/profile/widgets/profile_card.dart';
 
@@ -61,8 +63,13 @@ class ProfilePage extends StatelessWidget {
                     cancelText: context.l10n.cancel,
                   );
 
-                  if (confirmed && context.mounted) {
-                    context.go('/loginScreen');
+                  if (confirmed) {
+                    if (sl.isRegistered<FcmNotificationService>()) {
+                      await sl<FcmNotificationService>().handleLogout();
+                    }
+                    if (context.mounted) {
+                      context.go('/loginScreen');
+                    }
                   }
                 },
               ),
