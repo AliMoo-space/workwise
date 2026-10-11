@@ -10,12 +10,11 @@ class LeaveHistoryTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Row(
       children: [
-        AppText(
-          context.l10n.leaveHistory,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
+        AppText(context.l10n.leaveHistory, style: theme.textTheme.titleMedium),
 
         const Spacer(),
 
@@ -23,10 +22,7 @@ class LeaveHistoryTitle extends StatelessWidget {
           onPressed: () {
             context.push(AppRoutes.leaveScreen);
           },
-          child: AppText(
-            context.l10n.view,
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
+          child: AppText(context.l10n.view, style: theme.textTheme.bodyLarge),
         ),
       ],
     );

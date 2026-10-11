@@ -8,12 +8,11 @@ class LeaveTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Align(
       alignment: AlignmentDirectional.topStart,
-      child: AppText(
-        context.l10n.leave,
-        style: Theme.of(context).textTheme.headlineMedium,
-      ),
+      child: AppText(context.l10n.leave, style: theme.textTheme.headlineMedium),
     );
   }
 }

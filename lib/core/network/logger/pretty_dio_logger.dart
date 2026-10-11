@@ -5,7 +5,7 @@ PrettyDioLogger createPrettyDioLogger() {
     requestHeader: true,
     requestBody: true,
     responseHeader: false,
-    responseBody: true,
+    responseBody: false,
     error: true,
     compact: true,
     maxWidth: 120,
