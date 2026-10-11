@@ -8,11 +8,13 @@ class LeaveSubtitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Align(
       alignment: AlignmentDirectional.topStart,
       child: AppText(
         context.l10n.balancesRequestsGoals,
-        style: Theme.of(context).textTheme.bodySmall,
+        style: theme.textTheme.bodySmall,
       ),
     );
   }

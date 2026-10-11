@@ -66,7 +66,7 @@ class SettingsScreen extends StatelessWidget {
                       trailing: Switch.adaptive(
                         value: cubit.isBiometricEnabled,
                         //  حالة التفعيل 
-                        activeColor: Colors.white,
+                        activeThumbColor: Colors.white,
                         activeTrackColor: theme.colorScheme.primary,
                         //  حالة الإيقاف 
                         inactiveThumbColor: theme.colorScheme.outline,
@@ -84,7 +84,7 @@ class SettingsScreen extends StatelessWidget {
                       trailing: Switch.adaptive(
                         value: cubit.isNotificationsEnabled,
                         //  حالة التفعيل 
-                        activeColor: Colors.white,
+                        activeThumbColor: Colors.white,
                         activeTrackColor: theme.colorScheme.primary,
                         //  حالة الإيقاف 
                         inactiveThumbColor: theme.colorScheme.outline,

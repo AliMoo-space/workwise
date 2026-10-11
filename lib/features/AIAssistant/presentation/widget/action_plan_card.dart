@@ -5,173 +5,110 @@ import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/spacing/app_radius.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
-import 'package:workwise/core/design_system/widgets/layout/app_divider.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
+import 'package:workwise/features/AIAssistant/domain/entities/career_coach.dart';
 
 class ActionPlanCard extends StatelessWidget {
-  const ActionPlanCard({super.key});
+  final DevelopmentPlan plan;
+  final int index;
+
+  const ActionPlanCard({super.key, required this.plan, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return AppCard(
-      height: 265.h,
-      width: double.infinity.w,
+      width: double.infinity,
       padding: EdgeInsets.zero,
-      backgroundColor: Theme.of(context).colorScheme.onError,
+      backgroundColor: theme.colorScheme.onError,
       borderRadius: AppRadius.radius24.r,
-      border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
+      border: Border.all(color: theme.colorScheme.outlineVariant),
       boxShadow: const [],
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
+        padding: EdgeInsets.all(AppSpacing.space12.r),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Gap(AppSpacing.space8.h),
-            Row(
-              children: [
-                Gap(AppSpacing.space20.w),
-                const Icon(Icons.format_list_numbered),
-                Gap(AppSpacing.space4.w),
-                AppText(
-                  "Prioritized next steps",
-                  style: Theme.of(context).textTheme.titleSmall,
+            // Step Number
+            Container(
+              height: 40.h,
+              width: 40.w,
+              decoration: BoxDecoration(
+                color: theme.colorScheme.primary,
+                borderRadius: BorderRadius.circular(AppRadius.radius12.r),
+              ),
+              child: Center(
+                child: AppText(
+                  '${index + 1}',
+                  color: theme.colorScheme.onPrimary,
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
                 ),
-              ],
-            ),
-
-            Gap(AppSpacing.space8.h),
-
-            AppDivider(color: Theme.of(context).colorScheme.outlineVariant),
-
-            Gap(AppSpacing.space8.h),
-
-            Padding(
-              padding: EdgeInsets.all(AppSpacing.space4.r),
-              child: Row(
-                children: [
-                  Container(
-                    height: 35.h,
-                    width: 35.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        AppRadius.radiusFull.r,
-                      ),
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    child: Center(
-                      child: AppText(
-                        "1",
-                        color: Theme.of(context).colorScheme.onError,
-                      ),
-                    ),
-                  ),
-                  Gap(AppSpacing.space8.w),
-
-                  const AppText("Complete Advanced\n SQL certification"),
-
-                  const Spacer(),
-
-                  Container(
-                    height: 25.h,
-                    width: 80.w,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.outlineVariant,
-                      borderRadius: BorderRadius.circular(AppRadius.radius16.r),
-                    ),
-                    child: const Center(child: AppText("Aug 2026")),
-                  ),
-                ],
               ),
             ),
 
-            Gap(AppSpacing.space8.h),
+            Gap(AppSpacing.space12.w),
 
-            AppDivider(color: Theme.of(context).colorScheme.outlineVariant),
-
-            Gap(AppSpacing.space8.h),
-
-            Padding(
-              padding: EdgeInsets.all(AppSpacing.space4.r),
-              child: Row(
+            // Action Content
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    height: 35.h,
-                    width: 35.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        AppRadius.radiusFull.r,
-                      ),
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    child: Center(
-                      child: AppText(
-                        "2",
-                        color: Theme.of(context).colorScheme.onError,
-                      ),
-                    ),
+                  AppText(
+                    'Action ${index + 1}',
+                    fontSize: 11.sp,
+                    color: theme.colorScheme.onSurfaceVariant,
+                    fontWeight: FontWeight.w500,
                   ),
 
-                  Gap(AppSpacing.space8.w),
+                  Gap(AppSpacing.space4.h),
 
-                  const AppText(
-                    "Delegate one recurring\n report to a junior analyst",
+                  // Action
+                  AppText(
+                    plan.action,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
                   ),
 
-                  const Spacer(),
+                  Gap(AppSpacing.space12.h),
 
+                  // Timeline
                   Container(
-                    height: 25.h,
-                    width: 80.w,
+                    constraints: BoxConstraints(maxWidth: 150.w),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppSpacing.space8.w,
+                      vertical: AppSpacing.space4.h,
+                    ),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.outlineVariant,
+                      color: theme.colorScheme.primary.withValues(alpha: 0.08),
                       borderRadius: BorderRadius.circular(AppRadius.radius16.r),
                     ),
-                    child: const Center(child: AppText("Aug 2026")),
-                  ),
-                ],
-              ),
-            ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.schedule_rounded,
+                          size: 14.sp,
+                          color: theme.colorScheme.primary,
+                        ),
 
-            Gap(AppSpacing.space8.h),
+                        Gap(AppSpacing.space4.w),
 
-            AppDivider(color: Theme.of(context).colorScheme.outlineVariant),
-
-            Gap(AppSpacing.space8.h),
-
-            Padding(
-              padding: EdgeInsets.all(AppSpacing.space4.r),
-              child: Row(
-                children: [
-                  Container(
-                    height: 35.h,
-                    width: 35.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        AppRadius.radiusFull.r,
-                      ),
-                      color: Theme.of(context).colorScheme.primary,
+                        Flexible(
+                          child: AppText(
+                            plan.suggestedTimeline,
+                            fontSize: 11.sp,
+                            color: theme.colorScheme.primary,
+                            fontWeight: FontWeight.w600,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
-                    child: Center(
-                      child: AppText(
-                        "3",
-                        color: Theme.of(context).colorScheme.onError,
-                      ),
-                    ),
-                  ),
-
-                  Gap(AppSpacing.space8.w),
-
-                  const AppText("Complete Advanced\n SQL certification"),
-
-                  const Spacer(),
-
-                  Container(
-                    height: 25.h,
-                    width: 80.w,
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.outlineVariant,
-                      borderRadius: BorderRadius.circular(AppRadius.radius16.r),
-                    ),
-                    child: const Center(child: AppText("Aug 2026")),
                   ),
                 ],
               ),

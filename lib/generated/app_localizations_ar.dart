@@ -33,40 +33,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get language => 'اللغة';
 
   @override
-  String get languageEnglish => 'الإنجليزيّة';
+  String get languageEnglish => 'الإنجليزية';
 
   @override
   String get languageArabic => 'العربية';
 
   @override
   String get loading => 'جاري التحميل...';
-
-  @override
-  String get homeScreen => 'الرئيسية';
-
-  @override
-  String get notifications => 'الإشعارات';
-
-  @override
-  String get quickActions => 'إجراءات سريعة';
-
-  @override
-  String get todayAttendance => 'حضور اليوم';
-
-  @override
-  String get onShift => 'في الدوام';
-
-  @override
-  String get checkedInAt => 'تم تسجيل الحضور الساعة 9:00 صباحًا';
-
-  @override
-  String get hoursWorked => 'ساعات العمل';
-
-  @override
-  String get insideOffice => 'داخل المكتب';
-
-  @override
-  String get checkOut => 'تسجيل الانصراف';
 
   @override
   String get welcomeBack => 'مرحباً بعودتك';
@@ -94,13 +67,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get forgotPassword => 'نسيت كلمة المرور؟';
 
   @override
-  String get pendingTasks => 'المهام المعلقة';
+  String get homeScreen => 'الرئيسية';
 
   @override
-  String get nextMeeting => 'الاجتماع القادم';
+  String get notifications => 'الإشعارات';
 
   @override
-  String get leaveBalance => 'رصيد الإجازات';
+  String get markAllNotificationsAsRead => 'تحديد كل الإشعارات كمقروءة';
+
+  @override
+  String get clearAllNotifications => 'مسح كل الإشعارات';
+
+  @override
+  String get quickActions => 'إجراءات سريعة';
 
   @override
   String get quickSignIn => 'تسجيل دخول سريع';
@@ -112,13 +91,86 @@ class AppLocalizationsAr extends AppLocalizations {
   String get or => 'أو';
 
   @override
-  String get requestLeave => 'طلب إجازة';
+  String get todayAttendance => 'حضور اليوم';
 
   @override
-  String get submitTask => 'إرسال مهمة';
+  String get onShift => 'في الدوام';
 
   @override
-  String get viewCalendar => 'عرض التقويم';
+  String get checkedInAt => 'تم تسجيل الحضور الساعة ';
+
+  @override
+  String get hoursWorked => ' ساعات العمل ';
+
+  @override
+  String get insideOffice => 'داخل المكتب';
+
+  @override
+  String get outsideOffice => 'خارج المكتب';
+
+  @override
+  String get checkIn => 'تسجيل الحضور';
+
+  @override
+  String get checkOut => 'تسجيل الانصراف';
+
+  @override
+  String get checkInSuccess => 'تم تسجيل الحضور بنجاح';
+
+  @override
+  String get checkOutSuccess => 'تم تسجيل الانصراف بنجاح';
+
+  @override
+  String get locationPermissionDenied => 'إذن الموقع مطلوب للتحقق من الحضور.';
+
+  @override
+  String get locationServiceDisabled =>
+      'يرجى تفعيل خدمة تحديد الموقع (GPS) على جهازك.';
+
+  @override
+  String get locationPermissionRequired =>
+      'إذن الوصول إلى الموقع مطلوب للتحقق من حضورك في مقر العمل.';
+
+  @override
+  String get locationPermissionDeniedMessage =>
+      'تم رفض إذن الموقع. يرجى منح صلاحية الموقع للتحقق من الحضور.';
+
+  @override
+  String get locationPermissionDeniedRepeatedly =>
+      'تم رفض إذن الموقع عدة مرات. يرجى تفعيله من إعدادات التطبيق أو المحاولة مرة أخرى.';
+
+  @override
+  String get locationPermissionPermanentlyDenied =>
+      'تم رفض إذن الموقع بشكل دائم. يرجى فتح إعدادات التطبيق والسماح بالوصول إلى الموقع أثناء استخدام التطبيق.';
+
+  @override
+  String get locationPreciseRequired =>
+      'يلزم تفعيل الموقع الدقيق للتحقق من الحضور في مقر العمل. يرجى تفعيل الموقع الدقيق من إعدادات التطبيق.';
+
+  @override
+  String get locationUnableToDetermine =>
+      'تعذر تحديد موقعك الحالي. يرجى التحقق من إعدادات الموقع والمحاولة مرة أخرى.';
+
+  @override
+  String get locationTimeout =>
+      'انتهت مهلة تحديد الموقع. يرجى الانتقال إلى مكان ذي إشارة GPS أوضح والمحاولة مرة أخرى.';
+
+  @override
+  String get locationTemporarilyUnavailable =>
+      'موقعك الحالي غير متاح مؤقتاً. يرجى الانتظار قليلاً والمحاولة مرة أخرى.';
+
+  @override
+  String get locationUnexpectedError =>
+      'حدث خطأ غير متوقع أثناء جلب موقعك. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
+  String get openAppSettings => 'فتح إعدادات التطبيق';
+
+  @override
+  String get openLocationSettings => 'تفعيل خدمات الموقع';
 
   @override
   String get sessionExpiredWarning =>
@@ -129,7 +181,13 @@ class AppLocalizationsAr extends AppLocalizations {
       'بيانات الدخول غير صحيحة. يرجى المحاولة مرة أخرى.';
 
   @override
-  String get aiHrAssistant => 'مساعد الموارد البشرية الذكي';
+  String get pendingTasks => 'المهام المعلقة';
+
+  @override
+  String get nextMeeting => 'الاجتماع القادم';
+
+  @override
+  String get leaveBalance => 'رصيد الإجازات';
 
   @override
   String get verifyYourIdentityToAccessYourAccount =>
@@ -150,16 +208,13 @@ class AppLocalizationsAr extends AppLocalizations {
   String get authCanceledOrFailed => 'تم إلغاء عملية التحقق أو فشلت.';
 
   @override
-  String get drawerHeader => 'رأس القائمة';
+  String get requestLeave => 'طلب إجازة';
 
   @override
-  String get drawerItem1 => 'العنصر 1';
+  String get submitTask => 'إرسال مهمة';
 
   @override
-  String get drawerItem2 => 'العنصر 2';
-
-  @override
-  String get drawerItem3 => 'العنصر 3';
+  String get viewCalendar => 'عرض التقويم';
 
   @override
   String get resetPasswordTitle => 'إعادة ضبط كلمة المرور';
@@ -181,10 +236,31 @@ class AppLocalizationsAr extends AppLocalizations {
   String get enterPasswordMessage => 'يرجى إدخال كلمة المرور';
 
   @override
+  String get aiHrAssistant => 'مساعد الموارد البشرية الذكي';
+
+  @override
+  String get drawerHeader => 'رأس القائمة';
+
+  @override
+  String get drawerItem1 => 'العنصر 1';
+
+  @override
+  String get drawerItem2 => 'العنصر 2';
+
+  @override
+  String get drawerItem3 => 'العنصر 3';
+
+  @override
   String get attendance => 'الحضور';
 
   @override
   String get attendanceDescription => 'تسجيل الحضور والتحقق من الموقع والسجل';
+
+  @override
+  String get noAttendanceRecords => 'لا توجد سجلات حضور';
+
+  @override
+  String get noAttendanceRecordsMessage => 'لا توجد سجلات حضور لهذا الشهر.';
 
   @override
   String get history => 'السجل';
@@ -318,7 +394,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get leave => 'الإجازات';
 
   @override
-  String get balancesRequestsGoals => 'الأرصدة والطلبات والأهداف الشخصية';
+  String get balancesRequestsGoals =>
+      'تابع أرصدة الإجازات والطلبات وسجل الإجازات.';
 
   @override
   String get leaveType => 'نوع الإجازة';
@@ -333,7 +410,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get status => 'الحالة';
 
   @override
-  String get selectLeaveType => 'اختر نوع الإجازة...';
+  String get selectLeaveType => 'اختر نوع الإجازة';
 
   @override
   String get annualLeave => 'إجازة سنوية';
@@ -345,16 +422,22 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sickLeave => 'إجازة مرضية';
 
   @override
+  String get emergencyLeave => 'إجازة طارئة';
+
+  @override
   String get startDate => 'تاريخ البداية';
 
   @override
   String get endDate => 'تاريخ النهاية';
 
   @override
+  String get dateFormat => 'يوم/شهر/سنة';
+
+  @override
   String get reason => 'السبب';
 
   @override
-  String get reasonHint => 'اكتب سبب الإجازة باختصار...';
+  String get reasonHint => 'اكتب سبب الإجازة';
 
   @override
   String get attachSupportingDocument => 'إرفاق مستند داعم';
@@ -369,10 +452,37 @@ class AppLocalizationsAr extends AppLocalizations {
   String get leaveHistory => 'سجل الإجازات';
 
   @override
+  String get noLeaveHistory => 'لا يوجد سجل إجازات.';
+
+  @override
   String get view => 'عرض الكل';
 
   @override
   String get approved => 'تمت الموافقة';
+
+  @override
+  String get leaveRequestSubmittedSuccessfully => 'تم إرسال طلب الإجازة بنجاح';
+
+  @override
+  String get pleaseSelectLeaveType => 'برجاء اختيار نوع الإجازة.';
+
+  @override
+  String get pleaseSelectStartDate => 'برجاء اختيار تاريخ البداية.';
+
+  @override
+  String get pleaseSelectEndDate => 'برجاء اختيار تاريخ النهاية.';
+
+  @override
+  String get pleaseEnterReason => 'برجاء إدخال السبب.';
+
+  @override
+  String get balance => 'الرصيد';
+
+  @override
+  String get daysLeft => 'يوم متبقي';
+
+  @override
+  String get days => 'أيام';
 
   @override
   String get atAGlance => 'نظرة سريعة';
@@ -396,6 +506,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get quality => 'الجودة';
 
   @override
+  String get performance => 'الأداء';
+
+  @override
   String get april => 'أبريل';
 
   @override
@@ -415,9 +528,6 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get performanceTrend => 'اتجاه الأداء';
-
-  @override
-  String get performance => 'الأداء';
 
   @override
   String get personalGoals => 'الأهداف الشخصية';
@@ -454,10 +564,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get strengths => 'نقاط القوة';
 
   @override
-  String get dateFormat => 'يوم / شهر / سنة';
-
-  @override
-  String get progress => 'التقدم';
+  String get progress => 'نسبة الإنجاز';
 
   @override
   String get profileJobDetails => 'تفاصيل الوظيفة';
@@ -517,5 +624,44 @@ class AppLocalizationsAr extends AppLocalizations {
   String get appDisplayLanguage => 'لغة عرض التطبيق';
 
   @override
-  String get logoutConfirmationMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+  String get details => 'التفاصيل';
+
+  @override
+  String get goalDetails => 'تفاصيل الهدف';
+
+  @override
+  String get currentValue => 'القيمة الحالية';
+
+  @override
+  String get targetValue => 'القيمة المستهدفة';
+
+  @override
+  String get targetDate => 'تاريخ الهدف';
+
+  @override
+  String get createdAt => 'تاريخ الإنشاء';
+
+  @override
+  String get goals => 'الأهداف';
+
+  @override
+  String get noGoalsFound => 'لا توجد أهداف';
+
+  @override
+  String get january => 'يناير';
+
+  @override
+  String get february => 'فبراير';
+
+  @override
+  String get march => 'مارس';
+
+  @override
+  String get october => 'أكتوبر';
+
+  @override
+  String get november => 'نوفمبر';
+
+  @override
+  String get december => 'ديسمبر';
 }

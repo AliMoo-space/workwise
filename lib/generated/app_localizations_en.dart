@@ -39,34 +39,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageArabic => 'Arabic';
 
   @override
-  String get loading => 'loading...';
-
-  @override
-  String get homeScreen => 'Home Screen';
-
-  @override
-  String get notifications => 'Notifications';
-
-  @override
-  String get quickActions => 'Quick Actions';
-
-  @override
-  String get todayAttendance => 'Today\'s attendance';
-
-  @override
-  String get onShift => 'On Shift';
-
-  @override
-  String get checkedInAt => 'Checked in at 9:00 AM';
-
-  @override
-  String get hoursWorked => 'hours worked';
-
-  @override
-  String get insideOffice => 'Inside the office';
-
-  @override
-  String get checkOut => 'Check Out';
+  String get loading => 'Loading...';
 
   @override
   String get welcomeBack => 'Welcome Back';
@@ -94,13 +67,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get forgotPassword => 'Forgot Password?';
 
   @override
-  String get pendingTasks => 'Pending Tasks';
+  String get homeScreen => 'Home Screen';
 
   @override
-  String get nextMeeting => 'Next Meeting';
+  String get notifications => 'Notifications';
 
   @override
-  String get leaveBalance => 'Leave Balance';
+  String get markAllNotificationsAsRead => 'Mark all as read';
+
+  @override
+  String get clearAllNotifications => 'Clear all notifications';
+
+  @override
+  String get quickActions => 'Quick Actions';
 
   @override
   String get quickSignIn => 'Quick Sign-In';
@@ -112,13 +91,87 @@ class AppLocalizationsEn extends AppLocalizations {
   String get or => 'OR';
 
   @override
-  String get requestLeave => 'Request Leave';
+  String get todayAttendance => 'Today\'s attendance';
 
   @override
-  String get submitTask => 'Submit Task';
+  String get onShift => 'On Shift';
 
   @override
-  String get viewCalendar => 'View Calendar';
+  String get checkedInAt => 'Checked in at ';
+
+  @override
+  String get hoursWorked => ' hours worked ';
+
+  @override
+  String get insideOffice => 'Inside the office';
+
+  @override
+  String get outsideOffice => 'Outside the office';
+
+  @override
+  String get checkIn => 'Check In';
+
+  @override
+  String get checkOut => 'Check Out';
+
+  @override
+  String get checkInSuccess => 'Checked in successfully';
+
+  @override
+  String get checkOutSuccess => 'Checked out successfully';
+
+  @override
+  String get locationPermissionDenied =>
+      'Location permission is required to verify attendance.';
+
+  @override
+  String get locationServiceDisabled =>
+      'Please enable GPS/location services on your device.';
+
+  @override
+  String get locationPermissionRequired =>
+      'Location permission is required to verify your workplace attendance.';
+
+  @override
+  String get locationPermissionDeniedMessage =>
+      'Location permission was denied. Please grant location access to verify attendance.';
+
+  @override
+  String get locationPermissionDeniedRepeatedly =>
+      'Location permission was denied multiple times. Please enable it in App Settings or tap retry.';
+
+  @override
+  String get locationPermissionPermanentlyDenied =>
+      'Location permission is permanently denied. Please open App Settings and allow location access while using the app.';
+
+  @override
+  String get locationPreciseRequired =>
+      'Precise location is required to verify workplace attendance. Please enable Precise Location in App Settings.';
+
+  @override
+  String get locationUnableToDetermine =>
+      'Unable to determine your current location. Please check your location settings and try again.';
+
+  @override
+  String get locationTimeout =>
+      'Location request timed out. Please move to an area with a clearer GPS signal and try again.';
+
+  @override
+  String get locationTemporarilyUnavailable =>
+      'Your current location is temporarily unavailable. Please wait a moment and try again.';
+
+  @override
+  String get locationUnexpectedError =>
+      'An unexpected error occurred while retrieving your location. Please try again.';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get openAppSettings => 'Open App Settings';
+
+  @override
+  String get openLocationSettings => 'Enable Location Services';
 
   @override
   String get sessionExpiredWarning =>
@@ -129,7 +182,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Invalid credentials. Please try again.';
 
   @override
-  String get aiHrAssistant => 'AI HR Assistant';
+  String get pendingTasks => 'Pending Tasks';
+
+  @override
+  String get nextMeeting => 'Next Meeting';
+
+  @override
+  String get leaveBalance => 'Leave Balance';
 
   @override
   String get verifyYourIdentityToAccessYourAccount =>
@@ -149,16 +208,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authCanceledOrFailed => 'Authentication canceled or failed.';
 
   @override
-  String get drawerHeader => 'Drawer Header';
+  String get requestLeave => 'Request Leave';
 
   @override
-  String get drawerItem1 => 'Item 1';
+  String get submitTask => 'Submit Task';
 
   @override
-  String get drawerItem2 => 'Item 2';
-
-  @override
-  String get drawerItem3 => 'Item 3';
+  String get viewCalendar => 'View Calendar';
 
   @override
   String get resetPasswordTitle => 'Reset Password';
@@ -180,10 +236,32 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterPasswordMessage => 'Please enter your password';
 
   @override
+  String get aiHrAssistant => 'AI HR Assistant';
+
+  @override
+  String get drawerHeader => 'Drawer Header';
+
+  @override
+  String get drawerItem1 => 'Item 1';
+
+  @override
+  String get drawerItem2 => 'Item 2';
+
+  @override
+  String get drawerItem3 => 'Item 3';
+
+  @override
   String get attendance => 'Attendance';
 
   @override
   String get attendanceDescription => 'Location-validated check in and history';
+
+  @override
+  String get noAttendanceRecords => 'No attendance records';
+
+  @override
+  String get noAttendanceRecordsMessage =>
+      'There are no attendance records for this month.';
 
   @override
   String get history => 'History';
@@ -317,22 +395,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get leave => 'Leave';
 
   @override
-  String get balancesRequestsGoals => 'Balances, requests, and personal goals';
+  String get balancesRequestsGoals =>
+      'Manage your balances, requests and leave history.';
 
   @override
-  String get leaveType => 'Leave type';
+  String get leaveType => 'Leave Type';
 
   @override
   String get leaveRequestNotFound => 'Leave request not found';
 
   @override
-  String get dateRange => 'Date range';
+  String get dateRange => 'Date Range';
 
   @override
   String get status => 'Status';
 
   @override
-  String get selectLeaveType => 'Select type...';
+  String get selectLeaveType => 'Select leave type';
 
   @override
   String get annualLeave => 'Annual Leave';
@@ -344,16 +423,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sickLeave => 'Sick Leave';
 
   @override
-  String get startDate => 'Start date';
+  String get emergencyLeave => 'Emergency Leave';
 
   @override
-  String get endDate => 'End date';
+  String get startDate => 'Start Date';
+
+  @override
+  String get endDate => 'End Date';
+
+  @override
+  String get dateFormat => 'DD/MM/YYYY';
 
   @override
   String get reason => 'Reason';
 
   @override
-  String get reasonHint => 'Briefly describe your reason...';
+  String get reasonHint => 'Enter your reason';
 
   @override
   String get attachSupportingDocument => 'Attach supporting document';
@@ -362,16 +447,44 @@ class AppLocalizationsEn extends AppLocalizations {
   String get uploadImage => 'Upload image';
 
   @override
-  String get submitRequest => 'Submit request';
+  String get submitRequest => 'Submit Request';
 
   @override
-  String get leaveHistory => 'Leave history';
+  String get leaveHistory => 'Leave History';
+
+  @override
+  String get noLeaveHistory => 'No leave history found.';
 
   @override
   String get view => 'View All';
 
   @override
   String get approved => 'Approved';
+
+  @override
+  String get leaveRequestSubmittedSuccessfully =>
+      'Leave request submitted successfully';
+
+  @override
+  String get pleaseSelectLeaveType => 'Please select a leave type.';
+
+  @override
+  String get pleaseSelectStartDate => 'Please select a start date.';
+
+  @override
+  String get pleaseSelectEndDate => 'Please select an end date.';
+
+  @override
+  String get pleaseEnterReason => 'Please enter a reason.';
+
+  @override
+  String get balance => 'Balance';
+
+  @override
+  String get daysLeft => 'days left';
+
+  @override
+  String get days => 'days';
 
   @override
   String get atAGlance => 'At a glance';
@@ -389,10 +502,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get fromLastMonth => 'from last month';
 
   @override
-  String get overall => 'overall';
+  String get overall => 'Overall';
 
   @override
   String get quality => 'Quality';
+
+  @override
+  String get performance => 'Performance';
 
   @override
   String get april => 'Apr';
@@ -414,9 +530,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get performanceTrend => 'Performance trend';
-
-  @override
-  String get performance => 'Performance';
 
   @override
   String get personalGoals => 'Personal goals';
@@ -451,9 +564,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get strengths => 'Strengths';
-
-  @override
-  String get dateFormat => 'DD / MM / YYYY';
 
   @override
   String get progress => 'Progress';
@@ -516,5 +626,44 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appDisplayLanguage => 'App display language';
 
   @override
-  String get logoutConfirmationMessage => 'Are you sure you want to log out?';
+  String get details => 'Details';
+
+  @override
+  String get goalDetails => 'Goal Details';
+
+  @override
+  String get currentValue => 'Current Value';
+
+  @override
+  String get targetValue => 'Target Value';
+
+  @override
+  String get targetDate => 'Target Date';
+
+  @override
+  String get createdAt => 'Created At';
+
+  @override
+  String get goals => 'Goals';
+
+  @override
+  String get noGoalsFound => 'No goals found';
+
+  @override
+  String get january => 'January';
+
+  @override
+  String get february => 'February';
+
+  @override
+  String get march => 'March';
+
+  @override
+  String get october => 'October';
+
+  @override
+  String get november => 'November';
+
+  @override
+  String get december => 'December';
 }

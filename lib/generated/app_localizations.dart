@@ -161,62 +161,8 @@ abstract class AppLocalizations {
   /// No description provided for @loading.
   ///
   /// In en, this message translates to:
-  /// **'loading...'**
+  /// **'Loading...'**
   String get loading;
-
-  /// No description provided for @homeScreen.
-  ///
-  /// In en, this message translates to:
-  /// **'Home Screen'**
-  String get homeScreen;
-
-  /// No description provided for @notifications.
-  ///
-  /// In en, this message translates to:
-  /// **'Notifications'**
-  String get notifications;
-
-  /// No description provided for @quickActions.
-  ///
-  /// In en, this message translates to:
-  /// **'Quick Actions'**
-  String get quickActions;
-
-  /// No description provided for @todayAttendance.
-  ///
-  /// In en, this message translates to:
-  /// **'Today\'s attendance'**
-  String get todayAttendance;
-
-  /// No description provided for @onShift.
-  ///
-  /// In en, this message translates to:
-  /// **'On Shift'**
-  String get onShift;
-
-  /// No description provided for @checkedInAt.
-  ///
-  /// In en, this message translates to:
-  /// **'Checked in at 9:00 AM'**
-  String get checkedInAt;
-
-  /// No description provided for @hoursWorked.
-  ///
-  /// In en, this message translates to:
-  /// **'hours worked'**
-  String get hoursWorked;
-
-  /// No description provided for @insideOffice.
-  ///
-  /// In en, this message translates to:
-  /// **'Inside the office'**
-  String get insideOffice;
-
-  /// No description provided for @checkOut.
-  ///
-  /// In en, this message translates to:
-  /// **'Check Out'**
-  String get checkOut;
 
   /// No description provided for @welcomeBack.
   ///
@@ -266,23 +212,35 @@ abstract class AppLocalizations {
   /// **'Forgot Password?'**
   String get forgotPassword;
 
-  /// No description provided for @pendingTasks.
+  /// No description provided for @homeScreen.
   ///
   /// In en, this message translates to:
-  /// **'Pending Tasks'**
-  String get pendingTasks;
+  /// **'Home Screen'**
+  String get homeScreen;
 
-  /// No description provided for @nextMeeting.
+  /// No description provided for @notifications.
   ///
   /// In en, this message translates to:
-  /// **'Next Meeting'**
-  String get nextMeeting;
+  /// **'Notifications'**
+  String get notifications;
 
-  /// No description provided for @leaveBalance.
+  /// No description provided for @markAllNotificationsAsRead.
   ///
   /// In en, this message translates to:
-  /// **'Leave Balance'**
-  String get leaveBalance;
+  /// **'Mark all as read'**
+  String get markAllNotificationsAsRead;
+
+  /// No description provided for @clearAllNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all notifications'**
+  String get clearAllNotifications;
+
+  /// No description provided for @quickActions.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick Actions'**
+  String get quickActions;
 
   /// No description provided for @quickSignIn.
   ///
@@ -302,23 +260,149 @@ abstract class AppLocalizations {
   /// **'OR'**
   String get or;
 
-  /// No description provided for @requestLeave.
+  /// No description provided for @todayAttendance.
   ///
   /// In en, this message translates to:
-  /// **'Request Leave'**
-  String get requestLeave;
+  /// **'Today\'s attendance'**
+  String get todayAttendance;
 
-  /// No description provided for @submitTask.
+  /// No description provided for @onShift.
   ///
   /// In en, this message translates to:
-  /// **'Submit Task'**
-  String get submitTask;
+  /// **'On Shift'**
+  String get onShift;
 
-  /// No description provided for @viewCalendar.
+  /// No description provided for @checkedInAt.
   ///
   /// In en, this message translates to:
-  /// **'View Calendar'**
-  String get viewCalendar;
+  /// **'Checked in at '**
+  String get checkedInAt;
+
+  /// No description provided for @hoursWorked.
+  ///
+  /// In en, this message translates to:
+  /// **' hours worked '**
+  String get hoursWorked;
+
+  /// No description provided for @insideOffice.
+  ///
+  /// In en, this message translates to:
+  /// **'Inside the office'**
+  String get insideOffice;
+
+  /// No description provided for @outsideOffice.
+  ///
+  /// In en, this message translates to:
+  /// **'Outside the office'**
+  String get outsideOffice;
+
+  /// No description provided for @checkIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Check In'**
+  String get checkIn;
+
+  /// No description provided for @checkOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Check Out'**
+  String get checkOut;
+
+  /// No description provided for @checkInSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Checked in successfully'**
+  String get checkInSuccess;
+
+  /// No description provided for @checkOutSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Checked out successfully'**
+  String get checkOutSuccess;
+
+  /// No description provided for @locationPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is required to verify attendance.'**
+  String get locationPermissionDenied;
+
+  /// No description provided for @locationServiceDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enable GPS/location services on your device.'**
+  String get locationServiceDisabled;
+
+  /// No description provided for @locationPermissionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is required to verify your workplace attendance.'**
+  String get locationPermissionRequired;
+
+  /// No description provided for @locationPermissionDeniedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission was denied. Please grant location access to verify attendance.'**
+  String get locationPermissionDeniedMessage;
+
+  /// No description provided for @locationPermissionDeniedRepeatedly.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission was denied multiple times. Please enable it in App Settings or tap retry.'**
+  String get locationPermissionDeniedRepeatedly;
+
+  /// No description provided for @locationPermissionPermanentlyDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is permanently denied. Please open App Settings and allow location access while using the app.'**
+  String get locationPermissionPermanentlyDenied;
+
+  /// No description provided for @locationPreciseRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Precise location is required to verify workplace attendance. Please enable Precise Location in App Settings.'**
+  String get locationPreciseRequired;
+
+  /// No description provided for @locationUnableToDetermine.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to determine your current location. Please check your location settings and try again.'**
+  String get locationUnableToDetermine;
+
+  /// No description provided for @locationTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Location request timed out. Please move to an area with a clearer GPS signal and try again.'**
+  String get locationTimeout;
+
+  /// No description provided for @locationTemporarilyUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Your current location is temporarily unavailable. Please wait a moment and try again.'**
+  String get locationTemporarilyUnavailable;
+
+  /// No description provided for @locationUnexpectedError.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred while retrieving your location. Please try again.'**
+  String get locationUnexpectedError;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @openAppSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open App Settings'**
+  String get openAppSettings;
+
+  /// No description provided for @openLocationSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Location Services'**
+  String get openLocationSettings;
 
   /// No description provided for @sessionExpiredWarning.
   ///
@@ -332,11 +416,23 @@ abstract class AppLocalizations {
   /// **'Invalid credentials. Please try again.'**
   String get invalidCredentialsWarning;
 
-  /// No description provided for @aiHrAssistant.
+  /// No description provided for @pendingTasks.
   ///
   /// In en, this message translates to:
-  /// **'AI HR Assistant'**
-  String get aiHrAssistant;
+  /// **'Pending Tasks'**
+  String get pendingTasks;
+
+  /// No description provided for @nextMeeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Meeting'**
+  String get nextMeeting;
+
+  /// No description provided for @leaveBalance.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave Balance'**
+  String get leaveBalance;
 
   /// No description provided for @verifyYourIdentityToAccessYourAccount.
   ///
@@ -368,29 +464,23 @@ abstract class AppLocalizations {
   /// **'Authentication canceled or failed.'**
   String get authCanceledOrFailed;
 
-  /// No description provided for @drawerHeader.
+  /// No description provided for @requestLeave.
   ///
   /// In en, this message translates to:
-  /// **'Drawer Header'**
-  String get drawerHeader;
+  /// **'Request Leave'**
+  String get requestLeave;
 
-  /// No description provided for @drawerItem1.
+  /// No description provided for @submitTask.
   ///
   /// In en, this message translates to:
-  /// **'Item 1'**
-  String get drawerItem1;
+  /// **'Submit Task'**
+  String get submitTask;
 
-  /// No description provided for @drawerItem2.
+  /// No description provided for @viewCalendar.
   ///
   /// In en, this message translates to:
-  /// **'Item 2'**
-  String get drawerItem2;
-
-  /// No description provided for @drawerItem3.
-  ///
-  /// In en, this message translates to:
-  /// **'Item 3'**
-  String get drawerItem3;
+  /// **'View Calendar'**
+  String get viewCalendar;
 
   /// No description provided for @resetPasswordTitle.
   ///
@@ -428,6 +518,36 @@ abstract class AppLocalizations {
   /// **'Please enter your password'**
   String get enterPasswordMessage;
 
+  /// No description provided for @aiHrAssistant.
+  ///
+  /// In en, this message translates to:
+  /// **'AI HR Assistant'**
+  String get aiHrAssistant;
+
+  /// No description provided for @drawerHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Drawer Header'**
+  String get drawerHeader;
+
+  /// No description provided for @drawerItem1.
+  ///
+  /// In en, this message translates to:
+  /// **'Item 1'**
+  String get drawerItem1;
+
+  /// No description provided for @drawerItem2.
+  ///
+  /// In en, this message translates to:
+  /// **'Item 2'**
+  String get drawerItem2;
+
+  /// No description provided for @drawerItem3.
+  ///
+  /// In en, this message translates to:
+  /// **'Item 3'**
+  String get drawerItem3;
+
   /// No description provided for @attendance.
   ///
   /// In en, this message translates to:
@@ -439,6 +559,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Location-validated check in and history'**
   String get attendanceDescription;
+
+  /// No description provided for @noAttendanceRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No attendance records'**
+  String get noAttendanceRecords;
+
+  /// No description provided for @noAttendanceRecordsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no attendance records for this month.'**
+  String get noAttendanceRecordsMessage;
 
   /// No description provided for @history.
   ///
@@ -701,13 +833,13 @@ abstract class AppLocalizations {
   /// No description provided for @balancesRequestsGoals.
   ///
   /// In en, this message translates to:
-  /// **'Balances, requests, and personal goals'**
+  /// **'Manage your balances, requests and leave history.'**
   String get balancesRequestsGoals;
 
   /// No description provided for @leaveType.
   ///
   /// In en, this message translates to:
-  /// **'Leave type'**
+  /// **'Leave Type'**
   String get leaveType;
 
   /// No description provided for @leaveRequestNotFound.
@@ -719,7 +851,7 @@ abstract class AppLocalizations {
   /// No description provided for @dateRange.
   ///
   /// In en, this message translates to:
-  /// **'Date range'**
+  /// **'Date Range'**
   String get dateRange;
 
   /// No description provided for @status.
@@ -731,7 +863,7 @@ abstract class AppLocalizations {
   /// No description provided for @selectLeaveType.
   ///
   /// In en, this message translates to:
-  /// **'Select type...'**
+  /// **'Select leave type'**
   String get selectLeaveType;
 
   /// No description provided for @annualLeave.
@@ -752,17 +884,29 @@ abstract class AppLocalizations {
   /// **'Sick Leave'**
   String get sickLeave;
 
+  /// No description provided for @emergencyLeave.
+  ///
+  /// In en, this message translates to:
+  /// **'Emergency Leave'**
+  String get emergencyLeave;
+
   /// No description provided for @startDate.
   ///
   /// In en, this message translates to:
-  /// **'Start date'**
+  /// **'Start Date'**
   String get startDate;
 
   /// No description provided for @endDate.
   ///
   /// In en, this message translates to:
-  /// **'End date'**
+  /// **'End Date'**
   String get endDate;
+
+  /// No description provided for @dateFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'DD/MM/YYYY'**
+  String get dateFormat;
 
   /// No description provided for @reason.
   ///
@@ -773,7 +917,7 @@ abstract class AppLocalizations {
   /// No description provided for @reasonHint.
   ///
   /// In en, this message translates to:
-  /// **'Briefly describe your reason...'**
+  /// **'Enter your reason'**
   String get reasonHint;
 
   /// No description provided for @attachSupportingDocument.
@@ -791,14 +935,20 @@ abstract class AppLocalizations {
   /// No description provided for @submitRequest.
   ///
   /// In en, this message translates to:
-  /// **'Submit request'**
+  /// **'Submit Request'**
   String get submitRequest;
 
   /// No description provided for @leaveHistory.
   ///
   /// In en, this message translates to:
-  /// **'Leave history'**
+  /// **'Leave History'**
   String get leaveHistory;
+
+  /// No description provided for @noLeaveHistory.
+  ///
+  /// In en, this message translates to:
+  /// **'No leave history found.'**
+  String get noLeaveHistory;
 
   /// No description provided for @view.
   ///
@@ -811,6 +961,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Approved'**
   String get approved;
+
+  /// No description provided for @leaveRequestSubmittedSuccessfully.
+  ///
+  /// In en, this message translates to:
+  /// **'Leave request submitted successfully'**
+  String get leaveRequestSubmittedSuccessfully;
+
+  /// No description provided for @pleaseSelectLeaveType.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a leave type.'**
+  String get pleaseSelectLeaveType;
+
+  /// No description provided for @pleaseSelectStartDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a start date.'**
+  String get pleaseSelectStartDate;
+
+  /// No description provided for @pleaseSelectEndDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select an end date.'**
+  String get pleaseSelectEndDate;
+
+  /// No description provided for @pleaseEnterReason.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a reason.'**
+  String get pleaseEnterReason;
+
+  /// No description provided for @balance.
+  ///
+  /// In en, this message translates to:
+  /// **'Balance'**
+  String get balance;
+
+  /// No description provided for @daysLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'days left'**
+  String get daysLeft;
+
+  /// No description provided for @days.
+  ///
+  /// In en, this message translates to:
+  /// **'days'**
+  String get days;
 
   /// No description provided for @atAGlance.
   ///
@@ -845,7 +1043,7 @@ abstract class AppLocalizations {
   /// No description provided for @overall.
   ///
   /// In en, this message translates to:
-  /// **'overall'**
+  /// **'Overall'**
   String get overall;
 
   /// No description provided for @quality.
@@ -853,6 +1051,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Quality'**
   String get quality;
+
+  /// No description provided for @performance.
+  ///
+  /// In en, this message translates to:
+  /// **'Performance'**
+  String get performance;
 
   /// No description provided for @april.
   ///
@@ -895,12 +1099,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Performance trend'**
   String get performanceTrend;
-
-  /// No description provided for @performance.
-  ///
-  /// In en, this message translates to:
-  /// **'Performance'**
-  String get performance;
 
   /// No description provided for @personalGoals.
   ///
@@ -967,12 +1165,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Strengths'**
   String get strengths;
-
-  /// No description provided for @dateFormat.
-  ///
-  /// In en, this message translates to:
-  /// **'DD / MM / YYYY'**
-  String get dateFormat;
 
   /// No description provided for @progress.
   ///
@@ -1094,11 +1286,89 @@ abstract class AppLocalizations {
   /// **'App display language'**
   String get appDisplayLanguage;
 
-  /// No description provided for @logoutConfirmationMessage.
+  /// No description provided for @details.
   ///
   /// In en, this message translates to:
-  /// **'Are you sure you want to log out?'**
-  String get logoutConfirmationMessage;
+  /// **'Details'**
+  String get details;
+
+  /// No description provided for @goalDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Goal Details'**
+  String get goalDetails;
+
+  /// No description provided for @currentValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Value'**
+  String get currentValue;
+
+  /// No description provided for @targetValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Value'**
+  String get targetValue;
+
+  /// No description provided for @targetDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Target Date'**
+  String get targetDate;
+
+  /// No description provided for @createdAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Created At'**
+  String get createdAt;
+
+  /// No description provided for @goals.
+  ///
+  /// In en, this message translates to:
+  /// **'Goals'**
+  String get goals;
+
+  /// No description provided for @noGoalsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No goals found'**
+  String get noGoalsFound;
+
+  /// No description provided for @january.
+  ///
+  /// In en, this message translates to:
+  /// **'January'**
+  String get january;
+
+  /// No description provided for @february.
+  ///
+  /// In en, this message translates to:
+  /// **'February'**
+  String get february;
+
+  /// No description provided for @march.
+  ///
+  /// In en, this message translates to:
+  /// **'March'**
+  String get march;
+
+  /// No description provided for @october.
+  ///
+  /// In en, this message translates to:
+  /// **'October'**
+  String get october;
+
+  /// No description provided for @november.
+  ///
+  /// In en, this message translates to:
+  /// **'November'**
+  String get november;
+
+  /// No description provided for @december.
+  ///
+  /// In en, this message translates to:
+  /// **'December'**
+  String get december;
 }
 
 class _AppLocalizationsDelegate

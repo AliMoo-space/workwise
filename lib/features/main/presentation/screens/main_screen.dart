@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:workwise/features/AIAssistant/presentation/screens/AI_assistant.dart';
+import 'package:workwise/core/services/service_locator.dart';
+import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
 import 'package:workwise/features/home/presentation/screens/home_screen.dart';
 import 'package:workwise/features/leave/presentation/screens/leave_screen.dart';
 import 'package:workwise/features/main/presentation/widgets/main_bottom_navigation_bar.dart';
@@ -33,7 +36,10 @@ class _MainScreenState extends State<MainScreen> {
     ];
 
     return Scaffold(
-      body: screens[currentIndex],
+      body: BlocProvider(
+        create: (_) => sl<AttendanceCubit>(),
+        child: screens[currentIndex],
+      ),
       bottomNavigationBar: isDrawerOpen
           ? null
           : MainBottomNavigationBar(

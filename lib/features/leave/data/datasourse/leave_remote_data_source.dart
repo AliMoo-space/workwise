@@ -1,18 +1,28 @@
-import 'package:workwise/features/leave/data/models/leave_balance_model.dart';
+import 'package:dio/dio.dart';
 
-abstract class LeaveRemoteDataSource {
-  Future<List<LeaveBalanceModel>> getLeaveBalances();
+import 'package:workwise/core/network/api_consumer.dart';
+import 'package:workwise/core/network/endpoints/api_endpoints.dart';
+import 'package:workwise/core/network/error_message.dart';
+
+import '../models/leave_request_model.dart';
+
+abstract interface class LeaveRemoteDataSource {
+  Future<void> createLeaveRequest(LeaveRequestModel request);
 }
 
 class LeaveRemoteDataSourceImpl implements LeaveRemoteDataSource {
-  @override
-  Future<List<LeaveBalanceModel>> getLeaveBalances() async {
-    await Future.delayed(const Duration(seconds: 2));
+  final ApiConsumer apiConsumer;
 
-    return [
-      LeaveBalanceModel(type: 'Annual', usedDays: 8, totalDays: 21),
-      LeaveBalanceModel(type: 'Casual', usedDays: 3, totalDays: 7),
-      LeaveBalanceModel(type: 'Sick', usedDays: 2, totalDays: 10),
-    ];
+  LeaveRemoteDataSourceImpl(this.apiConsumer);
+
+  @override
+  Future<void> createLeaveRequest(LeaveRequestModel request) async {
+    try {
+      final data = request.toJson();
+
+      await apiConsumer.post(ApiEndpoints.leaveRequests, data: data);
+    } on DioException catch (e) {
+      throw Exception(ErrorMessage.fromDioException(e));
+    }
   }
 }
