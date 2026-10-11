@@ -92,7 +92,7 @@ class HomeStatsGrid extends StatelessWidget {
               child: AppCard(
                 height: 80.h,
                 padding: EdgeInsets.all(AppSpacing.space12.w),
-                onTap: () => context.push(AppRoutes.goalDetailsScreen),
+                onTap: () => context.push(AppRoutes.attendanceScreen),
                 child: Row(
                   children: [
                     Icon(Icons.calendar_month, size: 20.sp),

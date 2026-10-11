@@ -29,50 +29,43 @@ class AttendanceScreen extends StatefulWidget {
   State<AttendanceScreen> createState() => _AttendanceScreenState();
 }
 
-class _AttendanceScreenState extends State<AttendanceScreen> {
-  double? _latitude;
-  double? _longitude;
-  bool _locationUnavailable = false;
+class _AttendanceScreenState extends State<AttendanceScreen>
+    with WidgetsBindingObserver {
   DateTime _selectedHistoryMonth = DateTime.now();
 
   @override
   void initState() {
     super.initState();
-    _loadAttendance();
+    WidgetsBinding.instance.addObserver(this);
+    _loadAttendance(isUserInitiated: false);
     context.read<AttendanceHistoryCubit>().loadHistory(
       month: _selectedHistoryMonth.month,
       year: _selectedHistoryMonth.year,
     );
   }
 
-  Future<void> _loadAttendance() async {
-    final position = await LocationHelper.getCurrentPosition();
-    if (!mounted) return;
-    if (position == null) {
-      setState(() => _locationUnavailable = true);
-      return;
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed && mounted) {
+      context.read<AttendanceCubit>().onAppResumed();
     }
-    if (!_isValidCoordinate(position.latitude, position.longitude)) {
-      setState(() => _locationUnavailable = true);
-      return;
-    }
-    setState(() => _locationUnavailable = false);
-    _latitude = position.latitude;
-    _longitude = position.longitude;
-    await context.read<AttendanceCubit>().loadAttendance(
-      latitude: position.latitude,
-      longitude: position.longitude,
+  }
+
+  Future<void> _loadAttendance({bool isUserInitiated = true}) {
+    return context.read<AttendanceCubit>().loadCurrentAttendance(
+      isUserInitiated: isUserInitiated,
     );
   }
 
-  Future<void> _checkIn() async {
-    if (_latitude == null || _longitude == null) {
-      await _loadAttendance();
-      if (_latitude == null || _longitude == null || !mounted) return;
-    }
-    await context.read<AttendanceCubit>().checkIn(
-      latitude: _latitude!,
-      longitude: _longitude!,
+  Future<void> _checkIn() {
+    return context.read<AttendanceCubit>().checkInCurrentLocation(
+      isUserInitiated: true,
     );
   }
 
@@ -80,13 +73,24 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
     return context.read<AttendanceCubit>().checkOut();
   }
 
-  bool _isValidCoordinate(double latitude, double longitude) {
-    return latitude.isFinite &&
-        longitude.isFinite &&
-        latitude >= -90 &&
-        latitude <= 90 &&
-        longitude >= -180 &&
-        longitude <= 180;
+  SnackBarAction? _buildSettingsSnackBarAction(
+    BuildContext context, {
+    required bool canOpenLocationSettings,
+    required bool canOpenAppSettings,
+  }) {
+    if (canOpenLocationSettings) {
+      return SnackBarAction(
+        label: context.l10n.openLocationSettings,
+        onPressed: LocationHelper.openLocationSettings,
+      );
+    }
+    if (canOpenAppSettings) {
+      return SnackBarAction(
+        label: context.l10n.openAppSettings,
+        onPressed: LocationHelper.openAppSettings,
+      );
+    }
+    return null;
   }
 
   Future<void> _selectHistoryMonth() async {
@@ -117,25 +121,40 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
     return BlocListener<AttendanceCubit, AttendanceState>(
       listener: (context, state) {
         if (state is AttendanceActionSuccess) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
-          _loadAttendance();
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(SnackBar(content: Text(state.message)));
+          _loadAttendance(isUserInitiated: false);
           context.read<AttendanceHistoryCubit>().loadHistory(
             month: _selectedHistoryMonth.month,
             year: _selectedHistoryMonth.year,
           );
-        } else if (state is AttendanceFailure ||
-            state is AttendanceActionFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                state is AttendanceFailure
-                    ? state.message
-                    : (state as AttendanceActionFailure).message,
+        } else if (state is AttendanceFailure) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(state.localizedMessage(context.l10n)),
+                action: _buildSettingsSnackBarAction(
+                  context,
+                  canOpenLocationSettings: state.canOpenLocationSettings,
+                  canOpenAppSettings: state.canOpenAppSettings,
+                ),
               ),
-            ),
-          );
+            );
+        } else if (state is AttendanceActionFailure) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(
+                content: Text(state.localizedMessage(context.l10n)),
+                action: _buildSettingsSnackBarAction(
+                  context,
+                  canOpenLocationSettings: state.canOpenLocationSettings,
+                  canOpenAppSettings: state.canOpenAppSettings,
+                ),
+              ),
+            );
         }
       },
       child: Scaffold(
@@ -150,18 +169,29 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
         body: BlocBuilder<AttendanceCubit, AttendanceState>(
           builder: (context, state) {
             if (state is AttendanceLoading || state is AttendanceInitial) {
-              if (_locationUnavailable) {
-                return AppErrorState(
-                  message: context.l10n.locationPermissionDenied,
-                  onRetry: _loadAttendance,
-                );
-              }
               return const _AttendanceScreenSkeleton();
             }
             if (state is AttendanceFailure) {
+              final secondaryText = state.canOpenLocationSettings
+                  ? context.l10n.openLocationSettings
+                  : state.canOpenAppSettings
+                  ? context.l10n.openAppSettings
+                  : null;
+              final secondaryAction = state.canOpenLocationSettings
+                  ? () {
+                      LocationHelper.openLocationSettings();
+                    }
+                  : state.canOpenAppSettings
+                  ? () {
+                      LocationHelper.openAppSettings();
+                    }
+                  : null;
+
               return AppErrorState(
-                message: state.message,
-                onRetry: _loadAttendance,
+                message: state.localizedMessage(context.l10n),
+                onRetry: () => _loadAttendance(isUserInitiated: true),
+                secondaryButtonText: secondaryText,
+                onSecondaryPressed: secondaryAction,
               );
             }
             final attendance = switch (state) {
@@ -176,7 +206,7 @@ class _AttendanceScreenState extends State<AttendanceScreen> {
             if (attendance == null) {
               return AppErrorState(
                 message: context.l10n.attendanceDescription,
-                onRetry: _loadAttendance,
+                onRetry: () => _loadAttendance(isUserInitiated: true),
               );
             }
             final actionInProgress = state is AttendanceActionLoading;
