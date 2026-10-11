@@ -1,11 +1,13 @@
-import 'package:go_router/go_router.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/routing/app_routes.dart';
+import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/core/routing/page_transition.dart';
+import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/attendance/presentation/screens/attendance_screen.dart';
 import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
 import 'package:workwise/features/attendance/presentation/cubit/attendance_history_cubit.dart';
-import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/auth/fingerprint/presentation/screens/finger_print_screen.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/screens/otp_verification_screen.dart';
 import 'package:workwise/features/auth/login/presentation/screens/login_screen.dart';
@@ -17,6 +19,7 @@ import 'package:workwise/features/attendance/presentation/screens/map_screen.dar
 import 'package:workwise/features/performance/presentation/screens/goal_details_screen.dart';
 import 'package:workwise/features/performance/presentation/screens/goalsviewallscreen.dart';
 import 'package:workwise/features/profile/presentation/screen/profile_page.dart';
+import 'package:workwise/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:workwise/features/performance/presentation/screens/performance_screen.dart';
 import 'package:workwise/features/setting/presentation/screens/settings_screen.dart';
 import 'package:workwise/features/splash/presentation/screens/splash_screen.dart';
@@ -80,7 +83,18 @@ class RouterGenerationConfig {
         name: AppRoutes.profilePage,
         path: AppRoutes.profilePage,
         pageBuilder: (context, state) {
-          return slideTransitionPage(state: state, child: ProfilePage());
+          final employeeId = sl<LocalStorage>().getUserId();
+          final language = sl<LocaleCubit>().state.languageCode;
+
+          return slideTransitionPage(
+            state: state,
+            child: BlocProvider(
+              create: (_) =>
+                  sl<ProfileCubit>()
+                    ..getProfile(employeeId: employeeId, language: language),
+              child: const ProfilePage(),
+            ),
+          );
         },
       ),
       GoRoute(

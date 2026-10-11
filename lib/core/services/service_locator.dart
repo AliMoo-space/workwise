@@ -68,6 +68,10 @@ import 'package:workwise/features/leave/data/repo/leave_history_repository_impl.
 import 'package:workwise/features/leave/domain/repo/leave_history_repository.dart';
 import 'package:workwise/features/leave/domain/usecase/get_leave_history_use_case.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_history/leave_history_cubit.dart';
+import 'package:workwise/features/profile/data/datasources/profile_remote_data_source.dart';
+import 'package:workwise/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:workwise/features/profile/domain/repositories/profile_repository.dart';
+import 'package:workwise/features/profile/presentation/cubit/profile_cubit.dart';
 
 // Leave Request
 import 'package:workwise/features/leave/data/datasourse/leave_remote_data_source.dart';
@@ -193,6 +197,7 @@ Future<void> init() async {
       authApiService: sl<AuthApiService>(),
       networkInfo: sl<NetworkInfo>(),
       secureStorage: sl<SecureStorage>(),
+      localStorage: sl<LocalStorage>(),
     ),
   );
 
@@ -317,6 +322,14 @@ Future<void> init() async {
     ),
   );
 
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSource(sl<ApiConsumer>()),
+  );
+
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(sl<ProfileRemoteDataSource>()),
+  );
+
   // =============================================
   // Use Cases
   // =============================================
@@ -416,6 +429,8 @@ Future<void> init() async {
       createLeaveRequestUseCase: sl<CreateLeaveRequestUseCase>(),
     ),
   );
+
+  sl.registerFactory<ProfileCubit>(() => ProfileCubit(sl<ProfileRepository>()));
 
   // =============================================
   // Notifications

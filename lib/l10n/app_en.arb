@@ -246,7 +246,11 @@
   "profileWorkPhone": "WORK PHONE",
   "profileContact": "Contact",
   "profileActiveFullTime": "Active / Full-Time",
+<<<<<<< HEAD
+  "profilePhotoUpdated": "Profile photo updated successfully",
+=======
 
+>>>>>>> main
   "logoutConfirmMessage": "Are you sure you want to logout?",
 
   "preferences": "Preferences",

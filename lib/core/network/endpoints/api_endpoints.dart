@@ -25,8 +25,7 @@ abstract final class ApiEndpoints {
   static const String register = '/auth/register';
 
   static const String refreshToken = '/auth/refresh-token';
-
-  static const String logout = '/auth/logout';
+  static const String logout = '/api/auth/logout';
 
   // Forgot Password
 
@@ -39,10 +38,8 @@ abstract final class ApiEndpoints {
   static const String resetPassword = '/api/auth/forgot-password/reset';
 
   // User
-
-  static const String profile = '/users/profile';
-
-  static const String users = '/users';
+  static const String profile = '/api/users/profile';
+  static const String users = '/api/users';
 
   // Performance
 
@@ -69,4 +66,9 @@ abstract final class ApiEndpoints {
   static const String careerCoach = '/api/ai/career-coach';
 
   // Add project-specific endpoints below.
+  static const String employeeProfile = '/api/employees/profile';
+
+  static String employeeDetails(int employeeId) {
+    return '/api/employees/$employeeId';
+  }
 }
