@@ -8,11 +8,13 @@ class RequestLeaveTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Align(
       alignment: AlignmentDirectional.centerStart,
       child: AppText(
         context.l10n.requestLeave,
-        style: Theme.of(context).textTheme.titleMedium,
+        style: theme.textTheme.titleMedium,
       ),
     );
   }

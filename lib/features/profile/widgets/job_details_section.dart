@@ -8,11 +8,14 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/features/profile/domain/entities/profile.dart';
 
 import 'job_detail_item.dart';
 
 class JobDetailsSection extends StatelessWidget {
-  const JobDetailsSection({super.key});
+  const JobDetailsSection({super.key, required this.profile});
+
+  final Profile profile;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +67,7 @@ class JobDetailsSection extends StatelessWidget {
         JobDetailItem(
           icon: Icons.person_outline,
           label: context.l10n.profileDirectManager,
-          title: 'Layla Nasser',
+          title: profile.managerName ?? '-',
           badge: context.l10n.profileHeadOfOperations,
           showButton: true,
         ),
@@ -74,7 +77,7 @@ class JobDetailsSection extends StatelessWidget {
         JobDetailItem(
           icon: Icons.location_on_outlined,
           label: context.l10n.profileWorkLocation,
-          title: 'Downtown Campus\n— Tower B',
+          title: profile.companyLocationName ?? profile.address,
           badge: context.l10n.profileWithinAssignedRadius,
           badgeColor: AppColors.accent,
         ),
@@ -84,7 +87,7 @@ class JobDetailsSection extends StatelessWidget {
         JobDetailItem(
           icon: Icons.email_outlined,
           label: context.l10n.profileWorkEmail,
-          title: 'omar.haddad@smarthr.co',
+          title: profile.email,
         ),
 
         Gap(AppSpacing.space12.h),
@@ -92,7 +95,7 @@ class JobDetailsSection extends StatelessWidget {
         JobDetailItem(
           icon: Icons.phone_outlined,
           label: context.l10n.profileWorkPhone,
-          title: '+971 4 555 0192',
+          title: profile.phone,
         ),
       ],
     );

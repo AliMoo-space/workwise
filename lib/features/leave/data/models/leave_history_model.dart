@@ -1,31 +1,29 @@
-import 'package:workwise/features/leave/domain/entity/leave_history.dart';
+import '../../domain/entity/leave_history_entity.dart';
 
-class LeaveHistoryModel extends LeaveHistory {
+class LeaveHistoryModel extends LeaveHistoryEntity {
   const LeaveHistoryModel({
-    required super.type,
+    required super.id,
+    required super.name,
     required super.startDate,
     required super.endDate,
     required super.days,
     required super.status,
+    required super.createdAt,
   });
 
   factory LeaveHistoryModel.fromJson(Map<String, dynamic> json) {
-    return LeaveHistoryModel(
-      type: json['type'] as String,
-      startDate: json['start_date'] as String,
-      endDate: json['end_date'] as String,
-      days: json['days'] as int,
-      status: json['status'] as String,
-    );
-  }
+    final leaveType = json['leave_type'] as Map<String, dynamic>?;
 
-  Map<String, dynamic> toJson() {
-    return {
-      'type': type,
-      'start_date': startDate,
-      'end_date': endDate,
-      'days': days,
-      'status': status,
-    };
+    return LeaveHistoryModel(
+      id: json['id']?.toString() ?? '',
+      name: leaveType?['name']?.toString() ?? '',
+      startDate: json['start_date']?.toString() ?? '',
+      endDate: json['end_date']?.toString() ?? '',
+      days: json['days'] is int
+          ? json['days'] as int
+          : int.tryParse(json['days']?.toString() ?? '') ?? 0,
+      status: json['status']?.toString() ?? '',
+      createdAt: json['created_at']?.toString() ?? '',
+    );
   }
 }

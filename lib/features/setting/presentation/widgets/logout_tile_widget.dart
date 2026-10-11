@@ -137,7 +137,7 @@ class LogoutTileWidget extends StatelessWidget {
           ),
         ),
         content: AppText(
-          context.l10n.logoutConfirmationMessage,
+          context.l10n.logoutConfirmMessage,
           style: theme.textTheme.bodyMedium,
         ),
         actionsPadding: const EdgeInsets.symmetric(
