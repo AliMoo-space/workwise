@@ -643,6 +643,8 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get taskSubmitFailed =>
       'Failed to submit task. Please check your internet connection and try again.';
+
+  @override
   String get details => 'Details';
 
   @override

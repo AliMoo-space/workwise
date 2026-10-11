@@ -260,8 +260,7 @@
   "addNoteBeforeSubmit": "Please add a note before submitting",
   "uploadingFiles": "Uploading files...",
   "invalidTaskId": "Invalid task ID",
-  "taskSubmitFailed": "Failed to submit task. Please check your internet connection and try again."
-}
+  "taskSubmitFailed": "Failed to submit task. Please check your internet connection and try again.",
 
   "details": "Details",
   "goalDetails": "Goal Details",

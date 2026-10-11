@@ -603,7 +603,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profileActiveFullTime => 'نشط / دوام كامل';
 
   @override
-  String get profilePhotoUpdated => 'تم تحديث الصورة الشخصية بنجاح';
+  String get profilePhotoUpdated => 'Profile photo updated successfully';
 
   @override
   String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
@@ -641,6 +641,8 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get taskSubmitFailed =>
       'فشل في إرسال المهمة. تأكد من الاتصال بالإنترنت وحاول مرة أخرى';
+
+  @override
   String get details => 'التفاصيل';
 
   @override

@@ -1292,7 +1292,7 @@ abstract class AppLocalizations {
   /// **'App display language'**
   String get appDisplayLanguage;
 
-  /// No description provided for @details.
+  /// No description provided for @logoutConfirmationMessage.
   ///
   /// In en, this message translates to:
   /// **'Are you sure you want to log out?'**
@@ -1321,6 +1321,10 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Failed to submit task. Please check your internet connection and try again.'**
   String get taskSubmitFailed;
+
+  /// No description provided for @details.
+  ///
+  /// In en, this message translates to:
   /// **'Details'**
   String get details;
 
