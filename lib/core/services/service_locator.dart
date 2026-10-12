@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:workwise/core/utils/location_helper.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/network/api_consumer.dart';
 import 'package:workwise/core/network/api_constants.dart';
@@ -12,6 +12,29 @@ import 'package:workwise/core/network/dio_consumer.dart';
 import 'package:workwise/core/network/network_info.dart';
 import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/core/storage/secure_storage.dart';
+
+// =============================================
+// Attendance
+// =============================================
+
+import 'package:workwise/features/attendance/data/datasource/attendance_remote_data_source.dart';
+import 'package:workwise/features/attendance/data/datasource/attendance_history_remote_data_source.dart';
+import 'package:workwise/features/attendance/data/repo/attendance_history_repo_impl.dart';
+import 'package:workwise/features/attendance/data/repo/attendance_repo_impl.dart';
+import 'package:workwise/features/attendance/domain/repo/attendance_history_repo.dart';
+import 'package:workwise/features/attendance/domain/repo/attendance_repo.dart';
+import 'package:workwise/features/attendance/domain/usecases/check_in.dart';
+import 'package:workwise/features/attendance/domain/usecases/check_out.dart';
+import 'package:workwise/features/attendance/domain/usecases/get_attendance_history.dart';
+import 'package:workwise/features/attendance/domain/usecases/get_today_attendance.dart';
+import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
+import 'package:workwise/features/attendance/presentation/cubit/attendance_history_cubit.dart';
+import 'package:workwise/features/notification/data/datasource/notification_remote_data_source.dart';
+import 'package:workwise/features/notification/data/repo/notification_repository_impl.dart';
+import 'package:workwise/features/notification/domain/repo/notification_repository.dart';
+import 'package:workwise/features/notification/domain/usecases/get_notifications.dart';
+import 'package:workwise/features/notification/domain/usecases/notification_actions.dart';
+import 'package:workwise/features/notification/presentation/cubit/notification_cubit.dart';
 
 // =============================================
 // Auth
@@ -45,6 +68,20 @@ import 'package:workwise/features/leave/data/repo/leave_history_repository_impl.
 import 'package:workwise/features/leave/domain/repo/leave_history_repository.dart';
 import 'package:workwise/features/leave/domain/usecase/get_leave_history_use_case.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_history/leave_history_cubit.dart';
+import 'package:workwise/features/tasks/data/datasources/tasks_remote_data_source.dart';
+import 'package:workwise/features/tasks/data/repositories/tasks_repository_impl.dart';
+import 'package:workwise/features/tasks/domain/repositories/tasks_repository.dart';
+import 'package:workwise/features/tasks/domain/usecases/add_submission_attachment_usecase.dart';
+import 'package:workwise/features/tasks/domain/usecases/get_submission_details_usecase.dart';
+import 'package:workwise/features/tasks/domain/usecases/get_tasks_usecase.dart';
+import 'package:workwise/features/tasks/domain/usecases/submit_task_usecase.dart';
+import 'package:workwise/features/tasks/domain/usecases/update_task_progress_usecase.dart';
+import 'package:workwise/features/tasks/domain/usecases/update_task_status_usecase.dart';
+import 'package:workwise/features/tasks/presentation/cubit/tasks_cubit.dart';
+import 'package:workwise/features/profile/data/datasources/profile_remote_data_source.dart';
+import 'package:workwise/features/profile/data/repositories/profile_repository_impl.dart';
+import 'package:workwise/features/profile/domain/repositories/profile_repository.dart';
+import 'package:workwise/features/profile/presentation/cubit/profile_cubit.dart';
 
 // Leave Request
 import 'package:workwise/features/leave/data/datasourse/leave_remote_data_source.dart';
@@ -132,9 +169,8 @@ Future<void> init() async {
   sl.registerLazySingleton<Dio>(
     () => DioFactory(
       baseUrl: ApiConstants.baseUrl,
-      getToken: () async {
-        return sl<SecureStorage>().getAccessToken();
-      },
+      getToken: () => sl<SecureStorage>().getAccessToken(),
+      localStorage: sl<LocalStorage>(),
     ).create(),
   );
 
@@ -150,7 +186,9 @@ Future<void> init() async {
   // Localization
   // =============================================
 
-  sl.registerFactory<LocaleCubit>(() => LocaleCubit(sl<SharedPreferences>()));
+  sl.registerLazySingleton<LocaleCubit>(
+    () => LocaleCubit(sl<SharedPreferences>()),
+  );
 
   // =============================================
   // Auth
@@ -169,6 +207,7 @@ Future<void> init() async {
       authApiService: sl<AuthApiService>(),
       networkInfo: sl<NetworkInfo>(),
       secureStorage: sl<SecureStorage>(),
+      localStorage: sl<LocalStorage>(),
     ),
   );
 
@@ -184,6 +223,23 @@ Future<void> init() async {
       secureStorage: sl<SecureStorage>(),
       localStorage: sl<LocalStorage>(),
     ),
+  );
+
+  // =============================================
+  // Attendance - Data Layer
+  // =============================================
+
+  sl.registerLazySingleton<AttendanceRemoteDataSource>(
+    () => AttendanceRemoteDataSourceImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton<AttendanceRepo>(
+    () => AttendanceRepoImpl(remoteDataSource: sl()),
+  );
+  sl.registerLazySingleton<AttendanceHistoryRemoteDataSource>(
+    () => AttendanceHistoryRemoteDataSourceImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton<AttendanceHistoryRepo>(
+    () => AttendanceHistoryRepoImpl(remoteDataSource: sl()),
   );
 
   // =============================================
@@ -276,9 +332,30 @@ Future<void> init() async {
     ),
   );
 
+  sl.registerLazySingleton<ProfileRemoteDataSource>(
+    () => ProfileRemoteDataSource(sl<ApiConsumer>()),
+  );
+
+  sl.registerLazySingleton<ProfileRepository>(
+    () => ProfileRepositoryImpl(sl<ProfileRemoteDataSource>()),
+  );
+
   // =============================================
   // Use Cases
   // =============================================
+
+  // ---------------------------------------------
+  // Attendance
+  // ---------------------------------------------
+
+  sl.registerLazySingleton<GetTodayAttendance>(
+    () => GetTodayAttendance(attendanceRepo: sl()),
+  );
+  sl.registerLazySingleton<CheckIn>(() => CheckIn(sl()));
+  sl.registerLazySingleton<CheckOut>(() => CheckOut(sl()));
+  sl.registerLazySingleton<GetAttendanceHistory>(
+    () => GetAttendanceHistory(sl()),
+  );
 
   // ---------------------------------------------
   // Leave
@@ -327,9 +404,26 @@ Future<void> init() async {
   // =============================================
 
   // ---------------------------------------------
-  // Leave
+  // Attendance
   // ---------------------------------------------
 
+  sl.registerFactory<AttendanceCubit>(
+    () => AttendanceCubit(
+      getTodayAttendance: sl(),
+      checkIn: sl(),
+      checkOut: sl(),
+      locationProvider: LocationHelper.getCurrentPosition,
+      locationAcquirer: LocationHelper.acquireCurrentLocation,
+      locationStatusChecker: LocationHelper.checkLocationStatus,
+    ),
+  );
+  sl.registerFactory<AttendanceHistoryCubit>(
+    () => AttendanceHistoryCubit(getAttendanceHistory: sl()),
+  );
+
+  // ---------------------------------------------
+  // Leave
+  // ---------------------------------------------
   sl.registerFactory<LeaveBalancesCubit>(
     () => LeaveBalancesCubit(
       getLeaveBalancesUseCase: sl<GetLeaveBalancesUseCase>(),
@@ -340,9 +434,106 @@ Future<void> init() async {
     () => LeaveHistoryCubit(sl<GetLeaveHistoryUseCase>()),
   );
 
+  // =============================================
+  // Tasks - Data Layer
+  // =============================================
+
+  sl.registerLazySingleton<TasksRemoteDataSource>(
+    () => TasksRemoteDataSourceImpl(apiConsumer: sl<ApiConsumer>()),
+  );
+
+  sl.registerLazySingleton<TasksRepository>(
+    () => TasksRepositoryImpl(
+      remoteDataSource: sl<TasksRemoteDataSource>(),
+      networkInfo: sl<NetworkInfo>(),
+    ),
+  );
+
+  // =============================================
+  // Tasks - Use Cases
+  // =============================================
+
+  sl.registerLazySingleton<GetTasksUseCase>(
+    () => GetTasksUseCase(repository: sl<TasksRepository>()),
+  );
+
+  sl.registerLazySingleton<UpdateTaskProgressUseCase>(
+    () => UpdateTaskProgressUseCase(repository: sl<TasksRepository>()),
+  );
+
+  sl.registerLazySingleton<UpdateTaskStatusUseCase>(
+    () => UpdateTaskStatusUseCase(repository: sl<TasksRepository>()),
+  );
+
+  sl.registerLazySingleton<SubmitTaskUseCase>(
+    () => SubmitTaskUseCase(repository: sl<TasksRepository>()),
+  );
+
+  sl.registerLazySingleton<GetSubmissionDetailsUseCase>(
+    () => GetSubmissionDetailsUseCase(repository: sl<TasksRepository>()),
+  );
+
+  sl.registerLazySingleton<AddSubmissionAttachmentUseCase>(
+    () => AddSubmissionAttachmentUseCase(repository: sl<TasksRepository>()),
+  );
+
+  // =============================================
+  // Tasks - Presentation Layer
+  // =============================================
+
+  sl.registerFactory<TasksCubit>(
+    () => TasksCubit(
+      getTasksUseCase: sl<GetTasksUseCase>(),
+      updateTaskProgressUseCase: sl<UpdateTaskProgressUseCase>(),
+      updateTaskStatusUseCase: sl<UpdateTaskStatusUseCase>(),
+      submitTaskUseCase: sl<SubmitTaskUseCase>(),
+      getSubmissionDetailsUseCase: sl<GetSubmissionDetailsUseCase>(),
+      addSubmissionAttachmentUseCase: sl<AddSubmissionAttachmentUseCase>(),
+    ),
+  );
+
+  // =============================================
+  // Localization
+  // =============================================
   sl.registerFactory<LeaveRequestCubit>(
     () => LeaveRequestCubit(
       createLeaveRequestUseCase: sl<CreateLeaveRequestUseCase>(),
+    ),
+  );
+
+  sl.registerFactory<ProfileCubit>(() => ProfileCubit(sl<ProfileRepository>()));
+
+  // =============================================
+  // Notifications
+  // =============================================
+  sl.registerLazySingleton<NotificationRemoteDataSource>(
+    () => NotificationRemoteDataSourceImpl(apiConsumer: sl()),
+  );
+  sl.registerLazySingleton<NotificationRepository>(
+    () => NotificationRepositoryImpl(remoteDataSource: sl()),
+  );
+  sl.registerLazySingleton<GetNotifications>(() => GetNotifications(sl()));
+  sl.registerLazySingleton<GetUnreadNotificationsCount>(
+    () => GetUnreadNotificationsCount(sl()),
+  );
+  sl.registerLazySingleton<MarkNotificationAsRead>(
+    () => MarkNotificationAsRead(sl()),
+  );
+  sl.registerLazySingleton<MarkAllNotificationsAsRead>(
+    () => MarkAllNotificationsAsRead(sl()),
+  );
+  sl.registerLazySingleton<ClearAllNotifications>(
+    () => ClearAllNotifications(sl()),
+  );
+  sl.registerLazySingleton<DeleteNotification>(() => DeleteNotification(sl()));
+  sl.registerFactory<NotificationCubit>(
+    () => NotificationCubit(
+      getNotifications: sl(),
+      getUnreadNotificationsCount: sl(),
+      markNotificationAsRead: sl(),
+      markAllNotificationsAsRead: sl(),
+      clearAllNotifications: sl(),
+      deleteNotification: sl(),
     ),
   );
 

@@ -7,7 +7,6 @@ import 'login_state.dart';
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit({required this.authRepository, required this.localStorage})
     : super(LoginInitialState());
-
   final AuthRepository authRepository;
   final LocalStorage localStorage;
 

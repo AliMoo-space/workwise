@@ -10,12 +10,14 @@ import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/features/attendance/presentation/widgets/status_badge.dart';
+import 'package:workwise/features/attendance/domain/entities/attendance_entity.dart';
 import 'package:go_router/go_router.dart';
 
 class LocationStatusCard extends StatelessWidget {
-  const LocationStatusCard({super.key});
+  const LocationStatusCard({required this.attendance, super.key});
 
   static const workplaceLocation = LatLng(30.0444, 31.2357);
+  final AttendanceEntity attendance;
 
   @override
   Widget build(BuildContext context) {
@@ -96,12 +98,16 @@ class LocationStatusCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       AppText(
-                        context.l10n.insideWorkplaceRadius,
+                        attendance.isInsideRadius
+                            ? context.l10n.insideWorkplaceRadius
+                            : context.l10n.outsideOffice,
                         style: AppTextStyles.titleMedium,
                       ),
                       Gap(AppSpacing.space4),
                       AppText(
-                        context.l10n.gpsAccuracy,
+                        attendance.distanceMeters == null
+                            ? context.l10n.gpsAccuracy
+                            : '${attendance.distanceMeters!.toStringAsFixed(0)} m',
                         style: AppTextStyles.bodySmall,
                         color: AppColors.textSecondary,
                       ),
@@ -113,8 +119,12 @@ class LocationStatusCard extends StatelessWidget {
                     alignment: AlignmentDirectional.centerEnd,
 
                     child: StatusBadge(
-                      label: context.l10n.valid,
-                      color: AppColors.success,
+                      label: attendance.isInsideRadius
+                          ? context.l10n.valid
+                          : context.l10n.outsideOffice,
+                      color: attendance.isInsideRadius
+                          ? AppColors.success
+                          : AppColors.warning,
                     ),
                   ),
                 ),

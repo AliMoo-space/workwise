@@ -26,6 +26,8 @@
 
   "homeScreen": "Home Screen",
   "notifications": "Notifications",
+  "markAllNotificationsAsRead": "Mark all as read",
+  "clearAllNotifications": "Clear all notifications",
   "quickActions": "Quick Actions",
 
   "quickSignIn": "Quick Sign-In",
@@ -34,10 +36,28 @@
 
   "todayAttendance": "Today's attendance",
   "onShift": "On Shift",
-  "checkedInAt": "Checked in at 9:00 AM",
-  "hoursWorked": "Hours worked",
+  "checkedInAt": "Checked in at ",
+  "hoursWorked": " hours worked ",
   "insideOffice": "Inside the office",
+  "outsideOffice": "Outside the office",
+  "checkIn": "Check In",
   "checkOut": "Check Out",
+  "checkInSuccess": "Checked in successfully",
+  "checkOutSuccess": "Checked out successfully",
+  "locationPermissionDenied": "Location permission is required to verify attendance.",
+  "locationServiceDisabled": "Please enable GPS/location services on your device.",
+  "locationPermissionRequired": "Location permission is required to verify your workplace attendance.",
+  "locationPermissionDeniedMessage": "Location permission was denied. Please grant location access to verify attendance.",
+  "locationPermissionDeniedRepeatedly": "Location permission was denied multiple times. Please enable it in App Settings or tap retry.",
+  "locationPermissionPermanentlyDenied": "Location permission is permanently denied. Please open App Settings and allow location access while using the app.",
+  "locationPreciseRequired": "Precise location is required to verify workplace attendance. Please enable Precise Location in App Settings.",
+  "locationUnableToDetermine": "Unable to determine your current location. Please check your location settings and try again.",
+  "locationTimeout": "Location request timed out. Please move to an area with a clearer GPS signal and try again.",
+  "locationTemporarilyUnavailable": "Your current location is temporarily unavailable. Please wait a moment and try again.",
+  "locationUnexpectedError": "An unexpected error occurred while retrieving your location. Please try again.",
+  "retry": "Retry",
+  "openAppSettings": "Open App Settings",
+  "openLocationSettings": "Enable Location Services",
 
   "sessionExpiredWarning": "Your session has expired. Please try again to continue.",
   "invalidCredentialsWarning": "Invalid credentials. Please try again.",
@@ -72,6 +92,8 @@
 
   "attendance": "Attendance",
   "attendanceDescription": "Location-validated check in and history",
+  "noAttendanceRecords": "No attendance records",
+  "noAttendanceRecordsMessage": "There are no attendance records for this month.",
   "history": "History",
   "june2026": "June 2026",
 
@@ -224,9 +246,9 @@
   "profileWorkPhone": "WORK PHONE",
   "profileContact": "Contact",
   "profileActiveFullTime": "Active / Full-Time",
+  "profilePhotoUpdated": "Profile photo updated successfully",
 
   "logoutConfirmMessage": "Are you sure you want to logout?",
-  "logoutConfirmationMessage": "Are you sure you want to log out?",
 
   "preferences": "Preferences",
   "biometricLogin": "Biometric login",
@@ -234,6 +256,11 @@
   "pushNotifications": "Push notifications",
   "tasksApprovalsReminders": "Tasks, approvals, reminders",
   "appDisplayLanguage": "App display language",
+  "logoutConfirmationMessage": "Are you sure you want to log out?",
+  "addNoteBeforeSubmit": "Please add a note before submitting",
+  "uploadingFiles": "Uploading files...",
+  "invalidTaskId": "Invalid task ID",
+  "taskSubmitFailed": "Failed to submit task. Please check your internet connection and try again.",
 
   "details": "Details",
   "goalDetails": "Goal Details",

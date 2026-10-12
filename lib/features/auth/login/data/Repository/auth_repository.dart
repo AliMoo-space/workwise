@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:workwise/core/errors/failure.dart';
 import 'package:workwise/core/network/network_info.dart';
+import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/core/storage/secure_storage.dart';
 import 'package:workwise/features/auth/login/data/models/login_response_model.dart';
 import 'package:workwise/features/auth/login/data/web_services/auth_api_service.dart';
@@ -11,11 +12,13 @@ class AuthRepository {
     required this.authApiService,
     required this.networkInfo,
     required this.secureStorage,
+    required this.localStorage,
   });
 
   final AuthApiService authApiService;
   final NetworkInfo networkInfo;
   final SecureStorage secureStorage;
+  final LocalStorage localStorage;
 
   Future<Either<Failure, LoginResponseModel>> login({
     required String email,
@@ -33,6 +36,7 @@ class AuthRepository {
         final loginModel = LoginResponseModel.fromJson(responseData);
 
         await secureStorage.saveAccessToken(loginModel.data.accessToken);
+        await localStorage.saveUserId(loginModel.data.user.id);
 
         return Right(loginModel);
       }
@@ -47,6 +51,15 @@ class AuthRepository {
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
+  }
+
+  Future<void> logout() async {
+    try {
+      await authApiService.logout();
+    } catch (_) {}
+
+    await secureStorage.clearSession();
+    await localStorage.clearSession();
   }
 
   Failure _mapDioException(DioException exception) {

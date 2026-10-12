@@ -73,6 +73,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get notifications => 'Notifications';
 
   @override
+  String get markAllNotificationsAsRead => 'Mark all as read';
+
+  @override
+  String get clearAllNotifications => 'Clear all notifications';
+
+  @override
   String get quickActions => 'Quick Actions';
 
   @override
@@ -91,16 +97,81 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onShift => 'On Shift';
 
   @override
-  String get checkedInAt => 'Checked in at 9:00 AM';
+  String get checkedInAt => 'Checked in at ';
 
   @override
-  String get hoursWorked => 'Hours worked';
+  String get hoursWorked => ' hours worked ';
 
   @override
   String get insideOffice => 'Inside the office';
 
   @override
+  String get outsideOffice => 'Outside the office';
+
+  @override
+  String get checkIn => 'Check In';
+
+  @override
   String get checkOut => 'Check Out';
+
+  @override
+  String get checkInSuccess => 'Checked in successfully';
+
+  @override
+  String get checkOutSuccess => 'Checked out successfully';
+
+  @override
+  String get locationPermissionDenied =>
+      'Location permission is required to verify attendance.';
+
+  @override
+  String get locationServiceDisabled =>
+      'Please enable GPS/location services on your device.';
+
+  @override
+  String get locationPermissionRequired =>
+      'Location permission is required to verify your workplace attendance.';
+
+  @override
+  String get locationPermissionDeniedMessage =>
+      'Location permission was denied. Please grant location access to verify attendance.';
+
+  @override
+  String get locationPermissionDeniedRepeatedly =>
+      'Location permission was denied multiple times. Please enable it in App Settings or tap retry.';
+
+  @override
+  String get locationPermissionPermanentlyDenied =>
+      'Location permission is permanently denied. Please open App Settings and allow location access while using the app.';
+
+  @override
+  String get locationPreciseRequired =>
+      'Precise location is required to verify workplace attendance. Please enable Precise Location in App Settings.';
+
+  @override
+  String get locationUnableToDetermine =>
+      'Unable to determine your current location. Please check your location settings and try again.';
+
+  @override
+  String get locationTimeout =>
+      'Location request timed out. Please move to an area with a clearer GPS signal and try again.';
+
+  @override
+  String get locationTemporarilyUnavailable =>
+      'Your current location is temporarily unavailable. Please wait a moment and try again.';
+
+  @override
+  String get locationUnexpectedError =>
+      'An unexpected error occurred while retrieving your location. Please try again.';
+
+  @override
+  String get retry => 'Retry';
+
+  @override
+  String get openAppSettings => 'Open App Settings';
+
+  @override
+  String get openLocationSettings => 'Enable Location Services';
 
   @override
   String get sessionExpiredWarning =>
@@ -184,6 +255,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get attendanceDescription => 'Location-validated check in and history';
+
+  @override
+  String get noAttendanceRecords => 'No attendance records';
+
+  @override
+  String get noAttendanceRecordsMessage =>
+      'There are no attendance records for this month.';
 
   @override
   String get history => 'History';
@@ -527,10 +605,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileActiveFullTime => 'Active / Full-Time';
 
   @override
-  String get logoutConfirmMessage => 'Are you sure you want to logout?';
+  String get profilePhotoUpdated => 'Profile photo updated successfully';
 
   @override
-  String get logoutConfirmationMessage => 'Are you sure you want to log out?';
+  String get logoutConfirmMessage => 'Are you sure you want to logout?';
 
   @override
   String get preferences => 'Preferences';
@@ -549,6 +627,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appDisplayLanguage => 'App display language';
+
+  @override
+  String get logoutConfirmationMessage => 'Are you sure you want to log out?';
+
+  @override
+  String get addNoteBeforeSubmit => 'Please add a note before submitting';
+
+  @override
+  String get uploadingFiles => 'Uploading files...';
+
+  @override
+  String get invalidTaskId => 'Invalid task ID';
+
+  @override
+  String get taskSubmitFailed =>
+      'Failed to submit task. Please check your internet connection and try again.';
 
   @override
   String get details => 'Details';

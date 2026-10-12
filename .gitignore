@@ -10,7 +10,8 @@
 .history
 .svn/
 .swiftpm/
-.agent/
+.agents/
+.github/
 migrate_working_dir/
 
 # IntelliJ related

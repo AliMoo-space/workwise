@@ -19,4 +19,5 @@ class AppRoutes {
   static const String leaveScreen = '/viewLeaveScreen';
   static const String goalDetailsScreen = '/goalDetailsScreen';
   static const String goalViewAll = '/goalViewAll';
+  static const String notificationScreen = '/notifications';
 }

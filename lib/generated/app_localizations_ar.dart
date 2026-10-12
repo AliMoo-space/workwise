@@ -73,6 +73,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get notifications => 'الإشعارات';
 
   @override
+  String get markAllNotificationsAsRead => 'تحديد كل الإشعارات كمقروءة';
+
+  @override
+  String get clearAllNotifications => 'مسح كل الإشعارات';
+
+  @override
   String get quickActions => 'إجراءات سريعة';
 
   @override
@@ -91,16 +97,80 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onShift => 'في الدوام';
 
   @override
-  String get checkedInAt => 'تم تسجيل الحضور الساعة 9:00 صباحًا';
+  String get checkedInAt => 'تم تسجيل الحضور الساعة ';
 
   @override
-  String get hoursWorked => 'ساعات العمل';
+  String get hoursWorked => ' ساعات العمل ';
 
   @override
   String get insideOffice => 'داخل المكتب';
 
   @override
+  String get outsideOffice => 'خارج المكتب';
+
+  @override
+  String get checkIn => 'تسجيل الحضور';
+
+  @override
   String get checkOut => 'تسجيل الانصراف';
+
+  @override
+  String get checkInSuccess => 'تم تسجيل الحضور بنجاح';
+
+  @override
+  String get checkOutSuccess => 'تم تسجيل الانصراف بنجاح';
+
+  @override
+  String get locationPermissionDenied => 'إذن الموقع مطلوب للتحقق من الحضور.';
+
+  @override
+  String get locationServiceDisabled =>
+      'يرجى تفعيل خدمة تحديد الموقع (GPS) على جهازك.';
+
+  @override
+  String get locationPermissionRequired =>
+      'إذن الوصول إلى الموقع مطلوب للتحقق من حضورك في مقر العمل.';
+
+  @override
+  String get locationPermissionDeniedMessage =>
+      'تم رفض إذن الموقع. يرجى منح صلاحية الموقع للتحقق من الحضور.';
+
+  @override
+  String get locationPermissionDeniedRepeatedly =>
+      'تم رفض إذن الموقع عدة مرات. يرجى تفعيله من إعدادات التطبيق أو المحاولة مرة أخرى.';
+
+  @override
+  String get locationPermissionPermanentlyDenied =>
+      'تم رفض إذن الموقع بشكل دائم. يرجى فتح إعدادات التطبيق والسماح بالوصول إلى الموقع أثناء استخدام التطبيق.';
+
+  @override
+  String get locationPreciseRequired =>
+      'يلزم تفعيل الموقع الدقيق للتحقق من الحضور في مقر العمل. يرجى تفعيل الموقع الدقيق من إعدادات التطبيق.';
+
+  @override
+  String get locationUnableToDetermine =>
+      'تعذر تحديد موقعك الحالي. يرجى التحقق من إعدادات الموقع والمحاولة مرة أخرى.';
+
+  @override
+  String get locationTimeout =>
+      'انتهت مهلة تحديد الموقع. يرجى الانتقال إلى مكان ذي إشارة GPS أوضح والمحاولة مرة أخرى.';
+
+  @override
+  String get locationTemporarilyUnavailable =>
+      'موقعك الحالي غير متاح مؤقتاً. يرجى الانتظار قليلاً والمحاولة مرة أخرى.';
+
+  @override
+  String get locationUnexpectedError =>
+      'حدث خطأ غير متوقع أثناء جلب موقعك. يرجى المحاولة مرة أخرى.';
+
+  @override
+  String get retry => 'إعادة المحاولة';
+
+  @override
+  String get openAppSettings => 'فتح إعدادات التطبيق';
+
+  @override
+  String get openLocationSettings => 'تفعيل خدمات الموقع';
 
   @override
   String get sessionExpiredWarning =>
@@ -185,6 +255,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get attendanceDescription => 'تسجيل الحضور والتحقق من الموقع والسجل';
+
+  @override
+  String get noAttendanceRecords => 'لا توجد سجلات حضور';
+
+  @override
+  String get noAttendanceRecordsMessage => 'لا توجد سجلات حضور لهذا الشهر.';
 
   @override
   String get history => 'السجل';
@@ -527,10 +603,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profileActiveFullTime => 'نشط / دوام كامل';
 
   @override
-  String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+  String get profilePhotoUpdated => 'Profile photo updated successfully';
 
   @override
-  String get logoutConfirmationMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+  String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
 
   @override
   String get preferences => 'التفضيلات';
@@ -549,6 +625,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get appDisplayLanguage => 'لغة عرض التطبيق';
+
+  @override
+  String get logoutConfirmationMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+
+  @override
+  String get addNoteBeforeSubmit => 'يرجى إضافة ملاحظة قبل الإرسال';
+
+  @override
+  String get uploadingFiles => 'جاري رفع الملفات...';
+
+  @override
+  String get invalidTaskId => 'معرف المهمة غير صالح';
+
+  @override
+  String get taskSubmitFailed =>
+      'فشل في إرسال المهمة. تأكد من الاتصال بالإنترنت وحاول مرة أخرى';
 
   @override
   String get details => 'التفاصيل';

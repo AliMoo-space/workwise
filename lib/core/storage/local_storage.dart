@@ -1,4 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:workwise/core/constants/app_constants.dart';
 import 'package:workwise/core/constants/storage_keys.dart';
 
 class LocalStorage {
@@ -57,5 +58,19 @@ class LocalStorage {
     await _preferences.remove(StorageKeys.employeeCode);
 
     return true;
+  }
+
+  Future<bool> saveLocale(String locale) {
+    return _preferences.setString(
+      StorageKeys.locale,
+      locale,
+    );
+  }
+
+  String getLocale() {
+    return _preferences.getString(
+          StorageKeys.locale,
+        ) ??
+        AppConstants.defaultLanguage;
   }
 }

@@ -224,6 +224,18 @@ abstract class AppLocalizations {
   /// **'Notifications'**
   String get notifications;
 
+  /// No description provided for @markAllNotificationsAsRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all as read'**
+  String get markAllNotificationsAsRead;
+
+  /// No description provided for @clearAllNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear all notifications'**
+  String get clearAllNotifications;
+
   /// No description provided for @quickActions.
   ///
   /// In en, this message translates to:
@@ -263,13 +275,13 @@ abstract class AppLocalizations {
   /// No description provided for @checkedInAt.
   ///
   /// In en, this message translates to:
-  /// **'Checked in at 9:00 AM'**
+  /// **'Checked in at '**
   String get checkedInAt;
 
   /// No description provided for @hoursWorked.
   ///
   /// In en, this message translates to:
-  /// **'Hours worked'**
+  /// **' hours worked '**
   String get hoursWorked;
 
   /// No description provided for @insideOffice.
@@ -278,11 +290,119 @@ abstract class AppLocalizations {
   /// **'Inside the office'**
   String get insideOffice;
 
+  /// No description provided for @outsideOffice.
+  ///
+  /// In en, this message translates to:
+  /// **'Outside the office'**
+  String get outsideOffice;
+
+  /// No description provided for @checkIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Check In'**
+  String get checkIn;
+
   /// No description provided for @checkOut.
   ///
   /// In en, this message translates to:
   /// **'Check Out'**
   String get checkOut;
+
+  /// No description provided for @checkInSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Checked in successfully'**
+  String get checkInSuccess;
+
+  /// No description provided for @checkOutSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Checked out successfully'**
+  String get checkOutSuccess;
+
+  /// No description provided for @locationPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is required to verify attendance.'**
+  String get locationPermissionDenied;
+
+  /// No description provided for @locationServiceDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enable GPS/location services on your device.'**
+  String get locationServiceDisabled;
+
+  /// No description provided for @locationPermissionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is required to verify your workplace attendance.'**
+  String get locationPermissionRequired;
+
+  /// No description provided for @locationPermissionDeniedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission was denied. Please grant location access to verify attendance.'**
+  String get locationPermissionDeniedMessage;
+
+  /// No description provided for @locationPermissionDeniedRepeatedly.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission was denied multiple times. Please enable it in App Settings or tap retry.'**
+  String get locationPermissionDeniedRepeatedly;
+
+  /// No description provided for @locationPermissionPermanentlyDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is permanently denied. Please open App Settings and allow location access while using the app.'**
+  String get locationPermissionPermanentlyDenied;
+
+  /// No description provided for @locationPreciseRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Precise location is required to verify workplace attendance. Please enable Precise Location in App Settings.'**
+  String get locationPreciseRequired;
+
+  /// No description provided for @locationUnableToDetermine.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to determine your current location. Please check your location settings and try again.'**
+  String get locationUnableToDetermine;
+
+  /// No description provided for @locationTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Location request timed out. Please move to an area with a clearer GPS signal and try again.'**
+  String get locationTimeout;
+
+  /// No description provided for @locationTemporarilyUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Your current location is temporarily unavailable. Please wait a moment and try again.'**
+  String get locationTemporarilyUnavailable;
+
+  /// No description provided for @locationUnexpectedError.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred while retrieving your location. Please try again.'**
+  String get locationUnexpectedError;
+
+  /// No description provided for @retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get retry;
+
+  /// No description provided for @openAppSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open App Settings'**
+  String get openAppSettings;
+
+  /// No description provided for @openLocationSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable Location Services'**
+  String get openLocationSettings;
 
   /// No description provided for @sessionExpiredWarning.
   ///
@@ -439,6 +559,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Location-validated check in and history'**
   String get attendanceDescription;
+
+  /// No description provided for @noAttendanceRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No attendance records'**
+  String get noAttendanceRecords;
+
+  /// No description provided for @noAttendanceRecordsMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no attendance records for this month.'**
+  String get noAttendanceRecordsMessage;
 
   /// No description provided for @history.
   ///
@@ -1112,17 +1244,17 @@ abstract class AppLocalizations {
   /// **'Active / Full-Time'**
   String get profileActiveFullTime;
 
+  /// No description provided for @profilePhotoUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo updated successfully'**
+  String get profilePhotoUpdated;
+
   /// No description provided for @logoutConfirmMessage.
   ///
   /// In en, this message translates to:
   /// **'Are you sure you want to logout?'**
   String get logoutConfirmMessage;
-
-  /// No description provided for @logoutConfirmationMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Are you sure you want to log out?'**
-  String get logoutConfirmationMessage;
 
   /// No description provided for @preferences.
   ///
@@ -1159,6 +1291,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'App display language'**
   String get appDisplayLanguage;
+
+  /// No description provided for @logoutConfirmationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to log out?'**
+  String get logoutConfirmationMessage;
+
+  /// No description provided for @addNoteBeforeSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Please add a note before submitting'**
+  String get addNoteBeforeSubmit;
+
+  /// No description provided for @uploadingFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploading files...'**
+  String get uploadingFiles;
+
+  /// No description provided for @invalidTaskId.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid task ID'**
+  String get invalidTaskId;
+
+  /// No description provided for @taskSubmitFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to submit task. Please check your internet connection and try again.'**
+  String get taskSubmitFailed;
 
   /// No description provided for @details.
   ///
