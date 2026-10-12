@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_icon_button.dart';
@@ -8,7 +10,7 @@ import 'package:workwise/core/design_system/widgets/feedback/app_snack_bar.dart'
 import 'package:workwise/core/design_system/widgets/inputs/app_text_field.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
-import '../../data/static_tasks_data.dart';
+import 'package:workwise/features/tasks/presentation/cubit/tasks_cubit.dart';
 import '../../domain/models/task_models.dart';
 import '../widgets/attachment_uploader.dart';
 import '../widgets/custom_widgets/priority_badge.dart';
@@ -46,18 +48,71 @@ class TaskSubmissionScreen extends StatelessWidget {
   Future<void> _submitForReview(BuildContext context) async {
     _isSubmitting.value = true;
 
-    await Future.delayed(const Duration(milliseconds: 600));
+    final taskId = int.tryParse(task.id);
+    if (taskId == null) {
+      _isSubmitting.value = false;
+      if (context.mounted) {
+        AppSnackBar.error(context, message: context.l10n.invalidTaskId);
+      }
+      return;
+    }
 
-    StaticTasksData.updateTask(
-      task.id,
-      _draftProgress.value,
-      TaskStatus.underReview,
+    // التحقق من الملاحظة
+    if (_notesController.text.trim().isEmpty) {
+      _isSubmitting.value = false;
+      if (context.mounted) {
+        AppSnackBar.error(context, message: context.l10n.addNoteBeforeSubmit);
+      }
+      return;
+    }
+
+    // جمع file paths من الـ attachments
+    final filePaths = _attachments.value
+        .where(
+          (attachment) =>
+              attachment.localPath != null && attachment.localPath!.isNotEmpty,
+        )
+        .map((attachment) => attachment.localPath!)
+        .toList();
+
+    // إظهار رسالة أثناء الرفع
+    if (context.mounted && filePaths.isNotEmpty) {
+      AppSnackBar.info(context, message: context.l10n.uploadingFiles);
+    }
+
+    // تحديث نسبة الإنجاز إذا تم تغييرها
+    if (_draftProgress.value != task.progress) {
+      await context.read<TasksCubit>().updateTaskProgress(
+        taskId: taskId,
+        progress: _draftProgress.value,
+      );
+    }
+
+    if (!context.mounted) return;
+
+    // استدعاء الـ API
+    final (success, errorMessage) = await context.read<TasksCubit>().submitTask(
+      taskId: taskId,
+      note: _notesController.text.trim(),
+      filePaths: filePaths.isNotEmpty ? filePaths : null,
     );
 
+    _isSubmitting.value = false;
+
     if (context.mounted) {
-      AppSnackBar.success(context, message: context.l10n.taskSubmittedSuccess);
-      Navigator.of(context).pop();
-      onSubmitted?.call();
+      if (success) {
+        AppSnackBar.success(
+          context,
+          message: context.l10n.taskSubmittedSuccess,
+        );
+        Navigator.of(context).pop();
+        onSubmitted?.call();
+      } else {
+        AppSnackBar.error(
+          context,
+          message: errorMessage ?? context.l10n.taskSubmitFailed,
+        );
+      }
     }
   }
 
@@ -72,134 +127,146 @@ class TaskSubmissionScreen extends StatelessWidget {
             return ValueListenableBuilder<bool>(
               valueListenable: _isSubmitting,
               builder: (context, isSubmitting, _) {
-                return Material(
-                  color: AppColors.onPrimary,
-                  child: SafeArea(
+                return Scaffold(
+                  backgroundColor: AppColors.onPrimary,
+                  body: SafeArea(
                     top: false,
-                    child: Column(
-                      children: [
-                        Center(
-                          child: Container(
-                            width: 36.w,
-                            height: 4.h,
-                            margin: EdgeInsets.only(top: 10.h, bottom: 8.h),
-                            decoration: BoxDecoration(
-                              color: AppColors.textDisabled,
-                              borderRadius: BorderRadius.circular(2.r),
+                    child: Skeletonizer(
+                      enabled: isSubmitting,
+                      effect: const ShimmerEffect(
+                        baseColor: Color(0xFFEDF1F4),
+                        highlightColor: Color(0xFFF9FAFB),
+                        duration: Duration(milliseconds: 1600),
+                      ),
+                      child: Column(
+                        children: [
+                          Center(
+                            child: Container(
+                              width: 36.w,
+                              height: 4.h,
+                              margin: EdgeInsets.only(top: 10.h, bottom: 8.h),
+                              decoration: BoxDecoration(
+                                color: AppColors.textDisabled,
+                                borderRadius: BorderRadius.circular(2.r),
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 16.w,
-                            vertical: 4.h,
-                          ),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    AppText(
-                                      'T-${task.id}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodySmall
-                                          ?.copyWith(
-                                            color: Colors.grey.shade600,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                    ),
-                                    Gap(2.h),
-                                    AppText(
-                                      task.title,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium
-                                          ?.copyWith(
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 18.sp,
-                                          ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Gap(12.h),
-                              AppIconButton(
-                                icon: Icons.close,
-                                size: 36.r,
-                                iconSize: 18.r,
-                                variant: AppIconButtonVariant.ghost,
-                                onPressed: () => Navigator.of(context).pop(),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 16.w,
-                            vertical: 8.h,
-                          ),
-                          child: Row(
-                            children: [
-                              PriorityBadge(priority: task.priority),
-                              const Gap(8),
-                              TaskStatusBadge(status: task.status),
-                              const Gap(12),
-                              AppText(
-                                '${context.l10n.due} ${_date(task.deadline)}',
-                                style: TextStyle(
-                                  color: AppColors.textHint,
-                                  fontSize: 13.sp,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            padding: EdgeInsets.all(16.r),
-                            child: Column(
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16.w,
+                              vertical: 4.h,
+                            ),
+                            child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (task.feedback != null) ...[Gap(16.h)],
-                                Gap(28.h),
-                                ProgressSlider(
-                                  value: draftProgress,
-                                  enabled: !isSubmitting,
-                                  onChanged: _updateProgress,
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      AppText(
+                                        'T-${task.id}',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodySmall
+                                            ?.copyWith(
+                                              color: Colors.grey.shade600,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                      Gap(2.h),
+                                      AppText(
+                                        task.title,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                              fontWeight: FontWeight.w700,
+                                              fontSize: 18.sp,
+                                            ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                Gap(24.h),
-                                AppTextField(
-                                  label: context.l10n.notes,
-                                  controller: _notesController,
-                                  enabled: !isSubmitting,
-                                  type: AppTextFieldType.multiline,
-                                  minLines: 3,
-                                  maxLines: 5,
-                                  hintText: context.l10n.notesHint,
-                                ),
-                                Gap(24.h),
-                                AttachmentUploader(
-                                  attachments: attachments,
-                                  onPick: _pickAttachment,
-                                  onRemove: _removeAttachment,
+                                Gap(12.h),
+                                AppIconButton(
+                                  icon: Icons.close,
+                                  size: 36.r,
+                                  iconSize: 18.r,
+                                  variant: AppIconButtonVariant.ghost,
+                                  onPressed: () => Navigator.of(context).pop(),
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(30.r),
-                          child: AppButton(
-                            text: context.l10n.submitForReview,
-                            onPressed: () => _submitForReview(context),
-                            isLoading: isSubmitting,
-                            enabled: !isSubmitting,
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16.w,
+                              vertical: 8.h,
+                            ),
+                            child: Row(
+                              children: [
+                                PriorityBadge(priority: task.priority),
+                                const Gap(8),
+                                TaskStatusBadge(status: task.status),
+                                const Gap(12),
+                                AppText(
+                                  '${context.l10n.due} ${_date(task.deadline)}',
+                                  style: TextStyle(
+                                    color: AppColors.textHint,
+                                    fontSize: 13.sp,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            child: SingleChildScrollView(
+                              padding: EdgeInsets.all(16.r),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (task.feedback != null) ...[Gap(16.h)],
+                                  Gap(28.h),
+                                  ProgressSlider(
+                                    value: draftProgress,
+                                    enabled: !isSubmitting,
+                                    onChanged: _updateProgress,
+                                  ),
+                                  Gap(24.h),
+                                  AppTextField(
+                                    label: context.l10n.notes,
+                                    controller: _notesController,
+                                    enabled: !isSubmitting,
+                                    type: AppTextFieldType.multiline,
+                                    minLines: 3,
+                                    maxLines: 5,
+                                    hintText: context.l10n.notesHint,
+                                  ),
+                                  Gap(24.h),
+                                  IgnorePointer(
+                                    ignoring: isSubmitting,
+                                    child: AttachmentUploader(
+                                      attachments: attachments,
+                                      onPick: _pickAttachment,
+                                      onRemove: _removeAttachment,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(30.r),
+                            child: AppButton(
+                              text: context.l10n.submitForReview,
+                              onPressed: () => _submitForReview(context),
+                              isLoading: false,
+                              enabled: !isSubmitting,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );

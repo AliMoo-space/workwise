@@ -15,5 +15,4 @@ abstract final class AppConstants {
   static const int maxImageSizeInMb = 5;
 
   static const String defaultLanguage = 'en';
-
 }

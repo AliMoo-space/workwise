@@ -68,6 +68,16 @@ import 'package:workwise/features/leave/data/repo/leave_history_repository_impl.
 import 'package:workwise/features/leave/domain/repo/leave_history_repository.dart';
 import 'package:workwise/features/leave/domain/usecase/get_leave_history_use_case.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_history/leave_history_cubit.dart';
+import 'package:workwise/features/tasks/data/datasources/tasks_remote_data_source.dart';
+import 'package:workwise/features/tasks/data/repositories/tasks_repository_impl.dart';
+import 'package:workwise/features/tasks/domain/repositories/tasks_repository.dart';
+import 'package:workwise/features/tasks/domain/usecases/add_submission_attachment_usecase.dart';
+import 'package:workwise/features/tasks/domain/usecases/get_submission_details_usecase.dart';
+import 'package:workwise/features/tasks/domain/usecases/get_tasks_usecase.dart';
+import 'package:workwise/features/tasks/domain/usecases/submit_task_usecase.dart';
+import 'package:workwise/features/tasks/domain/usecases/update_task_progress_usecase.dart';
+import 'package:workwise/features/tasks/domain/usecases/update_task_status_usecase.dart';
+import 'package:workwise/features/tasks/presentation/cubit/tasks_cubit.dart';
 import 'package:workwise/features/profile/data/datasources/profile_remote_data_source.dart';
 import 'package:workwise/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:workwise/features/profile/domain/repositories/profile_repository.dart';
@@ -424,6 +434,67 @@ Future<void> init() async {
     () => LeaveHistoryCubit(sl<GetLeaveHistoryUseCase>()),
   );
 
+  // =============================================
+  // Tasks - Data Layer
+  // =============================================
+
+  sl.registerLazySingleton<TasksRemoteDataSource>(
+    () => TasksRemoteDataSourceImpl(apiConsumer: sl<ApiConsumer>()),
+  );
+
+  sl.registerLazySingleton<TasksRepository>(
+    () => TasksRepositoryImpl(
+      remoteDataSource: sl<TasksRemoteDataSource>(),
+      networkInfo: sl<NetworkInfo>(),
+    ),
+  );
+
+  // =============================================
+  // Tasks - Use Cases
+  // =============================================
+
+  sl.registerLazySingleton<GetTasksUseCase>(
+    () => GetTasksUseCase(repository: sl<TasksRepository>()),
+  );
+
+  sl.registerLazySingleton<UpdateTaskProgressUseCase>(
+    () => UpdateTaskProgressUseCase(repository: sl<TasksRepository>()),
+  );
+
+  sl.registerLazySingleton<UpdateTaskStatusUseCase>(
+    () => UpdateTaskStatusUseCase(repository: sl<TasksRepository>()),
+  );
+
+  sl.registerLazySingleton<SubmitTaskUseCase>(
+    () => SubmitTaskUseCase(repository: sl<TasksRepository>()),
+  );
+
+  sl.registerLazySingleton<GetSubmissionDetailsUseCase>(
+    () => GetSubmissionDetailsUseCase(repository: sl<TasksRepository>()),
+  );
+
+  sl.registerLazySingleton<AddSubmissionAttachmentUseCase>(
+    () => AddSubmissionAttachmentUseCase(repository: sl<TasksRepository>()),
+  );
+
+  // =============================================
+  // Tasks - Presentation Layer
+  // =============================================
+
+  sl.registerFactory<TasksCubit>(
+    () => TasksCubit(
+      getTasksUseCase: sl<GetTasksUseCase>(),
+      updateTaskProgressUseCase: sl<UpdateTaskProgressUseCase>(),
+      updateTaskStatusUseCase: sl<UpdateTaskStatusUseCase>(),
+      submitTaskUseCase: sl<SubmitTaskUseCase>(),
+      getSubmissionDetailsUseCase: sl<GetSubmissionDetailsUseCase>(),
+      addSubmissionAttachmentUseCase: sl<AddSubmissionAttachmentUseCase>(),
+    ),
+  );
+
+  // =============================================
+  // Localization
+  // =============================================
   sl.registerFactory<LeaveRequestCubit>(
     () => LeaveRequestCubit(
       createLeaveRequestUseCase: sl<CreateLeaveRequestUseCase>(),

@@ -1292,6 +1292,36 @@ abstract class AppLocalizations {
   /// **'App display language'**
   String get appDisplayLanguage;
 
+  /// No description provided for @logoutConfirmationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to log out?'**
+  String get logoutConfirmationMessage;
+
+  /// No description provided for @addNoteBeforeSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Please add a note before submitting'**
+  String get addNoteBeforeSubmit;
+
+  /// No description provided for @uploadingFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploading files...'**
+  String get uploadingFiles;
+
+  /// No description provided for @invalidTaskId.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid task ID'**
+  String get invalidTaskId;
+
+  /// No description provided for @taskSubmitFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to submit task. Please check your internet connection and try again.'**
+  String get taskSubmitFailed;
+
   /// No description provided for @details.
   ///
   /// In en, this message translates to:
