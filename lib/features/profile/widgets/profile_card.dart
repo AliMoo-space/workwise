@@ -83,6 +83,13 @@ class _ProfileCardState extends State<ProfileCard> {
     }
   }
 
+  Future<void> _showProfilePhoto() async {
+    final bytes = widget.avatarPreview ?? await _avatarFuture;
+    if (!mounted || bytes == null || bytes.isEmpty) return;
+
+    await showProfilePhotoViewer(context, bytes: bytes);
+  }
+
   Widget _buildDefaultAvatar() {
     return Container(
       width: 80.w,
@@ -100,8 +107,8 @@ class _ProfileCardState extends State<ProfileCard> {
       return ClipOval(
         child: Image.memory(
           widget.avatarPreview!,
-          width: 90.w,
-          height: 90.h,
+          width: 80.w,
+          height: 80.h,
           fit: BoxFit.cover,
         ),
       );
@@ -134,7 +141,7 @@ class _ProfileCardState extends State<ProfileCard> {
         return ClipOval(
           child: Image.memory(
             bytes,
-            width: 0.w,
+            width: 80.w,
             height: 80.h,
             fit: BoxFit.cover,
           ),
@@ -162,11 +169,7 @@ class _ProfileCardState extends State<ProfileCard> {
                         onTap:
                             widget.avatarPreview != null ||
                                 widget.profile.avatarUrl.isNotEmpty
-                            ? () => showProfilePhotoViewer(
-                                context,
-                                bytes: widget.avatarPreview,
-                                imageUrl: widget.profile.avatarUrl,
-                              )
+                            ? _showProfilePhoto
                             : null,
                         child: _buildAvatar(),
                       ),

@@ -33,7 +33,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get language => 'اللغة';
 
   @override
-  String get languageEnglish => 'الإنجليزية';
+  String get languageEnglish => 'الإنجليزيّة';
 
   @override
   String get languageArabic => 'العربية';
@@ -97,10 +97,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onShift => 'في الدوام';
 
   @override
-  String get checkedInAt => 'تم تسجيل الحضور الساعة ';
+  String get checkedInAt => 'تم تسجيل الحضور الساعة 9:00 صباحًا';
 
   @override
-  String get hoursWorked => ' ساعات العمل ';
+  String get hoursWorked => 'ساعات العمل';
 
   @override
   String get insideOffice => 'داخل المكتب';

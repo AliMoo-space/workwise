@@ -1,5 +1,13 @@
 import 'package:workwise/core/constants/app_constants.dart';
 
+import 'company_location_model.dart';
+import 'department_model.dart';
+import 'manager_model.dart';
+
+export 'company_location_model.dart';
+export 'department_model.dart';
+export 'manager_model.dart';
+
 class ProfileModel {
   const ProfileModel({
     required this.id,
@@ -44,7 +52,8 @@ class ProfileModel {
   final String createdAt;
 
   static String _parseAvatarUrl(Map<String, dynamic> json) {
-    final dynamic rawUrl = json['avatar_url'] ??
+    final dynamic rawUrl =
+        json['avatar_url'] ??
         json['avatar'] ??
         json['image'] ??
         json['photo'] ??
@@ -94,57 +103,6 @@ class ProfileModel {
           : null,
       permissions: List<String>.from(json['permissions'] ?? const []),
       createdAt: json['created_at'] ?? '',
-    );
-  }
-}
-
-class DepartmentModel {
-  const DepartmentModel({
-    required this.id,
-    required this.name,
-  });
-
-  final int id;
-  final String name;
-
-  factory DepartmentModel.fromJson(Map<String, dynamic> json) {
-    return DepartmentModel(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? '',
-    );
-  }
-}
-
-class CompanyLocationModel {
-  const CompanyLocationModel({
-    required this.id,
-    required this.name,
-  });
-
-  final int id;
-  final String name;
-
-  factory CompanyLocationModel.fromJson(Map<String, dynamic> json) {
-    return CompanyLocationModel(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? '',
-    );
-  }
-}
-
-class ManagerModel {
-  const ManagerModel({
-    required this.id,
-    required this.name,
-  });
-
-  final int id;
-  final String name;
-
-  factory ManagerModel.fromJson(Map<String, dynamic> json) {
-    return ManagerModel(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? '',
     );
   }
 }

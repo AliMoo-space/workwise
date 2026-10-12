@@ -1,47 +1,31 @@
-import 'package:dio/dio.dart';
-import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/network/api_consumer.dart';
-import '../../../../core/network/endpoints/api_endpoints.dart';
+import 'get_profile_remote_data_source.dart';
 import '../models/profile_model.dart';
+import 'profile_payload_normalizer.dart';
+import 'update_profile_remote_data_source.dart';
 
 class ProfileRemoteDataSource {
-  ProfileRemoteDataSource(this.apiConsumer);
+  ProfileRemoteDataSource(this.apiConsumer)
+    : _getProfileDataSource = GetProfileRemoteDataSource(apiConsumer),
+      _updateProfileDataSource = UpdateProfileRemoteDataSource(apiConsumer);
 
   final ApiConsumer apiConsumer;
+  final GetProfileRemoteDataSource _getProfileDataSource;
+  final UpdateProfileRemoteDataSource _updateProfileDataSource;
 
   static Map<String, dynamic> normalizeProfilePayload(dynamic payload) {
-    if (payload is! Map) {
-      return <String, dynamic>{};
-    }
-
-    var map = Map<String, dynamic>.from(payload);
-
-    if (map.containsKey('data') && map['data'] is Map) {
-      map = Map<String, dynamic>.from(map['data'] as Map);
-    }
-
-    if (map.containsKey('employee') && map['employee'] is Map) {
-      map = Map<String, dynamic>.from(map['employee'] as Map);
-    } else if (map.containsKey('user') && map['user'] is Map) {
-      map = Map<String, dynamic>.from(map['user'] as Map);
-    }
-
-    return map;
+    return ProfilePayloadNormalizer.normalize(payload);
   }
 
   Future<ProfileModel> getProfile({
     required int employeeId,
     required String language,
   }) async {
-    final response = await apiConsumer.get(
-      ApiEndpoints.employeeDetails(employeeId),
-      queryParameters: {'lang': language},
+    return _getProfileDataSource.getProfile(
+      employeeId: employeeId,
+      language: language,
     );
-
-    final data = normalizeProfilePayload(response.data);
-
-    return ProfileModel.fromJson(data);
   }
 
   Future<ProfileModel> updateProfile({
@@ -52,55 +36,13 @@ class ProfileRemoteDataSource {
     String? locale,
     XFile? avatar,
   }) async {
-    final fields = <String, dynamic>{
-      'name': name,
-      'phone': phone,
-      'address': address,
-      'locale': locale,
-      '_method': 'PATCH',
-    }..removeWhere((key, value) => value == null);
-
-    if (avatar != null) {
-      final ext = avatar.name.contains('.')
-          ? avatar.name.split('.').last.toLowerCase()
-          : 'jpg';
-      final mimeSubtype = (ext == 'jpg' || ext == 'jpeg')
-          ? 'jpeg'
-          : (ext == 'png' ? 'png' : (ext == 'webp' ? 'webp' : 'jpeg'));
-
-      fields['avatar'] = MultipartFile.fromBytes(
-        await avatar.readAsBytes(),
-        filename: avatar.name,
-        contentType: MediaType('image', mimeSubtype),
-      );
-    }
-
-    final formData = FormData.fromMap(fields);
-
-    Response<dynamic> response;
-    try {
-      response = await apiConsumer.post(
-        ApiEndpoints.employeeProfile,
-        queryParameters: {'lang': language},
-        data: formData,
-        options: Options(
-          headers: {'X-HTTP-Method-Override': 'PATCH'},
-        ),
-      );
-    } on DioException catch (e) {
-      if (e.response?.statusCode == 405) {
-        response = await apiConsumer.patch(
-          ApiEndpoints.employeeProfile,
-          queryParameters: {'lang': language},
-          data: formData,
-        );
-      } else {
-        rethrow;
-      }
-    }
-
-    final data = normalizeProfilePayload(response.data);
-
-    return ProfileModel.fromJson(data);
+    return _updateProfileDataSource.updateProfile(
+      language: language,
+      name: name,
+      phone: phone,
+      address: address,
+      locale: locale,
+      avatar: avatar,
+    );
   }
 }

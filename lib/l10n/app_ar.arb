@@ -147,7 +147,6 @@
   "due": "الموعد النهائي",
   "managerFeedback": "ملاحظات المدير: {feedback}",
 
-<<<<<<< HEAD
   "low": "منخفضة",
   "medium": "متوسطة",
   "high": "عالية",
@@ -308,8 +307,6 @@
   "taskSubmittedSuccess": "تم إرسال المهمة للمراجعة.",
   "due": "الموعد النهائي",
   "managerFeedback": "ملاحظات المدير: {feedback}",
-=======
->>>>>>> main
   "@managerFeedback": {
     "placeholders": {
       "feedback": {
