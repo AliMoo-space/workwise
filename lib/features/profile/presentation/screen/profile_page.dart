@@ -11,6 +11,7 @@ import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/feedback/app_dialog.dart';
+import 'package:workwise/core/design_system/widgets/feedback/app_error_state.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
@@ -33,13 +34,15 @@ class _ProfilePageState extends State<ProfilePage> {
   Uint8List? _avatarPreview;
 
   Future<void> _changeAvatar() async {
+    final profileCubit = context.read<ProfileCubit>();
+    final language = Localizations.localeOf(context).languageCode;
     final avatar = await ImagePicker().pickImage(
       source: ImageSource.gallery,
       maxWidth: 1024,
       maxHeight: 1024,
       imageQuality: 85,
     );
-    
+
     if (avatar == null) return;
 
     final bytes = await avatar.readAsBytes();
@@ -49,8 +52,8 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() => _avatarPreview = bytes);
 
     // Upload to server
-    final success = await context.read<ProfileCubit>().updateProfile(
-      language: Localizations.localeOf(context).languageCode,
+    final success = await profileCubit.updateProfile(
+      language: language,
       avatar: avatar,
     );
 
@@ -59,13 +62,13 @@ class _ProfilePageState extends State<ProfilePage> {
     // Clear preview on success so the new URL from server is used
     if (success) {
       // Clear the old cached image
-      final oldAvatarUrl = context.read<ProfileCubit>().state.profile?.avatarUrl;
+      final oldAvatarUrl = profileCubit.state.profile?.avatarUrl;
       if (oldAvatarUrl != null && oldAvatarUrl.isNotEmpty) {
         await CachedNetworkImage.evictFromCache(oldAvatarUrl);
       }
-      
+
       setState(() => _avatarPreview = null);
-      
+
       // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -77,20 +80,45 @@ class _ProfilePageState extends State<ProfilePage> {
           behavior: SnackBarBehavior.floating,
         ),
       );
-      
+
       // Force reload profile after a short delay to get the new avatar URL
       await Future.delayed(const Duration(milliseconds: 500));
       if (mounted) {
         final employeeId = sl<LocalStorage>().getUserId();
-        await context.read<ProfileCubit>().getProfile(
+        await profileCubit.getProfile(
           employeeId: employeeId,
-          language: Localizations.localeOf(context).languageCode,
+          language: language,
         );
       }
     } else {
       // Revert preview on failure
       setState(() => _avatarPreview = null);
     }
+  }
+
+  Future<bool> _saveProfileFields({
+    String? name,
+    String? phone,
+    String? address,
+  }) async {
+    final profileCubit = context.read<ProfileCubit>();
+    final language = Localizations.localeOf(context).languageCode;
+    final successMessage = context.l10n.profileUpdateSuccess;
+    final success = await profileCubit.updateProfile(
+      language: language,
+      name: name,
+      phone: phone,
+      address: address,
+    );
+    if (!mounted) return success;
+
+    if (success) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(successMessage)));
+    }
+
+    return success;
   }
 
   Widget _buildLogoutButton(BuildContext context) {
@@ -159,10 +187,16 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     if (state.isFailure && state.message != null) ...[
                       Gap(AppSpacing.space8.h),
-                      AppText(state.message!, color: AppColors.textSecondary),
+                      AppText(
+                        state.failure?.message ?? state.message!,
+                        color: AppColors.textSecondary,
+                      ),
                     ],
                     Gap(AppSpacing.space16.h),
-                    JobDetailsSection(profile: state.profile!),
+                    JobDetailsSection(
+                      profile: state.profile!,
+                      onSave: _saveProfileFields,
+                    ),
                   ] else if (state.isLoading ||
                       state.status == ProfileStatus.initial)
                     Skeletonizer(
@@ -176,11 +210,19 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     )
                   else if (state.isFailure)
-                    Center(
-                      child: AppText(
-                        state.message ?? context.l10n.profile,
-                        color: AppColors.textSecondary,
-                      ),
+                    AppErrorState(
+                      message:
+                          state.failure?.message ??
+                          state.message ??
+                          context.l10n.profile,
+                      onRetry: () {
+                        context.read<ProfileCubit>().getProfile(
+                          employeeId: sl<LocalStorage>().getUserId(),
+                          language: Localizations.localeOf(
+                            context,
+                          ).languageCode,
+                        );
+                      },
                     ),
                   if (!isLoadingProfile) ...[
                     Gap(AppSpacing.space20.h),

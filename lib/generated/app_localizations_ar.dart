@@ -603,7 +603,28 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profileActiveFullTime => 'نشط / دوام كامل';
 
   @override
-  String get profilePhotoUpdated => 'Profile photo updated successfully';
+  String get profilePhotoUpdated => 'تم تحديث الصورة الشخصية بنجاح';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get profileName => 'الاسم';
+
+  @override
+  String get profilePhone => 'رقم الهاتف';
+
+  @override
+  String get profileAddress => 'العنوان';
+
+  @override
+  String get save => 'حفظ';
+
+  @override
+  String get profileUpdateSuccess => 'تم تحديث بيانات الملف الشخصي بنجاح';
+
+  @override
+  String get profileNameRequired => 'يرجى إدخال الاسم';
 
   @override
   String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';

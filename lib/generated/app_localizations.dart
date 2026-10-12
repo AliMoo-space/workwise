@@ -1250,6 +1250,48 @@ abstract class AppLocalizations {
   /// **'Profile photo updated successfully'**
   String get profilePhotoUpdated;
 
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfile;
+
+  /// No description provided for @profileName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get profileName;
+
+  /// No description provided for @profilePhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get profilePhone;
+
+  /// No description provided for @profileAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get profileAddress;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @profileUpdateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile details updated successfully'**
+  String get profileUpdateSuccess;
+
+  /// No description provided for @profileNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a name'**
+  String get profileNameRequired;
+
   /// No description provided for @logoutConfirmMessage.
   ///
   /// In en, this message translates to:

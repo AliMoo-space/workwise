@@ -286,6 +286,13 @@
   "profileContact": "تواصل",
   "profileActiveFullTime": "نشط / دوام كامل",
   "profilePhotoUpdated": "تم تحديث الصورة الشخصية بنجاح",
+  "editProfile": "تعديل الملف الشخصي",
+  "profileName": "الاسم",
+  "profilePhone": "رقم الهاتف",
+  "profileAddress": "العنوان",
+  "save": "حفظ",
+  "profileUpdateSuccess": "تم تحديث بيانات الملف الشخصي بنجاح",
+  "profileNameRequired": "يرجى إدخال الاسم",
   "logoutConfirmMessage": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
 
   "submit": "إرسال",

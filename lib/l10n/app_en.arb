@@ -247,6 +247,13 @@
   "profileContact": "Contact",
   "profileActiveFullTime": "Active / Full-Time",
   "profilePhotoUpdated": "Profile photo updated successfully",
+  "editProfile": "Edit profile",
+  "profileName": "Name",
+  "profilePhone": "Phone",
+  "profileAddress": "Address",
+  "save": "Save",
+  "profileUpdateSuccess": "Profile details updated successfully",
+  "profileNameRequired": "Please enter a name",
 
   "logoutConfirmMessage": "Are you sure you want to logout?",
 
