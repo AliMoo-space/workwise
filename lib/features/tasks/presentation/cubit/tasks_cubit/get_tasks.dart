@@ -42,7 +42,7 @@ extension TasksCubitGetTasks on TasksCubit {
       page: _currentPage,
     );
 
-    result.fold((failure) => _emitState(TasksError(message: failure.message)), (
+    result.fold((failure) => _emitState(TasksError(failure: failure)), (
       response,
     ) {
       if (state is TasksLoaded && !refresh) {

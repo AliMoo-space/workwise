@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
+import 'package:workwise/core/design_system/widgets/feedback/app_error_state.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/services/service_locator.dart';
@@ -154,29 +155,11 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
                     }
 
                     if (state is TasksError) {
-                      return Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.error_outline,
-                              size: 64.w,
-                              color: AppColors.error,
-                            ),
-                            Gap(16.h),
-                            AppText(
-                              state.message,
-                              style: AppTextStyles.bodyLarge,
-                              textAlign: TextAlign.center,
-                            ),
-                            Gap(16.h),
-                            ElevatedButton(
-                              onPressed: () =>
-                                  context.read<TasksCubit>().refresh(),
-                              child: const AppText('Retry'),
-                            ),
-                          ],
-                        ),
+                      return AppErrorState(
+                        message: state.failure.message,
+                        onRetry: () {
+                          context.read<TasksCubit>().refresh();
+                        },
                       );
                     }
 
