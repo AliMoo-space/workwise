@@ -2,20 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 
-import 'package:workwise/core/design_system/colors/app_colors.dart';
-import 'package:workwise/core/design_system/spacing/app_radius.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
+import 'package:workwise/core/design_system/widgets/inputs/app_text_field.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/features/profile/domain/entities/profile.dart';
 
 import 'job_detail_item.dart';
 
-class JobDetailsSection extends StatelessWidget {
-  const JobDetailsSection({super.key, required this.profile});
+class JobDetailsSection extends StatefulWidget {
+  const JobDetailsSection({
+    super.key,
+    required this.profile,
+    required this.onSave,
+  });
 
   final Profile profile;
+  final Future<bool> Function({String? name, String? phone, String? address})
+  onSave;
+
+  @override
+  State<JobDetailsSection> createState() => _JobDetailsSectionState();
+}
+
+class _JobDetailsSectionState extends State<JobDetailsSection> {
+  bool _isEditing = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,33 +42,11 @@ class JobDetailsSection extends StatelessWidget {
             ),
 
             const Spacer(),
-
-            Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: AppSpacing.space8.w,
-                vertical: AppSpacing.space4.h,
-              ),
-              decoration: BoxDecoration(
-                color: AppColors.surfaceContainer,
-                borderRadius: BorderRadius.circular(AppRadius.radius8.r),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.lock_outline,
-                    size: 14.r,
-                    color: AppColors.textSecondary,
-                  ),
-
-                  Gap(AppSpacing.space4.w),
-
-                  AppText(
-                    context.l10n.profileManagedByHr,
-                    style: AppTextStyles.labelSmall,
-                    color: AppColors.textSecondary,
-                  ),
-                ],
+            TextButton.icon(
+              onPressed: () => setState(() => _isEditing = !_isEditing),
+              icon: Icon(_isEditing ? Icons.close : Icons.edit_outlined),
+              label: Text(
+                _isEditing ? context.l10n.cancel : context.l10n.editProfile,
               ),
             ),
           ],
@@ -66,10 +56,22 @@ class JobDetailsSection extends StatelessWidget {
 
         JobDetailItem(
           icon: Icons.person_outline,
+          label: context.l10n.profileName,
+          title: widget.profile.name,
+          isEditable: true,
+          isEditing: _isEditing,
+          isRequired: true,
+          onSave: (value) => widget.onSave(name: value),
+        ),
+
+        Gap(AppSpacing.space12.h),
+
+        JobDetailItem(
+          icon: Icons.badge_outlined,
           label: context.l10n.profileDirectManager,
-          title: profile.managerName ?? '-',
+          title: widget.profile.managerName ?? '-',
           badge: context.l10n.profileHeadOfOperations,
-          showButton: true,
+          showLock: true,
         ),
 
         Gap(AppSpacing.space12.h),
@@ -77,9 +79,12 @@ class JobDetailsSection extends StatelessWidget {
         JobDetailItem(
           icon: Icons.location_on_outlined,
           label: context.l10n.profileWorkLocation,
-          title: profile.companyLocationName ?? profile.address,
+          title: widget.profile.address,
           badge: context.l10n.profileWithinAssignedRadius,
-          badgeColor: AppColors.accent,
+          isEditable: true,
+          isEditing: _isEditing,
+          fieldType: AppTextFieldType.multiline,
+          onSave: (value) => widget.onSave(address: value),
         ),
 
         Gap(AppSpacing.space12.h),
@@ -87,7 +92,8 @@ class JobDetailsSection extends StatelessWidget {
         JobDetailItem(
           icon: Icons.email_outlined,
           label: context.l10n.profileWorkEmail,
-          title: profile.email,
+          title: widget.profile.email,
+          showLock: true,
         ),
 
         Gap(AppSpacing.space12.h),
@@ -95,7 +101,11 @@ class JobDetailsSection extends StatelessWidget {
         JobDetailItem(
           icon: Icons.phone_outlined,
           label: context.l10n.profileWorkPhone,
-          title: profile.phone,
+          title: widget.profile.phone,
+          isEditable: true,
+          isEditing: _isEditing,
+          fieldType: AppTextFieldType.phone,
+          onSave: (value) => widget.onSave(phone: value),
         ),
       ],
     );

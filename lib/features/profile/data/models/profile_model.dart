@@ -1,5 +1,13 @@
 import 'package:workwise/core/constants/app_constants.dart';
 
+import 'company_location_model.dart';
+import 'department_model.dart';
+import 'manager_model.dart';
+
+export 'company_location_model.dart';
+export 'department_model.dart';
+export 'manager_model.dart';
+
 class ProfileModel {
   const ProfileModel({
     required this.id,
@@ -13,6 +21,7 @@ class ProfileModel {
     required this.status,
     required this.address,
     required this.avatarUrl,
+    this.avatarFileId,
     required this.role,
     required this.roleLabel,
     required this.locale,
@@ -34,6 +43,7 @@ class ProfileModel {
   final String status;
   final String address;
   final String avatarUrl;
+  final int? avatarFileId;
   final String role;
   final String roleLabel;
   final String locale;
@@ -44,7 +54,8 @@ class ProfileModel {
   final String createdAt;
 
   static String _parseAvatarUrl(Map<String, dynamic> json) {
-    final dynamic rawUrl = json['avatar_url'] ??
+    final dynamic rawUrl =
+        json['avatar_url'] ??
         json['avatar'] ??
         json['image'] ??
         json['photo'] ??
@@ -67,7 +78,23 @@ class ProfileModel {
     return '$base$path';
   }
 
+  static int? _parseAvatarFileId(String avatarUrl) {
+    final pathSegments = Uri.tryParse(avatarUrl)?.pathSegments;
+    if (pathSegments == null) {
+      return null;
+    }
+
+    final filesIndex = pathSegments.indexOf('files');
+    if (filesIndex < 0 || filesIndex + 1 >= pathSegments.length) {
+      return null;
+    }
+
+    return int.tryParse(pathSegments[filesIndex + 1]);
+  }
+
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
+    final avatarUrl = _parseAvatarUrl(json);
+
     return ProfileModel(
       id: json['id'] ?? 0,
       name: json['name'] ?? '',
@@ -79,7 +106,8 @@ class ProfileModel {
       startDate: json['start_date'] ?? '',
       status: json['status'] ?? '',
       address: json['address'] ?? '',
-      avatarUrl: _parseAvatarUrl(json),
+      avatarUrl: avatarUrl,
+      avatarFileId: _parseAvatarFileId(avatarUrl),
       role: json['role'] ?? '',
       roleLabel: json['role_label'] ?? '',
       locale: json['locale'] ?? '',
@@ -94,57 +122,6 @@ class ProfileModel {
           : null,
       permissions: List<String>.from(json['permissions'] ?? const []),
       createdAt: json['created_at'] ?? '',
-    );
-  }
-}
-
-class DepartmentModel {
-  const DepartmentModel({
-    required this.id,
-    required this.name,
-  });
-
-  final int id;
-  final String name;
-
-  factory DepartmentModel.fromJson(Map<String, dynamic> json) {
-    return DepartmentModel(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? '',
-    );
-  }
-}
-
-class CompanyLocationModel {
-  const CompanyLocationModel({
-    required this.id,
-    required this.name,
-  });
-
-  final int id;
-  final String name;
-
-  factory CompanyLocationModel.fromJson(Map<String, dynamic> json) {
-    return CompanyLocationModel(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? '',
-    );
-  }
-}
-
-class ManagerModel {
-  const ManagerModel({
-    required this.id,
-    required this.name,
-  });
-
-  final int id;
-  final String name;
-
-  factory ManagerModel.fromJson(Map<String, dynamic> json) {
-    return ManagerModel(
-      id: json['id'] ?? 0,
-      name: json['name'] ?? '',
     );
   }
 }

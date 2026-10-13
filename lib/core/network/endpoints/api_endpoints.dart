@@ -19,6 +19,8 @@ abstract final class ApiEndpoints {
 
   static String deleteNotification(String id) => '/api/notifications/$id';
 
+  static String deleteFile(int fileId) => '/api/files/$fileId';
+
   // Auth
 
   static const String login = '/api/auth/login';

@@ -16,4 +16,6 @@ abstract interface class ProfileRepository {
     String? locale,
     XFile? avatar,
   });
+
+  Future<void> deleteProfileAvatar(int fileId);
 }

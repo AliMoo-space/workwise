@@ -31,6 +31,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
       status: model.status,
       address: model.address,
       avatarUrl: model.avatarUrl,
+      avatarFileId: model.avatarFileId,
       role: model.role,
       roleLabel: model.roleLabel,
       locale: model.locale,
@@ -70,6 +71,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
       status: model.status,
       address: model.address,
       avatarUrl: model.avatarUrl,
+      avatarFileId: model.avatarFileId,
       role: model.role,
       roleLabel: model.roleLabel,
       locale: model.locale,
@@ -77,5 +79,10 @@ class ProfileRepositoryImpl implements ProfileRepository {
       companyLocationName: model.companyLocation?.name,
       managerName: model.manager?.name,
     );
+  }
+
+  @override
+  Future<void> deleteProfileAvatar(int fileId) {
+    return remoteDataSource.deleteProfileAvatar(fileId);
   }
 }
