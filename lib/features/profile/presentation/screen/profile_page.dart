@@ -52,8 +52,11 @@ class _ProfilePageState extends State<ProfilePage> {
     // Show preview immediately
     setState(() => _avatarPreview = bytes);
 
-    final previousAvatarUrl =
-        context.read<ProfileCubit>().state.profile?.avatarUrl;
+    final previousAvatarUrl = context
+        .read<ProfileCubit>()
+        .state
+        .profile
+        ?.avatarUrl;
 
     // Upload to server
     final success = await profileCubit.updateProfile(
@@ -178,8 +181,9 @@ class _ProfilePageState extends State<ProfilePage> {
         if (confirmed && context.mounted) {
           if (sl.isRegistered<FcmNotificationService>()) {
             await sl<FcmNotificationService>().handleLogout();
+          } else {
+            await sl<AuthRepository>().logout();
           }
-          await sl<AuthRepository>().logout();
           if (!context.mounted) return;
           context.go('/loginScreen');
         }

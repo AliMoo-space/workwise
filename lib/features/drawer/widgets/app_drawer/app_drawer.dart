@@ -80,8 +80,9 @@ class AppDrawer extends StatelessWidget {
                 if (confirmed && context.mounted) {
                   if (sl.isRegistered<FcmNotificationService>()) {
                     await sl<FcmNotificationService>().handleLogout();
+                  } else {
+                    await sl<AuthRepository>().logout();
                   }
-                  await sl<AuthRepository>().logout();
                   if (!context.mounted) return;
                   context.go('/loginScreen');
                 }
