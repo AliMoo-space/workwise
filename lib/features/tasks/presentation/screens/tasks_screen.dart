@@ -5,6 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
+import 'package:workwise/core/design_system/widgets/feedback/app_error_state.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/services/service_locator.dart';
@@ -21,9 +22,11 @@ class TasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final language = Localizations.localeOf(context).languageCode;
+
     return BlocProvider(
       create: (context) => sl<TasksCubit>()
-        ..getTasks(lang: Localizations.localeOf(context).languageCode),
+        ..getTasks(lang: language),
       child: const _TasksScreenContent(),
     );
   }
@@ -61,7 +64,6 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
 
   void _selectFilter(TaskFilter filter) {
     setState(() => _currentFilter = filter);
-    final language = Localizations.localeOf(context).languageCode;
     
     String? status;
     switch (filter) {
@@ -79,6 +81,7 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
         break;
     }
     
+    final language = Localizations.localeOf(context).languageCode;
     context.read<TasksCubit>().applyFilters(lang: language, status: status);
   }
 
@@ -93,21 +96,38 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText(
-                context.l10n.tasks,
-                style: AppTextStyles.headlineMedium,
+              BlocBuilder<TasksCubit, TasksState>(
+                builder: (context, state) {
+                  return Skeletonizer(
+                    enabled: state is TasksLoading,
+                    effect: const ShimmerEffect(
+                      baseColor: Color(0xFFEDF1F4),
+                      highlightColor: Color(0xFFF9FAFB),
+                      duration: Duration(milliseconds: 1600),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppText(
+                          context.l10n.tasks,
+                          style: AppTextStyles.headlineMedium,
+                        ),
+                        Gap(4.h),
+                        AppText(
+                          context.l10n.trackAssignments,
+                          style: AppTextStyles.bodyMedium,
+                        ),
+                        Gap(20.h),
+                        TaskFilterBar(
+                          selected: _currentFilter,
+                          onSelected: _selectFilter,
+                        ),
+                        Gap(16.h),
+                      ],
+                    ),
+                  );
+                },
               ),
-              Gap(4.h),
-              AppText(
-                context.l10n.trackAssignments,
-                style: AppTextStyles.bodyMedium,
-              ),
-              Gap(20.h),
-              TaskFilterBar(
-                selected: _currentFilter,
-                onSelected: _selectFilter,
-              ),
-              Gap(16.h),
               Expanded(
                 child: BlocBuilder<TasksCubit, TasksState>(
                   builder: (context, state) {
@@ -139,29 +159,11 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
                     }
 
                     if (state is TasksError) {
-                      return Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.error_outline,
-                              size: 64.w,
-                              color: AppColors.error,
-                            ),
-                            Gap(16.h),
-                            AppText(
-                              state.message,
-                              style: AppTextStyles.bodyLarge,
-                              textAlign: TextAlign.center,
-                            ),
-                            Gap(16.h),
-                            ElevatedButton(
-                              onPressed: () =>
-                                  context.read<TasksCubit>().refresh(),
-                              child: const AppText('Retry'),
-                            ),
-                          ],
-                        ),
+                      return AppErrorState(
+                        message: state.failure.message,
+                        onRetry: () {
+                          context.read<TasksCubit>().refresh();
+                        },
                       );
                     }
 
@@ -180,7 +182,8 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
                         child: ListView.builder(
                           controller: _scrollController,
                           physics: const AlwaysScrollableScrollPhysics(),
-                          itemCount: tasks.length + (state.isLoadingMore ? 1 : 0),
+                          itemCount:
+                              tasks.length + (state.isLoadingMore ? 1 : 0),
                           itemBuilder: (context, index) {
                             if (index == tasks.length) {
                               return Padding(
