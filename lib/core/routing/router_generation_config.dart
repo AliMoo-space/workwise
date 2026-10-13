@@ -29,7 +29,7 @@ import 'package:workwise/features/notification/presentation/screens/notification
 
 class RouterGenerationConfig {
   static GoRouter goRouter = GoRouter(
-    initialLocation: AppRoutes.mainScreen,
+    initialLocation: AppRoutes.splashScreen,
     routes: [
       GoRoute(
         name: AppRoutes.mainScreen,

@@ -717,4 +717,38 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get december => 'ديسمبر';
+
+  @override
+  String get policyAssistantWelcome =>
+      'أهلًا، أنا مساعد سياسات الموارد البشرية. اسألني عن سياسات الإجازات أو المزايا أو أرصدتك الحالية.';
+
+  @override
+  String get policyAssistantThinking => 'جاري التفكير...';
+
+  @override
+  String get deleteMessageTitle => 'حذف الرسالة';
+
+  @override
+  String get deleteFailedMessageConfirmation =>
+      'هل تريد حذف الرسالة التي لم يتم إرسالها؟';
+
+  @override
+  String get delete => 'حذف';
+
+  @override
+  String get policyMessageNotSentLongPress =>
+      'لم يتم الإرسال • اضغط مطولًا للحذف';
+
+  @override
+  String get sendMessage => 'إرسال الرسالة';
+
+  @override
+  String get employeeIdNotAvailable => 'رقم الموظف غير متوفر.';
+
+  @override
+  String get policyAssistantNoAnswer => 'لم يتم توفير رد.';
+
+  @override
+  String get policyAssistantUnexpectedError =>
+      'حدث خطأ غير متوقع. حاول مرة أخرى.';
 }

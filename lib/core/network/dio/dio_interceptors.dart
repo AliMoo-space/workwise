@@ -4,10 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:workwise/core/storage/local_storage.dart';
 
 class DioInterceptors extends Interceptor {
-  DioInterceptors({
-    this.getToken,
-    required this.localStorage,
-  });
+  DioInterceptors({this.getToken, required this.localStorage});
 
   final Future<String?> Function()? getToken;
   final LocalStorage localStorage;
@@ -24,8 +21,13 @@ class DioInterceptors extends Interceptor {
         options.headers['Authorization'] = 'Bearer $token';
       }
 
-      options.headers['Accept-Language'] =
-          localStorage.getLocale();
+      if (token != null && token.isNotEmpty) {
+        options.headers['Authorization'] = 'Bearer $token';
+      }
+      options.headers['Accept-Language'] = localStorage.getLocale();
+      if (token != null && token.isNotEmpty) {
+        options.headers['Authorization'] = 'Bearer $token';
+      }
     } catch (e, stackTrace) {
       log(
         'Failed to prepare request headers.',

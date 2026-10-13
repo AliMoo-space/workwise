@@ -10,8 +10,11 @@ import 'package:workwise/core/network/api_constants.dart';
 import 'package:workwise/core/network/dio/dio_factory.dart';
 import 'package:workwise/core/network/dio_consumer.dart';
 import 'package:workwise/core/network/network_info.dart';
+import 'package:workwise/core/services/fcm_notification_service.dart';
 import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/core/storage/secure_storage.dart';
+import 'package:workwise/features/AIAssistant/presentation/cubit/career_coach/career_coach_cubit.dart';
+import 'package:workwise/features/AIAssistant/presentation/cubit/chat_policy/policy_assistant_cubit.dart';
 
 // =============================================
 // Attendance
@@ -129,7 +132,14 @@ import 'package:workwise/features/AIAssistant/data/repositories/career_coach_rep
 import 'package:workwise/features/AIAssistant/domain/repositories/career_coach_repository.dart';
 import 'package:workwise/features/AIAssistant/domain/usecases/get_career_coach.dart';
 
-import 'package:workwise/features/AIAssistant/presentation/cubit/career_coach_cubit.dart';
+// =============================================
+// AI Assistant - Policy Assistant
+// =============================================
+
+import 'package:workwise/features/AIAssistant/data/datasource/policy_assistant_remote_data_source.dart';
+import 'package:workwise/features/AIAssistant/data/repositories/policy_assistant_repository_impl.dart';
+import 'package:workwise/features/AIAssistant/domain/repositories/policy_assistant_repository.dart';
+import 'package:workwise/features/AIAssistant/domain/usecases/ask_policy_question_use_case.dart';
 
 final sl = GetIt.instance;
 
@@ -215,6 +225,7 @@ Future<void> init() async {
     () => LoginCubit(
       authRepository: sl<AuthRepository>(),
       localStorage: sl<LocalStorage>(),
+      fcmNotificationService: sl<FcmNotificationService>(),
     ),
   );
 
@@ -222,6 +233,7 @@ Future<void> init() async {
     () => SplashCubit(
       secureStorage: sl<SecureStorage>(),
       localStorage: sl<LocalStorage>(),
+      fcmNotificationService: sl<FcmNotificationService>(),
     ),
   );
 
@@ -332,6 +344,17 @@ Future<void> init() async {
     ),
   );
 
+  // Policy Assistant - Data Layer
+  sl.registerLazySingleton<PolicyAssistantRemoteDataSource>(
+    () => PolicyAssistantRemoteDataSourceImpl(apiConsumer: sl<ApiConsumer>()),
+  );
+
+  sl.registerLazySingleton<PolicyAssistantRepository>(
+    () => PolicyAssistantRepositoryImpl(
+      remoteDataSource: sl<PolicyAssistantRemoteDataSource>(),
+    ),
+  );
+
   sl.registerLazySingleton<ProfileRemoteDataSource>(
     () => ProfileRemoteDataSource(sl<ApiConsumer>()),
   );
@@ -397,6 +420,10 @@ Future<void> init() async {
 
   sl.registerLazySingleton<GetCareerCoach>(
     () => GetCareerCoach(sl<CareerCoachRepository>()),
+  );
+
+  sl.registerLazySingleton<AskPolicyQuestionUseCase>(
+    () => AskPolicyQuestionUseCase(sl<PolicyAssistantRepository>()),
   );
 
   // =============================================
@@ -526,6 +553,15 @@ Future<void> init() async {
     () => ClearAllNotifications(sl()),
   );
   sl.registerLazySingleton<DeleteNotification>(() => DeleteNotification(sl()));
+  sl.registerLazySingleton<UpdateFcmToken>(() => UpdateFcmToken(sl()));
+  sl.registerLazySingleton<FcmNotificationService>(
+    () => FcmNotificationService(
+      updateFcmToken: sl(),
+      secureStorage: sl(),
+      localStorage: sl(),
+      apiConsumer: sl(),
+    ),
+  );
   sl.registerFactory<NotificationCubit>(
     () => NotificationCubit(
       getNotifications: sl(),
@@ -534,6 +570,12 @@ Future<void> init() async {
       markAllNotificationsAsRead: sl(),
       clearAllNotifications: sl(),
       deleteNotification: sl(),
+      foregroundNotificationStream:
+          sl<FcmNotificationService>().onForegroundNotification,
+      isAuthenticated: () async {
+        final token = await sl<SecureStorage>().getAccessToken();
+        return token != null && token.trim().isNotEmpty;
+      },
     ),
   );
 
@@ -560,4 +602,10 @@ Future<void> init() async {
   sl.registerFactory<CareerCoachCubit>(
     () => CareerCoachCubit(getCareerCoach: sl<GetCareerCoach>()),
   );
+
+  // sl.registerFactory<PolicyAssistantCubit>(
+  //   () => PolicyAssistantCubit(
+  //     askPolicyQuestionUseCase: sl<AskPolicyQuestionUseCase>(),
+  //   ),
+  // );
 }

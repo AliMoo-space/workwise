@@ -719,4 +719,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get december => 'December';
+
+  @override
+  String get policyAssistantWelcome =>
+      'Hi, I\'m your HR Policy Assistant. Ask me about leave policies, benefits, or your current balances.';
+
+  @override
+  String get policyAssistantThinking => 'AI is thinking...';
+
+  @override
+  String get deleteMessageTitle => 'Delete message';
+
+  @override
+  String get deleteFailedMessageConfirmation =>
+      'Do you want to delete the message that was not sent?';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String get policyMessageNotSentLongPress => 'Not sent • Long press to delete';
+
+  @override
+  String get sendMessage => 'Send message';
+
+  @override
+  String get employeeIdNotAvailable => 'Employee ID is not available.';
+
+  @override
+  String get policyAssistantNoAnswer => 'No answer provided.';
+
+  @override
+  String get policyAssistantUnexpectedError =>
+      'Something went wrong. Please try again.';
 }

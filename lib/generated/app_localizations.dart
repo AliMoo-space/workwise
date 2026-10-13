@@ -1471,6 +1471,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'December'**
   String get december;
+
+  /// No description provided for @policyAssistantWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi, I\'m your HR Policy Assistant. Ask me about leave policies, benefits, or your current balances.'**
+  String get policyAssistantWelcome;
+
+  /// No description provided for @policyAssistantThinking.
+  ///
+  /// In en, this message translates to:
+  /// **'AI is thinking...'**
+  String get policyAssistantThinking;
+
+  /// No description provided for @deleteMessageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete message'**
+  String get deleteMessageTitle;
+
+  /// No description provided for @deleteFailedMessageConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to delete the message that was not sent?'**
+  String get deleteFailedMessageConfirmation;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @policyMessageNotSentLongPress.
+  ///
+  /// In en, this message translates to:
+  /// **'Not sent • Long press to delete'**
+  String get policyMessageNotSentLongPress;
+
+  /// No description provided for @sendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send message'**
+  String get sendMessage;
+
+  /// No description provided for @employeeIdNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Employee ID is not available.'**
+  String get employeeIdNotAvailable;
+
+  /// No description provided for @policyAssistantNoAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'No answer provided.'**
+  String get policyAssistantNoAnswer;
+
+  /// No description provided for @policyAssistantUnexpectedError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get policyAssistantUnexpectedError;
 }
 
 class _AppLocalizationsDelegate

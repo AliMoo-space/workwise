@@ -7,6 +7,7 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/feedback/app_dialog.dart';
 import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/core/services/fcm_notification_service.dart';
 import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/features/auth/login/data/Repository/auth_repository.dart';
@@ -45,7 +46,7 @@ class AppDrawer extends StatelessWidget {
 
                 return custom.DrawerHeader(
                   userName: userName ?? profile?.name ?? '',
-                  userEmail: userEmail ?? profile?.email ?? '',
+                  userEmail: userEmail ?? profile?.jobTitle ?? '',
                   avatarUrl:
                       avatarUrl ??
                       (profileAvatar != null && profileAvatar.isNotEmpty
@@ -77,6 +78,9 @@ class AppDrawer extends StatelessWidget {
                 );
 
                 if (confirmed && context.mounted) {
+                  if (sl.isRegistered<FcmNotificationService>()) {
+                    await sl<FcmNotificationService>().handleLogout();
+                  }
                   await sl<AuthRepository>().logout();
                   if (!context.mounted) return;
                   context.go('/loginScreen');

@@ -446,5 +446,17 @@
   "march": "مارس",
   "october": "أكتوبر",
   "november": "نوفمبر",
-  "december": "ديسمبر"
+  "december": "ديسمبر",
+  "policyAssistantWelcome": "أهلًا، أنا مساعد سياسات الموارد البشرية. اسألني عن سياسات الإجازات أو المزايا أو أرصدتك الحالية.",
+  "policyAssistantThinking": "جاري التفكير...",
+  "deleteMessageTitle": "حذف الرسالة",
+  "deleteFailedMessageConfirmation": "هل تريد حذف الرسالة التي لم يتم إرسالها؟",
+  "cancel": "إلغاء",
+  "delete": "حذف",
+  "policyMessageNotSentLongPress": "لم يتم الإرسال • اضغط مطولًا للحذف",
+  "sendMessage": "إرسال الرسالة",
+  "employeeIdNotAvailable": "رقم الموظف غير متوفر.",
+  "policyAssistantNoAnswer": "لم يتم توفير رد.",
+  "policyAssistantUnexpectedError": "حدث خطأ غير متوقع. حاول مرة أخرى."
+
 }
