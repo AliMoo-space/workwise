@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:workwise/core/errors/failure.dart';
 import 'package:workwise/core/network/network_info.dart';
+import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/core/storage/secure_storage.dart';
 import 'package:workwise/features/auth/login/data/datasources/login_api_service.dart';
 import 'package:workwise/features/auth/login/data/models/login_response_model.dart';
@@ -13,11 +14,13 @@ class LoginRepositoryImpl implements LoginRepository {
     required this.loginApiService,
     required this.networkInfo,
     required this.secureStorage,
+    required this.localStorage,
   });
 
   final LoginApiService loginApiService;
   final NetworkInfo networkInfo;
   final SecureStorage secureStorage;
+  final LocalStorage localStorage;
 
   @override
   Future<Either<Failure, LoginDataEntity>> login({
@@ -35,6 +38,8 @@ class LoginRepositoryImpl implements LoginRepository {
       if (response.statusCode == 200) {
         final loginModel = LoginResponseModel.fromJson(responseData);
 
+        await secureStorage.saveAccessToken(loginModel.data.accessToken);
+        await localStorage.saveUserId(loginModel.data.user.id);
         await secureStorage.saveAccessToken(
           loginModel.data.accessToken,
         );
@@ -58,6 +63,24 @@ class LoginRepositoryImpl implements LoginRepository {
         ),
       );
     }
+  }
+
+  Future<void> logout() async {
+    try {
+      await authApiService.logout();
+    } catch (_) {}
+
+    await secureStorage.clearSession();
+    await localStorage.clearSession();
+  }
+
+  Future<void> logout() async {
+    try {
+      await authApiService.logout();
+    } catch (_) {}
+
+    await secureStorage.clearSession();
+    await localStorage.clearSession();
   }
 
   Failure _mapDioException(DioException exception) {

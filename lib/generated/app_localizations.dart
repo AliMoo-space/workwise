@@ -1244,6 +1244,12 @@ abstract class AppLocalizations {
   /// **'Active / Full-Time'**
   String get profileActiveFullTime;
 
+  /// No description provided for @profilePhotoUpdated.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo updated successfully'**
+  String get profilePhotoUpdated;
+
   /// No description provided for @logoutConfirmMessage.
   ///
   /// In en, this message translates to:
@@ -1285,6 +1291,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'App display language'**
   String get appDisplayLanguage;
+
+  /// No description provided for @logoutConfirmationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to log out?'**
+  String get logoutConfirmationMessage;
+
+  /// No description provided for @addNoteBeforeSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Please add a note before submitting'**
+  String get addNoteBeforeSubmit;
+
+  /// No description provided for @uploadingFiles.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploading files...'**
+  String get uploadingFiles;
+
+  /// No description provided for @invalidTaskId.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid task ID'**
+  String get invalidTaskId;
+
+  /// No description provided for @taskSubmitFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to submit task. Please check your internet connection and try again.'**
+  String get taskSubmitFailed;
 
   /// No description provided for @details.
   ///

@@ -605,6 +605,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileActiveFullTime => 'Active / Full-Time';
 
   @override
+  String get profilePhotoUpdated => 'Profile photo updated successfully';
+
+  @override
   String get logoutConfirmMessage => 'Are you sure you want to logout?';
 
   @override
@@ -624,6 +627,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get appDisplayLanguage => 'App display language';
+
+  @override
+  String get logoutConfirmationMessage => 'Are you sure you want to log out?';
+
+  @override
+  String get addNoteBeforeSubmit => 'Please add a note before submitting';
+
+  @override
+  String get uploadingFiles => 'Uploading files...';
+
+  @override
+  String get invalidTaskId => 'Invalid task ID';
+
+  @override
+  String get taskSubmitFailed =>
+      'Failed to submit task. Please check your internet connection and try again.';
 
   @override
   String get details => 'Details';

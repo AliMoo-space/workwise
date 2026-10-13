@@ -25,8 +25,8 @@ abstract final class ApiEndpoints {
   static const String register = '/auth/register';
 
   static const String refreshToken = '/auth/refresh-token';
+  static const String logout = '/api/auth/logout';
 
-  static const String logout = '/auth/logout';
   static const String toggleBiometrics = '/api/auth/toggle-biometrics';
 
   static const String biometricLogin = '/api/auth/biometric-login';
@@ -42,10 +42,8 @@ abstract final class ApiEndpoints {
   static const String resetPassword = '/api/auth/forgot-password/reset';
 
   // User
-
-  static const String profile = '/users/profile';
-
-  static const String users = '/users';
+  static const String profile = '/api/users/profile';
+  static const String users = '/api/users';
 
   // Performance
 
@@ -71,5 +69,20 @@ abstract final class ApiEndpoints {
 
   static const String careerCoach = '/api/ai/career-coach';
 
+  // Tasks
+  static const String tasks = '/api/tasks';
+  static String taskById(int id) => '/api/tasks/$id';
+  static String updateTaskProgress(int id) => '/api/tasks/$id/progress';
+  static String updateTaskStatus(int id) => '/api/tasks/$id/status';
+  static String submitTask(int id) => '/api/tasks/$id/submissions';
+  static String getSubmissionDetails(int submissionId) => '/api/tasks/submissions/$submissionId';
+  static String addSubmissionAttachment(int submissionId) => '/api/tasks/submissions/$submissionId/attachments';
+  static String resubmitSubmission(int submissionId) => '/api/tasks/submissions/$submissionId/resubmit';
+
   // Add project-specific endpoints below.
+  static const String employeeProfile = '/api/employees/profile';
+
+  static String employeeDetails(int employeeId) {
+    return '/api/employees/$employeeId';
+  }
 }

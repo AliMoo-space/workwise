@@ -603,6 +603,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profileActiveFullTime => 'نشط / دوام كامل';
 
   @override
+  String get profilePhotoUpdated => 'Profile photo updated successfully';
+
+  @override
   String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
 
   @override
@@ -622,6 +625,22 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get appDisplayLanguage => 'لغة عرض التطبيق';
+
+  @override
+  String get logoutConfirmationMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
+
+  @override
+  String get addNoteBeforeSubmit => 'يرجى إضافة ملاحظة قبل الإرسال';
+
+  @override
+  String get uploadingFiles => 'جاري رفع الملفات...';
+
+  @override
+  String get invalidTaskId => 'معرف المهمة غير صالح';
+
+  @override
+  String get taskSubmitFailed =>
+      'فشل في إرسال المهمة. تأكد من الاتصال بالإنترنت وحاول مرة أخرى';
 
   @override
   String get details => 'التفاصيل';
