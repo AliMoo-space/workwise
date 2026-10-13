@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +24,14 @@ void main() async {
     debugPrint('Firebase initialization warning: $e');
   }
   await init();
-  await sl<FcmNotificationService>().initialize();
   runApp(BlocProvider(create: (_) => sl<LocaleCubit>(), child: const MyApp()));
+
+  // Fix: FCM permission and initial-message checks must not block the first frame.
+  unawaited(
+    sl<FcmNotificationService>().initialize().catchError((Object error) {
+      debugPrint('FCM initialization warning: ${error.runtimeType}');
+    }),
+  );
 }
 
 class MyApp extends StatelessWidget {

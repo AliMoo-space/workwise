@@ -46,7 +46,7 @@ class AppDrawer extends StatelessWidget {
 
                 return custom.DrawerHeader(
                   userName: userName ?? profile?.name ?? '',
-                  userEmail: userEmail ?? profile?.email ?? '',
+                  userEmail: userEmail ?? profile?.jobTitle ?? '',
                   avatarUrl:
                       avatarUrl ??
                       (profileAvatar != null && profileAvatar.isNotEmpty
