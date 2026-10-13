@@ -1,16 +1,18 @@
-
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_auth/local_auth.dart';
-import 'package:workwise/features/auth/fingerprint/data/Repository/fingerprint_repository.dart';
+import 'package:workwise/features/auth/fingerprint/domain/usecases/has_biometric_token_usecase.dart';
+import 'package:workwise/features/auth/fingerprint/domain/usecases/biometric_login_usecase.dart';
 import 'finger_print_state.dart';
 
 class FingerprintCubit extends Cubit<FingerprintState> {
   FingerprintCubit({
-    required this.fingerprintRepository,
+    required this.hasBiometricTokenUseCase,
+    required this.biometricLoginUseCase,
   }) : super(FingerprintInitialState());
 
-  final FingerprintRepository fingerprintRepository;
+  final HasBiometricTokenUseCase hasBiometricTokenUseCase;
+  final BiometricLoginUseCase biometricLoginUseCase;
   final LocalAuthentication auth = LocalAuthentication();
 
   Future<void> authenticateWithBiometrics() async {
@@ -19,13 +21,11 @@ class FingerprintCubit extends Cubit<FingerprintState> {
     emit(FingerprintLoadingState());
 
     try {
-      // لازم يكون المستخدم فعّل البصمة قبل كده.
-      final hasBiometricToken =
-          await fingerprintRepository.hasBiometricToken();
+      final hasToken = await hasBiometricTokenUseCase();
 
-      if (!hasBiometricToken) {
+      if (!hasToken) {
         emit(
-          FingerprintErrorState(
+           FingerprintErrorState(
             'Biometric login is disabled. Please sign in with your email and password.',
           ),
         );
@@ -36,7 +36,7 @@ class FingerprintCubit extends Cubit<FingerprintState> {
 
       if (!canAuthenticate) {
         emit(
-          FingerprintErrorState(
+           FingerprintErrorState(
             'Biometric or device authentication is not available on this device.',
           ),
         );
@@ -50,13 +50,12 @@ class FingerprintCubit extends Cubit<FingerprintState> {
 
       if (!didAuthenticate) {
         emit(
-          FingerprintErrorState('Authentication canceled or failed.'),
+           FingerprintErrorState('Authentication canceled or failed.'),
         );
         return;
       }
 
-      // بعد نجاح مصادقة الجهاز، نطلب Access Token من السيرفر.
-      final result = await fingerprintRepository.biometricLogin();
+      final result = await biometricLoginUseCase();
 
       result.fold(
         (failure) => emit(FingerprintErrorState(failure.message)),
@@ -70,7 +69,7 @@ class FingerprintCubit extends Cubit<FingerprintState> {
       );
     } catch (_) {
       emit(
-        FingerprintErrorState('An unexpected error occurred.'),
+         FingerprintErrorState('An unexpected error occurred.'),
       );
     }
   }

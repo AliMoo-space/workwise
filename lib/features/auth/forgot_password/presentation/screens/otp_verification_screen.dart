@@ -11,7 +11,9 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/routing/app_routes.dart';
-import 'package:workwise/features/auth/forgot_password/data/Repository/forgot_password_repository.dart';
+import 'package:workwise/features/auth/forgot_password/domain/usecases/send_otp_usecase.dart';
+import 'package:workwise/features/auth/forgot_password/domain/usecases/verify_otp_usecase.dart';
+import 'package:workwise/features/auth/forgot_password/domain/usecases/resend_otp_usecase.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/cubit/forgot_password_cubit.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/cubit/forgot_password_state.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/widgets/otp_header_widget.dart';
@@ -117,8 +119,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
 
     return BlocProvider(
       create: (context) => ForgotPasswordCubit(
-        forgotPasswordRepository:
-            GetIt.instance<ForgotPasswordRepository>(),
+        sendOtpUseCase: GetIt.instance<SendOtpUseCase>(),
+        verifyOtpUseCase: GetIt.instance<VerifyOtpUseCase>(),
+        resendOtpUseCase: GetIt.instance<ResendOtpUseCase>(),
         email: widget.email,
       ),
       child: BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(

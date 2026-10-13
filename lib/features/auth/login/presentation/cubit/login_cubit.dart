@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workwise/core/storage/local_storage.dart';
-import 'package:workwise/features/auth/login/data/Repository/login_repository.dart';
+import 'package:workwise/features/auth/login/domain/usecases/login_usecase.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit({
-    required this.loginRepository,
+    required this.loginUseCase,
     required this.localStorage,
   }) : super(LoginInitialState());
 
-  final LoginRepository loginRepository;
+  final LoginUseCase loginUseCase;
   final LocalStorage localStorage;
 
   final formKey = GlobalKey<FormState>();
@@ -37,7 +37,8 @@ class LoginCubit extends Cubit<LoginState> {
 
     emit(LoginLoadingState());
 
-    final result = await loginRepository.login(
+    // استدعاء الـ UseCase بدل الـ Repository مباشرة
+    final result = await loginUseCase(
       email: emailController.text.trim(),
       password: passwordController.text,
     );
@@ -46,37 +47,27 @@ class LoginCubit extends Cubit<LoginState> {
       (failure) {
         emit(LoginErrorState(failure.message));
       },
-      (loginResponse) async {
+      (loginDataEntity) async {
         await localStorage.saveKeepMeSignedIn(keepMeSignedIn);
 
-        // Added userId storage for Career Coach feature.
-        final userId = loginResponse.data.user.id;
+        // استخدام الـ Entity اللي راجعة من طبقة الـ Domain
+        final userId = loginDataEntity.user.id;
         await localStorage.saveUserId(userId);
 
-        // Debug: Check userId returned from Login API.
         debugPrint('========== LOGIN DEBUG ==========');
         debugPrint('User ID from API: $userId');
 
-        // Added employeeCode storage for Career Coach feature.
-        final employeeCode = loginResponse.data.user.employeeCode;
-
-        // Debug: Check employeeCode returned from Login API.
+        final employeeCode = loginDataEntity.user.employeeCode;
         debugPrint('Employee Code from API: $employeeCode');
 
-        // Save employeeCode locally when it exists.
         if (employeeCode != null && employeeCode.isNotEmpty) {
           await localStorage.saveEmployeeCode(employeeCode);
-
-          // Debug: Check employeeCode saved in LocalStorage.
           final savedEmployeeCode = localStorage.getEmployeeCode();
-
           debugPrint('Employee Code saved in LocalStorage: $savedEmployeeCode');
         } else {
-          // Debug: employeeCode was null or empty.
           debugPrint('WARNING: Employee Code is NULL or EMPTY');
         }
 
-        // Debug: Check final values stored in LocalStorage.
         debugPrint('User ID from LocalStorage: ${localStorage.getUserId()}');
         debugPrint(
           'Employee Code from LocalStorage: '

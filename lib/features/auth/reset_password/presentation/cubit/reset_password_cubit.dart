@@ -1,15 +1,16 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workwise/features/auth/reset_password/data/Repository/reset_password_repository.dart';
+import 'package:workwise/features/auth/reset_password/domain/usecases/reset_password_usecase.dart';
 import 'reset_password_state.dart';
 
 class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   ResetPasswordCubit({
-    required this.resetPasswordRepository,
+    required this.resetPasswordUseCase,
     required this.resetToken,
   }) : super(ResetPasswordInitialState());
 
-  final ResetPasswordRepository resetPasswordRepository;
+  final ResetPasswordUseCase resetPasswordUseCase;
   final String resetToken;
 
   final newPasswordController = TextEditingController();
@@ -20,46 +21,26 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
     final confirmPassword = confirmPasswordController.text;
 
     if (newPassword.isEmpty || confirmPassword.isEmpty) {
-      emit(
-        ResetPasswordErrorState(
-          'Please fill in all fields.',
-        ),
-      );
+      emit(ResetPasswordErrorState('Please fill in all fields.'));
       return;
     }
 
     if (newPassword != confirmPassword) {
-      emit(
-        ResetPasswordErrorState(
-          'Passwords do not match.',
-        ),
-      );
+      emit(ResetPasswordErrorState('Passwords do not match.'));
       return;
     }
 
     emit(ResetPasswordLoadingState());
 
-    final result = await resetPasswordRepository.resetPassword(
+    final result = await resetPasswordUseCase(
       resetToken: resetToken,
       password: newPassword,
       passwordConfirmation: confirmPassword,
     );
 
     result.fold(
-      (failure) {
-        emit(
-          ResetPasswordErrorState(
-            failure.message,
-          ),
-        );
-      },
-      (message) {
-        emit(
-          ResetPasswordSuccessState(
-            message,
-          ),
-        );
-      },
+      (failure) => emit(ResetPasswordErrorState(failure.message)),
+      (message) => emit(ResetPasswordSuccessState(message)),
     );
   }
 

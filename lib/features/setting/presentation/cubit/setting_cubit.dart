@@ -1,6 +1,5 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workwise/features/auth/fingerprint/data/Repository/fingerprint_repository.dart';
+import 'package:workwise/features/auth/fingerprint/domain/repositories/fingerprint_repository.dart';
 import 'package:workwise/features/setting/presentation/cubit/setting_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
@@ -19,8 +18,6 @@ class SettingsCubit extends Cubit<SettingsState> {
     emit(state.copyWith(status: SettingStatus.loading));
 
     try {
-      // مفيش endpoint لاسترجاع حالة البصمة ضمن الـ API
-      // اللي راجعناه؛ لذلك نستخدم وجود التوكن المحلي.
       final enabled =
           await fingerprintRepository.hasBiometricToken();
 
@@ -77,11 +74,11 @@ class SettingsCubit extends Cubit<SettingsState> {
         );
       },
       (response) {
-        // نعتمد على الحالة التي أكدها السيرفر.
+        // نعتمد على الحالة التي أكدها السيرفر مباشرة من الـ Entity
         emit(
           state.copyWith(
             status: SettingStatus.success,
-            isBiometricEnabled: response.data.isEnabled,
+            isBiometricEnabled: response.isEnabled,
             isBiometricLoading: false,
             clearErrorMessage: true,
           ),

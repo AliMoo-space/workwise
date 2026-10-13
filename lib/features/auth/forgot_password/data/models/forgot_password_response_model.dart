@@ -1,5 +1,5 @@
-
 import 'package:workwise/core/utils/json_helper.dart';
+import 'package:workwise/features/auth/forgot_password/domain/entities/forgot_password_entity.dart';
 
 class ForgotPasswordResponseModel {
   const ForgotPasswordResponseModel({
@@ -12,9 +12,7 @@ class ForgotPasswordResponseModel {
   final String message;
   final ForgotPasswordDataModel data;
 
-  factory ForgotPasswordResponseModel.fromJson(
-    Map<String, dynamic> json,
-  ) {
+  factory ForgotPasswordResponseModel.fromJson(Map<String, dynamic> json) {
     return ForgotPasswordResponseModel(
       success: JsonHelper.required<bool>(json, 'success'),
       message: JsonHelper.required<String>(json, 'message'),
@@ -34,12 +32,17 @@ class ForgotPasswordDataModel {
   final String email;
   final String resetToken;
 
-  factory ForgotPasswordDataModel.fromJson(
-    Map<String, dynamic> json,
-  ) {
+  factory ForgotPasswordDataModel.fromJson(Map<String, dynamic> json) {
     return ForgotPasswordDataModel(
       email: JsonHelper.required<String>(json, 'email'),
       resetToken: JsonHelper.required<String>(json, 'reset_token'),
+    );
+  }
+
+  ForgotPasswordEntity toEntity() {
+    return ForgotPasswordEntity(
+      email: email,
+      resetToken: resetToken,
     );
   }
 }

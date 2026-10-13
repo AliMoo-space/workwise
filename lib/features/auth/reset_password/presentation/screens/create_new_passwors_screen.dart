@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/routing/app_routes.dart';
-import 'package:workwise/features/auth/reset_password/data/Repository/reset_password_repository.dart';
 import 'package:workwise/features/auth/reset_password/presentation/cubit/reset_password_cubit.dart';
 import 'package:workwise/features/auth/reset_password/presentation/cubit/reset_password_state.dart';
 import 'package:workwise/features/auth/reset_password/presentation/widgets/reset_password_form.dart';
@@ -32,9 +31,8 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
     final theme = Theme.of(context);
 
     return BlocProvider(
-      create: (context) => ResetPasswordCubit(
-        resetPasswordRepository: GetIt.instance<ResetPasswordRepository>(),
-        resetToken: widget.resetToken,
+      create: (context) => GetIt.instance.get<ResetPasswordCubit>(
+        param1: widget.resetToken,
       ),
       child: BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
         listener: (context, state) {
@@ -80,7 +78,7 @@ class _CreateNewPasswordScreenState extends State<CreateNewPasswordScreen> {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                children: [
                     const ResetPasswordHeaderWidget(),
                     const Gap(AppSpacing.space32),
                     ResetPasswordForm(

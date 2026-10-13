@@ -1,5 +1,5 @@
-
 import 'package:workwise/core/utils/json_helper.dart';
+import 'package:workwise/features/auth/fingerprint/domain/entities/biometric_entity.dart';
 
 class ToggleBiometricResponseModel {
   const ToggleBiometricResponseModel({
@@ -12,9 +12,7 @@ class ToggleBiometricResponseModel {
   final String message;
   final ToggleBiometricDataModel data;
 
-  factory ToggleBiometricResponseModel.fromJson(
-    Map<String, dynamic> json,
-  ) {
+  factory ToggleBiometricResponseModel.fromJson(Map<String, dynamic> json) {
     return ToggleBiometricResponseModel(
       success: JsonHelper.required<bool>(json, 'success'),
       message: JsonHelper.required<String>(json, 'message'),
@@ -34,15 +32,17 @@ class ToggleBiometricDataModel {
   final bool isEnabled;
   final String? biometricToken;
 
-  factory ToggleBiometricDataModel.fromJson(
-    Map<String, dynamic> json,
-  ) {
+  factory ToggleBiometricDataModel.fromJson(Map<String, dynamic> json) {
     return ToggleBiometricDataModel(
       isEnabled: JsonHelper.required<bool>(json, 'is_enabled'),
-      biometricToken: JsonHelper.optional<String>(
-        json,
-        'biometric_token',
-      ),
+      biometricToken: JsonHelper.optional<String>(json, 'biometric_token'),
+    );
+  }
+
+  BiometricEntity toEntity() {
+    return BiometricEntity(
+      isEnabled: isEnabled,
+      biometricToken: biometricToken,
     );
   }
 }

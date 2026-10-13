@@ -1,11 +1,16 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workwise/features/auth/forgot_password/data/Repository/forgot_password_repository.dart';
+import 'package:workwise/features/auth/forgot_password/domain/usecases/send_otp_usecase.dart';
+import 'package:workwise/features/auth/forgot_password/domain/usecases/verify_otp_usecase.dart';
+import 'package:workwise/features/auth/forgot_password/domain/usecases/resend_otp_usecase.dart';
 import 'forgot_password_state.dart';
 
 class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   ForgotPasswordCubit({
-    required this.forgotPasswordRepository,
+    required this.sendOtpUseCase,
+    required this.verifyOtpUseCase,
+    required this.resendOtpUseCase,
     String? email,
   }) : super(ForgotPasswordInitialState()) {
     if (email != null) {
@@ -13,7 +18,9 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     }
   }
 
-  final ForgotPasswordRepository forgotPasswordRepository;
+  final SendOtpUseCase sendOtpUseCase;
+  final VerifyOtpUseCase verifyOtpUseCase;
+  final ResendOtpUseCase resendOtpUseCase;
 
   final emailController = TextEditingController();
   final otpController = TextEditingController();
@@ -22,35 +29,17 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     final email = emailController.text.trim();
 
     if (email.isEmpty) {
-      emit(
-        SendOtpErrorState(
-          'Please enter your email address.',
-        ),
-      );
+      emit(SendOtpErrorState('Please enter your email address.'));
       return;
     }
 
     emit(SendOtpLoadingState());
 
-    final result = await forgotPasswordRepository.sendOtp(
-      email: email,
-    );
+    final result = await sendOtpUseCase(email: email);
 
     result.fold(
-      (failure) {
-        emit(
-          SendOtpErrorState(
-            failure.message,
-          ),
-        );
-      },
-      (_) {
-        emit(
-          SendOtpSuccessState(
-            email,
-          ),
-        );
-      },
+      (failure) => emit(SendOtpErrorState(failure.message)),
+      (_) => emit(SendOtpSuccessState(email)),
     );
   }
 
@@ -59,45 +48,22 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     final otp = otpController.text.trim();
 
     if (email.isEmpty) {
-      emit(
-        VerifyOtpErrorState(
-          'Email is required.',
-        ),
-      );
+      emit(VerifyOtpErrorState('Email is required.'));
       return;
     }
 
     if (otp.length != 6) {
-      emit(
-        VerifyOtpErrorState(
-          'Please enter the complete 6-digit code.',
-        ),
-      );
+      emit(VerifyOtpErrorState('Please enter the complete 6-digit code.'));
       return;
     }
 
     emit(VerifyOtpLoadingState());
 
-    final result = await forgotPasswordRepository.verifyOtp(
-      email: email,
-      otp: otp,
-    );
+    final result = await verifyOtpUseCase(email: email, otp: otp);
 
     result.fold(
-      (failure) {
-        emit(
-          VerifyOtpErrorState(
-            failure.message,
-          ),
-        );
-      },
-      (response) {
-        emit(
-          VerifyOtpSuccessState(
-            response.data.resetToken,
-          ),
-        );
-      },
+      (failure) => emit(VerifyOtpErrorState(failure.message)),
+      (entity) => emit(VerifyOtpSuccessState(entity.resetToken)),
     );
   }
 
@@ -105,35 +71,17 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
     final email = emailController.text.trim();
 
     if (email.isEmpty) {
-      emit(
-        ResendOtpErrorState(
-          'Email is required.',
-        ),
-      );
+      emit(ResendOtpErrorState('Email is required.'));
       return;
     }
 
     emit(ResendOtpLoadingState());
 
-    final result = await forgotPasswordRepository.resendOtp(
-      email: email,
-    );
+    final result = await resendOtpUseCase(email: email);
 
     result.fold(
-      (failure) {
-        emit(
-          ResendOtpErrorState(
-            failure.message,
-          ),
-        );
-      },
-      (message) {
-        emit(
-          ResendOtpSuccessState(
-            message,
-          ),
-        );
-      },
+      (failure) => emit(ResendOtpErrorState(failure.message)),
+      (message) => emit(ResendOtpSuccessState(message)),
     );
   }
 
@@ -141,7 +89,6 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   Future<void> close() {
     emailController.dispose();
     otpController.dispose();
-
     return super.close();
   }
 }

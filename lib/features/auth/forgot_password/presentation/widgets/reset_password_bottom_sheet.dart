@@ -12,7 +12,9 @@ import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
 import 'package:workwise/core/utils/app_validator.dart';
-import 'package:workwise/features/auth/forgot_password/data/Repository/forgot_password_repository.dart';
+import 'package:workwise/features/auth/forgot_password/domain/usecases/send_otp_usecase.dart';
+import 'package:workwise/features/auth/forgot_password/domain/usecases/verify_otp_usecase.dart';
+import 'package:workwise/features/auth/forgot_password/domain/usecases/resend_otp_usecase.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/cubit/forgot_password_cubit.dart';
 import 'package:workwise/features/auth/forgot_password/presentation/cubit/forgot_password_state.dart';
 
@@ -30,7 +32,9 @@ class ResetPasswordBottomSheet extends StatefulWidget {
       backgroundColor: Theme.of(context).colorScheme.surface,
       builder: (context) => BlocProvider(
         create: (context) => ForgotPasswordCubit(
-          forgotPasswordRepository: GetIt.instance<ForgotPasswordRepository>(),
+          sendOtpUseCase: GetIt.instance<SendOtpUseCase>(),
+          verifyOtpUseCase: GetIt.instance<VerifyOtpUseCase>(),
+          resendOtpUseCase: GetIt.instance<ResendOtpUseCase>(),
         ),
         child: const ResetPasswordBottomSheet(),
       ),
@@ -122,7 +126,7 @@ class _ResetPasswordBottomSheetState extends State<ResetPasswordBottomSheet> {
                   AppText(
                     state.message,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context).colorScheme.error,
+                       color: Theme.of(context).colorScheme.error,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
