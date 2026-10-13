@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:workwise/core/errors/failure.dart';
 import 'package:workwise/features/tasks/data/models/tasks_response_model.dart';
 
 abstract class TasksState extends Equatable {
@@ -37,12 +36,10 @@ class TasksLoaded extends TasksState {
 }
 
 class TasksError extends TasksState {
-  final Failure failure;
+  final String message;
 
-  const TasksError({required this.failure});
-
-  String get message => failure.message;
+  const TasksError({required this.message});
 
   @override
-  List<Object?> get props => [failure];
+  List<Object?> get props => [message];
 }

@@ -44,10 +44,7 @@ class _TaskFilterDialogState extends State<TaskFilterDialog> {
               }).toList(),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Priority',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+            const Text('Priority', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
@@ -64,10 +61,7 @@ class _TaskFilterDialogState extends State<TaskFilterDialog> {
               }).toList(),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Deadline Range',
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+            const Text('Deadline Range', style: TextStyle(fontWeight: FontWeight.bold)),
             const SizedBox(height: 8),
             Row(
               children: [
@@ -136,7 +130,7 @@ class _TaskFilterDialogState extends State<TaskFilterDialog> {
         ElevatedButton(
           onPressed: () {
             context.read<TasksCubit>().applyFilters(
-              lang: Localizations.localeOf(context).languageCode,
+              lang: 'en',
               status: selectedStatus,
               priority: selectedPriority,
               deadlineFrom: deadlineFrom != null
