@@ -14,8 +14,6 @@ import 'package:workwise/core/services/fcm_notification_service.dart';
 import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/core/storage/secure_storage.dart';
 import 'package:workwise/features/AIAssistant/presentation/cubit/career_coach/career_coach_cubit.dart';
-import 'package:workwise/features/AIAssistant/presentation/cubit/chat_policy/policy_assistant_cubit.dart';
-
 // =============================================
 // Attendance
 // =============================================
