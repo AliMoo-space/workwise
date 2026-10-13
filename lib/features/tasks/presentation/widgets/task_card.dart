@@ -12,10 +12,16 @@ import 'custom_widgets/task_detail_widget.dart';
 import 'task_status_badge.dart';
 
 class TaskCard extends StatelessWidget {
-  const TaskCard({super.key, required this.task, required this.onTap});
+  const TaskCard({
+    super.key,
+    required this.task,
+    required this.onTap,
+    this.isLoading = false,
+  });
 
   final Task task;
   final VoidCallback onTap;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) => AppCard(
@@ -58,11 +64,21 @@ class TaskCard extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: LinearProgressIndicator(
-                value: task.progress / 100,
-                valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
-                backgroundColor: AppColors.textDisabled,
-              ),
+              child: isLoading
+                  ? Container(
+                      height: 6.h,
+                      decoration: BoxDecoration(
+                        color: AppColors.textDisabled,
+                        borderRadius: BorderRadius.circular(3.r),
+                      ),
+                    )
+                  : LinearProgressIndicator(
+                      value: task.progress / 100,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        AppColors.primary,
+                      ),
+                      backgroundColor: AppColors.textDisabled,
+                    ),
             ),
             Gap(12.w),
             Text('${task.progress}%', style: TextStyle(fontSize: 14.sp)),

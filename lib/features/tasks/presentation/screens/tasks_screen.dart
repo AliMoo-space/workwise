@@ -60,7 +60,7 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
 
   void _selectFilter(TaskFilter filter) {
     setState(() => _currentFilter = filter);
-    
+
     String? status;
     switch (filter) {
       case TaskFilter.inProgress:
@@ -76,7 +76,7 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
         status = null;
         break;
     }
-    
+
     context.read<TasksCubit>().applyFilters(lang: 'en', status: status);
   }
 
@@ -91,19 +91,34 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText(
-                context.l10n.tasks,
-                style: AppTextStyles.headlineMedium,
-              ),
-              Gap(4.h),
-              AppText(
-                context.l10n.trackAssignments,
-                style: AppTextStyles.bodyMedium,
-              ),
-              Gap(20.h),
-              TaskFilterBar(
-                selected: _currentFilter,
-                onSelected: _selectFilter,
+              BlocBuilder<TasksCubit, TasksState>(
+                builder: (context, state) => Skeletonizer(
+                  enabled: state is TasksLoading,
+                  effect: const ShimmerEffect(
+                    baseColor: Color(0xFFEDF1F4),
+                    highlightColor: Color(0xFFF9FAFB),
+                    duration: Duration(milliseconds: 1600),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppText(
+                        context.l10n.tasks,
+                        style: AppTextStyles.headlineMedium,
+                      ),
+                      Gap(4.h),
+                      AppText(
+                        context.l10n.trackAssignments,
+                        style: AppTextStyles.bodyMedium,
+                      ),
+                      Gap(20.h),
+                      TaskFilterBar(
+                        selected: _currentFilter,
+                        onSelected: _selectFilter,
+                      ),
+                    ],
+                  ),
+                ),
               ),
               Gap(16.h),
               Expanded(
@@ -131,6 +146,7 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
                               status: TaskStatus.inProgress,
                             ),
                             onTap: () {},
+                            isLoading: true,
                           ),
                         ),
                       );
@@ -178,7 +194,8 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
                         child: ListView.builder(
                           controller: _scrollController,
                           physics: const AlwaysScrollableScrollPhysics(),
-                          itemCount: tasks.length + (state.isLoadingMore ? 1 : 0),
+                          itemCount:
+                              tasks.length + (state.isLoadingMore ? 1 : 0),
                           itemBuilder: (context, index) {
                             if (index == tasks.length) {
                               return Padding(
