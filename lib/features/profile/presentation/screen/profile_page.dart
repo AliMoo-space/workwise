@@ -67,6 +67,7 @@ class _ProfilePageState extends State<ProfilePage> {
         await CachedNetworkImage.evictFromCache(oldAvatarUrl);
       }
 
+      if (!mounted) return;
       setState(() => _avatarPreview = null);
 
       // Show success message
@@ -93,6 +94,43 @@ class _ProfilePageState extends State<ProfilePage> {
     } else {
       // Revert preview on failure
       setState(() => _avatarPreview = null);
+    }
+  }
+
+  Future<void> _deleteAvatar() async {
+    final profileCubit = context.read<ProfileCubit>();
+    final profile = profileCubit.state.profile;
+    final fileId = profile?.avatarFileId;
+    if (profile == null || fileId == null) return;
+
+    final confirmed = await AppDialog.confirm(
+      context,
+      title: context.l10n.profilePhotoDelete,
+      message: context.l10n.profilePhotoDeleteConfirm,
+      confirmText: context.l10n.profilePhotoDelete,
+      cancelText: context.l10n.cancel,
+    );
+    if (!confirmed || !mounted) return;
+
+    final success = await profileCubit.deleteProfileAvatar(fileId);
+    if (!mounted) return;
+
+    if (success) {
+      if (profile.avatarUrl.isNotEmpty) {
+        await CachedNetworkImage.evictFromCache(profile.avatarUrl);
+      }
+
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: AppText(
+            context.l10n.profilePhotoDeleted,
+            color: Colors.white,
+          ),
+          backgroundColor: AppColors.success,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
     }
   }
 
@@ -184,6 +222,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       avatarPreview: _avatarPreview,
                       isUpdatingAvatar: state.isLoading,
                       onChangeAvatar: _changeAvatar,
+                      onDeleteAvatar: _deleteAvatar,
                     ),
                     if (state.isFailure && state.message != null) ...[
                       Gap(AppSpacing.space8.h),

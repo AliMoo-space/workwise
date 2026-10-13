@@ -1250,6 +1250,30 @@ abstract class AppLocalizations {
   /// **'Profile photo updated successfully'**
   String get profilePhotoUpdated;
 
+  /// No description provided for @profilePhotoChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose photo'**
+  String get profilePhotoChoose;
+
+  /// No description provided for @profilePhotoDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete profile photo'**
+  String get profilePhotoDelete;
+
+  /// No description provided for @profilePhotoDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your profile photo?'**
+  String get profilePhotoDeleteConfirm;
+
+  /// No description provided for @profilePhotoDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo deleted successfully'**
+  String get profilePhotoDeleted;
+
   /// No description provided for @editProfile.
   ///
   /// In en, this message translates to:

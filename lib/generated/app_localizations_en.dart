@@ -608,6 +608,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profilePhotoUpdated => 'Profile photo updated successfully';
 
   @override
+  String get profilePhotoChoose => 'Choose photo';
+
+  @override
+  String get profilePhotoDelete => 'Delete profile photo';
+
+  @override
+  String get profilePhotoDeleteConfirm =>
+      'Are you sure you want to delete your profile photo?';
+
+  @override
+  String get profilePhotoDeleted => 'Profile photo deleted successfully';
+
+  @override
   String get editProfile => 'Edit profile';
 
   @override

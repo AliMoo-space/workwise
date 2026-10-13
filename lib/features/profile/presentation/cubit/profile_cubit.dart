@@ -110,6 +110,46 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
+  Future<bool> deleteProfileAvatar(int fileId) async {
+    emit(
+      state.copyWith(
+        status: ProfileStatus.loading,
+        clearMessage: true,
+        clearFailure: true,
+      ),
+    );
+
+    try {
+      await _repository.deleteProfileAvatar(fileId);
+      final profile = state.profile;
+
+      emit(
+        state.copyWith(
+          status: ProfileStatus.success,
+          profile: profile?.copyWith(
+            avatarUrl: '',
+            clearAvatarFileId: true,
+          ),
+          clearMessage: true,
+          clearFailure: true,
+        ),
+      );
+
+      return true;
+    } catch (e) {
+      final failure = _mapFailure(e);
+      emit(
+        state.copyWith(
+          status: ProfileStatus.failure,
+          message: failure.message,
+          failure: failure,
+        ),
+      );
+
+      return false;
+    }
+  }
+
   Failure _mapFailure(Object error) {
     if (error is AppException) {
       return switch (error) {

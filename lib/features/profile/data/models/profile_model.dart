@@ -21,6 +21,7 @@ class ProfileModel {
     required this.status,
     required this.address,
     required this.avatarUrl,
+    this.avatarFileId,
     required this.role,
     required this.roleLabel,
     required this.locale,
@@ -42,6 +43,7 @@ class ProfileModel {
   final String status;
   final String address;
   final String avatarUrl;
+  final int? avatarFileId;
   final String role;
   final String roleLabel;
   final String locale;
@@ -76,7 +78,23 @@ class ProfileModel {
     return '$base$path';
   }
 
+  static int? _parseAvatarFileId(String avatarUrl) {
+    final pathSegments = Uri.tryParse(avatarUrl)?.pathSegments;
+    if (pathSegments == null) {
+      return null;
+    }
+
+    final filesIndex = pathSegments.indexOf('files');
+    if (filesIndex < 0 || filesIndex + 1 >= pathSegments.length) {
+      return null;
+    }
+
+    return int.tryParse(pathSegments[filesIndex + 1]);
+  }
+
   factory ProfileModel.fromJson(Map<String, dynamic> json) {
+    final avatarUrl = _parseAvatarUrl(json);
+
     return ProfileModel(
       id: json['id'] ?? 0,
       name: json['name'] ?? '',
@@ -88,7 +106,8 @@ class ProfileModel {
       startDate: json['start_date'] ?? '',
       status: json['status'] ?? '',
       address: json['address'] ?? '',
-      avatarUrl: _parseAvatarUrl(json),
+      avatarUrl: avatarUrl,
+      avatarFileId: _parseAvatarFileId(avatarUrl),
       role: json['role'] ?? '',
       roleLabel: json['role_label'] ?? '',
       locale: json['locale'] ?? '',

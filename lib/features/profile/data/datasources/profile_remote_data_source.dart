@@ -1,5 +1,6 @@
 import 'package:image_picker/image_picker.dart';
 import '../../../../core/network/api_consumer.dart';
+import '../../../../core/network/endpoints/api_endpoints.dart';
 import 'get_profile_remote_data_source.dart';
 import '../models/profile_model.dart';
 import 'profile_payload_normalizer.dart';
@@ -44,5 +45,9 @@ class ProfileRemoteDataSource {
       locale: locale,
       avatar: avatar,
     );
+  }
+
+  Future<void> deleteProfileAvatar(int fileId) async {
+    await apiConsumer.delete(ApiEndpoints.deleteFile(fileId));
   }
 }

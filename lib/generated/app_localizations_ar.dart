@@ -606,6 +606,19 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profilePhotoUpdated => 'تم تحديث الصورة الشخصية بنجاح';
 
   @override
+  String get profilePhotoChoose => 'اختيار صورة';
+
+  @override
+  String get profilePhotoDelete => 'حذف الصورة الشخصية';
+
+  @override
+  String get profilePhotoDeleteConfirm =>
+      'هل أنت متأكد أنك تريد حذف صورتك الشخصية؟';
+
+  @override
+  String get profilePhotoDeleted => 'تم حذف الصورة الشخصية بنجاح';
+
+  @override
   String get editProfile => 'تعديل الملف الشخصي';
 
   @override
