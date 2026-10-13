@@ -276,7 +276,7 @@ class _LeaveRequestFormState extends State<LeaveRequestForm> {
                     onPressed: submitForm,
                     isLoading: isLoading,
                     enabled: !isLoading,
-                    height: 48.h,
+                    height: 55.h,
                     width: double.infinity,
                   );
                 },
