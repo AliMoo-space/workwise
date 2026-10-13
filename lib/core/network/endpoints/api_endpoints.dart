@@ -12,6 +12,7 @@ abstract final class ApiEndpoints {
   static const String markAllNotificationsAsRead =
       '/api/notifications/read-all';
   static const String clearAllNotifications = '/api/notifications/clear-all';
+  static const String updateFcmToken = '/api/notifications/fcm-token';
 
   static String markNotificationAsRead(String id) =>
       '/api/notifications/$id/read';

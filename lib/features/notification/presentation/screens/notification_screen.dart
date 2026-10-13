@@ -19,11 +19,36 @@ class NotificationScreen extends StatefulWidget {
   State<NotificationScreen> createState() => _NotificationScreenState();
 }
 
-class _NotificationScreenState extends State<NotificationScreen> {
+class _NotificationScreenState extends State<NotificationScreen>
+    with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    context.read<NotificationCubit>().loadNotifications();
+    WidgetsBinding.instance.addObserver(this);
+    final cubit = context.read<NotificationCubit>();
+    cubit.loadNotifications();
+    cubit.startPolling();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (!mounted) return;
+    final cubit = context.read<NotificationCubit>();
+    if (state == AppLifecycleState.resumed) {
+      cubit.refreshNotificationsSilently();
+      cubit.startPolling();
+    } else if (state == AppLifecycleState.paused ||
+        state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.hidden ||
+        state == AppLifecycleState.detached) {
+      cubit.stopPolling();
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override

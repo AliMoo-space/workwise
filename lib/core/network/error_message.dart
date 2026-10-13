@@ -66,9 +66,6 @@ class ErrorMessage {
 
       case DioExceptionType.unknown:
         return 'Something went wrong. Please try again.';
-
-      default:
-        return 'Something went wrong. Please try again.';
     }
   }
 }

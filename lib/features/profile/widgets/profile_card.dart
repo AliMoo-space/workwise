@@ -134,7 +134,7 @@ class _ProfileCardState extends State<ProfileCard> {
         return ClipOval(
           child: Image.memory(
             bytes,
-            width: 0.w,
+            width: 80.w,
             height: 80.h,
             fit: BoxFit.cover,
           ),

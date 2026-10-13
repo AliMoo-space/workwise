@@ -15,10 +15,11 @@ abstract interface class NotificationRemoteDataSource {
   Future<void> clearAllNotifications();
 
   Future<void> deleteNotification(String id);
+
+  Future<void> updateFcmToken(String fcmToken);
 }
 
-class NotificationRemoteDataSourceImpl
-    implements NotificationRemoteDataSource {
+class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
   const NotificationRemoteDataSourceImpl({required this.apiConsumer});
 
   final ApiConsumer apiConsumer;
@@ -75,5 +76,13 @@ class NotificationRemoteDataSourceImpl
   @override
   Future<void> deleteNotification(String id) async {
     await apiConsumer.delete(ApiEndpoints.deleteNotification(id));
+  }
+
+  @override
+  Future<void> updateFcmToken(String fcmToken) async {
+    await apiConsumer.post(
+      ApiEndpoints.updateFcmToken,
+      data: {'fcm_token': fcmToken},
+    );
   }
 }

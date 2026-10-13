@@ -14,12 +14,24 @@ class NotificationModel extends NotificationEntity {
   });
 
   factory NotificationModel.fromJson(Map<String, dynamic> json) {
+    final nestedData = _optionalMap(json, 'data');
+    final explicitMetadata = _optionalMap(json, 'metadata');
+    final fallbackMetadata = Map<String, dynamic>.from(nestedData)
+      ..remove('title')
+      ..remove('body');
+
     return NotificationModel(
       id: JsonHelper.required<String>(json, 'id'),
       type: JsonHelper.required<String>(json, 'type'),
-      title: JsonHelper.optional<String>(json, 'title'),
-      body: JsonHelper.optional<String>(json, 'body'),
-      metadata: _optionalMap(json, 'metadata'),
+      title:
+          JsonHelper.optional<String>(json, 'title') ??
+          JsonHelper.optional<String>(nestedData, 'title'),
+      body:
+          JsonHelper.optional<String>(json, 'body') ??
+          JsonHelper.optional<String>(nestedData, 'body'),
+      metadata: explicitMetadata.isNotEmpty
+          ? explicitMetadata
+          : fallbackMetadata,
       isRead: JsonHelper.required<bool>(json, 'is_read'),
       createdAt: JsonHelper.required<String>(json, 'created_at'),
     );

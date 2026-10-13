@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workwise/core/services/fcm_notification_service.dart';
 import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/features/auth/login/data/Repository/auth_repository.dart';
 import 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
-  LoginCubit({required this.authRepository, required this.localStorage})
-    : super(LoginInitialState());
+  LoginCubit({
+    required this.authRepository,
+    required this.localStorage,
+    this.fcmNotificationService,
+  }) : super(LoginInitialState());
   final AuthRepository authRepository;
   final LocalStorage localStorage;
+  final FcmNotificationService? fcmNotificationService;
 
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
@@ -80,6 +85,8 @@ class LoginCubit extends Cubit<LoginState> {
           '${localStorage.getEmployeeCode()}',
         );
         debugPrint('=================================');
+
+        await fcmNotificationService?.syncTokenIfAuthenticated();
 
         emit(LoginSuccessState());
       },

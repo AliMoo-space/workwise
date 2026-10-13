@@ -14,6 +14,7 @@ import 'package:workwise/core/design_system/widgets/feedback/app_dialog.dart';
 import 'package:workwise/core/design_system/widgets/layout/app_card.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
+import 'package:workwise/core/services/fcm_notification_service.dart';
 import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/features/profile/widgets/job_details_section.dart';
@@ -39,7 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
       maxHeight: 1024,
       imageQuality: 85,
     );
-    
+
     if (avatar == null) return;
 
     final bytes = await avatar.readAsBytes();
@@ -47,6 +48,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
     // Show preview immediately
     setState(() => _avatarPreview = bytes);
+
+    final previousAvatarUrl =
+        context.read<ProfileCubit>().state.profile?.avatarUrl;
 
     // Upload to server
     final success = await context.read<ProfileCubit>().updateProfile(
@@ -59,13 +63,13 @@ class _ProfilePageState extends State<ProfilePage> {
     // Clear preview on success so the new URL from server is used
     if (success) {
       // Clear the old cached image
-      final oldAvatarUrl = context.read<ProfileCubit>().state.profile?.avatarUrl;
-      if (oldAvatarUrl != null && oldAvatarUrl.isNotEmpty) {
-        await CachedNetworkImage.evictFromCache(oldAvatarUrl);
+      if (previousAvatarUrl != null && previousAvatarUrl.isNotEmpty) {
+        await CachedNetworkImage.evictFromCache(previousAvatarUrl);
       }
-      
+      if (!mounted) return;
+
       setState(() => _avatarPreview = null);
-      
+
       // Show success message
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -77,7 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
           behavior: SnackBarBehavior.floating,
         ),
       );
-      
+
       // Force reload profile after a short delay to get the new avatar URL
       await Future.delayed(const Duration(milliseconds: 500));
       if (mounted) {
@@ -107,6 +111,9 @@ class _ProfilePageState extends State<ProfilePage> {
         );
 
         if (confirmed && context.mounted) {
+          if (sl.isRegistered<FcmNotificationService>()) {
+            await sl<FcmNotificationService>().handleLogout();
+          }
           await sl<AuthRepository>().logout();
           if (!context.mounted) return;
           context.go('/loginScreen');

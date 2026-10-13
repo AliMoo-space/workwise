@@ -10,6 +10,7 @@ import 'package:workwise/core/network/api_constants.dart';
 import 'package:workwise/core/network/dio/dio_factory.dart';
 import 'package:workwise/core/network/dio_consumer.dart';
 import 'package:workwise/core/network/network_info.dart';
+import 'package:workwise/core/services/fcm_notification_service.dart';
 import 'package:workwise/core/storage/local_storage.dart';
 import 'package:workwise/core/storage/secure_storage.dart';
 import 'package:workwise/features/AIAssistant/presentation/cubit/career_coach/career_coach_cubit.dart';
@@ -224,6 +225,7 @@ Future<void> init() async {
     () => LoginCubit(
       authRepository: sl<AuthRepository>(),
       localStorage: sl<LocalStorage>(),
+      fcmNotificationService: sl<FcmNotificationService>(),
     ),
   );
 
@@ -231,6 +233,7 @@ Future<void> init() async {
     () => SplashCubit(
       secureStorage: sl<SecureStorage>(),
       localStorage: sl<LocalStorage>(),
+      fcmNotificationService: sl<FcmNotificationService>(),
     ),
   );
 
@@ -550,6 +553,15 @@ Future<void> init() async {
     () => ClearAllNotifications(sl()),
   );
   sl.registerLazySingleton<DeleteNotification>(() => DeleteNotification(sl()));
+  sl.registerLazySingleton<UpdateFcmToken>(() => UpdateFcmToken(sl()));
+  sl.registerLazySingleton<FcmNotificationService>(
+    () => FcmNotificationService(
+      updateFcmToken: sl(),
+      secureStorage: sl(),
+      localStorage: sl(),
+      apiConsumer: sl(),
+    ),
+  );
   sl.registerFactory<NotificationCubit>(
     () => NotificationCubit(
       getNotifications: sl(),
@@ -558,6 +570,12 @@ Future<void> init() async {
       markAllNotificationsAsRead: sl(),
       clearAllNotifications: sl(),
       deleteNotification: sl(),
+      foregroundNotificationStream:
+          sl<FcmNotificationService>().onForegroundNotification,
+      isAuthenticated: () async {
+        final token = await sl<SecureStorage>().getAccessToken();
+        return token != null && token.trim().isNotEmpty;
+      },
     ),
   );
 
