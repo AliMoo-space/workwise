@@ -1,50 +1,75 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:workwise/features/auth/fingerprint/domain/usecases/has_biometric_token_usecase.dart';
+import 'package:workwise/features/auth/fingerprint/domain/usecases/biometric_login_usecase.dart';
 import 'finger_print_state.dart';
 
 class FingerprintCubit extends Cubit<FingerprintState> {
-  FingerprintCubit() : super(FingerprintInitialState());
+  FingerprintCubit({
+    required this.hasBiometricTokenUseCase,
+    required this.biometricLoginUseCase,
+  }) : super(FingerprintInitialState());
 
+  final HasBiometricTokenUseCase hasBiometricTokenUseCase;
+  final BiometricLoginUseCase biometricLoginUseCase;
   final LocalAuthentication auth = LocalAuthentication();
 
   Future<void> authenticateWithBiometrics() async {
+    if (state is FingerprintLoadingState) return;
+
     emit(FingerprintLoadingState());
 
     try {
-      final bool canAuthenticateWithBiometrics = await auth.canCheckBiometrics;
-      final bool canAuthenticate =
-          canAuthenticateWithBiometrics || await auth.isDeviceSupported();
+      final hasToken = await hasBiometricTokenUseCase();
 
-      if (!canAuthenticate) {
+      if (!hasToken) {
         emit(
-          FingerprintErrorState(
-            'Biometric authentication is not available on this device.',
+           FingerprintErrorState(
+            'Biometric login is disabled. Please sign in with your email and password.',
           ),
         );
         return;
       }
 
-      final bool didAuthenticate = await auth.authenticate(
+      final canAuthenticate = await auth.isDeviceSupported();
+
+      if (!canAuthenticate) {
+        emit(
+           FingerprintErrorState(
+            'Biometric or device authentication is not available on this device.',
+          ),
+        );
+        return;
+      }
+
+      final didAuthenticate = await auth.authenticate(
         localizedReason: 'Please authenticate to sign in to WorkWise',
-        // options: const AuthenticationOptions(
-        //   biometricOnly: true,
-        //   stickyAuth: true,
-        // ),
+        persistAcrossBackgrounding: true,
       );
 
-      if (didAuthenticate) {
-        // TODO (Future API Integration):
-        
-        emit(FingerprintSuccessState());
-      } else {
-        emit(FingerprintErrorState('Authentication canceled or failed.'));
+      if (!didAuthenticate) {
+        emit(
+           FingerprintErrorState('Authentication canceled or failed.'),
+        );
+        return;
       }
+
+      final result = await biometricLoginUseCase();
+
+      result.fold(
+        (failure) => emit(FingerprintErrorState(failure.message)),
+        (_) => emit(FingerprintSuccessState()),
+      );
     } on PlatformException catch (e) {
       emit(
         FingerprintErrorState(
           e.message ?? 'An error occurred during authentication.',
         ),
+      );
+    } catch (_) {
+      emit(
+         FingerprintErrorState('An unexpected error occurred.'),
       );
     }
   }

@@ -5,14 +5,14 @@ enum SettingStatus { initial, loading, success, failure }
 class SettingsState extends Equatable {
   final SettingStatus status;
   final bool isBiometricEnabled;
-  final bool isNotificationsEnabled;
+  final bool isBiometricLoading;
   final String selectedLanguage;
   final String? errorMessage;
 
   const SettingsState({
     this.status = SettingStatus.initial,
     this.isBiometricEnabled = false,
-    this.isNotificationsEnabled = true,
+    this.isBiometricLoading = false,
     this.selectedLanguage = 'English',
     this.errorMessage,
   });
@@ -20,17 +20,21 @@ class SettingsState extends Equatable {
   SettingsState copyWith({
     SettingStatus? status,
     bool? isBiometricEnabled,
-    bool? isNotificationsEnabled,
+    bool? isBiometricLoading,
     String? selectedLanguage,
     String? errorMessage,
+    bool clearErrorMessage = false,
   }) {
     return SettingsState(
       status: status ?? this.status,
-      isBiometricEnabled: isBiometricEnabled ?? this.isBiometricEnabled,
-      isNotificationsEnabled:
-          isNotificationsEnabled ?? this.isNotificationsEnabled,
+      isBiometricEnabled:
+          isBiometricEnabled ?? this.isBiometricEnabled,
+      isBiometricLoading:
+          isBiometricLoading ?? this.isBiometricLoading,
       selectedLanguage: selectedLanguage ?? this.selectedLanguage,
-      errorMessage: errorMessage ?? this.errorMessage,
+      errorMessage: clearErrorMessage
+          ? null
+          : errorMessage ?? this.errorMessage,
     );
   }
 
@@ -38,7 +42,7 @@ class SettingsState extends Equatable {
   List<Object?> get props => [
         status,
         isBiometricEnabled,
-        isNotificationsEnabled,
+        isBiometricLoading,
         selectedLanguage,
         errorMessage,
       ];

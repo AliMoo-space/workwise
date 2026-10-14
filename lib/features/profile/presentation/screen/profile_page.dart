@@ -22,7 +22,6 @@ import 'package:workwise/features/profile/widgets/job_details_section.dart';
 import 'package:workwise/features/profile/widgets/profile_card.dart';
 import 'package:workwise/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:workwise/features/profile/presentation/cubit/profile_state.dart';
-import 'package:workwise/features/auth/login/data/Repository/auth_repository.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -72,8 +71,9 @@ class _ProfilePageState extends State<ProfilePage> {
       if (previousAvatarUrl != null && previousAvatarUrl.isNotEmpty) {
         await CachedNetworkImage.evictFromCache(previousAvatarUrl);
       }
-      if (!mounted) return;
 
+      if (!mounted) return;
+      
       setState(() => _avatarPreview = null);
 
       // Show success message
@@ -179,11 +179,7 @@ class _ProfilePageState extends State<ProfilePage> {
         );
 
         if (confirmed && context.mounted) {
-          if (sl.isRegistered<FcmNotificationService>()) {
-            await sl<FcmNotificationService>().handleLogout();
-          } else {
-            await sl<AuthRepository>().logout();
-          }
+          await sl<FcmNotificationService>().handleLogout();
           if (!context.mounted) return;
           context.go('/loginScreen');
         }

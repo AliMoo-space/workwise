@@ -85,7 +85,7 @@ class LoginScreen extends StatelessWidget {
                     const Gap(AppSpacing.space24),
                     QuickSignInButton(
                       onTap: () {
-                        context.go(AppRoutes.fingerprintScreen);
+                        context.push(AppRoutes.fingerprintScreen);
                       },
                     ),
                   ],
