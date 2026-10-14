@@ -1,6 +1,4 @@
-
 import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:workwise/core/network/endpoints/api_endpoints.dart';
@@ -31,7 +29,7 @@ class DioInterceptors extends Interceptor {
     try {
       final isAuthEndpoint = _isAuthEndpoint(options.path);
 
-      // Public authentication requests should not use an old access token.
+      // Authentication endpoints should not use an old access token.
       if (isAuthEndpoint) {
         options.headers.remove('Authorization');
       } else {
@@ -39,6 +37,8 @@ class DioInterceptors extends Interceptor {
 
         if (token != null && token.isNotEmpty) {
           options.headers['Authorization'] = 'Bearer $token';
+        } else {
+          options.headers.remove('Authorization');
         }
       }
 
@@ -47,10 +47,12 @@ class DioInterceptors extends Interceptor {
       debugPrint(
         '[NETWORK][REQUEST] ${options.method} ${options.path}',
       );
+
       debugPrint(
         '[NETWORK][REQUEST] Authorization attached: '
         '${options.headers.containsKey('Authorization')}',
       );
+
       debugPrint(
         '[NETWORK][REQUEST] Language: '
         '${options.headers['Accept-Language']}',
@@ -73,7 +75,8 @@ class DioInterceptors extends Interceptor {
     ResponseInterceptorHandler handler,
   ) {
     debugPrint(
-      '[NETWORK][RESPONSE] ${response.requestOptions.method} '
+      '[NETWORK][RESPONSE] '
+      '${response.requestOptions.method} '
       '${response.requestOptions.path} '
       'Status: ${response.statusCode}',
     );
@@ -95,6 +98,7 @@ class DioInterceptors extends Interceptor {
       'Status: ${statusCode ?? 'no status'} '
       'Type: ${err.type}',
     );
+
     debugPrint('[NETWORK][ERROR] Message: ${err.message}');
 
     if (statusCode != 401 ||
@@ -111,13 +115,16 @@ class DioInterceptors extends Interceptor {
 
       if (newAccessToken == null || newAccessToken.isEmpty) {
         debugPrint(
-          '[AUTH][RETRY] Cancelled: refresh did not provide an access token.',
+          '[AUTH][RETRY] Cancelled: '
+          'refresh did not provide an access token.',
         );
+
         handler.next(err);
         return;
       }
 
       request.headers['Authorization'] = 'Bearer $newAccessToken';
+      request.headers['Accept-Language'] = localStorage.getLocale();
       request.extra['retryAfterRefresh'] = true;
 
       final retryDio = Dio(
@@ -134,7 +141,9 @@ class DioInterceptors extends Interceptor {
       );
 
       try {
-        debugPrint('[AUTH][RETRY] Retrying original request once.');
+        debugPrint(
+          '[AUTH][RETRY] Retrying original request once.',
+        );
 
         final response = await retryDio.fetch<dynamic>(request);
 
@@ -192,7 +201,10 @@ class DioInterceptors extends Interceptor {
       );
 
       if (refreshToken == null || refreshToken.isEmpty) {
-        debugPrint('[AUTH][REFRESH] Aborted: refresh token is missing.');
+        debugPrint(
+          '[AUTH][REFRESH] Aborted: refresh token is missing.',
+        );
+
         return null;
       }
 
@@ -282,6 +294,7 @@ class DioInterceptors extends Interceptor {
         if (newBiometricToken != null &&
             newBiometricToken.isNotEmpty) {
           await secureStorage.saveBiometricToken(newBiometricToken);
+
           debugPrint('[AUTH][REFRESH] Biometric token updated.');
         }
 

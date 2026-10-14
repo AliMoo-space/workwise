@@ -18,8 +18,6 @@ class CareerCoachRemoteDataSourceImpl implements CareerCoachRemoteDataSource {
   @override
   Future<CareerCoachModel> getCareerCoach(Map<String, dynamic> body) async {
     try {
-      // Added body to Career Coach API request
-      // to send the employee code to the backend.
       final response = await apiConsumer.post(
         ApiEndpoints.careerCoach,
         data: body,

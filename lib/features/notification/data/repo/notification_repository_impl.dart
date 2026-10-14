@@ -76,6 +76,16 @@ class NotificationRepositoryImpl implements NotificationRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, void>> updateFcmToken(String fcmToken) async {
+    try {
+      await remoteDataSource.updateFcmToken(fcmToken);
+      return const Right(null);
+    } on AppException catch (e) {
+      return Left(_mapFailure(e));
+    }
+  }
+
   Failure _mapFailure(AppException exception) {
     return switch (exception) {
       UnauthorizedException() => UnauthorizedFailure(exception.message),

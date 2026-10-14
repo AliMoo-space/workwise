@@ -1,16 +1,37 @@
+import 'dart:async';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:workwise/core/design_system/theme/app_theme.dart';
 import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/routing/router_generation_config.dart';
+import 'package:workwise/core/services/fcm_notification_service.dart';
 import 'package:workwise/core/services/service_locator.dart';
+import 'package:workwise/firebase_options.dart';
 import 'package:workwise/generated/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  } catch (e) {
+    debugPrint('Firebase initialization warning: $e');
+  }
   await init();
   runApp(BlocProvider(create: (_) => sl<LocaleCubit>(), child: const MyApp()));
+
+  // Fix: FCM permission and initial-message checks must not block the first frame.
+  unawaited(
+    sl<FcmNotificationService>().initialize().catchError((Object error) {
+      debugPrint('FCM initialization warning: ${error.runtimeType}');
+    }),
+  );
 }
 
 class MyApp extends StatelessWidget {

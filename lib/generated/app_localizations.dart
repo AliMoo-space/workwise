@@ -1250,6 +1250,72 @@ abstract class AppLocalizations {
   /// **'Profile photo updated successfully'**
   String get profilePhotoUpdated;
 
+  /// No description provided for @profilePhotoChoose.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose photo'**
+  String get profilePhotoChoose;
+
+  /// No description provided for @profilePhotoDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete profile photo'**
+  String get profilePhotoDelete;
+
+  /// No description provided for @profilePhotoDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete your profile photo?'**
+  String get profilePhotoDeleteConfirm;
+
+  /// No description provided for @profilePhotoDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo deleted successfully'**
+  String get profilePhotoDeleted;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get editProfile;
+
+  /// No description provided for @profileName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get profileName;
+
+  /// No description provided for @profilePhone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get profilePhone;
+
+  /// No description provided for @profileAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get profileAddress;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @profileUpdateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile details updated successfully'**
+  String get profileUpdateSuccess;
+
+  /// No description provided for @profileNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a name'**
+  String get profileNameRequired;
+
   /// No description provided for @logoutConfirmMessage.
   ///
   /// In en, this message translates to:
@@ -1405,6 +1471,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'December'**
   String get december;
+
+  /// No description provided for @policyAssistantWelcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Hi, I\'m your HR Policy Assistant. Ask me about leave policies, benefits, or your current balances.'**
+  String get policyAssistantWelcome;
+
+  /// No description provided for @policyAssistantThinking.
+  ///
+  /// In en, this message translates to:
+  /// **'AI is thinking...'**
+  String get policyAssistantThinking;
+
+  /// No description provided for @deleteMessageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete message'**
+  String get deleteMessageTitle;
+
+  /// No description provided for @deleteFailedMessageConfirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'Do you want to delete the message that was not sent?'**
+  String get deleteFailedMessageConfirmation;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @policyMessageNotSentLongPress.
+  ///
+  /// In en, this message translates to:
+  /// **'Not sent • Long press to delete'**
+  String get policyMessageNotSentLongPress;
+
+  /// No description provided for @sendMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Send message'**
+  String get sendMessage;
+
+  /// No description provided for @employeeIdNotAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Employee ID is not available.'**
+  String get employeeIdNotAvailable;
+
+  /// No description provided for @policyAssistantNoAnswer.
+  ///
+  /// In en, this message translates to:
+  /// **'No answer provided.'**
+  String get policyAssistantNoAnswer;
+
+  /// No description provided for @policyAssistantUnexpectedError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again.'**
+  String get policyAssistantUnexpectedError;
 }
 
 class _AppLocalizationsDelegate

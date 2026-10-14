@@ -5,6 +5,8 @@ import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/routing/app_routes.dart';
+import 'package:workwise/core/services/fcm_notification_service.dart';
+import 'package:workwise/core/services/service_locator.dart';
 
 class LogoutTileWidget extends StatelessWidget {
   final VoidCallback? onConfirmLogout;
@@ -69,12 +71,16 @@ class LogoutTileWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed: () {
+                  onPressed: () async {
                     Navigator.of(dialogContext).pop();
+
+                    if (sl.isRegistered<FcmNotificationService>()) {
+                      await sl<FcmNotificationService>().handleLogout();
+                    }
 
                     if (onConfirmLogout != null) {
                       onConfirmLogout!();
-                    } else {
+                    } else if (context.mounted) {
                       context.go(AppRoutes.loginScreen);
                     }
                   },

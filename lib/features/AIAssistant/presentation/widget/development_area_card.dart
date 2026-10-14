@@ -16,7 +16,7 @@ class DevelopmentAreaCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      height: 110.h,
+      height: 120.h,
       width: double.infinity.w,
       padding: EdgeInsets.all(AppSpacing.space16.r),
       backgroundColor: Theme.of(context).colorScheme.onError,

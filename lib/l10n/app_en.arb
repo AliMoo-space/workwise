@@ -247,6 +247,17 @@
   "profileContact": "Contact",
   "profileActiveFullTime": "Active / Full-Time",
   "profilePhotoUpdated": "Profile photo updated successfully",
+  "profilePhotoChoose": "Choose photo",
+  "profilePhotoDelete": "Delete profile photo",
+  "profilePhotoDeleteConfirm": "Are you sure you want to delete your profile photo?",
+  "profilePhotoDeleted": "Profile photo deleted successfully",
+  "editProfile": "Edit profile",
+  "profileName": "Name",
+  "profilePhone": "Phone",
+  "profileAddress": "Address",
+  "save": "Save",
+  "profileUpdateSuccess": "Profile details updated successfully",
+  "profileNameRequired": "Please enter a name",
 
   "logoutConfirmMessage": "Are you sure you want to logout?",
 
@@ -276,5 +287,16 @@
   "march": "March",
   "october": "October",
   "november": "November",
-  "december": "December"
+  "december": "December",
+  "policyAssistantWelcome": "Hi, I'm your HR Policy Assistant. Ask me about leave policies, benefits, or your current balances.",
+  "policyAssistantThinking": "AI is thinking...",
+  "deleteMessageTitle": "Delete message",
+  "deleteFailedMessageConfirmation": "Do you want to delete the message that was not sent?",
+  "cancel": "Cancel",
+  "delete": "Delete",
+  "policyMessageNotSentLongPress": "Not sent • Long press to delete",
+  "sendMessage": "Send message",
+  "employeeIdNotAvailable": "Employee ID is not available.",
+  "policyAssistantNoAnswer": "No answer provided.",
+  "policyAssistantUnexpectedError": "Something went wrong. Please try again."
 }

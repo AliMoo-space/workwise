@@ -76,6 +76,17 @@ class _DrawerHeaderState extends State<DrawerHeader> {
     }
   }
 
+  Future<void> _showProfilePhoto() async {
+    final bytes = await _avatarFuture;
+    if (!mounted) return;
+
+    await showProfilePhotoViewer(
+      context,
+      bytes: bytes,
+      imageUrl: bytes == null ? widget.avatarUrl : null,
+    );
+  }
+
   Widget _buildDefaultAvatar() {
     return Container(
       width: 72.r,
@@ -164,10 +175,7 @@ class _DrawerHeaderState extends State<DrawerHeader> {
           children: [
             GestureDetector(
               onTap: widget.avatarUrl != null && widget.avatarUrl!.isNotEmpty
-                  ? () => showProfilePhotoViewer(
-                      context,
-                      imageUrl: widget.avatarUrl,
-                    )
+                  ? _showProfilePhoto
                   : null,
               child: _buildAvatar(),
             ),

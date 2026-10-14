@@ -16,7 +16,7 @@ class StrengthCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      height: 130.h,
+      height: 140.h,
       width: double.infinity.w,
       padding: EdgeInsets.all(AppSpacing.space16.r),
       backgroundColor: Theme.of(context).colorScheme.onError,
@@ -56,7 +56,7 @@ class StrengthCard extends StatelessWidget {
           Gap(AppSpacing.space8.h),
 
           AppCard(
-            height: 65.h,
+            height: 70.h,
             width: double.infinity.w,
             padding: EdgeInsets.all(AppSpacing.space16.r),
             backgroundColor: Theme.of(context).colorScheme.outlineVariant,

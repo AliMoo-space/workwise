@@ -33,7 +33,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get language => 'اللغة';
 
   @override
-  String get languageEnglish => 'الإنجليزية';
+  String get languageEnglish => 'الإنجليزيّة';
 
   @override
   String get languageArabic => 'العربية';
@@ -97,10 +97,10 @@ class AppLocalizationsAr extends AppLocalizations {
   String get onShift => 'في الدوام';
 
   @override
-  String get checkedInAt => 'تم تسجيل الحضور الساعة ';
+  String get checkedInAt => 'تم تسجيل الحضور الساعة 9:00 صباحًا';
 
   @override
-  String get hoursWorked => ' ساعات العمل ';
+  String get hoursWorked => 'ساعات العمل';
 
   @override
   String get insideOffice => 'داخل المكتب';
@@ -603,7 +603,41 @@ class AppLocalizationsAr extends AppLocalizations {
   String get profileActiveFullTime => 'نشط / دوام كامل';
 
   @override
-  String get profilePhotoUpdated => 'Profile photo updated successfully';
+  String get profilePhotoUpdated => 'تم تحديث الصورة الشخصية بنجاح';
+
+  @override
+  String get profilePhotoChoose => 'اختيار صورة';
+
+  @override
+  String get profilePhotoDelete => 'حذف الصورة الشخصية';
+
+  @override
+  String get profilePhotoDeleteConfirm =>
+      'هل أنت متأكد أنك تريد حذف صورتك الشخصية؟';
+
+  @override
+  String get profilePhotoDeleted => 'تم حذف الصورة الشخصية بنجاح';
+
+  @override
+  String get editProfile => 'تعديل الملف الشخصي';
+
+  @override
+  String get profileName => 'الاسم';
+
+  @override
+  String get profilePhone => 'رقم الهاتف';
+
+  @override
+  String get profileAddress => 'العنوان';
+
+  @override
+  String get save => 'حفظ';
+
+  @override
+  String get profileUpdateSuccess => 'تم تحديث بيانات الملف الشخصي بنجاح';
+
+  @override
+  String get profileNameRequired => 'يرجى إدخال الاسم';
 
   @override
   String get logoutConfirmMessage => 'هل أنت متأكد أنك تريد تسجيل الخروج؟';
@@ -683,4 +717,38 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get december => 'ديسمبر';
+
+  @override
+  String get policyAssistantWelcome =>
+      'أهلًا، أنا مساعد سياسات الموارد البشرية. اسألني عن سياسات الإجازات أو المزايا أو أرصدتك الحالية.';
+
+  @override
+  String get policyAssistantThinking => 'جاري التفكير...';
+
+  @override
+  String get deleteMessageTitle => 'حذف الرسالة';
+
+  @override
+  String get deleteFailedMessageConfirmation =>
+      'هل تريد حذف الرسالة التي لم يتم إرسالها؟';
+
+  @override
+  String get delete => 'حذف';
+
+  @override
+  String get policyMessageNotSentLongPress =>
+      'لم يتم الإرسال • اضغط مطولًا للحذف';
+
+  @override
+  String get sendMessage => 'إرسال الرسالة';
+
+  @override
+  String get employeeIdNotAvailable => 'رقم الموظف غير متوفر.';
+
+  @override
+  String get policyAssistantNoAnswer => 'لم يتم توفير رد.';
+
+  @override
+  String get policyAssistantUnexpectedError =>
+      'حدث خطأ غير متوقع. حاول مرة أخرى.';
 }
