@@ -595,9 +595,9 @@ import 'package:workwise/features/attendance/domain/usecases/get_attendance_hist
 import 'package:workwise/features/attendance/domain/usecases/get_today_attendance.dart';
 import 'package:workwise/features/attendance/presentation/cubit/attendance_cubit.dart';
 import 'package:workwise/features/attendance/presentation/cubit/attendance_history_cubit.dart';
-import 'package:workwise/features/auth/fingerprint/data/Repository/fingerprint_repository.dart';
+import 'package:workwise/features/auth/fingerprint/data/repository/fingerprint_repository.dart';
 import 'package:workwise/features/auth/forgot_password/data/Repository/forgot_password_repository_impl.dart';
-import 'package:workwise/features/auth/login/data/Repository/login_repository_impl.dart.dart';
+import 'package:workwise/features/auth/login/data/Repository/login_repository_impl.dart';
 import 'package:workwise/features/auth/reset_password/data/Repository/reset_password_repository_impl.dart';
 import 'package:workwise/features/notification/data/datasource/notification_remote_data_source.dart';
 import 'package:workwise/features/notification/data/repo/notification_repository_impl.dart';
@@ -633,6 +633,8 @@ import 'package:workwise/features/auth/reset_password/data/datasources/reset_pas
 import 'package:workwise/features/auth/reset_password/domain/repositories/reset_password_repository.dart';
 import 'package:workwise/features/auth/reset_password/domain/usecases/reset_password_usecase.dart';
 import 'package:workwise/features/auth/reset_password/presentation/cubit/reset_password_cubit.dart';
+import 'package:workwise/features/setting/domain/usecases/get_biometric_setting_usecase.dart';
+import 'package:workwise/features/setting/domain/usecases/toggle_biometric_setting_usecase.dart';
 import 'package:workwise/features/setting/presentation/cubit/setting_cubit.dart';
 
 // =============================================
@@ -643,6 +645,7 @@ import 'package:workwise/features/auth/fingerprint/domain/repositories/fingerpri
 import 'package:workwise/features/auth/fingerprint/domain/usecases/has_biometric_token_usecase.dart';
 import 'package:workwise/features/auth/fingerprint/domain/usecases/biometric_login_usecase.dart';
 import 'package:workwise/features/auth/fingerprint/presentation/cubit/finger_print_cubit.dart';
+import 'package:workwise/features/splash/domain/usecases/check_auth_session_usecase.dart';
 
 // =============================================
 // Splash
@@ -754,13 +757,14 @@ Future<void> init() async {
   // Network
   // =============================================
 
-  sl.registerLazySingleton<Dio>(
-    () => DioFactory(
-      baseUrl: ApiConstants.baseUrl,
-      getToken: () => sl<SecureStorage>().getAccessToken(),
-      localStorage: sl<LocalStorage>(),
-    ).create(),
-  );
+ sl.registerLazySingleton<Dio>(
+  () => DioFactory(
+    baseUrl: ApiConstants.baseUrl,
+    getToken: () => sl<SecureStorage>().getAccessToken(),
+    localStorage: sl<LocalStorage>(),
+    secureStorage: sl<SecureStorage>(),
+  ).create(),
+);
 
   sl.registerLazySingleton<NetworkInfo>(
     () => NetworkInfoImpl(
@@ -804,7 +808,6 @@ Future<void> init() async {
   sl.registerLazySingleton<LoginRepository>(
     () => LoginRepositoryImpl(
       loginApiService: sl<LoginApiService>(),
-      networkInfo: sl<NetworkInfo>(),
       secureStorage: sl<SecureStorage>(),
       localStorage: sl<LocalStorage>(),
     ),
@@ -897,11 +900,12 @@ Future<void> init() async {
   );
 
   sl.registerLazySingleton<FingerprintRepository>(
-    () => FingerprintRepositoryImpl(
-      fingerprintApiService: sl<FingerprintApiService>(),
-      secureStorage: sl<SecureStorage>(),
-    ),
-  );
+  () => FingerprintRepositoryImpl(
+    fingerprintApiService: sl<FingerprintApiService>(),
+    secureStorage: sl<SecureStorage>(),
+    localStorage: sl<LocalStorage>(),
+  ),
+);
 
   sl.registerLazySingleton<HasBiometricTokenUseCase>(
     () => HasBiometricTokenUseCase(sl<FingerprintRepository>()),
@@ -919,12 +923,21 @@ Future<void> init() async {
   );
 
   // =============================================
-  // Settings
+  // Settings - Use Cases
   // =============================================
+
+  sl.registerLazySingleton<GetBiometricSettingUseCase>(
+    () => GetBiometricSettingUseCase(sl<FingerprintRepository>()),
+  );
+
+  sl.registerLazySingleton<ToggleBiometricSettingUseCase>(
+    () => ToggleBiometricSettingUseCase(sl<FingerprintRepository>()),
+  );
 
   sl.registerFactory<SettingsCubit>(
     () => SettingsCubit(
-      fingerprintRepository: sl<FingerprintRepository>(),
+      getBiometricSettingUseCase: sl<GetBiometricSettingUseCase>(),
+      toggleBiometricSettingUseCase: sl<ToggleBiometricSettingUseCase>(),
     ),
   );
 
@@ -932,13 +945,18 @@ Future<void> init() async {
   // Splash
   // =============================================
 
-  sl.registerFactory<SplashCubit>(
-    () => SplashCubit(
+  sl.registerLazySingleton<CheckAuthSessionUseCase>(
+    () => CheckAuthSessionUseCase(
       secureStorage: sl<SecureStorage>(),
       localStorage: sl<LocalStorage>(),
     ),
   );
 
+  sl.registerFactory<SplashCubit>(
+    () => SplashCubit(
+      checkAuthSessionUseCase: sl<CheckAuthSessionUseCase>(),
+    ),
+  );
   // =============================================
   // Attendance - Data Layer
   // =============================================

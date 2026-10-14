@@ -1,4 +1,3 @@
-
 import 'package:equatable/equatable.dart';
 
 enum SettingStatus { initial, loading, success, failure }
@@ -7,7 +6,6 @@ class SettingsState extends Equatable {
   final SettingStatus status;
   final bool isBiometricEnabled;
   final bool isBiometricLoading;
-  final bool isNotificationsEnabled;
   final String selectedLanguage;
   final String? errorMessage;
 
@@ -15,7 +13,6 @@ class SettingsState extends Equatable {
     this.status = SettingStatus.initial,
     this.isBiometricEnabled = false,
     this.isBiometricLoading = false,
-    this.isNotificationsEnabled = true,
     this.selectedLanguage = 'English',
     this.errorMessage,
   });
@@ -24,7 +21,6 @@ class SettingsState extends Equatable {
     SettingStatus? status,
     bool? isBiometricEnabled,
     bool? isBiometricLoading,
-    bool? isNotificationsEnabled,
     String? selectedLanguage,
     String? errorMessage,
     bool clearErrorMessage = false,
@@ -35,8 +31,6 @@ class SettingsState extends Equatable {
           isBiometricEnabled ?? this.isBiometricEnabled,
       isBiometricLoading:
           isBiometricLoading ?? this.isBiometricLoading,
-      isNotificationsEnabled:
-          isNotificationsEnabled ?? this.isNotificationsEnabled,
       selectedLanguage: selectedLanguage ?? this.selectedLanguage,
       errorMessage: clearErrorMessage
           ? null
@@ -49,7 +43,6 @@ class SettingsState extends Equatable {
         status,
         isBiometricEnabled,
         isBiometricLoading,
-        isNotificationsEnabled,
         selectedLanguage,
         errorMessage,
       ];

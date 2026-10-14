@@ -69,6 +69,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     const Gap(AppSpacing.space12),
 
+                    // Biometric Login Tile
                     SettingTileWidget(
                       icon: Icons.fingerprint_rounded,
                       title: context.l10n.biometricLogin,
@@ -93,23 +94,7 @@ class SettingsScreen extends StatelessWidget {
 
                     const Gap(AppSpacing.space12),
 
-                    SettingTileWidget(
-                      icon: Icons.notifications_none_rounded,
-                      title: context.l10n.pushNotifications,
-                      subtitle: context.l10n.tasksApprovalsReminders,
-                      trailing: Switch.adaptive(
-                        value: state.isNotificationsEnabled,
-                        activeColor: Colors.white,
-                        activeTrackColor: theme.colorScheme.primary,
-                        inactiveThumbColor: theme.colorScheme.outline,
-                        inactiveTrackColor:
-                            theme.colorScheme.surfaceContainerHighest,
-                        onChanged: cubit.toggleNotifications,
-                      ),
-                    ),
-
-                    const Gap(AppSpacing.space12),
-
+                    // Language Selector Tile
                     SettingTileWidget(
                       icon: Icons.translate_rounded,
                       title: context.l10n.language,

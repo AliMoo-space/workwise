@@ -26,28 +26,37 @@ class LoginResponseModel {
 class LoginDataModel {
   const LoginDataModel({
     required this.accessToken,
+    required this.refreshToken,
     required this.tokenType,
     required this.expiresIn,
+    required this.refreshExpiresIn,
     required this.user,
   });
 
   final String accessToken;
+  final String refreshToken;
   final String tokenType;
   final String expiresIn;
+  final String refreshExpiresIn;
   final LoginUserModel user;
 
   factory LoginDataModel.fromJson(Map<String, dynamic> json) {
     return LoginDataModel(
       accessToken: JsonHelper.required<String>(json, 'access_token'),
+      refreshToken: JsonHelper.required<String>(json, 'refresh_token'),
       tokenType: JsonHelper.required<String>(json, 'token_type'),
       expiresIn: JsonHelper.required<String>(json, 'expires_in'),
+      refreshExpiresIn: JsonHelper.required<String>(
+        json,
+        'refresh_expires_in',
+      ),
       user: LoginUserModel.fromJson(
         JsonHelper.required<Map<String, dynamic>>(json, 'user'),
       ),
     );
   }
 
-  // دالة التحويل لطبقة الـ Domain
+  // تحويل البيانات إلى طبقة الـ Domain.
   LoginDataEntity toEntity() {
     return LoginDataEntity(
       accessToken: accessToken,

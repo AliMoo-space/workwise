@@ -1,25 +1,26 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workwise/features/auth/fingerprint/domain/repositories/fingerprint_repository.dart';
+import 'package:workwise/features/setting/domain/usecases/get_biometric_setting_usecase.dart';
+import 'package:workwise/features/setting/domain/usecases/toggle_biometric_setting_usecase.dart';
 import 'package:workwise/features/setting/presentation/cubit/setting_state.dart';
 
 class SettingsCubit extends Cubit<SettingsState> {
   SettingsCubit({
-    required this.fingerprintRepository,
+    required this.getBiometricSettingUseCase,
+    required this.toggleBiometricSettingUseCase,
   }) : super(const SettingsState()) {
     _loadSettings();
   }
 
-  final FingerprintRepository fingerprintRepository;
+  final GetBiometricSettingUseCase getBiometricSettingUseCase;
+  final ToggleBiometricSettingUseCase toggleBiometricSettingUseCase;
 
   bool get isBiometricEnabled => state.isBiometricEnabled;
-  bool get isNotificationsEnabled => state.isNotificationsEnabled;
 
   Future<void> _loadSettings() async {
     emit(state.copyWith(status: SettingStatus.loading));
 
     try {
-      final enabled =
-          await fingerprintRepository.hasBiometricToken();
+      final enabled = await getBiometricSettingUseCase();
 
       if (isClosed) return;
 
@@ -57,13 +58,12 @@ class SettingsCubit extends Cubit<SettingsState> {
       ),
     );
 
-    final result = await fingerprintRepository.toggleBiometrics();
+    final result = await toggleBiometricSettingUseCase();
 
     if (isClosed) return;
 
     result.fold(
       (failure) {
-        // الحالة القديمة تفضل كما هي عند فشل الطلب.
         emit(
           state.copyWith(
             status: SettingStatus.failure,
@@ -74,7 +74,6 @@ class SettingsCubit extends Cubit<SettingsState> {
         );
       },
       (response) {
-        // نعتمد على الحالة التي أكدها السيرفر مباشرة من الـ Entity
         emit(
           state.copyWith(
             status: SettingStatus.success,
@@ -85,9 +84,5 @@ class SettingsCubit extends Cubit<SettingsState> {
         );
       },
     );
-  }
-
-  void toggleNotifications(bool value) {
-    emit(state.copyWith(isNotificationsEnabled: value));
   }
 }

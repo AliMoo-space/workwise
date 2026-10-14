@@ -16,11 +16,11 @@ import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/core/storage/local_storage.dart';
+import 'package:workwise/features/auth/login/domain/repositories/login_repository.dart';
 import 'package:workwise/features/profile/widgets/job_details_section.dart';
 import 'package:workwise/features/profile/widgets/profile_card.dart';
 import 'package:workwise/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:workwise/features/profile/presentation/cubit/profile_state.dart';
-import 'package:workwise/features/auth/login/data/Repository/auth_repository.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -63,6 +63,8 @@ class _ProfilePageState extends State<ProfilePage> {
       if (oldAvatarUrl != null && oldAvatarUrl.isNotEmpty) {
         await CachedNetworkImage.evictFromCache(oldAvatarUrl);
       }
+
+      if (!mounted) return;
       
       setState(() => _avatarPreview = null);
       
@@ -107,7 +109,7 @@ class _ProfilePageState extends State<ProfilePage> {
         );
 
         if (confirmed && context.mounted) {
-          await sl<AuthRepository>().logout();
+          await sl<LoginRepository>().logout();
           if (!context.mounted) return;
           context.go('/loginScreen');
         }

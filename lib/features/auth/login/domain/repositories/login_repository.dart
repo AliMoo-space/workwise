@@ -7,4 +7,6 @@ abstract class LoginRepository {
     required String email,
     required String password,
   });
+
+  Future<void> logout();
 }
