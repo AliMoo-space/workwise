@@ -719,7 +719,6 @@ import 'package:workwise/features/AIAssistant/data/datasource/career_coach_remot
 import 'package:workwise/features/AIAssistant/data/repositories/career_coach_repository_impl.dart';
 import 'package:workwise/features/AIAssistant/domain/repositories/career_coach_repository.dart';
 import 'package:workwise/features/AIAssistant/domain/usecases/get_career_coach.dart';
-import 'package:workwise/features/AIAssistant/presentation/cubit/career_coach_cubit.dart';
 
 // =============================================
 // AI Assistant - Policy Assistant
@@ -961,7 +960,6 @@ Future<void> init() async {
     () => CheckAuthSessionUseCase(
       secureStorage: sl<SecureStorage>(),
       localStorage: sl<LocalStorage>(),
-      fcmNotificationService: sl<FcmNotificationService>(),
     ),
   );
 
