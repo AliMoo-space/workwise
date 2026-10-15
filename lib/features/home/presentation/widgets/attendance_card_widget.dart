@@ -177,7 +177,7 @@ class _AttendanceCardWidgetState extends State<AttendanceCardWidget> {
           AppButton(
             text: !_isCheckedIn ? context.l10n.checkIn : context.l10n.checkOut,
             backgroundColor: !_isCheckedIn
-                ? AppColors.success
+                ? AppColors.secondary
                 : AppColors.outlineVariant.withValues(alpha: .4),
             onPressed: widget.isActionLoading
                 ? null
