@@ -94,10 +94,11 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
               BlocBuilder<TasksCubit, TasksState>(
                 builder: (context, state) => Skeletonizer(
                   enabled: state is TasksLoading,
+                  containersColor: const Color(0xFFF0F3F5),
                   effect: const ShimmerEffect(
-                    baseColor: Color(0xFFEDF1F4),
-                    highlightColor: Color(0xFFF9FAFB),
-                    duration: Duration(milliseconds: 1600),
+                    baseColor: Color(0xFFF0F3F5),
+                    highlightColor: Color(0xFFFAFBFC),
+                    duration: Duration(milliseconds: 1700),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,10 +128,11 @@ class _TasksScreenContentState extends State<_TasksScreenContent> {
                     if (state is TasksLoading) {
                       return Skeletonizer(
                         enabled: true,
+                        containersColor: const Color(0xFFF0F3F5),
                         effect: const ShimmerEffect(
-                          baseColor: Color(0xFFEDF1F4),
-                          highlightColor: Color(0xFFF9FAFB),
-                          duration: Duration(milliseconds: 1600),
+                          baseColor: Color(0xFFF0F3F5),
+                          highlightColor: Color(0xFFFAFBFC),
+                          duration: Duration(milliseconds: 1700),
                         ),
                         child: ListView.separated(
                           itemCount: 5,
