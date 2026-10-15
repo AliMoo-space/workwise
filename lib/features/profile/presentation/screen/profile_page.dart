@@ -73,7 +73,7 @@ class _ProfilePageState extends State<ProfilePage> {
       }
 
       if (!mounted) return;
-      
+
       setState(() => _avatarPreview = null);
 
       // Show success message
@@ -246,6 +246,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       state.status == ProfileStatus.initial)
                     Skeletonizer(
                       enabled: true,
+                      effect: const ShimmerEffect(
+                        baseColor: Color(0xFFF0F3F5),
+                        highlightColor: Color(0xFFFAFBFC),
+                        duration: Duration(milliseconds: 1700),
+                      ),
                       child: Column(
                         children: [
                           _ProfileSkeleton(),

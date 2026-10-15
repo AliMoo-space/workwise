@@ -134,9 +134,9 @@ class TaskSubmissionScreen extends StatelessWidget {
                     child: Skeletonizer(
                       enabled: isSubmitting,
                       effect: const ShimmerEffect(
-                        baseColor: Color(0xFFEDF1F4),
-                        highlightColor: Color(0xFFF9FAFB),
-                        duration: Duration(milliseconds: 1600),
+                        baseColor: Color(0xFFF0F3F5),
+                        highlightColor: Color(0xFFFAFBFC),
+                        duration: Duration(milliseconds: 1700),
                       ),
                       child: Column(
                         children: [
