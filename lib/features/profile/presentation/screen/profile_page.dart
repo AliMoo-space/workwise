@@ -278,6 +278,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     Gap(AppSpacing.space20.h),
                     _buildLogoutButton(context),
                   ],
+                  Gap(AppSpacing.space12.h),
                 ],
               );
             },
@@ -400,3 +401,6 @@ class _ProfileSkeleton extends StatelessWidget {
     );
   }
 }
+
+
+

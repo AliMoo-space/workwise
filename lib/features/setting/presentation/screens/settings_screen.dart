@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
+import 'package:workwise/core/design_system/widgets/buttons/app_button.dart';
+import 'package:workwise/core/design_system/widgets/feedback/app_dialog.dart';
 import 'package:workwise/core/design_system/widgets/inputs/language_selector.dart';
 import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
@@ -103,6 +105,7 @@ class SettingsScreen extends StatelessWidget {
                     ),
 
                     const Gap(AppSpacing.space24),
+                    _buildDeleteAccountButton(context),
                   ],
                 ),
               );
@@ -112,4 +115,29 @@ class SettingsScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _buildDeleteAccountButton(BuildContext context) {
+  final isArabic = Localizations.localeOf(context).languageCode == 'ar';
+
+  return AppButton(
+    text: isArabic ? 'حذف الحساب' : 'Delete Account',
+    variant: AppButtonVariant.danger,
+    onPressed: () async {
+      final confirmed = await AppDialog.confirm(
+        context,
+        title: isArabic ? 'حذف الحساب' : 'Delete Account',
+        message: isArabic
+            ? 'هل انت متأكد انك عايز تحذف حسابك؟ لا يمكن التراجع عن هذا الاجراء.'
+            : 'Are you sure you want to delete your account? This action cannot be undone.',
+        confirmText: isArabic ? 'حذف الحساب' : 'Delete Account',
+        cancelText: isArabic ? 'الغاء' : 'Cancel',
+      );
+
+      if (!confirmed || !context.mounted) return;
+
+      // TODO: Call the actual account deletion API here.
+      // Only log out and navigate after the server confirms deletion.
+    },
+  );
 }
