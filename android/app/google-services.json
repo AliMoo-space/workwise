@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:398090348279:android:f74c4e04749d7d8c3c15f2",
+        "android_client_info": {
+          "package_name": "com.alimohamed.workwise"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBvn3T8ndZcFosBLO9hu1C-7BOB-pdXAg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:398090348279:android:b14be8d72678450d3c15f2",
         "android_client_info": {
           "package_name": "com.example.workwise"
