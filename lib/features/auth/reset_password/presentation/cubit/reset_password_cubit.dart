@@ -1,9 +1,17 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workwise/features/auth/reset_password/domain/usecases/reset_password_usecase.dart';
 import 'reset_password_state.dart';
 
 class ResetPasswordCubit extends Cubit<ResetPasswordState> {
-  ResetPasswordCubit() : super(ResetPasswordInitialState());
+  ResetPasswordCubit({
+    required this.resetPasswordUseCase,
+    required this.resetToken,
+  }) : super(ResetPasswordInitialState());
+
+  final ResetPasswordUseCase resetPasswordUseCase;
+  final String resetToken;
 
   final newPasswordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -24,10 +32,16 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
 
     emit(ResetPasswordLoadingState());
 
-    // Simulation for API Call
-    await Future.delayed(const Duration(seconds: 2));
+    final result = await resetPasswordUseCase(
+      resetToken: resetToken,
+      password: newPassword,
+      passwordConfirmation: confirmPassword,
+    );
 
-    emit(ResetPasswordSuccessState());
+    result.fold(
+      (failure) => emit(ResetPasswordErrorState(failure.message)),
+      (message) => emit(ResetPasswordSuccessState(message)),
+    );
   }
 
   @override

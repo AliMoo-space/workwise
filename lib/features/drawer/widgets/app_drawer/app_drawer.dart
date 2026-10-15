@@ -9,11 +9,11 @@ import 'package:workwise/core/localization/local_cubit.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/core/storage/local_storage.dart';
-import 'package:workwise/features/auth/login/data/Repository/auth_repository.dart';
 import 'package:workwise/features/drawer/widgets/app_drawer/drawer_footer.dart';
 import 'package:workwise/features/drawer/widgets/app_drawer/drawer_header.dart'
     as custom;
 import 'package:workwise/features/drawer/widgets/app_drawer/drawer_menu.dart';
+import 'package:workwise/features/auth/login/domain/repositories/login_repository.dart';
 import 'package:workwise/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:workwise/features/profile/presentation/cubit/profile_state.dart';
 
@@ -45,7 +45,7 @@ class AppDrawer extends StatelessWidget {
 
                 return custom.DrawerHeader(
                   userName: userName ?? profile?.name ?? '',
-                  userEmail: userEmail ?? profile?.email ?? '',
+                  userEmail: userEmail ?? profile?.jobTitle ?? '',
                   avatarUrl:
                       avatarUrl ??
                       (profileAvatar != null && profileAvatar.isNotEmpty
@@ -77,7 +77,7 @@ class AppDrawer extends StatelessWidget {
                 );
 
                 if (confirmed && context.mounted) {
-                  await sl<AuthRepository>().logout();
+                  await sl<LoginRepository>().logout();
                   if (!context.mounted) return;
                   context.go('/loginScreen');
                 }

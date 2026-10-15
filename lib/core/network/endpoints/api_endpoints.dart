@@ -12,11 +12,14 @@ abstract final class ApiEndpoints {
   static const String markAllNotificationsAsRead =
       '/api/notifications/read-all';
   static const String clearAllNotifications = '/api/notifications/clear-all';
+  static const String updateFcmToken = '/api/notifications/fcm-token';
 
   static String markNotificationAsRead(String id) =>
       '/api/notifications/$id/read';
 
   static String deleteNotification(String id) => '/api/notifications/$id';
+
+  static String deleteFile(int fileId) => '/api/files/$fileId';
 
   // Auth
 
@@ -24,8 +27,12 @@ abstract final class ApiEndpoints {
 
   static const String register = '/auth/register';
 
-  static const String refreshToken = '/auth/refresh-token';
+static const String refresh = '/api/auth/refresh';
   static const String logout = '/api/auth/logout';
+
+  static const String toggleBiometrics = '/api/auth/toggle-biometrics';
+
+  static const String biometricLogin = '/api/auth/biometric-login';
 
   // Forgot Password
 

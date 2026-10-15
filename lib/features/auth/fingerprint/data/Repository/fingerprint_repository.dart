@@ -1,0 +1,196 @@
+import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
+import 'package:workwise/core/errors/failure.dart';
+import 'package:workwise/core/storage/local_storage.dart';
+import 'package:workwise/core/storage/secure_storage.dart';
+import 'package:workwise/features/auth/fingerprint/data/models/toggle_biometric_response_model.dart';
+import 'package:workwise/features/auth/fingerprint/data/datasources/fingerprint_api_service.dart';
+import 'package:workwise/features/auth/fingerprint/domain/entities/biometric_entity.dart';
+import 'package:workwise/features/auth/fingerprint/domain/repositories/fingerprint_repository.dart';
+import 'package:workwise/features/auth/login/data/models/login_response_model.dart';
+import 'package:workwise/features/auth/login/domain/entities/login_entity.dart';
+
+class FingerprintRepositoryImpl implements FingerprintRepository {
+  FingerprintRepositoryImpl({
+    required this.fingerprintApiService,
+    required this.secureStorage,
+    required this.localStorage,
+  });
+
+  final FingerprintApiService fingerprintApiService;
+  final SecureStorage secureStorage;
+  final LocalStorage localStorage;
+
+  @override
+  Future<bool> hasBiometricToken() async {
+    final token = await secureStorage.getBiometricToken();
+    return token != null && token.isNotEmpty;
+  }
+
+  @override
+  Future<Either<Failure, BiometricEntity>> toggleBiometrics() async {
+    try {
+      final response = await fingerprintApiService.toggleBiometrics();
+
+      final responseData = Map<String, dynamic>.from(
+        response.data as Map,
+      );
+
+      final model = ToggleBiometricResponseModel.fromJson(
+        responseData,
+      );
+
+      if (response.statusCode != 200 || !model.success) {
+        return Left(ServerFailure(model.message));
+      }
+
+      if (model.data.isEnabled) {
+        final token = model.data.biometricToken;
+
+        if (token == null || token.isEmpty) {
+          return const Left(
+            ServerFailure(
+              'The server did not return a biometric token.',
+            ),
+          );
+        }
+
+        await secureStorage.saveBiometricToken(token);
+      } else {
+        await secureStorage.removeBiometricToken();
+      }
+
+      return Right(model.data.toEntity());
+    } on DioException catch (e) {
+      // Preserve the biometric token if toggling fails.
+      return Left(_mapDioException(e));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, LoginDataEntity>> biometricLogin() async {
+    try {
+      final biometricToken = await secureStorage.getBiometricToken();
+
+      if (biometricToken == null || biometricToken.isEmpty) {
+        return const Left(
+          ServerFailure(
+            'Biometric login is not enabled. '
+            'Please sign in with your email and password.',
+          ),
+        );
+      }
+
+      final response = await fingerprintApiService.biometricLogin(
+        biometricToken: biometricToken,
+      );
+
+      final responseData = Map<String, dynamic>.from(
+        response.data as Map,
+      );
+
+      final model = LoginResponseModel.fromJson(responseData);
+
+      if (response.statusCode != 200 || !model.success) {
+        return Left(ServerFailure(model.message));
+      }
+
+      // Save the session tokens.
+      await secureStorage.saveAccessToken(
+        model.data.accessToken,
+      );
+      await secureStorage.saveRefreshToken(
+        model.data.refreshToken,
+      );
+
+      // Restore the user data cleared by logout.
+      final user = model.data.user;
+
+      await localStorage.saveUserId(user.id);
+
+      final employeeCode = user.employeeCode;
+
+      if (employeeCode != null && employeeCode.isNotEmpty) {
+        await localStorage.saveEmployeeCode(employeeCode);
+      }
+
+      // Safe debug logs: never print token values.
+      if (const bool.fromEnvironment('dart.vm.product') == false) {
+        // Avoid logging personal details such as employee code.
+        // Only report whether the required local data was restored.
+        // ignore: avoid_print
+        print(
+          '[AUTH][BIOMETRIC] User ID saved: '
+          '${localStorage.getUserId() != null}',
+        );
+        // ignore: avoid_print
+        print(
+          '[AUTH][BIOMETRIC] Employee code saved: '
+          '${localStorage.getEmployeeCode()?.isNotEmpty == true}',
+        );
+      }
+
+      return Right(model.data.toEntity());
+    } on DioException catch (e) {
+      if (e.response?.statusCode == 401) {
+        await secureStorage.removeBiometricToken();
+      }
+
+      return Left(_mapDioException(e));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  Failure _mapDioException(DioException exception) {
+    final response = exception.response;
+    final data = response?.data;
+
+    if (data is Map) {
+      final message = data['message']?.toString();
+
+      switch (response?.statusCode) {
+        case 401:
+          return UnauthorizedFailure(
+            message ?? 'Authentication failed.',
+          );
+
+        case 403:
+          return UnauthorizedFailure(
+            message ?? 'Your account is inactive.',
+          );
+
+        case 422:
+          return ValidationFailure(
+            message ?? 'The provided data is invalid.',
+          );
+
+        case 500:
+          return ServerFailure(
+            message ?? 'Something went wrong.',
+          );
+      }
+
+      return ServerFailure(
+        message ?? 'Something went wrong.',
+      );
+    }
+
+    switch (exception.type) {
+      case DioExceptionType.connectionError:
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.sendTimeout:
+      case DioExceptionType.receiveTimeout:
+        return const NetworkFailure(
+          'Unable to connect to the server. Please try again.',
+        );
+
+      default:
+        return NetworkFailure(
+          exception.message ?? 'Network error occurred.',
+        );
+    }
+  }
+}

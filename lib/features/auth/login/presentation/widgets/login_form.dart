@@ -64,53 +64,67 @@ class LoginForm extends StatelessWidget {
             const Gap(AppSpacing.space16),
 
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  children: [
-                    BlocBuilder<LoginCubit, LoginState>(
-                      buildWhen: (_, current) =>
-                          current is LoginKeepMeSignedInState,
-                      builder: (context, state) {
-                        return SizedBox(
-                          width: 20.w,
-                          height: 20.h,
-                          child: Checkbox(
-                            value: cubit.keepMeSignedIn,
-                            activeColor: Theme.of(context).colorScheme.primary,
-                            checkColor: Theme.of(context).colorScheme.surface,
-                            side: BorderSide(
-                              color: Theme.of(context).colorScheme.outline,
-                              width: 1.5.w,
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                AppRadius.radius4,
+                Flexible(
+                  child: Row(
+                    children: [
+                      BlocBuilder<LoginCubit, LoginState>(
+                        buildWhen: (_, current) =>
+                            current is LoginKeepMeSignedInState,
+                        builder: (context, state) {
+                          return SizedBox(
+                            width: 20.w,
+                            height: 20.h,
+                            child: Checkbox(
+                              value: cubit.keepMeSignedIn,
+                              activeColor: Theme.of(
+                                context,
+                              ).colorScheme.primary,
+                              checkColor: Theme.of(context).colorScheme.surface,
+                              side: BorderSide(
+                                color: Theme.of(context).colorScheme.outline,
+                                width: 1.5.w,
                               ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                  AppRadius.radius4,
+                                ),
+                              ),
+                              onChanged: (val) =>
+                                  cubit.toggleKeepMeSignedIn(val),
                             ),
-                            onChanged: (val) => cubit.toggleKeepMeSignedIn(val),
-                          ),
-                        );
-                      },
-                    ),
-                    const Gap(AppSpacing.space8),
-                    AppText(
-                      context.l10n.keepMeSignedIn,
-                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: Theme.of(context).colorScheme.primary,
+                          );
+                        },
                       ),
-                    ),
-                  ],
+                      const Gap(AppSpacing.space8),
+                      Flexible(
+                        child: AppText(
+                          context.l10n.keepMeSignedIn,
+                          style: Theme.of(context).textTheme.titleSmall
+                              ?.copyWith(
+                                color: Theme.of(context).colorScheme.primary,
+                              ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    ResetPasswordBottomSheet.show(context);
-                  },
-                  child: AppText(
-                    context.l10n.forgotPassword,
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: Theme.of(context).colorScheme.secondary,
-                      fontWeight: FontWeight.w600,
+                const Gap(AppSpacing.space8),
+                Flexible(
+                  child: GestureDetector(
+                    onTap: () {
+                      ResetPasswordBottomSheet.show(context);
+                    },
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: AppText(
+                        context.l10n.forgotPassword,
+                        style: Theme.of(context).textTheme.labelMedium
+                            ?.copyWith(
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
                     ),
                   ),
                 ),
