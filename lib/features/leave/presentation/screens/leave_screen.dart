@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/widgets/feedback/app_error_state.dart';
 import 'package:workwise/core/design_system/widgets/feedback/app_snack_bar.dart';
-import 'package:workwise/core/design_system/spacing/app_spacing.dart';
+import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/services/service_locator.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_balances/leave_balances_cubit.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_balances/leave_balances_state.dart';
@@ -36,7 +37,6 @@ class Leavescreen extends StatelessWidget {
         bottom: false,
         child: MultiBlocListener(
           listeners: [
-            // Leave Balances Error
             BlocListener<LeaveBalancesCubit, LeaveBalancesState>(
               listener: (context, state) {
                 if (state is LeaveBalancesFailure) {
@@ -44,8 +44,6 @@ class Leavescreen extends StatelessWidget {
                 }
               },
             ),
-
-            // Leave History Error
             BlocListener<LeaveHistoryCubit, LeaveHistoryState>(
               listener: (context, state) {
                 if (state is LeaveHistoryFailure) {
@@ -57,26 +55,22 @@ class Leavescreen extends StatelessWidget {
           child: BlocBuilder<LeaveBalancesCubit, LeaveBalancesState>(
             builder: (context, balancesState) {
               // Balances Loading
-
               if (balancesState is LeaveBalancesLoading) {
                 return LeaveLoadingView.build(context);
               }
 
               // Balances Failure
-
               if (balancesState is LeaveBalancesFailure) {
                 return AppErrorState(
                   message: balancesState.message,
                   onRetry: () {
                     context.read<LeaveBalancesCubit>().getLeaveBalances();
-
                     context.read<LeaveHistoryCubit>().getLeaveHistory();
                   },
                 );
               }
 
               // Balances Success
-
               if (balancesState is LeaveBalancesSuccess) {
                 final balances = balancesState.balances;
 
@@ -84,57 +78,64 @@ class Leavescreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(AppSpacing.space16),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         const LeaveTitle(),
-
                         const LeaveSubtitle(),
-
                         const Gap(AppSpacing.space16),
 
                         // Leave Balances
-                        SizedBox(
-                          height: 160,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: balances.length,
-                            separatorBuilder: (_, __) {
-                              return const Gap(AppSpacing.space8);
-                            },
-                            itemBuilder: (context, index) {
-                              return LeaveBalancesCard(
-                                balance: balances[index],
-                              );
-                            },
+                        if (balances.isEmpty)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: AppSpacing.space24,
+                            ),
+                            child: Center(
+                              child: Text(
+                                context.l10n.noLeaveBalancesFound,
+                                textAlign: TextAlign.center,
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                            ),
+                          )
+                        else
+                          SizedBox(
+                            height: 160,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: balances.length,
+                              separatorBuilder: (_, __) {
+                                return const Gap(AppSpacing.space8);
+                              },
+                              itemBuilder: (context, index) {
+                                return LeaveBalancesCard(
+                                  balance: balances[index],
+                                );
+                              },
+                            ),
                           ),
-                        ),
 
                         const Gap(AppSpacing.space8),
 
                         // Leave Request
                         const RequestLeaveTitle(),
-
                         const Gap(AppSpacing.space8),
-
                         const LeaveRequestForm(),
-
                         const Gap(AppSpacing.space16),
 
                         // Leave History
                         const LeaveHistoryTitle(),
-
                         const Gap(AppSpacing.space4),
 
                         BlocBuilder<LeaveHistoryCubit, LeaveHistoryState>(
                           builder: (context, historyState) {
                             // History Loading
-
                             if (historyState is LeaveHistoryInitial ||
                                 historyState is LeaveHistoryLoading) {
                               return const SizedBox.shrink();
                             }
 
                             // History Failure
-
                             if (historyState is LeaveHistoryFailure) {
                               return AppErrorState(
                                 message: historyState.message,
@@ -147,7 +148,6 @@ class Leavescreen extends StatelessWidget {
                             }
 
                             // History Success
-
                             if (historyState is LeaveHistorySuccess) {
                               final leaveHistory =
                                   [...historyState.leaveRequests]..sort((a, b) {
@@ -173,8 +173,22 @@ class Leavescreen extends StatelessWidget {
                                     return dateB.compareTo(dateA);
                                   });
 
+                              // Empty Leave History
                               if (leaveHistory.isEmpty) {
-                                return const SizedBox.shrink();
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: AppSpacing.space16,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      context.l10n.noLeaveHistoryFound,
+                                      textAlign: TextAlign.center,
+                                      style: Theme.of(
+                                        context,
+                                      ).textTheme.bodyMedium,
+                                    ),
+                                  ),
+                                );
                               }
 
                               return LeaveHistoryList(

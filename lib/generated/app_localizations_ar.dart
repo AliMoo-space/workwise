@@ -751,4 +751,10 @@ class AppLocalizationsAr extends AppLocalizations {
   @override
   String get policyAssistantUnexpectedError =>
       'حدث خطأ غير متوقع. حاول مرة أخرى.';
+
+  @override
+  String get noLeaveBalancesFound => 'لا توجد أرصدة إجازات متاحة';
+
+  @override
+  String get noLeaveHistoryFound => 'لا يوجد سجل إجازات حتى الآن';
 }

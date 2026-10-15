@@ -4,6 +4,7 @@ import 'package:flutter_screenutil_plus/flutter_screenutil_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'package:workwise/core/design_system/colors/app_colors.dart';
 import 'package:workwise/core/design_system/spacing/app_spacing.dart';
 import 'package:workwise/core/design_system/typography/app_text_styles.dart';
 import 'package:workwise/core/design_system/widgets/buttons/app_icon_button.dart';
@@ -139,100 +140,113 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             ),
           ],
         ),
-        body: BlocBuilder<AttendanceCubit, AttendanceState>(
-          builder: (context, state) {
-            final currentAttendance = switch (state) {
-              AttendanceSuccess(:final attendance) => attendance,
-              AttendanceActionLoading(:final attendance) => attendance,
-              AttendanceActionFailure(:final attendance) => attendance,
-              AttendanceActionSuccess(:final attendance) =>
-                attendance ?? _lastAttendance,
-              _ => _lastAttendance,
-            };
+        body: RefreshIndicator(
+          color: AppColors.primary,
+          onRefresh: () => context.read<AttendanceCubit>().loadCurrentAttendance(
+            isUserInitiated: true,
+            forceRefresh: true,
+          ),
+          child: BlocBuilder<AttendanceCubit, AttendanceState>(
+            builder: (context, state) {
+              final currentAttendance = switch (state) {
+                AttendanceSuccess(:final attendance) => attendance,
+                AttendanceActionLoading(:final attendance) => attendance,
+                AttendanceActionFailure(:final attendance) => attendance,
+                AttendanceActionSuccess(:final attendance) =>
+                  attendance ?? _lastAttendance,
+                _ => _lastAttendance,
+              };
 
-            final isLoading =
-                state is AttendanceLoading ||
-                state is AttendanceInitial ||
-                (state is AttendanceActionSuccess && currentAttendance == null);
+              final isLoading =
+                  state is AttendanceLoading ||
+                  state is AttendanceInitial ||
+                  (state is AttendanceActionSuccess && currentAttendance == null);
 
-            final secondaryText = state is AttendanceFailure
-                ? (state.canOpenLocationSettings
-                      ? context.l10n.openLocationSettings
-                      : state.canOpenAppSettings
-                      ? context.l10n.openAppSettings
-                      : null)
-                : null;
-            final secondaryAction = state is AttendanceFailure
-                ? (state.canOpenLocationSettings
-                      ? () {
-                          LocationHelper.openLocationSettings();
-                        }
-                      : state.canOpenAppSettings
-                      ? () {
-                          LocationHelper.openAppSettings();
-                        }
-                      : null)
-                : null;
+              final secondaryText = state is AttendanceFailure
+                  ? (state.canOpenLocationSettings
+                        ? context.l10n.openLocationSettings
+                        : state.canOpenAppSettings
+                        ? context.l10n.openAppSettings
+                        : null)
+                  : null;
+              final secondaryAction = state is AttendanceFailure
+                  ? (state.canOpenLocationSettings
+                        ? () {
+                            LocationHelper.openLocationSettings();
+                          }
+                        : state.canOpenAppSettings
+                        ? () {
+                            LocationHelper.openAppSettings();
+                          }
+                        : null)
+                  : null;
 
-            return Skeletonizer(
-              enabled: isLoading,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppSpacing.space16.w,
-                  ),
-                  child: Column(
-                    children: [
-                      Gap(AppSpacing.space24.h),
+              return Skeletonizer(
+                enabled: isLoading,
+                effect: const ShimmerEffect(
+                  baseColor: Color(0xFFF0F3F5),
+                  highlightColor: Color(0xFFFAFBFC),
+                  duration: Duration(milliseconds: 1700),
+                ),
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: AppSpacing.space16.w,
+                    ),
+                    child: Column(
+                      children: [
+                        Gap(AppSpacing.space24.h),
 
-                      if (isLoading)
-                        const AttendanceCardSkeleton()
-                      else if (currentAttendance != null)
-                        AttendanceCardWidget(
-                          attendanceEntity: currentAttendance,
-                          isActionLoading: state is AttendanceActionLoading,
-                          onCheckIn: () => context
-                              .read<AttendanceCubit>()
-                              .checkInCurrentLocation(isUserInitiated: true),
-                          onCheckOut: () =>
-                              context.read<AttendanceCubit>().checkOut(),
-                        )
-                      else if (state is AttendanceFailure)
-                        AppErrorState(
-                          message: state.localizedMessage(context.l10n),
-                          onRetry: () => context
-                              .read<AttendanceCubit>()
-                              .loadCurrentAttendance(isUserInitiated: true),
-                          secondaryButtonText: secondaryText,
-                          onSecondaryPressed: secondaryAction,
-                        )
-                      else
-                        const SizedBox.shrink(),
-                      Gap(AppSpacing.space24.h),
+                        if (isLoading)
+                          const AttendanceCardSkeleton()
+                        else if (currentAttendance != null)
+                          AttendanceCardWidget(
+                            attendanceEntity: currentAttendance,
+                            isActionLoading: state is AttendanceActionLoading,
+                            onCheckIn: () => context
+                                .read<AttendanceCubit>()
+                                .checkInCurrentLocation(isUserInitiated: true),
+                            onCheckOut: () =>
+                                context.read<AttendanceCubit>().checkOut(),
+                          )
+                        else if (state is AttendanceFailure)
+                          AppErrorState(
+                            message: state.localizedMessage(context.l10n),
+                            onRetry: () => context
+                                .read<AttendanceCubit>()
+                                .loadCurrentAttendance(isUserInitiated: true),
+                            secondaryButtonText: secondaryText,
+                            onSecondaryPressed: secondaryAction,
+                          )
+                        else
+                          const SizedBox.shrink(),
+                        Gap(AppSpacing.space24.h),
 
-                      HomeStatsSectionWidget(
-                        widgets: currentAttendance?.widgets,
-                      ),
-
-                      Gap(AppSpacing.space24.h),
-                      Align(
-                        alignment: AlignmentDirectional.centerStart,
-                        child: AppText(
-                          context.l10n.quickActions,
-                          style: AppTextStyles.headlineMedium,
+                        HomeStatsSectionWidget(
+                          widgets: currentAttendance?.widgets,
                         ),
-                      ),
-                      Gap(AppSpacing.space16.h),
 
-                      HomeStatsGrid(),
+                        Gap(AppSpacing.space24.h),
+                        Align(
+                          alignment: AlignmentDirectional.centerStart,
+                          child: AppText(
+                            context.l10n.quickActions,
+                            style: AppTextStyles.headlineMedium,
+                          ),
+                        ),
+                        Gap(AppSpacing.space16.h),
 
-                      Gap(AppSpacing.space16.h),
-                    ],
+                        HomeStatsGrid(),
+
+                        Gap(AppSpacing.space16.h),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

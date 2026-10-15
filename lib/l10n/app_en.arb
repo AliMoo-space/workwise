@@ -298,5 +298,7 @@
   "sendMessage": "Send message",
   "employeeIdNotAvailable": "Employee ID is not available.",
   "policyAssistantNoAnswer": "No answer provided.",
-  "policyAssistantUnexpectedError": "Something went wrong. Please try again."
+  "policyAssistantUnexpectedError": "Something went wrong. Please try again.",
+  "noLeaveBalancesFound": "No leave balances found",
+  "noLeaveHistoryFound": "No leave history found"
 }
