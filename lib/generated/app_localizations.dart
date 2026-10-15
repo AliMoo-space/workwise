@@ -1543,6 +1543,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No leave history found'**
   String get noLeaveHistoryFound;
+
+  /// No description provided for @noCareerStrengthsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No strengths found'**
+  String get noCareerStrengthsFound;
+
+  /// No description provided for @noDevelopmentAreasFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No development areas found'**
+  String get noDevelopmentAreasFound;
+
+  /// No description provided for @noDevelopmentPlanFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No development plan found'**
+  String get noDevelopmentPlanFound;
 }
 
 class _AppLocalizationsDelegate

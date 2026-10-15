@@ -757,4 +757,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get noLeaveHistoryFound => 'لا يوجد سجل إجازات حتى الآن';
+
+  @override
+  String get noCareerStrengthsFound => 'لا توجد نقاط قوة متاحة حاليًا';
+
+  @override
+  String get noDevelopmentAreasFound => 'لا توجد مجالات تطوير متاحة حاليًا';
+
+  @override
+  String get noDevelopmentPlanFound => 'لا توجد خطة تطوير متاحة حاليًا';
 }

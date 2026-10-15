@@ -6,6 +6,7 @@ import 'package:workwise/core/design_system/widgets/feedback/app_error_state.dar
 import 'package:workwise/core/design_system/widgets/feedback/app_snack_bar.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/services/service_locator.dart';
+import 'package:workwise/features/AIAssistant/presentation/widget/empty_career_section.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_balances/leave_balances_cubit.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_balances/leave_balances_state.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_history/leave_history_cubit.dart';
@@ -86,17 +87,9 @@ class Leavescreen extends StatelessWidget {
 
                         // Leave Balances
                         if (balances.isEmpty)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: AppSpacing.space24,
-                            ),
-                            child: Center(
-                              child: Text(
-                                context.l10n.noLeaveBalancesFound,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
-                            ),
+                          EmptyCareerSection(
+                            icon: Icons.account_balance_wallet_outlined,
+                            message: context.l10n.noLeaveBalancesFound,
                           )
                         else
                           SizedBox(
@@ -175,19 +168,9 @@ class Leavescreen extends StatelessWidget {
 
                               // Empty Leave History
                               if (leaveHistory.isEmpty) {
-                                return Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: AppSpacing.space16,
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      context.l10n.noLeaveHistoryFound,
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(
-                                        context,
-                                      ).textTheme.bodyMedium,
-                                    ),
-                                  ),
+                                return EmptyCareerSection(
+                                  icon: Icons.event_note_outlined,
+                                  message: context.l10n.noLeaveHistoryFound,
                                 );
                               }
 

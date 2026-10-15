@@ -14,6 +14,7 @@ import 'package:workwise/core/design_system/widgets/text/app_text.dart';
 import 'package:workwise/core/localization/localization_extension.dart';
 import 'package:workwise/core/services/service_locator.dart';
 
+import 'package:workwise/features/AIAssistant/presentation/widget/empty_career_section.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_history/leave_history_cubit.dart';
 import 'package:workwise/features/leave/presentation/cubit/leave_history/leave_history_state.dart';
 import 'package:workwise/features/leave/presentation/widget/leave_history_list.dart';
@@ -46,27 +47,22 @@ class LeaveHistoryScreen extends StatelessWidget {
               ),
               child: BlocBuilder<LeaveHistoryCubit, LeaveHistoryState>(
                 builder: (context, state) {
-                  // Loading
                   if (state is LeaveHistoryInitial ||
                       state is LeaveHistoryLoading) {
                     return _buildLoading();
                   }
 
-                  // Success
                   if (state is LeaveHistorySuccess) {
                     if (state.leaveRequests.isEmpty) {
-                      return Center(
-                        child: AppText(
-                          context.l10n.noLeaveHistory,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
+                      return EmptyCareerSection(
+                        icon: Icons.event_note_outlined,
+                        message: context.l10n.noLeaveHistoryFound,
                       );
                     }
 
                     return LeaveHistoryList(leaveHistory: state.leaveRequests);
                   }
 
-                  // Failure
                   if (state is LeaveHistoryFailure) {
                     return AppErrorState(
                       message: state.message,

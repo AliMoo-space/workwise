@@ -758,4 +758,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noLeaveHistoryFound => 'No leave history found';
+
+  @override
+  String get noCareerStrengthsFound => 'No strengths found';
+
+  @override
+  String get noDevelopmentAreasFound => 'No development areas found';
+
+  @override
+  String get noDevelopmentPlanFound => 'No development plan found';
 }

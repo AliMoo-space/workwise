@@ -459,5 +459,8 @@
   "policyAssistantNoAnswer": "لم يتم توفير رد.",
   "policyAssistantUnexpectedError": "حدث خطأ غير متوقع. حاول مرة أخرى.",
   "noLeaveBalancesFound": "لا توجد أرصدة إجازات متاحة",
-  "noLeaveHistoryFound": "لا يوجد سجل إجازات حتى الآن"
+  "noLeaveHistoryFound": "لا يوجد سجل إجازات حتى الآن",
+  "noCareerStrengthsFound": "لا توجد نقاط قوة متاحة حاليًا",
+  "noDevelopmentAreasFound": "لا توجد مجالات تطوير متاحة حاليًا",
+  "noDevelopmentPlanFound": "لا توجد خطة تطوير متاحة حاليًا"
 }

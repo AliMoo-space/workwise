@@ -300,5 +300,8 @@
   "policyAssistantNoAnswer": "No answer provided.",
   "policyAssistantUnexpectedError": "Something went wrong. Please try again.",
   "noLeaveBalancesFound": "No leave balances found",
-  "noLeaveHistoryFound": "No leave history found"
+  "noLeaveHistoryFound": "No leave history found",
+  "noCareerStrengthsFound": "No strengths found",
+  "noDevelopmentAreasFound": "No development areas found",
+  "noDevelopmentPlanFound": "No development plan found"
 }
