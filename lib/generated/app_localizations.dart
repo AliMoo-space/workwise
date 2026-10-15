@@ -1465,6 +1465,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong. Please try again.'**
   String get policyAssistantUnexpectedError;
+
+  /// No description provided for @noLeaveBalancesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No leave balances found'**
+  String get noLeaveBalancesFound;
+
+  /// No description provided for @noLeaveHistoryFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No leave history found'**
+  String get noLeaveHistoryFound;
 }
 
 class _AppLocalizationsDelegate

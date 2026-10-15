@@ -718,4 +718,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get policyAssistantUnexpectedError =>
       'Something went wrong. Please try again.';
+
+  @override
+  String get noLeaveBalancesFound => 'No leave balances found';
+
+  @override
+  String get noLeaveHistoryFound => 'No leave history found';
 }

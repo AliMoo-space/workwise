@@ -286,6 +286,7 @@
   "sendMessage": "إرسال الرسالة",
   "employeeIdNotAvailable": "رقم الموظف غير متوفر.",
   "policyAssistantNoAnswer": "لم يتم توفير رد.",
-  "policyAssistantUnexpectedError": "حدث خطأ غير متوقع. حاول مرة أخرى."
-
+  "policyAssistantUnexpectedError": "حدث خطأ غير متوقع. حاول مرة أخرى.",
+  "noLeaveBalancesFound": "لا توجد أرصدة إجازات متاحة",
+  "noLeaveHistoryFound": "لا يوجد سجل إجازات حتى الآن"
 }
