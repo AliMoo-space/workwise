@@ -339,6 +339,11 @@ class _AttendanceScreenSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
+      effect: const ShimmerEffect(
+        baseColor: Color(0xFFF0F3F5),
+        highlightColor: Color(0xFFFAFBFC),
+        duration: Duration(milliseconds: 1700),
+      ),
       child: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: AppSpacing.space16.w,
