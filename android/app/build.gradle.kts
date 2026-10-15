@@ -37,16 +37,21 @@ android {
         create("release") {
             keyAlias = keystoreProperties["keyAlias"] as String
             keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = file(keystoreProperties["storeFile"] as String)
+            storeFile = keystoreProperties["storeFile"]?.let {
+                val path = it as String
+                val appRelative = file(path)
+                if (appRelative.exists()) {
+                    appRelative
+                } else {
+                    val rootRelative = rootProject.file(path)
+                    if (rootRelative.exists()) {
+                        rootRelative
+                    } else {
+                        rootProject.file(path.removePrefix("android/"))
+                    }
+                }
+            }
             storePassword = keystoreProperties["storePassword"] as String
-        }
-    }  
-     signingConfigs {
-        create("release") {
-            keyAlias = keystoreProperties.getProperty("keyAlias")
-            keyPassword = keystoreProperties.getProperty("keyPassword")
-            storeFile = keystoreProperties.getProperty("storeFile")?.let { file(it) }
-            storePassword = keystoreProperties.getProperty("storePassword")
         }
     }
 
