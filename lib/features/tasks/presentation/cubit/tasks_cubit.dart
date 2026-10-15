@@ -26,6 +26,13 @@ class TasksCubit extends Cubit<TasksState> {
     required this.addSubmissionAttachmentUseCase,
   }) : super(TasksInitial());
 
+  // Fix: Prevent StateError if state is emitted after cubit is closed
+  @override
+  void emit(TasksState state) {
+    if (isClosed) return;
+    super.emit(state);
+  }
+
   String? _currentLang;
   String? _currentStatus;
   String? _currentPriority;
@@ -75,6 +82,9 @@ class TasksCubit extends Cubit<TasksState> {
       perPage: _perPage,
       page: _currentPage,
     );
+
+    // Fix: Avoid processing and emitting state if cubit was closed while request was in flight
+    if (isClosed) return;
 
     result.fold(
       (failure) => emit(TasksError(message: failure.message)),
@@ -150,6 +160,9 @@ class TasksCubit extends Cubit<TasksState> {
       lang: _currentLang,
     );
 
+    // Fix: Avoid processing and emitting state if cubit was closed
+    if (isClosed) return;
+
     result.fold(
       (failure) {
         // يمكن إضافة emit للـ error لو عايز تظهر message
@@ -201,6 +214,9 @@ class TasksCubit extends Cubit<TasksState> {
       status: status,
       lang: _currentLang,
     );
+
+    // Fix: Avoid processing and emitting state if cubit was closed
+    if (isClosed) return;
 
     result.fold(
       (failure) {
@@ -260,7 +276,9 @@ class TasksCubit extends Cubit<TasksState> {
         return (false, failure.message);
       },
       (response) {
-        refresh();
+        if (!isClosed) {
+          refresh();
+        }
         return (true, null);
       },
     );

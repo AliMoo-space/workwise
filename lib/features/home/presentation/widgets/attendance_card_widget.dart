@@ -177,7 +177,7 @@ class _AttendanceCardWidgetState extends State<AttendanceCardWidget> {
           AppButton(
             text: !_isCheckedIn ? context.l10n.checkIn : context.l10n.checkOut,
             backgroundColor: !_isCheckedIn
-                ? AppColors.success
+                ? AppColors.secondary
                 : AppColors.outlineVariant.withValues(alpha: .4),
             onPressed: widget.isActionLoading
                 ? null
@@ -203,6 +203,11 @@ class AttendanceCardSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
+      effect: const ShimmerEffect(
+        baseColor: Color(0xFFF0F3F5),
+        highlightColor: Color(0xFFFAFBFC),
+        duration: Duration(milliseconds: 1700),
+      ),
       child: AppCard(
         backgroundColor: AppColors.primary.withValues(alpha: .9),
         child: Column(

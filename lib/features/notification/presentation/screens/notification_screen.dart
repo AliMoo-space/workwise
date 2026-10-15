@@ -154,6 +154,11 @@ class _NotificationScreenSkeleton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Skeletonizer(
+      effect: const ShimmerEffect(
+        baseColor: Color(0xFFF0F3F5),
+        highlightColor: Color(0xFFFAFBFC),
+        duration: Duration(milliseconds: 1700),
+      ),
       child: ListView.separated(
         padding: EdgeInsets.all(AppSpacing.space16.w),
         itemCount: 6,
