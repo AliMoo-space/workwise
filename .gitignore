@@ -13,8 +13,6 @@
 .agents/
 .github/
 # Android release signing secrets
-/android/key.properties
-/android/app/workwise-keystore.jks
 migrate_working_dir/
 
 # IntelliJ related
