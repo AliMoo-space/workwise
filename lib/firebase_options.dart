@@ -63,6 +63,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: '398090348279',
     projectId: 'workwise-notification',
     storageBucket: 'workwise-notification.firebasestorage.app',
-    iosBundleId: 'com.example.workwise',
+    iosBundleId: 'com.alimohamed.workwise',
   );
 }

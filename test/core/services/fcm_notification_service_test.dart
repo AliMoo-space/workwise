@@ -563,7 +563,7 @@ void main() {
       'initializes Android channel and forwards showNotification & tap events over MethodChannel',
       () async {
         const testChannel = MethodChannel(
-          'com.example.workwise/test_local_notifications',
+          'com.alimohamed.workwise/test_local_notifications',
         );
         final recordedCalls = <MethodCall>[];
 

@@ -4,7 +4,7 @@ import UserNotifications
 
 @main
 @objc class AppDelegate: FlutterAppDelegate, FlutterImplicitEngineDelegate {
-  private static let localNotificationChannelName = "com.example.workwise/local_notifications"
+  private static let localNotificationChannelName = "com.alimohamed.workwise/local_notifications"
   private static let localPayloadKey = "workwise_local_payload"
 
   private var localNotificationChannel: FlutterMethodChannel?
