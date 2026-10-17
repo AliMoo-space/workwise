@@ -1,2 +1,2 @@
-// Fix: CocoaPods integration was removed; Flutter plugins use the generated Swift package.
+#include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"
 #include "Generated.xcconfig"

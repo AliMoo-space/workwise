@@ -1,4 +1,4 @@
-package com.example.workwise
+package com.alimohamed.workwise
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -172,7 +172,7 @@ class WorkWiseFcmDataReceiver : BroadcastReceiver() {
 }
 
 internal object WorkWiseNotificationHelper {
-    const val METHOD_CHANNEL_NAME = "com.example.workwise/local_notifications"
+    const val METHOD_CHANNEL_NAME = "com.alimohamed.workwise/local_notifications"
     const val DEFAULT_CHANNEL_ID = "workwise_high_importance_channel"
     const val DEFAULT_CHANNEL_NAME = "WorkWise Notifications"
     const val DEFAULT_CHANNEL_DESCRIPTION = "High importance notifications for WorkWise"

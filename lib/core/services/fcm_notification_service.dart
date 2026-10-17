@@ -33,7 +33,7 @@ abstract class FcmLocalNotificationPresenter {
 
 /// Default [MethodChannel]-backed implementation that delegates Android channel
 /// creation, heads-up local notification presentation, and tap callbacks to the
-/// host platform (`com.example.workwise/local_notifications`).
+/// host platform (`com.alimohamed.workwise/local_notifications`).
 class MethodChannelFcmLocalNotificationPresenter
     implements FcmLocalNotificationPresenter {
   const MethodChannelFcmLocalNotificationPresenter({MethodChannel? channel})
@@ -316,7 +316,7 @@ class FcmNotificationService {
            ((route) => RouterGenerationConfig.goRouter.push(route));
 
   static const String localNotificationMethodChannelName =
-      'com.example.workwise/local_notifications';
+      'com.alimohamed.workwise/local_notifications';
   static const String androidNotificationChannelId =
       'workwise_high_importance_channel';
   static const String androidNotificationChannelName = 'WorkWise Notifications';
