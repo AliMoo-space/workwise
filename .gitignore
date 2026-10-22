@@ -10,8 +10,7 @@
 .history
 .svn/
 .swiftpm/
-.agents/
-.github/
+
 docs/
 # Android release signing secrets
 migrate_working_dir/
