@@ -12,7 +12,7 @@
 .swiftpm/
 .agents/
 .github/
-.docs/
+docs/
 # Android release signing secrets
 migrate_working_dir/
 
